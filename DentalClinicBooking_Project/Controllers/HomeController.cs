@@ -1,6 +1,6 @@
-using DCB1.Models.ViewModels;
 using DentalClinicBooking_Project.Models;
 using DentalClinicBooking_Project.Models.Domain;
+using DentalClinicBooking_Project.Models.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System.Diagnostics;
@@ -20,8 +20,34 @@ namespace DentalClinicBooking_Project.Controllers
 
 		public IActionResult HomePage()
 		{
-			
-			return View();
+			_context = new DentalClinicBookingProjectContext();
+
+
+			var clinics = _context.Clinics.Select(a => new ClinicWithAddress
+			{
+				ClinicId = a.ClinicId,
+				ClinicName = a.ClinicName,
+				MainImage = a.MainImage,
+				Address = a.Basics.FirstOrDefault().Address
+			}).ToList();
+
+			var dentists = _context.Dentists.Select(a => new DentistWithClinicName
+			{
+				DentistId = a.DentistId,
+				DentistName = a.DentistName,
+				Image = a.Image,
+				Experience = a.Experience,
+				BasicId = a.BasicId,
+				AccountId = a.AccountId,
+				ClinicName = a.Basic.Clinic.ClinicName
+			}).Take(6).ToList();
+
+			var viewModels = new ClinicAndDentist
+			{
+				clinicWithAddress = clinics,
+				dentistWithClinicName = dentists,
+			};
+			return View(viewModels);
 		}
 
 
