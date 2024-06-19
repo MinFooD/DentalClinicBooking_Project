@@ -1,4 +1,5 @@
-using DentalClinicBooking_Project.Models.Domain;
+using DentalClinicBooking_Project.Data;
+using DentalClinicBooking_Project.Repositories;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -10,6 +11,8 @@ builder.Services.AddDbContext<DentalClinicBookingProjectContext>(options =>
 {
 	options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
 });
+
+builder.Services.AddScoped<IClinicRepository, ClinicRepository>();
 
 var app = builder.Build();
 

@@ -1,5 +1,5 @@
+using DentalClinicBooking_Project.Data;
 using DentalClinicBooking_Project.Models;
-using DentalClinicBooking_Project.Models.Domain;
 using DentalClinicBooking_Project.Models.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -29,7 +29,7 @@ namespace DentalClinicBooking_Project.Controllers
 				ClinicName = a.ClinicName,
 				MainImage = a.MainImage,
 				Address = a.Basics.FirstOrDefault().Address
-			}).ToList();
+            }).ToList();
 
 			var dentists = _context.Dentists.Select(a => new DentistWithClinicName
 			{
