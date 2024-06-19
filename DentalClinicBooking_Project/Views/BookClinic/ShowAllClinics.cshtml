@@ -1,217 +1,142 @@
-<!DOCTYPE html>
-<html lang="en">
 
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>ChooseClinic</title>
-  <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet" />
+﻿@model List<DentalClinicBooking_Project.Models.Domain.Clinic>
 
-  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
-  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
-</head>
-<header class="row navbar" style="margin-right: 0px;border-bottom: 1px solid #F1F5F9;">
-  <div class="col-md-2 navbar-brand">
-    <img src="https://cdn.youmed.vn/wp-content/themes/youmed/images/logo.svg" alt="YouMed Logo">
-  </div>
-  <nav class="navbar navbar-expand-md">
-    <div class="navbar-menu">
-      <ul class="navbar-nav">
-        <li class="nav-item"><a href="#" class="nav-link">Đặt khám</a></li>
-        <li class="nav-item"><a href="#" class="nav-link">Xem lịch khám</a></li>
-        <li class="nav-item"><a href="#" class="nav-link">Nha sĩ</a></li>
-        <li class="nav-item"><a href="#" class="nav-link">Dịch vụ</a></li>
-        <li class="nav-item"><a href="#" class="nav-link">Liên hệ</a></li>
-      </ul>
-    </div>
-  </nav>
-  <div class="col-md-2 navbar-login">
-    <div class="fomart-btLogin"> <a href="/dat-kham/login?returnUrl=https://youmed.vn" class="btn">Đăng nhập</a></div>
-  </div>
-</header>
+@{
+}
 
 
 
-<body>
-  <section id="main-search" class="relative overflow-hidden ">
+
+<link rel="stylesheet" href="chooseClinic.css" />
+<link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet" />
+<link href="~/css/allclinics.css" rel="stylesheet" />
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+
+<section id="main-search" class="relative overflow-hidden ">
     <div class="relative z-20 max-w-7xl mx-auto px-4 py-16 lg:px-6 md:min-h-[520px] flex flex-col justify-center">
-      <div>
-        <div class="absolute z-0 bottom-0 right-0 typex"><img width="676" height="520"
-            src="https://cdn.youmed.vn/wp-content/themes/youmed/images/your-medical-booking.webp" alt="YouMed"
-            class="opacity-40 lg:opacity-100 block entered lazyloaded"
-            data-lazy-src="https://cdn.youmed.vn/wp-content/themes/youmed/images/your-medical-booking.webp"
-            data-ll-status="loaded"><noscript><img width="676" height="520"
-              src="https://cdn.youmed.vn/wp-content/themes/youmed/images/your-medical-booking.webp" alt="YouMed"
-              class="opacity-40 lg:opacity-100 block"></noscript></div>
-      </div>
-      <div class="Search-in">
-        <div class="Search information" style="text-shadow: rgba(0, 0, 0, 0.3) 0px 0px 5px">
-          <h1 class="text-white text-xl md:text-4xl" style="font-weight: 700;">Ứng dụng đặt khám</h1>
-          <p class="text-white1 text-sm md:text-lg mt-2 mb-0" style="font-weight: 600;">
-            Đặt khám với hơn 600 bác sĩ, 25 bệnh viện, 100 phòng khám trên
-            YouMed <br />để có số thứ tự và khung giờ khám trước.
-          </p>
-        </div>
-
-
-        <form method="GET" action="https://youmed.vn/dat-kham/search" class="search-form">
-          <div class="search-bar">
-            <input name="q" type="search" placeholder="Triệu chứng, bác sĩ, bệnh viện..." class="Search" />
-            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search"
-              viewBox="0 0 16 16">
-              <path
-                d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001q.044.06.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1 1 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0" />
-            </svg>
-          </div>
-        </form>
-      </div>
-    </div>
-    </div>
-  </section>
-
-
-  <div class="container-md">
-    <div class="introBookClinic">
-      <h2>Đa dạng phòng khám</h2>
-      <p style="text-align: center; white-space: nowrap; display: flex; justify-content: center;">
-        Đặt khám dễ dàng và tiện lợi hơn với các phòng khám cùng nhiều chuyên khoa
-      </p>
-    </div>
-  </div>
-
-
-  <div class="container-md">
-    <div class="phongKham1" href="#">
-      <div>
-        <img class="img1" alt="Phòng khám Hello Doctor"
-          src="https://cdn.youmed.vn/photos/9bb621c9-2fff-49fe-8e88-31ce6f905e0a.png?width=128&amp;height=128" />
-      </div>
-      <div class="line1">
         <div>
-          <a href="#" style="color: black; font-weight: 600; font-size: larger;">Phòng khám Hello Doctor</a>
-          <p>152/6 Thành Thái, P.12, Q.10, TP.HCM</p>
+            <div class="absolute z-0 bottom-0 right-0 typex">
+                <img width="676" height="520"
+                     src="https://cdn.youmed.vn/wp-content/themes/youmed/images/your-medical-booking.webp" alt="YouMed"
+                     class="opacity-40 lg:opacity-100 block entered lazyloaded"
+                     data-lazy-src="https://cdn.youmed.vn/wp-content/themes/youmed/images/your-medical-booking.webp"
+                     data-ll-status="loaded"><noscript>
+                    <img width="676" height="520"
+                         src="https://cdn.youmed.vn/wp-content/themes/youmed/images/your-medical-booking.webp" alt="YouMed"
+                         class="opacity-40 lg:opacity-100 block">
+                </noscript>
+            </div>
         </div>
-      </div>
-    </div>
-    <div class="phongKham2" href="#">
-      <div>
-        <img class="img2" alt="Phòng khám Nhi Mỹ Mỹ"
-          src="https://cdn.youmed.vn/photos/0a865d20-8ad2-4e8a-a5ee-c888ab2628b4.jpg?width=128&height=128" />
-      </div>
-      <div class="line2">
-        <div>
-          <a href="#" style="color: black; font-weight: 600; font-size: larger;">Phòng khám Nhi Mỹ Mỹ</a>
-          <p>105/10 Nguyễn Thị Tú, P. Bình Hưng Hòa B, Q. Bình Tân, TP.HCM</p>
-        </div>
-      </div>
-    </div>
-    <div class="phongKham3" href="#">
-      <div>
-        <img class="img3" alt="Phòng Khám Nhi Đồng 315 Quận 10"
-          src="https://cdn.youmed.vn/photos/5451e5ff-12ae-414d-97b4-0b15c46a304a.jpg?width=128&height=128" />
-      </div>
-      <div class="line3">
-        <div>
-          <a href="#" style="color: black; font-weight: 600; font-size: larger;">Phòng Khám Nhi Đồng 315 Quận 10</a>
-          <p>307 Tô Hiến Thành, P. 13, Q. 10, TP.HCM</p>
-        </div>
-      </div>
-    </div>
-    <div class="phongKham4" href="#">
-      <div>
-        <img class="img4" alt="Phòng Khám Phụ Sản 315 Quận Thủ Đức"
-          src="https://cdn.youmed.vn/photos/8ae8a593-b513-4728-82d7-746770eb3e61.png?width=128&height=128" />
-      </div>
-      <div class="line4">
-        <div>
-          <a href="#" style="color: black; font-weight: 600; font-size: larger;">Phòng Khám Phụ Sản 315 Quận Thủ Đức</a>
-          <p>175 Lê Văn Việt, P. Hiệp Phú, Q.9, Q.Thủ Đức, TP.HCM</p>
-        </div>
-      </div>
-    </div>
-    <div class="phongKham5" href="#">
-      <div>
-        <img class="img5" alt="ALMA Clinic by TS.BS Trần Ngọc Ánh "
-          src="https://cdn.youmed.vn/photos/a31554d6-3de2-44d9-b44a-462f70cf0d5b.jpg?width=128&height=128" />
-      </div>
-      <div class="line5">
-        <div>
-          <a href="#" style="color: black; font-weight: 600; font-size: larger;">ALMA Clinic by TS.BS Trần Ngọc Ánh</a>
-          <p>290 Nguyễn Thị Minh Khai, P.5, Q.3, TP. HCM</p>
-        </div>
-      </div>
-    </div>
-  </div>
+        <div class="Search-in">
+            <div class="Search information" style="text-shadow: rgba(0, 0, 0, 0.3) 0px 0px 5px">
+                <h1 class="text-white text-xl md:text-4xl" style="font-weight: 700;">Ứng dụng đặt khám</h1>
+                <p class="text-white1 text-sm md:text-lg mt-2 mb-0" style="font-weight: 600;">
+                    Đặt khám với hơn 600 bác sĩ, 25 bệnh viện, 100 phòng khám trên
+                    YouMed <br />để có số thứ tự và khung giờ khám trước.
+                </p>
+            </div>
 
-  <ol class="pagination-container">
-    <li><!----></li>
+            <form method="GET"
+                  class="search-form"
+                  asp-controller="BookClinic"
+                  asp-action="ShowAllClinics">
+                <div class="search-bar">
+                    <input name="searchQuery" type="search" placeholder="Tìm kiếm phòng khám..." class="Search"
+                           value="@ViewBag.searchQuery" />
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search"
+                         viewBox="0 0 16 16">
+                        <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001q.044.06.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1 1 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0" />
+                    </svg>
+                </div>
+            </form>
+        </div>
+    </div>
+    @* </div> *@
+</section>
+
+
+<div class="container-md ">
+    <div class="introBookClinic ">
+        <h2>Đa dạng phòng khám</h2>
+        <div class="line">
+            <p style="text-align: center; white-space: nowrap; display: flex; justify-content: center;">
+                Đặt khám dễ dàng và tiện lợi hơn với các phòng khám cùng nhiều chuyên khoa
+            </p>
+        </div>
+
+    </div>
+</div>
+
+
+<div class="container-md">
+    @foreach (var clinic in Model)
+    {
+        <a asp-area=""
+           asp-controller="BookClinic"
+           asp-action="ShowClinicDetails"
+           asp-route-id="@clinic.ClinicId"
+           class="no-underline">
+            <div class="phongKham">
+                <div>
+                    <img class="img" alt="@clinic.ClinicName"
+                         src="@clinic.MainImage;height=128" />
+                </div>
+                <div class="line">
+                    <div style="color: black; font-weight: 600; font-size: larger;">
+                        @clinic.ClinicName
+                    </div>
+
+                    @foreach (var basic in clinic.Basics)
+                    {
+                        <p>@basic.Address</p>
+                        break;
+                    }
+                </div>
+            </div>
+        </a>
+    }
+</div>
+
+@* <ol class="pagination-container">
     <li class="ng-star-inserted">
-      <a class="bg-blue-600 block border-blue-600 h-8 hover:text-white leading-8 rounded text-center text-white w-8"
-        href="#" onclick="handlePageChange(1)">
-        1
-      </a>
+        <a class="bg-blue-600 block border-blue-600 h-8 hover:text-white leading-8 rounded text-center text-white w-8"
+           href="#" onclick="handlePageChange(1)">
+            1
+        </a>
     </li>
     <li class="ng-star-inserted">
-      <a class="bg-white block border border-gray-100 h-8 leading-8 rounded text-center text-gray-900 w-8" href="#"
-        onclick="handlePageChange(2)">
-        2
-      </a>
+        <a class="bg-white block border border-gray-100 h-8 leading-8 rounded text-center text-gray-900 w-8" href="#"
+           onclick="handlePageChange(2)">
+            2
+        </a>
     </li>
     <li class="ng-star-inserted">
-      <a class="bg-white block border border-gray-100 h-8 leading-8 rounded text-center text-gray-900 w-8" href="#"
-        onclick="handlePageChange(3)">
-        3
-      </a>
+        <a class="bg-white block border border-gray-100 h-8 leading-8 rounded text-center text-gray-900 w-8" href="#"
+           onclick="handlePageChange(3)">
+            3
+        </a>
     </li>
     <li class="ng-star-inserted">
-      <a class="bg-white block border border-gray-100 h-8 leading-8 rounded text-center text-gray-900 w-8" href="#"
-        onclick="handlePageChange(4)">
-        4
-      </a>
+        <a class="bg-white block border border-gray-100 h-8 leading-8 rounded text-center text-gray-900 w-8" href="#"
+           onclick="handlePageChange(4)">
+            4
+        </a>
     </li>
     <li class="ng-star-inserted">
-      <a class="bg-white block border border-gray-100 h-8 leading-8 rounded text-center text-gray-900 w-8" href="#"
-        onclick="handlePageChange(5)">
-        5
-      </a>
+        <a class="bg-white block border border-gray-100 h-8 leading-8 rounded text-center text-gray-900 w-8" href="#"
+           onclick="handlePageChange(5)">
+            5
+        </a>
     </li>
 
-  </ol>
+</ol> *@
 
-</body>
 
-<footer class="footer1">
-  <div class="container-md">
-    <div class="footer-direction">
-      <div class="col-md-3 footer-section">
-        <h5 style="font-size: 17px">CÔNG TY TNHH SunShine VIỆT NAM</h5>
-        <p><b>VPĐD</b>: FPT University, Campus HCM, Q.9, TP. HCM</p>
-        <p><b>Hotline:</b> 0000-0000 (8:30 - 20:30 từ T2 đến T7)</p>
-        <p>Chịu trách nhiệm nội dung: Biên soạn Huỳnh Trọng Nghĩa.</p>
-      </div>
-      <div class="col-md-3 footer-section">
-        <h5>Về SunShine</h5>
-        <p>Giới thiệu về SunShine Ban điều hành</p>
-        <p>Nhân sự & Tuyển dụng</p>
-        <p>Liên hệ</p>
-      </div>
-      <div class="col-md-3 footer-section">
-        <h5>Dịch vụ</h5>
-        <p>Đặt khám nha sĩ</p>
-        <p>Đặt khám theo ca</p>
-        <p>SunShine Store</p>
-      </div>
-      <div class="col-md-3 footer-section">
-        <h5>Hỗ trợ</h5>
-        <p>Điều Khoản Sử Dụng</p>
-        <p>Chính Sách Bảo Mật</p>
-        <p>Chính sách giải quyết khiếu nại</p>
-        <p>Hỗ trợ khách hàng: cskh@sunshine.vn</p>
-      </div>
-    </div>
-  </div>
-</footer>
 
-</html>
+
+
+
