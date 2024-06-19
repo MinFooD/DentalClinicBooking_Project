@@ -1,0 +1,478 @@
+﻿
+/* thanh search */
+.show-dropdown .dropdown-menu {
+    display: block;
+}
+
+input .Search {
+    width: 100% !important;
+}
+
+.typex {
+    display: flex;
+    justify-content: end;
+    width: 100%;
+    z-index: 1;
+}
+
+#main-search input[type="search"] {
+    width: 100%;
+    border-radius: 9999px;
+    font-size: 1rem;
+    padding: 0.75rem 3rem 0.75rem 1.5rem;
+    border: none;
+    outline: none;
+}
+
+.search-bar {
+    display: flex;
+}
+
+img {
+    margin: 0 !important;
+}
+
+.Search-in {
+    z-index: 3 !important;
+    text-align: center;
+    width: 100%;
+    display: flex;
+    position: static;
+    flex-direction: column;
+    align-items: center;
+    opacity: 1;
+}
+
+input .Search {
+    width: 100% !important;
+}
+
+.search-form {
+    width: 90%;
+}
+
+.bi {
+    display: block;
+    position: relative;
+    top: 18px;
+    left: -40px;
+}
+
+@media (max-width: 768px) {
+    .navbar-toggle {
+        display: block;
+    }
+
+    .navbar-menu {
+        display: none;
+    }
+
+        .navbar-menu.active {
+            display: block;
+        }
+
+    .nav-item {
+        margin: 8px 0;
+    }
+}
+
+
+#main-search {
+    position: relative;
+    overflow: hidden;
+    background-color: rgb(25 117 220);
+}
+
+.imgbanner {
+    width: 100%;
+    position: static;
+    height: 100%;
+}
+
+/* Inner container */
+#main-search .max-w-7xl {
+    max-width: 1280px;
+    margin: auto;
+    padding: 3rem 1rem;
+    min-height: 520px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+/* Centered content */
+#main-search .max-w-4xl {
+    max-width: 1024px;
+    width: 100%;
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+/* Search information */
+#main-search .Search.information {
+    width: 100%;
+    text-shadow: rgba(0, 0, 0, 0.3) 0px 0px 5px;
+    padding-bottom: 40px;
+}
+
+#main-search h1 {
+    color: white;
+    font-size: 1.25rem;
+}
+
+@media (min-width: 768px) {
+    #main-search h1 {
+        font-size: 2.25rem;
+        /* md:text-4xl */
+    }
+}
+
+#main-search p {
+    color: white;
+    font-size: 0.875rem;
+    margin-top: 0.5rem;
+    margin-bottom: 0;
+}
+
+@media (min-width: 768px) {
+    #main-search p {
+        font-size: 1.125rem;
+    }
+}
+
+/* Search form wrapper */
+#main-search .wrapper-search {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    /* gap-3 */
+    padding-top: 1rem;
+    /* Reduced padding-top */
+    align-items: center;
+    /* Center the search bar */
+    padding-left: 15rem;
+}
+
+.section-background {
+    position: relative;
+    background-image: url("Image/family-Photoroom.jpg");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    padding: 20px;
+    min-height: 520px;
+}
+
+.search-button {
+    position: absolute;
+    right: 0;
+    background: none;
+    border: none;
+    padding: 0.5rem;
+    cursor: pointer;
+}
+
+.right-0 {
+    position: static;
+}
+
+/* Background image */
+
+#main-search .absolute.z-0.bottom-0.right-0 {
+    position: absolute;
+    z-index: 0;
+    bottom: 0;
+    right: 0;
+}
+
+
+@media (min-width: 768px) {
+    #main-search .absolute.z-0.bottom-0.right-0 img {
+        opacity: 1;
+    }
+}
+
+
+
+/* Thanh Book dentist or clinic */
+.BookDentistorClinic {
+    display: flex;
+    justify-content: center;
+}
+
+.introBookClinic {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    margin-top: 1rem;
+}
+
+.container {
+    display: flex;
+    width: 100% !important;
+    flex-direction: column;
+    align-items: center;
+    margin: 0 15% !important;
+    gap: 1rem;
+}
+
+
+/* Booking Clinic */
+.container {
+    max-width: 64rem;
+    margin: 0 auto;
+    padding: 0 1rem;
+}
+
+.intro {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-bottom: 1rem;
+}
+
+.intro-heading {
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin-bottom: 0;
+}
+
+.intro-paragraph {
+    font-size: 0.875rem;
+    display: none;
+}
+
+.clinic-list-wrapper {
+    position: relative;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+}
+
+.clinic-list {
+    display: flex;
+    padding-top: 2rem;
+    padding-bottom: 1rem;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+}
+
+    .clinic-list::-webkit-scrollbar {
+        height: 8px;
+    }
+
+    .clinic-list::-webkit-scrollbar-track {
+        background-color: #f1f1f1;
+    }
+
+    .clinic-list::-webkit-scrollbar-thumb {
+        background-color: #888;
+        border-radius: 4px;
+    }
+
+.clinic-list {
+    scrollbar-width: thin;
+    -ms-overflow-style: -ms-autohiding-scrollbar;
+}
+
+
+
+.clinic-item {
+    flex-shrink: 0;
+    margin-right: 1rem;
+    width: 18rem;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start; /* Đảm bảo các phần tử con căn trái */
+    box-sizing: border-box; /* Đảm bảo padding và border nằm trong width và height */
+    overflow: hidden; /* Ẩn các phần tử con vượt ra ngoài khung */
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+    .clinic-item:hover {
+        text-decoration: none
+    }
+
+    .clinic-item:last-child {
+        margin-right: 0;
+    }
+
+    .clinic-item img {
+        width: 40%;
+        height: auto;
+        border-radius: 0.5rem;
+    }
+
+    .clinic-item h3 {
+        margin-top: 1rem;
+        font-size: 1rem;
+        font-weight: bold;
+        text-align: center;
+    }
+
+.imgClinic {
+    text-align: center;
+    margin: 0.5rem;
+}
+
+.clinic-item h4 {
+    margin-top: 0.5rem;
+    font-size: 0.875rem;
+    color: #4b5563;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 100%; /* Đảm bảo h4 không vượt quá khung chứa */
+    width: 230px;
+    box-sizing: border-box;
+    margin-left: 20px;
+}
+
+.clinic-info {
+    border: 1px solid #A1AFFB;
+    border-radius: 5%;
+    padding :5px
+}
+
+
+/* Đội ngũ chuyên gia */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 1rem;
+}
+
+/* Profile Section Styles */
+.profile-section {
+    background-color: #fff;
+    padding: 1rem;
+    border: 2px solid #007bff;
+    border-radius: 0.75rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+@media (min-width: 768px) {
+    .profile-section {
+        padding: 1.5rem;
+        flex-direction: row-reverse;
+    }
+}
+
+/* Info Styles */
+.info {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.description {
+    max-width: 20rem;
+    text-align: center;
+}
+
+.link {
+    background-color: #007bff;
+    color: #fff;
+    display: inline-flex;
+    align-items: center;
+    border-radius: 9999px;
+    padding: 0.5rem 1rem;
+    cursor: pointer;
+    text-decoration: none;
+}
+
+    .link p {
+        margin-right: 0.25rem;
+    }
+
+.arrow-icon {
+    margin-left: 0.5rem;
+}
+
+.arrow-path,
+.arrow-head {
+    transition: all 0.3s ease;
+}
+
+.link:hover .arrow-path {
+    opacity: 1;
+}
+
+.link:hover .arrow-head {
+    transform: translateX(2px);
+}
+
+/* List Styles */
+.list {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+}
+
+@media (min-width: 768px) {
+    .list {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+.item {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    text-decoration: none;
+}
+
+.photo {
+    width: 6rem;
+    height: 6rem;
+    border-radius: 9999px;
+    overflow: hidden;
+    background-color: #cbd5e0;
+}
+
+    .photo img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+
+.details {
+    flex: 1;
+}
+
+    .details h4 {
+        font-weight: 500;
+        font-size: smaller;
+        margin: 0;
+        transition: color 0.3s ease;
+    }
+
+    .details p {
+        margin: 0;
+        font-size: 0.875rem;
+        color: #6b7280;
+    }
+
+.item:hover .details h4 {
+    color: #007bff;
+    text-decoration: none;
+}
+
+a:hover{
+    text-decoration:none
+}
