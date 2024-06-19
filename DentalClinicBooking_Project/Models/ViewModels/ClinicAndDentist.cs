@@ -1,6 +1,4 @@
-﻿
-
-namespace DentalClinicBooking_Project.Models.ViewModels
+﻿namespace DentalClinicBooking_Project.Models.ViewModels
 {
 	public class ClinicAndDentist
 	{
