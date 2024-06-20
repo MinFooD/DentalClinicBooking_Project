@@ -1,4 +1,4 @@
-html{
+html {
   font-family: Arial, Helvetica, sans-serif;
 }
 
@@ -8,140 +8,6 @@ body {
   padding: 0 0;
 }
 
-.navbar {
-  background-color: #ffffff;
-}
-
-header.row.navbar{
-  border-bottom: 1px solid #F1F5F9;
-}
-
-.navbar-container {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 16px 32px;
-}
-
-.navbar-brand img {
-  width: 118px;
-}
-
-.navbar-toggle {
-  display: none;
-  background: none;
-  border: none;
-  cursor: pointer;
-}
-
-.navbar-menu {
-  display: flex;
-  justify-content: center;
-  width: 100%;
-}
-
-ul.navbar-nav {
-  flex-direction: row;
-}
-
-.navbar-nav {
-  display: none;
-  flex-direction: none;
-  list-style-type: none;
-  margin: 0;
-  padding: 0;
-  align-items: flex-start;
-  display: flex;
-  justify-content: center;
-  width: 100%;
-}
-
-.nav-item {
-  margin-right: 50px;
-  font-weight: 600;
-  margin: 0 10px;
-  position: relative;
-}
-
-.nav-link {
-  text-decoration: none;
-  color: #1f2937;
-  padding: 12px;
-  transition: background-color 0.3s ease;
-  border-radius: 15%;
-}
-
-.navbar-login .btn {
-  display: flex;
-  justify-content: end;
-  padding: 8px 16px;
-
-  color: rgb(25 117 220);
-  text-decoration: none;
-  transition: background-color 0.3s ease, color 0.3s ease;
-  margin-left: 100px;
-}
-
-.navbar-login {
-  display: flex;
-  margin-right: 0px !important;
-  padding-right: 0px !important;
-  justify-content: end;
-}
-
-.nav-item:hover .dropdown-menu {
-  display: block;
-}
-
-a.btn {
-  margin: 0 !important;
-  border: 2px solid rgb(25 117 220);
-}
-
-a.btn:hover {
-  margin: 0;
-  background-color: rgb(25 117 220);
-  color: #fff;
-}
-
-.dropdown-toggle::after {
-  margin-left: 0.255em;
-  vertical-align: 0.255em;
-  border: none;
-}
-
-.dropdown-menu {
-  display: block;
-  display: flex;
-  flex-direction: column;
-  left: 50%;
-  transform: translateX(-50%);
-}
-
-.dropdown-container {
-  display: flex;
-  flex-direction: column;
-  margin-bottom: 16px;
-}
-
-.dropdown-item {
-  padding: 0px 0px;
-}
-
-.dropdown-container a {
-  text-decoration: none;
-  color: #1f2937;
-  font-weight: 600;
-}
-
-.dropdown-container a+a {
-  font-weight: normal;
-}
-
-.dropdown-container a:hover {
-  color: rgb(25 117 220);
-  background-color: white;
-}
 
 
 /* thanh search */
@@ -171,7 +37,6 @@ input .Search {
 
 .search-bar {
   display: flex;
-
 }
 
 img {
@@ -206,19 +71,19 @@ input .Search {
 
 @media (max-width: 768px) {
   .navbar-toggle {
-    display: block;
+      display: block;
   }
 
   .navbar-menu {
-    display: none;
+      display: none;
   }
 
-  .navbar-menu.active {
-    display: block;
-  }
+      .navbar-menu.active {
+          display: block;
+      }
 
   .nav-item {
-    margin: 8px 0;
+      margin: 8px 0;
   }
 }
 
@@ -233,8 +98,6 @@ input .Search {
   width: 100%;
   position: static;
   height: 100%;
-
-
 }
 
 /* Inner container */
@@ -274,8 +137,8 @@ input .Search {
 
 @media (min-width: 768px) {
   #main-search h1 {
-    font-size: 2.25rem;
-    /* md:text-4xl */
+      font-size: 2.25rem;
+      /* md:text-4xl */
   }
 }
 
@@ -288,7 +151,7 @@ input .Search {
 
 @media (min-width: 768px) {
   #main-search p {
-    font-size: 1.125rem;
+      font-size: 1.125rem;
   }
 }
 
@@ -340,7 +203,7 @@ input .Search {
 
 @media (min-width: 768px) {
   #main-search .absolute.z-0.bottom-0.right-0 img {
-    opacity: 1;
+      opacity: 1;
   }
 }
 
@@ -352,45 +215,45 @@ input .Search {
   justify-content: center;
 }
 
-/* Individual link items */
-.BookDentistorClinic .banner-nav-item {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  text-decoration: none;
-  color: inherit;
-  padding: 1rem 2rem;
-  width: 300px;
-  border-bottom: 1px solid rgba(0, 0, 0, 0.2);
-  transition: border-color 0.3s ease;
-  text-align: center;
-  font-size: larger;
-}
+  /* Individual link items */
+  .BookDentistorClinic .banner-nav-item {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-decoration: none;
+      color: inherit;
+      padding: 1rem 2rem;
+      width: 300px;
+      border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+      transition: border-color 0.3s ease;
+      text-align: center;
+      font-size: larger;
+  }
 
-.BookDentistorClinic .banner-nav-item:hover {
-  background-color: #f0f0f0;
-  border-color: #ccc;
-  border-bottom: 1px solid rgb(0, 115, 255);
-}
+      .BookDentistorClinic .banner-nav-item:hover {
+          background-color: #f0f0f0;
+          border-color: #ccc;
+          border-bottom: 1px solid rgb(0, 115, 255);
+      }
 
-.BookDentistorClinic .bookDentist,
-.BookDentistorClinic .bookClinic {
-  margin-right: 0.5rem;
-}
+  .BookDentistorClinic .bookDentist,
+  .BookDentistorClinic .bookClinic {
+      margin-right: 0.5rem;
+  }
 
-.BookDentistorClinic .text-xs {
-  font-size: 0.75rem;
-}
+  .BookDentistorClinic .text-xs {
+      font-size: 0.75rem;
+  }
 
 @media (min-width: 768px) {
   .BookDentistorClinic .text-sm {
-    font-size: 0.875rem;
-    /* text-sm */
+      font-size: 0.875rem;
+      /* text-sm */
   }
 
   .BookDentistorClinic .md\\:font-medium {
-    font-weight: 500;
-    /* font-medium */
+      font-weight: 500;
+      /* font-medium */
   }
 }
 
@@ -414,7 +277,7 @@ input .Search {
 
 @media (min-width: 1024px) {
   .BookDentistorClinic .lg\\:inline-block {
-    display: inline-block;
+      display: inline-block;
   }
 }
 
@@ -433,11 +296,7 @@ input .Search {
   gap: 1rem;
 }
 
-.phongKham1,
-.phongKham2,
-.phongKham3,
-.phongKham4,
-.phongKham5 {
+.phongKham {
   display: flex;
   align-items: center;
   gap: 1rem;
@@ -451,11 +310,7 @@ input .Search {
   /* Căn giữa các phần tử */
 }
 
-.img1,
-.img2,
-.img3,
-.img4,
-.img5 {
+.img {
   width: 128px;
   height: 128px;
   overflow: hidden;
@@ -464,22 +319,14 @@ input .Search {
   position: relative;
 }
 
-.img1 img,
-.img2 img,
-.img3 img,
-.img4 img,
-.img5 img {
+.img img {
   width: 100%;
   height: 100%;
   object-fit: cover;
   /* Đảm bảo hình ảnh bao phủ toàn bộ khung */
 }
 
-.line1,
-.line2,
-.line3,
-.line4,
-.line5 {
+.line {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -487,29 +334,21 @@ input .Search {
   /* Màu xám */
 }
 
-.line1 h2,
-.line2 h2,
-.line3 h2,
-.line4 h2,
-.line5 h2 {
-  font-size: 1.125rem;
-  /* Kích thước chữ lớn */
-  font-weight: 600;
-  /* Font-weight đậm */
-  margin: 0;
-  /* Loại bỏ khoảng cách mặc định */
-}
+  .line h2 {
+      font-size: 1.125rem;
+      /* Kích thước chữ lớn */
+      font-weight: 600;
+      /* Font-weight đậm */
+      margin: 0;
+      /* Loại bỏ khoảng cách mặc định */
+  }
 
-.line1 p,
-.line2 p,
-.line3 p,
-.line4 p,
-.line5 p {
-  opacity: 0.8;
-  font-weight: 500;
-  margin: 0;
-  /* Loại bỏ khoảng cách mặc định */
-}
+  .line p {
+      opacity: 0.8;
+      font-weight: 500;
+      margin: 0;
+      /* Loại bỏ khoảng cách mặc định */
+  }
 
 .pagination-container {
   display: flex;
@@ -520,76 +359,76 @@ input .Search {
   padding: 1rem;
 }
 
-.pagination-container li {
-  list-style: none;
-  /* Loại bỏ dấu chấm của danh sách */
-}
+  .pagination-container li {
+      list-style: none;
+      /* Loại bỏ dấu chấm của danh sách */
+  }
 
-.pagination-container a {
-  display: block;
-  width: 2rem;
-  height: 2rem;
-  line-height: 2rem;
-  text-align: center;
-  border-radius: 0.5rem;
-  border: 1px solid #ddd;
-  text-decoration: none;
-  /* Loại bỏ gạch chân mặc định */
-  color: #333;
-  transition: background-color 0.3s, color 0.3s;
-  /* Hiệu ứng chuyển đổi màu */
-}
+  .pagination-container a {
+      display: block;
+      width: 2rem;
+      height: 2rem;
+      line-height: 2rem;
+      text-align: center;
+      border-radius: 0.5rem;
+      border: 1px solid #ddd;
+      text-decoration: none;
+      /* Loại bỏ gạch chân mặc định */
+      color: #333;
+      transition: background-color 0.3s, color 0.3s;
+      /* Hiệu ứng chuyển đổi màu */
+  }
 
-.pagination-container a.bg-blue-600 {
-  background-color: rgb(25 117 220);
-  color: white;
-  border: 1px solid rgb(25 117 220);
-}
+      .pagination-container a.bg-blue-600 {
+          background-color: rgb(25 117 220);
+          color: white;
+          border: 1px solid rgb(25 117 220);
+      }
 
-.pagination-container a:hover {
-  background-color: white;
-  color: white;
-}
+      .pagination-container a:hover {
+          background-color: white;
+          color: white;
+      }
 
-.pagination-container a.bg-white {
-  background-color: white;
-}
+      .pagination-container a.bg-white {
+          background-color: white;
+      }
 
-.pagination-container a:hover.bg-white {
-  background-color: #f8f9fa;
-}
+      .pagination-container a:hover.bg-white {
+          background-color: #f8f9fa;
+      }
 
-.pagination-container .ellipsis {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 2rem;
-  height: 2rem;
-  color: #333;
-}
+  .pagination-container .ellipsis {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 2rem;
+      height: 2rem;
+      color: #333;
+  }
 
-.pagination-container .next-page {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 2rem;
-  height: 2rem;
-  border-radius: 0.5rem;
-  border: 1px solid #ddd;
-  background-color: white;
-  color: #333;
-  transition: background-color 0.3s, color 0.3s;
-}
+  .pagination-container .next-page {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 2rem;
+      height: 2rem;
+      border-radius: 0.5rem;
+      border: 1px solid #ddd;
+      background-color: white;
+      color: #333;
+      transition: background-color 0.3s, color 0.3s;
+  }
 
-.pagination-container .next-page:hover {
-  background-color: #f8f9fa;
-  color: #333;
-}
+      .pagination-container .next-page:hover {
+          background-color: #f8f9fa;
+          color: #333;
+      }
 
-.pagination-container svg {
-  width: 1rem;
-  height: 1rem;
-}
+  .pagination-container svg {
+      width: 1rem;
+      height: 1rem;
+  }
 
 .buttonPhanTrang {
   display: flex;
@@ -608,63 +447,24 @@ input .Search {
   white-space: nowrap;
 }
 
-.buttonPhanTrang:hover {
-  background-color: white;
-  color: white;
-}
+  .buttonPhanTrang:hover {
+      background-color: white;
+      color: white;
+  }
 
-.buttonPhanTrang svg {
-  margin-left: 0.5rem;
-}
+  .buttonPhanTrang svg {
+      margin-left: 0.5rem;
+  }
 
-.buttonPhanTrang a {
-  width: 4rem;
-  height: 2rem;
-}
+  .buttonPhanTrang a {
+      width: 4rem;
+      height: 2rem;
+  }
 
 .backgroundImage {
   width: 100%;
   height: auto;
   object-fit: cover;
 }
-
-/* footer  */
-.footer1 {
-  background-color: #f8f8f8;
-  padding: 20px 0;
-  margin-top: 2rem;
-}
-
-.footer-section {
-  display: flex;
-  flex-direction: column;
-}
-
-.footer-section h5 {
-  font-weight: bold;
-  margin-bottom: 1rem;
-}
-
-.footer-section p {
-  margin: 0 0 10px;
-}
-.footer1 {
-  background-color: rgb(25 117 220);
-  color: white;
-  padding-left: 100px;
-  padding-right: 100px;
-  padding-left: 100px;
-  padding-top: 20px;
-  padding-bottom: 20px;
-}
-
-.container-md .flex2{
-  display: flex;
-  
-}
-.footer-direction{
-  display: flex;  
-}
-
 
 
