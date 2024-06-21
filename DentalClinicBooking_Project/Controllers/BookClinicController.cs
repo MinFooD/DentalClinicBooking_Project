@@ -20,23 +20,13 @@ namespace DentalClinicBooking_Project.Controllers
             int pageSize = 2,
             int pageNumber = 1)
         {
-            //var totalRecords = await bookClinicRepository.CountAsync();
-            //var totalPages = Math.Ceiling((decimal)totalRecords / pageSize);
+            var totalRecords = await bookClinicRepository.CountAsync();
+            var totalPages = Math.Ceiling((decimal)totalRecords / pageSize);
 
-            //if (pageNumber > totalPages)
-            //{
-            //    pageNumber--;
-            //}
-
-            //if (pageNumber < 1)
-            //{
-            //    pageNumber++;
-            //}
-
+            ViewBag.TotalPages = totalPages;
             ViewBag.SearchQuery = searchQuery;
-            //ViewBag.TotalPages = totalPages;            
-            //ViewBag.PageSize = pageSize;
-            //ViewBag.PageNumber = pageNumber;
+            ViewBag.PageSize = pageSize;
+            ViewBag.PageNumber = pageNumber;
 
             var Model = await bookClinicRepository.GetAllAsync(searchQuery, pageNumber, pageSize);
 
@@ -47,17 +37,17 @@ namespace DentalClinicBooking_Project.Controllers
         [HttpGet]
         public async Task<IActionResult> ShowClinicDetails(Guid id)
         {
-            var Clinic = await bookClinicRepository.GetAsync(id);
-            var descriptionClinics = Clinic?.DescriptionClinics;
+            var clinic = await bookClinicRepository.GetAsync(id);
+            var desClinics = clinic?.DescriptionClinics;
 
-            if (Clinic != null && descriptionClinics != null)
+            if (clinic != null && desClinics != null)
             {
                 var Model = new ClinicDetailsModel
                 {
-                    Id = Clinic.ClinicId,
-                    ClinicName = Clinic.ClinicName,
-                    MainImage = Clinic.MainImage,
-                    DescriptionClinics = descriptionClinics
+                    Id = clinic.ClinicId,
+                    ClinicName = clinic.ClinicName,
+                    MainImage = clinic.MainImage,
+                    DescriptionClinics = desClinics
                 };
 
                 return View(Model);

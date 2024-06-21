@@ -1,11 +1,30 @@
 @model List<DentalClinicBooking_Project.Models.Domain.Clinic>
 
-
 @{
+    decimal PrevPage = ViewBag.PageNumber - 1;
+    if (PrevPage <= 0)
+    {
+        PrevPage = 1;
+    }
+    decimal NextPage = ViewBag.PageNumber + 1;
+    if (NextPage > ViewBag.TotalPages)
+    {
+        NextPage = ViewBag.TotalPages;
+    }
+
+    decimal pageRange = 2; // Số lượng trang hiển thị trước và sau trang hiện tại
+    decimal startPage = ViewBag.PageNumber - pageRange;
+    decimal endPage = ViewBag.PageNumber + pageRange;
+
+    if (startPage < 1)
+    {
+        startPage = 1;
+    }
+    if (endPage > ViewBag.TotalPages)
+    {
+        endPage = ViewBag.TotalPages;
+    }
 }
-
-
-
 
 <link rel="stylesheet" href="chooseClinic.css" />
 <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet" />
@@ -14,19 +33,18 @@
 <script src="https://cdn.jsdelivr.net/npm/@@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
-
 <section id="main-search" class="relative overflow-hidden ">
     <div class="relative z-20 max-w-7xl mx-auto px-4 py-16 lg:px-6 md:min-h-[520px] flex flex-col justify-center">
         <div>
             <div class="absolute z-0 bottom-0 right-0 typex">
                 <img width="676" height="520"
-                    src="https://cdn.youmed.vn/wp-content/themes/youmed/images/your-medical-booking.webp" alt="YouMed"
-                    class="opacity-40 lg:opacity-100 block entered lazyloaded"
-                    data-lazy-src="https://cdn.youmed.vn/wp-content/themes/youmed/images/your-medical-booking.webp"
-                    data-ll-status="loaded"><noscript>
+                     src="https://cdn.youmed.vn/wp-content/themes/youmed/images/your-medical-booking.webp" alt="YouMed"
+                     class="opacity-40 lg:opacity-100 block entered lazyloaded"
+                     data-lazy-src="https://cdn.youmed.vn/wp-content/themes/youmed/images/your-medical-booking.webp"
+                     data-ll-status="loaded"><noscript>
                     <img width="676" height="520"
-                        src="https://cdn.youmed.vn/wp-content/themes/youmed/images/your-medical-booking.webp"
-                        alt="YouMed" class="opacity-40 lg:opacity-100 block">
+                         src="https://cdn.youmed.vn/wp-content/themes/youmed/images/your-medical-booking.webp"
+                         alt="YouMed" class="opacity-40 lg:opacity-100 block">
                 </noscript>
             </div>
         </div>
@@ -42,17 +60,15 @@
             <form method="GET" class="search-form" asp-controller="BookClinic" asp-action="ShowAllClinics">
                 <div class="search-bar">
                     <input name="searchQuery" type="search" placeholder="Tìm kiếm phòng khám..." class="Search"
-                        value="@ViewBag.searchQuery" />
+                           value="@ViewBag.searchQuery" />
                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
-                        class="bi bi-search" viewBox="0 0 16 16">
-                        <path
-                            d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001q.044.06.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1 1 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0" />
+                         class="bi bi-search" viewBox="0 0 16 16">
+                        <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001q.044.06.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1 1 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0" />
                     </svg>
                 </div>
             </form>
         </div>
     </div>
-    @* </div> *@
 </section>
 
 
@@ -72,8 +88,11 @@
 <div class="container-md">
     @foreach (var clinic in Model)
     {
-        <a asp-area="" asp-controller="BookClinic" asp-action="ShowClinicDetails" asp-route-id="@clinic.ClinicId"
-            class="no-underline">
+        <a asp-area=""
+           asp-controller="BookClinic"
+           asp-action="ShowClinicDetails"
+           asp-route-id="@clinic.ClinicId"
+           class="no-underline">
             <div class="phongKham">
                 <div>
                     <img class="img" alt="@clinic.ClinicName" src="@clinic.MainImage;height=128" />
@@ -94,36 +113,39 @@
     }
 </div>
 
-@* <ol class="pagination-container">
-<li class="ng-star-inserted">
-<a class="bg-blue-600 block border-blue-600 h-8 hover:text-white leading-8 rounded text-center text-white w-8"
-href="#" onclick="handlePageChange(1)">
-1
-</a>
-</li>
-<li class="ng-star-inserted">
-<a class="bg-white block border border-gray-100 h-8 leading-8 rounded text-center text-gray-900 w-8" href="#"
-onclick="handlePageChange(2)">
-2
-</a>
-</li>
-<li class="ng-star-inserted">
-<a class="bg-white block border border-gray-100 h-8 leading-8 rounded text-center text-gray-900 w-8" href="#"
-onclick="handlePageChange(3)">
-3
-</a>
-</li>
-<li class="ng-star-inserted">
-<a class="bg-white block border border-gray-100 h-8 leading-8 rounded text-center text-gray-900 w-8" href="#"
-onclick="handlePageChange(4)">
-4
-</a>
-</li>
-<li class="ng-star-inserted">
-<a class="bg-white block border border-gray-100 h-8 leading-8 rounded text-center text-gray-900 w-8" href="#"
-onclick="handlePageChange(5)">
-5
-</a>
-</li>
+<ol class="pagination-container">   
+    <li class="ng-star-inserted">
+        <a class="bg-blue-600 block border-blue-600 h-8 hover:text-white leading-8 rounded text-center text-white w-8"
+           asp-area="" asp-controller="BookClinic" asp-action="ShowAllClinics" asp-route-PageNumber="@PrevPage">
+            <<
+        </a>
+    </li>
+    @for (decimal i = startPage; i <= endPage; i++)
+    {
+        if (i == ViewBag.PageNumber)
+        {
+            <li class="ng-star-inserted">
+                <a class=" block border-blue-600 h-8 hover:text-white leading-8 rounded text-center text-white w-8 " style="background-color:#000db8"
+                   asp-area="" asp-controller="BookClinic" asp-action="ShowAllClinics" asp-route-PageNumber="@(i)">
+                    @(i)
+                </a>
+            </li>
 
-</ol> *@
+        }
+        else
+        {
+            <li class="ng-star-inserted">
+                <a class="bg-blue-600 block border-blue-600 h-8 hover:text-white leading-8 rounded text-center text-white w-8"
+                   asp-area="" asp-controller="BookClinic" asp-action="ShowAllClinics" asp-route-PageNumber="@(i)">
+                    @(i)
+                </a>
+            </li>
+        }
+    }
+    <li class="ng-star-inserted">
+        <a class="bg-blue-600 block border-blue-600 h-8 hover:text-white leading-8 rounded text-center text-white w-8"
+           asp-area="" asp-controller="BookClinic" asp-action="ShowAllClinics" asp-route-PageNumber="@NextPage">
+            >>
+        </a>
+    </li>
+</ol>

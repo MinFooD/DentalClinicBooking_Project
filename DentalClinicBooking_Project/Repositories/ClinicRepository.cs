@@ -26,8 +26,8 @@ namespace DentalClinicBooking_Project.Repositories
                 query = query.Where(x => x.ClinicName.Contains(searchQuery));
             }
 
-            //var skipResults = (pageNumber - 1) * pageSize;
-            //query = query.Skip(skipResults).Take(pageSize);
+            var skipResults = (pageNumber - 1) * pageSize;
+            query = query.Skip(skipResults).Take(pageSize);
 
             return await query.Include(x => x.Basics).ToListAsync();
             //return await dentalClinicBookingContext.Clinics.Include(x => x.Basics).ToListAsync();
