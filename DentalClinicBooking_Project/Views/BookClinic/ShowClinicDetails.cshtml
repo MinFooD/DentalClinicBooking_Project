@@ -1,195 +1,194 @@
-﻿
-@{
+﻿@{
 }
 
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>BookClinic</title>
-  <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet" />
-
-  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
-  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>BookClinic</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="~/css/clinicdetails.css" rel="stylesheet" />
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </head>
 
 
 <body>
-  <div class="container">
-    <nav class="homeClinic">
-      <ul class="home">
-        <li>
-          <a href="#">Trang chủ</a>
-        </li>
-        <li>
-          <span class="separator">/</span>
-        </li>
-        <li>
-          <a href="#">Phòng khám</a>
-        </li>
-      </ul>
-    </nav>
-    <div class="container1" style="margin-top: 1rem; margin-right: 15rem">
-      <div class="phongKham1" href="#">
-        <div>
-          <img class="img1" alt="Phòng khám Hello Doctor"
-            src="https://cdn.youmed.vn/photos/9bb621c9-2fff-49fe-8e88-31ce6f905e0a.png?width=128&amp;height=128" />
+    <div class="container">
+        <nav class="homeClinic">
+            <ul class="home">
+                <li>
+                    <a href="#">Trang chủ</a>
+                </li>
+                <li>
+                    <span class="separator">/</span>
+                </li>
+                <li>
+                    <a href="#">Phòng khám</a>
+                </li>
+            </ul>
+        </nav>
+        <div class="container1" style="margin-top: 1rem; margin-right: 15rem">
+            <div class="phongKham1" href="#">
+                <div>
+                    <img class="img1" alt="Phòng khám Hello Doctor"
+                        src="https://cdn.youmed.vn/photos/9bb621c9-2fff-49fe-8e88-31ce6f905e0a.png?width=128&amp;height=128" />
+                </div>
+
+                <div class="line1">
+                    <div>
+                        <h2>Phòng khám Hello Doctor</h2>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="informationButton">
+            <a style="margin-left: 255rem"> Thông tin </a>
         </div>
 
-        <div class="line1">
-          <div>
-            <h2>Phòng khám Hello Doctor</h2>
-          </div>
+
+        <div class="image-container">
+            <button class="prev" onclick="prevImage()">&#10094;</button>
+            <img id="mainImage"
+                src="https://cdn.youmed.vn/tin-tuc/wp-content/uploads/2022/07/YouMed-Ung-dung-dat-kham-dat-thuoc.jpg"
+                alt="Ảnh" />
+            <button class="next" onclick="nextImage()">&#10095;</button>
         </div>
-      </div>
-    </div>
-    <div class="informationButton">
-      <a style="margin-left: 255rem"> Thông tin </a>
-    </div>
-
-
-    <div class="image-container">
-      <button class="prev" onclick="prevImage()">&#10094;</button>
-      <img id="mainImage"
-        src="https://cdn.youmed.vn/tin-tuc/wp-content/uploads/2022/07/YouMed-Ung-dung-dat-kham-dat-thuoc.jpg"
-        alt="Ảnh" />
-      <button class="next" onclick="nextImage()">&#10095;</button>
-    </div>
-
-    <script>
-      let currentImageIndex = 0;
-      const images = [
-        "https://cdn.youmed.vn/tin-tuc/wp-content/uploads/2022/07/YouMed-Ung-dung-dat-kham-dat-thuoc.jpg",
-        "https://cdn.youmed.vn/tin-tuc/wp-content/uploads/2023/05/phan-mem-quan-ly-phong-kham.jpg",
-        "https://cdn.youmed.vn/tin-tuc/wp-content/uploads/2020/07/Top-5-phong-kham-da-day-uy-tin-tai-TPHCM.jpg"
-      ];
-
-      function prevImage() {
-        currentImageIndex = (currentImageIndex - 1 + images.length) % images.length;
-        document.getElementById('mainImage').src = images[currentImageIndex];
-      }
-
-      function nextImage() {
-        currentImageIndex = (currentImageIndex + 1) % images.length;
-        document.getElementById('mainImage').src = images[currentImageIndex];
-      }
-
-      setInterval(nextImage, 3000); // Tự động chuyển ảnh sau mỗi 3 giây
-    </script>
-
-
-    <div>
-
-      <style>
-        .dropdown-content {
-          display: none;
-          position: absolute;
-          background-color: #f9f9f9;
-          max-width: 370px;
-          box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
-          z-index: 1;
-          display: block;
-          width: 100%;
-          margin-left: 22rem;
-        }
-
-        .dropdown-content a {
-          color: black;
-          padding: 12px 16px;
-          text-decoration: none;
-          display: block;
-          font-weight: 600;
-          border-radius: 0.4rem;
-          border-bottom: 1px solid #F1F5F9;
-        }
-
-        .dropdown-content a:hover {
-          color: white;
-          background: #00b7ff;
-          box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
-        }
-      </style>
-
-      <div class="dropdown">
-        <button class="quickBooking" style="margin-left: 22rem" onclick="toggleDropdown()">Đặt khám ngay</button>
-        <div id="dropdownOptions" class="dropdown-content">
-          <a href="#" onclick="bookAppointment('clinic')">Đặt khám phòng khám</a>
-          <a href="#" onclick="bookAppointment('regular')">Đặt khám định kỳ</a>
-        </div>
-      </div>
-
-      <script>
-        function toggleDropdown() {
-          var dropdown = document.getElementById("dropdownOptions");
-          if (dropdown.style.display === "none") {
-            dropdown.style.display = "block";
-          } else {
-            dropdown.style.display = "none";
-          }
-        }
-
-        function bookAppointment(type) {
-          console.log('Đặt khám loại: ' + type);
-          closeDropdown();
-          // Thêm mã để xử lý đặt khám
-        }
-
-        function closeDropdown() {
-          var dropdown = document.getElementById("dropdownOptions");
-          dropdown.style.display = "none";
-        }
-
-        // Đảm bảo dropdown đóng khi trang được tải lại
-        window.onload = function () {
-          closeDropdown();
-        }
-      </script>
-
-
-
-    </div>
-    <div class="row information">
-      <div class="col-md-6 info1" style="padding-left: 8rem; margin-bottom: 2rem;">
-        <h4 class="text-lg font-semibold">Giới thiệu</h4>
-        <div class="content  introduceClinic" style="text-align: justify; font-weight: 400;">
-          <p>
-            Đầu năm 2011 Hello Doctor đã ghi dấu sự hình thành của mình ở Việt
-            Nam về y tế từ xa (Telemedicine) - một lĩnh vực khá mới mẻ và đang
-            phát triển nhanh chóng trên thế giới với mục tiêu phục vụ cho những
-            bệnh nhân quan tâm về sức khỏe muốn được bác sĩ tư vấn và đưa ra
-            giải pháp hỗ trợ đã thu hút hơn 300 giáo sư bác sĩ tham gia hệ
-            thống, hợp tác hướng điều trị chuyên sâu.
-          </p>
-          <p>
-            Ước tính Hello Doctor đã phục vụ cho hơn 4.000.000 bệnh nhân nắm rõ
-            tình trạng sức khỏe của mình và cung cấp cho họ giải pháp sức khỏe
-            đúng đắn nhất trên toàn quốc như Hồ Chí Minh, Hà Nội, Đà Nẵng, Khánh
-            Hòa, Đồng Nai, Bình Dương, Cần Thơ, Cà Mau….
-          </p>
-          <p>
-            Chúng tôi tin rằng Sức khỏe là thứ không thể đánh mất trong cuộc
-            đời. Do vậy, Hello Doctor có sứ mệnh với mỗi cá nhân được chữa lành
-            bệnh khi mang bệnh và sống hạnh phúc khi khỏe mạnh.
-          </p>
-          <p><strong>Điều trị chuyên sâu</strong></p>
-          <p>
-            Bệnh nhân của Hello Doctor sẽ được hướng dẫn và cung cấp các thông
-            tin hữu ích trong quá trình tư vấn và điều trị như nơi khám chữa.
-          </p>
-        </div>
-        <a class="toggle-button" onclick="toggleContent(this)" style="text-decoration: none;">
-          ...Xem thêm
-        </a>
 
         <script>
-          function toggleContent(a) {
-            const contentDiv = document.querySelector(".content");
+            let currentImageIndex = 0;
+            const images = [
+                "https://cdn.youmed.vn/tin-tuc/wp-content/uploads/2022/07/YouMed-Ung-dung-dat-kham-dat-thuoc.jpg",
+                "https://cdn.youmed.vn/tin-tuc/wp-content/uploads/2023/05/phan-mem-quan-ly-phong-kham.jpg",
+                "https://cdn.youmed.vn/tin-tuc/wp-content/uploads/2020/07/Top-5-phong-kham-da-day-uy-tin-tai-TPHCM.jpg"
+            ];
 
-            if (a.innerText === "...Xem thêm") {
-              contentDiv.innerHTML += `
+            function prevImage() {
+                currentImageIndex = (currentImageIndex - 1 + images.length) % images.length;
+                document.getElementById('mainImage').src = images[currentImageIndex];
+            }
+
+            function nextImage() {
+                currentImageIndex = (currentImageIndex + 1) % images.length;
+                document.getElementById('mainImage').src = images[currentImageIndex];
+            }
+
+            setInterval(nextImage, 3000); // Tự động chuyển ảnh sau mỗi 3 giây
+        </script>
+
+
+        <div>
+
+            <style>
+                .dropdown-content {
+                    display: none;
+                    position: absolute;
+                    background-color: #f9f9f9;
+                    max-width: 370px;
+                    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+                    z-index: 1;
+                    display: block;
+                    width: 100%;
+                    margin-left: 22rem;
+                }
+
+                .dropdown-content a {
+                    color: black;
+                    padding: 12px 16px;
+                    text-decoration: none;
+                    display: block;
+                    font-weight: 600;
+                    border-radius: 0.4rem;
+                    border-bottom: 1px solid #F1F5F9;
+                }
+
+                .dropdown-content a:hover {
+                    color: white;
+                    background: #00b7ff;
+                    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+                }
+            </style>
+
+            <div class="dropdown">
+                <button class="quickBooking" style="margin-left: 22rem" onclick="toggleDropdown()">Đặt khám
+                    ngay</button>
+                <div id="dropdownOptions" class="dropdown-content">
+                    <a href="#" onclick="bookAppointment('clinic')">Đặt khám phòng khám</a>
+                    <a href="#" onclick="bookAppointment('regular')">Đặt khám định kỳ</a>
+                </div>
+            </div>
+
+            <script>
+                function toggleDropdown() {
+                    var dropdown = document.getElementById("dropdownOptions");
+                    if (dropdown.style.display === "none") {
+                        dropdown.style.display = "block";
+                    } else {
+                        dropdown.style.display = "none";
+                    }
+                }
+
+                function bookAppointment(type) {
+                    console.log('Đặt khám loại: ' + type);
+                    closeDropdown();
+                    // Thêm mã để xử lý đặt khám
+                }
+
+                function closeDropdown() {
+                    var dropdown = document.getElementById("dropdownOptions");
+                    dropdown.style.display = "none";
+                }
+
+                // Đảm bảo dropdown đóng khi trang được tải lại
+                window.onload = function () {
+                    closeDropdown();
+                }
+            </script>
+
+
+
+        </div>
+        <div class="row information">
+            <div class="col-md-6 info1" style="padding-left: 8rem; margin-bottom: 2rem;">
+                <h4 class="text-lg font-semibold">Giới thiệu</h4>
+                <div class="content  introduceClinic" style="text-align: justify; font-weight: 400;">
+                    <p>
+                        Đầu năm 2011 Hello Doctor đã ghi dấu sự hình thành của mình ở Việt
+                        Nam về y tế từ xa (Telemedicine) - một lĩnh vực khá mới mẻ và đang
+                        phát triển nhanh chóng trên thế giới với mục tiêu phục vụ cho những
+                        bệnh nhân quan tâm về sức khỏe muốn được bác sĩ tư vấn và đưa ra
+                        giải pháp hỗ trợ đã thu hút hơn 300 giáo sư bác sĩ tham gia hệ
+                        thống, hợp tác hướng điều trị chuyên sâu.
+                    </p>
+                    <p>
+                        Ước tính Hello Doctor đã phục vụ cho hơn 4.000.000 bệnh nhân nắm rõ
+                        tình trạng sức khỏe của mình và cung cấp cho họ giải pháp sức khỏe
+                        đúng đắn nhất trên toàn quốc như Hồ Chí Minh, Hà Nội, Đà Nẵng, Khánh
+                        Hòa, Đồng Nai, Bình Dương, Cần Thơ, Cà Mau….
+                    </p>
+                    <p>
+                        Chúng tôi tin rằng Sức khỏe là thứ không thể đánh mất trong cuộc
+                        đời. Do vậy, Hello Doctor có sứ mệnh với mỗi cá nhân được chữa lành
+                        bệnh khi mang bệnh và sống hạnh phúc khi khỏe mạnh.
+                    </p>
+                    <p><strong>Điều trị chuyên sâu</strong></p>
+                    <p>
+                        Bệnh nhân của Hello Doctor sẽ được hướng dẫn và cung cấp các thông
+                        tin hữu ích trong quá trình tư vấn và điều trị như nơi khám chữa.
+                    </p>
+                </div>
+                <a class="toggle-button" onclick="toggleContent(this)" style="text-decoration: none;">
+                    ...Xem thêm
+                </a>
+
+                <script>
+                    function toggleContent(a) {
+                        const contentDiv = document.querySelector(".content");
+
+                        if (a.innerText === "...Xem thêm") {
+                            contentDiv.innerHTML += `
                     <p>
                         bệnh hợp lý, các xét nghiệm cần nên làm, bác sĩ chuyên khoa giỏi (đủ uy tín và nhiều kinh nghiệm) theo nhiều chuyên khoa như cơ xương khớp, tâm thần kinh, nội ngoại thần kinh, nam khoa…và nhiều phương pháp điều trị khác nhau như phẫu thuật, can thiệp tim mạch, xạ trị, hóa trị…
                     </p>
@@ -199,9 +198,9 @@
                     <p>Địa chỉ 1: Số 5, Ngõ 95, Ngách 4, Hoàng Cầu, Đống Đa, Hà Nội</p>
                     <p>Địa chỉ 2: 131/3 Ngọc Hồi, Hoàng Liệt, Hoàng Mai, Hà Nội</p>
                 `;
-              a.innerText = "...Thu gọn";
-            } else {
-              contentDiv.innerHTML = `
+                            a.innerText = "...Thu gọn";
+                        } else {
+                            contentDiv.innerHTML = `
                     <p>
                         Đầu năm 2011 Hello Doctor đã ghi dấu sự hình thành của mình ở Việt Nam về y tế từ xa (Telemedicine) - một lĩnh vực khá mới mẻ và đang phát triển nhanh chóng trên thế giới với mục tiêu phục vụ cho những bệnh nhân quan tâm về sức khỏe muốn được bác sĩ tư vấn và đưa ra giải pháp hỗ trợ đã thu hút hơn 300 giáo sư bác sĩ tham gia hệ thống, hợp tác hướng điều trị chuyên sâu.
                     </p>
@@ -216,33 +215,33 @@
                         Bệnh nhân của Hello Doctor sẽ được hướng dẫn và cung cấp các thông tin hữu ích trong quá trình tư vấn và điều trị như nơi khám chữa.
                     </p>
                 `;
-              a.innerText = "...Xem thêm";
-            }
-          }
-        </script>
-      </div>
-      <div class="col-md-6">
-        <div class="working-hours-container">
-          <h4 class="title">Giờ khám</h4>
-          <div class="hours-list">
-            <ul class="days-columns">
-              <li class="day-item">
-                <div class="day-name">Buổi sáng</div>
-                <div class="day-time">7:00 - 9:00</div>
-                <div class="day-time">9:00 - 11:00</div>
-              </li>
-              <li class="day-item">
-                <div class="day-name">Buổi chiều</div>
-                <div class="day-time">13:00 - 15:00</div>
-                <div class="day-time">15:00 - 17:00</div>
-              </li>
-            </ul>
-          </div>
-        </div>
-      </div>
+                            a.innerText = "...Xem thêm";
+                        }
+                    }
+                </script>
+            </div>
+            <div class="col-md-6">
+                <div class="working-hours-container">
+                    <h4 class="title">Giờ khám</h4>
+                    <div class="hours-list">
+                        <ul class="days-columns">
+                            <li class="day-item">
+                                <div class="day-name">Buổi sáng</div>
+                                <div class="day-time">7:00 - 9:00</div>
+                                <div class="day-time">9:00 - 11:00</div>
+                            </li>
+                            <li class="day-item">
+                                <div class="day-name">Buổi chiều</div>
+                                <div class="day-time">13:00 - 15:00</div>
+                                <div class="day-time">15:00 - 17:00</div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
 
+        </div>
     </div>
-  </div>
 </body>
 
 </html>
