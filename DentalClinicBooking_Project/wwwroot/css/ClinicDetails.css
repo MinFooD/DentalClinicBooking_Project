@@ -1,0 +1,405 @@
+
+html{
+    font-family: Arial, Helvetica, sans-serif;
+  }
+  /*  navbar */
+  body {
+    margin: 0;
+    padding: 0 0;
+    font-family: Arial, Helvetica, sans-serif;
+  }
+  
+  p{
+    color: #374151;
+    font-weight: 500;
+  }
+  .navbar {
+    background-color: #ffffff;
+  }
+  
+  header.row.navbar{
+    border-bottom: 1px solid #F1F5F9;
+  }
+  
+  .navbar-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 16px 32px;
+  }
+  
+  .navbar-brand img {
+    width: 118px;
+  }
+  
+  .navbar-toggle {
+    display: none;
+    background: none;
+    border: none;
+    cursor: pointer;
+  }
+  
+  .navbar-menu {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+  }
+  
+  ul.navbar-nav {
+    flex-direction: row;
+  }
+  
+  .navbar-nav {
+    display: none;
+    flex-direction: none;
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    align-items: flex-start;
+    display: flex;
+    justify-content: center;
+    width: 100%;
+  }
+  
+  .nav-item {
+    margin-right: 50px;
+    font-weight: 600;
+    margin: 0 10px;
+    position: relative;
+  }
+  
+  .nav-link {
+    text-decoration: none;
+    color: #1f2937;
+    padding: 12px;
+    transition: background-color 0.3s ease;
+    border-radius: 15%;
+  }
+  
+  .navbar-login .btn {
+    display: flex;
+    justify-content: end;
+    padding: 8px 16px;
+  
+    color: rgb(25 117 220);
+    text-decoration: none;
+    transition: background-color 0.3s ease, color 0.3s ease;
+    margin-left: 100px;
+  }
+  
+  .navbar-login {
+    display: flex;
+    margin-right: 0px !important;
+    padding-right: 0px !important;
+    justify-content: end;
+  }
+  
+  .nav-item:hover .dropdown-menu {
+    display: block;
+  }
+  
+  a.btn {
+    margin: 0 !important;
+    border: 2px solid rgb(25 117 220);
+  }
+  
+  a.btn:hover {
+    margin: 0;
+    background-color: rgb(25 117 220);
+    color: #fff;
+  }
+  
+  .dropdown-toggle::after {
+    margin-left: 0.255em;
+    vertical-align: 0.255em;
+    border: none;
+  }
+  
+  .dropdown-menu {
+    display: block;
+    display: flex;
+    flex-direction: column;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+  
+  .dropdown-container {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 16px;
+  }
+  
+  .dropdown-item {
+    padding: 0px 0px;
+  }
+  
+  .dropdown-container a {
+    text-decoration: none;
+    color: #1f2937;
+    font-weight: 600;
+  }
+  
+  .dropdown-container a+a {
+    font-weight: normal;
+  }
+  
+  .dropdown-container a:hover {
+    color: rgb(25 117 220);
+    background-color: white;
+  }
+  
+  
+  
+  
+  /* Home */
+  .homeClinic {
+    display: flex;
+    justify-content: left;
+    align-items: flex-start;
+    margin-left: -14rem;
+    font-weight: 600;
+  }
+  
+  .homeClinic ul {
+    list-style: none;
+    display: flex;
+    align-items: center;
+    margin: 0;
+    padding: 0;
+    padding-left: 20rem;
+  }
+  
+  .homeClinic ul li {
+    margin-right: 0.4rem;
+  }
+  
+  .homeClinic ul li:last-child {
+    margin-right: 0;
+  }
+  
+  .homeClinic ul li a,
+  .homeClinic ul li span {
+    text-decoration: none;
+    color: #333;
+    transition: color 0.3s;
+  }
+  
+  .homeClinic ul li a:hover,
+  .homeClinic ul li span:hover {
+    color: rgb(0, 183, 255);
+  }
+  
+  
+  /* container */
+  .container1 {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+  }
+  
+  .phongKham1 {
+    display: flex;
+    align-items: center;
+    gap: 1rem; /* Khoảng cách giữa các phần tử bên trong */
+    text-decoration: none; /* Loại bỏ gạch chân mặc định của thẻ a */
+    color: inherit; /* Giữ nguyên màu chữ */
+    width: 80%; /* Đảm bảo các phần tử có cùng chiều rộng */
+    max-width: 800px; /* Đặt chiều rộng tối đa */
+    margin: 0 auto; /* Căn giữa các phần tử */
+  }
+  
+  .img1 {
+    width: 100px;
+    height: 100px;
+    overflow: hidden;
+    border-radius: 1rem; /* Bo tròn góc */
+    position: relative;
+  }
+  
+  
+    
+  /* thông tin */
+  .informationButton {
+    font-weight: 600;
+    gap: 10px; /* Khoảng cách giữa các liên kết */
+    margin-left: -250rem;
+    margin-right: -250rem;
+    border-bottom: 1px solid #F1F5F9;
+    border-top: 1px solid #F1F5F9;
+    padding: 1rem;
+  
+    
+  }
+  
+  .informationButton a {
+    text-decoration: none;
+    color: inherit; /* Màu chữ thừa kế từ phần tử cha */
+    font-size: larger;
+  }
+  
+  /* ảnh */
+  .image-container {
+    position: relative;
+    text-align: center;
+    margin-top: 50px;
+    justify-content: center;
+    display: flex;
+  }
+  
+  #mainImage {
+    width: 70%;
+    height: auto;
+    border-radius: 3%;
+  }
+  
+  .prev,
+  .next {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: rgba(0, 0, 0, 0.5);
+    color: white;
+    padding: 10px;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+  }
+  
+  .prev:hover,
+  .next:hover {
+    background-color: rgba(0, 0, 0, 0.8);
+  }
+  
+  .prev {
+    left: 10px;
+  }
+  
+  .next {
+    right: 10px;
+  }
+  
+  
+  .information{
+    margin-top: 2rem;
+  }
+  
+  
+  /* Slot khám */
+  .working-hours-container {
+    padding: 0 24px;
+  }
+  
+  .title {
+    font-weight: 600;
+  }
+  
+  .hours-list {
+    margin-top: 16px;
+    font-size: 1rem;
+  }
+  
+  .days-columns {
+    display: flex;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  
+  .day-item {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    margin-bottom: 16px;
+    padding-bottom: 8px;
+    width: 50%;
+    box-sizing: border-box;
+    padding-right: 16px;
+  }
+  
+  .day-item:first-child {
+    /* border-right: 1px solid #e0e0e0;  */
+    margin-right: 16px; 
+  }
+  
+  .day-name {
+    font-weight: 600;
+    white-space: nowrap;
+    flex: 1;
+    margin-bottom: 8px;
+    text-align: center;
+    border-bottom: 1px solid #e0e0e0; 
+  }
+  
+  .day-time {
+    font-variant-numeric: tabular-nums;
+    margin-bottom: 8px;
+    border-bottom: 1px solid #e0e0e0; 
+    padding-bottom: 8px;
+  }
+  
+  /* footer */
+  
+  .footer-section {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .footer-section h5 {
+    font-weight: bold;
+    margin-bottom: 1rem;
+  }
+  
+  .footer-section p {
+    margin: 0 0 10px;
+  }
+  .footer1 {
+    background-color: rgb(25 117 220);
+    color: white;
+    padding-left: 100px;
+    padding-right: 100px;
+    padding-left: 100px;
+    padding-top: 20px;
+    padding-bottom: 20px;
+  }
+  .footer1 p {
+    color: white;
+  }
+  .container-md .flex2{
+    display: flex;
+    
+  }
+  .footer-direction{
+    display: flex;  
+  }
+  
+  
+  /* Xem thêm, thu gọn */
+  .toggle-button {
+    border: none;
+    background-color: transparent;
+    cursor: pointer;
+    text-decoration: none;
+    color: #666;
+    padding: 0;
+    margin: 0;
+    outline: none;
+  }
+  
+  /* Form Đặt Lịch */
+  .quickBooking {
+    margin-top: 1rem;
+    margin-left: 6rem;
+    background-color: #00b7ff; 
+    color: white; 
+    border: none; 
+    padding: 0.5rem 8rem; 
+    border-radius: 0.4rem; 
+    font-size: 16px; 
+    font-weight: bold;
+    cursor: pointer; 
+    transition: background-color 0.3s; 
+  }
+  
+  
