@@ -38,16 +38,16 @@ namespace DentalClinicBooking_Project.Controllers
         public async Task<IActionResult> ShowClinicDetails(Guid id)
         {
             var clinic = await bookClinicRepository.GetAsync(id);
-            var desClinics = clinic?.DescriptionClinics;
 
-            if (clinic != null && desClinics != null)
+            if (clinic != null)
             {
                 var Model = new ClinicDetailsModel
                 {
                     Id = clinic.ClinicId,
                     ClinicName = clinic.ClinicName,
                     MainImage = clinic.MainImage,
-                    DescriptionClinics = desClinics
+                    Description = clinic.Description,
+                    ClinicImages = clinic.ClinicImages,
                 };
 
                 return View(Model);
