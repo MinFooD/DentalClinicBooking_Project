@@ -191,14 +191,14 @@ html{
   
   
   /* container */
-  .container1 {
+  .containerClinicDetails {
     display: flex;
     flex-direction: column;
     align-items: center;
     gap: 1rem;
   }
-  
-  .phongKham1 {
+
+.phongKhamClinicDetails {
     display: flex;
     align-items: center;
     gap: 1rem; /* Khoảng cách giữa các phần tử bên trong */
@@ -207,15 +207,15 @@ html{
     width: 80%; /* Đảm bảo các phần tử có cùng chiều rộng */
     max-width: 800px; /* Đặt chiều rộng tối đa */
     margin: 0 auto; /* Căn giữa các phần tử */
-  }
-  
-  .img1 {
+}
+
+.imgClinicDetails {
     width: 100px;
     height: 100px;
     overflow: hidden;
     border-radius: 1rem; /* Bo tròn góc */
     position: relative;
-  }
+}
   
   
     
@@ -401,5 +401,9 @@ html{
     cursor: pointer; 
     transition: background-color 0.3s; 
   }
+
+#fullText {
+    display: none;
+}
   
   

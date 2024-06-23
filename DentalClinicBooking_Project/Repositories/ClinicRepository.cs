@@ -1,4 +1,5 @@
 ﻿using DentalClinicBooking_Project.Data;
+using DentalClinicBooking_Project.Models;
 using DentalClinicBooking_Project.Models.Domain;
 using Microsoft.EntityFrameworkCore;
 
@@ -44,7 +45,7 @@ namespace DentalClinicBooking_Project.Repositories
 
             return await dentalClinicBookingProjectContext.Clinics
                 .Include(x => x.Basics)
-                .Include(x => x.DescriptionClinics)
+                .Include(x => x.ClinicImages)
                 .FirstOrDefaultAsync(x => x.ClinicId == id);
 
         }

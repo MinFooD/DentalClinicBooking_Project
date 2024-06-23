@@ -1,0 +1,15 @@
+﻿.text {
+    overflow: hidden;
+    height: 260px; /* Chiều cao của đoạn văn bản khi thu gọn */
+    transition: height 0.3s ease;
+}
+
+    .text.expanded {
+        height: auto; /* Chiều cao tự động khi mở rộng */
+    }
+
+.toggle-button {
+    display: block;
+    margin-top: 10px;
+    cursor: pointer;
+}
