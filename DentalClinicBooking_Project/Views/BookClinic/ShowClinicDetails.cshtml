@@ -1,7 +1,16 @@
-﻿@using Newtonsoft.Json
+﻿@using DentalClinicBooking_Project.Models.Domain
+@using Newtonsoft.Json
 @model DentalClinicBooking_Project.Models.ViewModels.ClinicDetailsModel
 
 @{
+    TimeOnly stAM = new TimeOnly(7, 0);
+    TimeOnly enAM = new TimeOnly(12, 0);
+
+    TimeOnly stPM = new TimeOnly(12, 0);
+    TimeOnly enPM = new TimeOnly(17, 0);
+
+    IEnumerable<SlotOfClinic> model = Model.SlotOfClinics;
+    List<SlotOfClinic> slotOfClinics = model.OrderBy(slot => slot.StartTime).ThenBy(slot => slot.EndTime).ToList();
 }
 
 <!DOCTYPE html>
@@ -11,22 +20,24 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>BookClinic</title>
-    <link href="~/css/clinicdetails.css" rel="stylesheet" />
+    <link href="~/css/clinicdetails/clinicdetails.css" rel="stylesheet" />
     <link href="~/css/clinicdetails/collapse.css" rel="stylesheet" />
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet" />
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="~/js/clinicdetails/collapse.js"></script>
+    <script src="~/js/clinicdetails/img.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </head>
 
 <body>
-
     <div class="container">
+
         <nav class="homeClinic">
             <ul class="home">
                 <li>
                     <a asp-area=""
                        asp-controller="Home"
-                       asp-action="Index">
+                       asp-action="HomePage">
                         Trang chủ
                     </a>
                 </li>
@@ -42,6 +53,7 @@
                 </li>
             </ul>
         </nav>
+
         <div class="containerClinicDetails" style="margin-top: 1rem; margin-right: 15rem">
             <div class="phongKhamClinicDetails" href="#">
                 <div>
@@ -56,10 +68,10 @@
                 </div>
             </div>
         </div>
+        
         <div class="informationButton">
             <a style="margin-left: 255rem"> Thông tin </a>
         </div>
-
 
         <div class="image-container">
             <button class="prev" onclick="prevImage()">&#10094;</button>
@@ -68,23 +80,6 @@
                  alt="Ảnh" />
             <button class="next" onclick="nextImage()">&#10095;</button>
         </div>
-
-        <script>
-            let currentImageIndex = 0;
-            const images = @Html.Raw(JsonConvert.SerializeObject(Model.ClinicImages.Select(m => m.Image).ToList()));
-
-            function prevImage() {
-                currentImageIndex = (currentImageIndex - 1 + images.length) % images.length;
-                document.getElementById('mainImage').src = images[currentImageIndex];
-            }
-
-            function nextImage() {
-                currentImageIndex = (currentImageIndex + 1) % images.length;
-                document.getElementById('mainImage').src = images[currentImageIndex];
-            }
-
-            setInterval(nextImage, 3000); // Tự động chuyển ảnh sau mỗi 3 giây
-        </script>
 
         <div>
             <button class="quickBooking"
@@ -96,18 +91,17 @@
     </div>
 
     <div class="row information">
+
         <div class="col-md-6 info1" style="padding-left: 8rem; margin-bottom: 2rem;">
             <div class="content">
-                <div class="text">
+                <h4 class="text-lg font-semibold">Giới thiệu</h4>
+                <div class="text" style="text-align: justify; font-weight: 400;">
                     @Html.Raw(Model.Description)
                 </div>
                 <a class="toggle-button" style="text-decoration: none;"
                    id="toggleButton">Xem thêm...</a>
             </div>
         </div>
-
-        <script src="~/js/clinicdetails/collapse.js"></script>
-        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
         <div class="col-md-6">
             <div class="working-hours-container">
@@ -116,20 +110,28 @@
                     <ul class="days-columns">
                         <li class="day-item">
                             <div class="day-name">Buổi sáng</div>
-                            <div class="day-time">7:00 - 9:00</div>
-                            <div class="day-time">9:00 - 11:00</div>
+                            @foreach (var item in slotOfClinics)
+                            {
+                                if ((item.StartTime >= stAM && item.StartTime <= enAM))
+                                {
+                                    <div class="day-time">@item.StartTime.ToString("HH:mm") - @item.EndTime.ToString("HH:mm")</div>
+                                }
+                            }
                         </li>
                         <li class="day-item">
                             <div class="day-name">Buổi chiều</div>
-                            <div class="day-time">13:00 - 15:00</div>
-                            <div class="day-time">15:00 - 17:00</div>
+                            @foreach (var item in slotOfClinics)
+                            {
+                                if (item.EndTime >= stPM && item.EndTime <= enPM)
+                                {
+                                    <div class="day-time">@item.StartTime.ToString("HH:mm") - @item.EndTime.ToString("HH:mm")</div>
+                                }
+                            }
                         </li>
                     </ul>
                 </div>
             </div>
         </div>
-
-    </div>
     </div>
 </body>
 </html>

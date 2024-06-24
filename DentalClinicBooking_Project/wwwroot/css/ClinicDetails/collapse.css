@@ -1,6 +1,6 @@
 ﻿.text {
     overflow: hidden;
-    height: 260px; /* Chiều cao của đoạn văn bản khi thu gọn */
+    height: 250px; /* Chiều cao của đoạn văn bản khi thu gọn */
     transition: height 0.3s ease;
 }
 

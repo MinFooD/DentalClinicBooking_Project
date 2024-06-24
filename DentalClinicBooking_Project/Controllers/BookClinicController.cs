@@ -48,6 +48,7 @@ namespace DentalClinicBooking_Project.Controllers
                     MainImage = clinic.MainImage,
                     Description = clinic.Description,
                     ClinicImages = clinic.ClinicImages,
+                    SlotOfClinics = clinic.SlotOfClinics,
                 };
 
                 return View(Model);
@@ -55,6 +56,8 @@ namespace DentalClinicBooking_Project.Controllers
 
             return RedirectToAction("ShowAllClinics");
         }
+
+
 
         //[HttpGet]
         //public async Task<IActionResult> BookingClinic()
