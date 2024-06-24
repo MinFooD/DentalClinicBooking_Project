@@ -1,1 +1,342 @@
-﻿
+﻿html {
+  font-family: Arial, Helvetica, sans-serif;
+}
+/*  navbar */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+body {
+  margin: 0;
+  padding: 0 0;
+  font-family: Arial, Helvetica, sans-serif;
+}
+/* Thanh Book dentist or clinic */
+
+.container {
+  display: flex;
+  width: 100% !important;
+  flex-direction: column;
+  /* align-items: center; */
+  margin: 0 15% !important;
+  gap: 1rem;
+}
+
+.phongKham {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  text-decoration: none;
+
+  color: inherit;
+  /* border-bottom: 1px solid #ddd; */
+  padding-bottom: 0.5rem;
+  /* width: 80%; */
+  max-width: 800px;
+  margin: 0 auto;
+  background-color: rgb(249, 249, 249);
+
+  border-bottom: 1px solid #ccc;
+}
+.img-container {
+  width: 200px;
+  /* height: 150px; */
+  overflow: hidden; /* Đảm bảo hình ảnh không tràn ra ngoài thẻ div */
+}
+.img {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  border-radius: 1rem;
+  object-fit: cover;
+  position: relative;
+  margin-right: 10px;
+}
+
+.line1,
+.line2,
+.line3,
+.line4,
+.line5 {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  color: #2d3748;
+  /* Màu xám */
+}
+
+.line1 h2,
+.line2 h2,
+.line3 h2,
+.line4 h2,
+.line5 h2 {
+  font-size: 1.125rem;
+  /* Kích thước chữ lớn */
+  font-weight: 600;
+  /* Font-weight đậm */
+  margin: 0;
+  /* Loại bỏ khoảng cách mặc định */
+}
+
+.line1 p,
+.line2 p,
+.line3 p,
+.line4 p,
+.line5 p {
+  opacity: 0.8;
+  font-weight: 500;
+  margin: 0;
+  /* Loại bỏ khoảng cách mặc định */
+}
+
+/* HomeService */
+.homeService {
+  display: flex;
+  justify-content: left;
+  align-items: flex-start;
+  margin-left: -19rem;
+}
+
+.homeService ul {
+  list-style: none;
+  display: flex;
+  align-items: center;
+  margin: 0;
+  padding: 0;
+  padding-left: 20rem;
+}
+
+.homeService ul li {
+  margin-right: 0.4rem;
+}
+
+.homeService ul li:last-child {
+  margin-right: 0;
+}
+
+.homeService ul li a,
+.homeService ul li span {
+  text-decoration: none;
+  color: #333;
+  transition: color 0.3s;
+}
+
+.homeService ul li a:hover,
+.homeService ul li span:hover {
+  color: rgb(0, 183, 255);
+}
+
+/* DentistryService */
+.row.flex-order {
+  display: flex;
+  flex-direction: row;
+  order: 1;
+  margin: 20px 0;
+}
+
+.col-md-3,
+.container-md {
+  flex: 0 0 25%;
+  max-width: 25%;
+  padding: 15px;
+  box-sizing: border-box;
+}
+
+.block-aside {
+  background-color: #f9f9f9;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.tit-aside {
+  font-size: 1.5em;
+  font-weight: bold;
+  margin-bottom: 15px;
+  text-transform: uppercase;
+  color: #333;
+  text-align: center;
+}
+
+.row.flex-order {
+  display: flex;
+  flex-direction: row;
+  order: 1;
+  margin: 20px 0;
+}
+
+.col-md-3,
+.container-md {
+  flex: 0 0 25%;
+  max-width: 25%;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.block-aside {
+  background-color: #f9f9f9;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  padding: 0px 0px;
+}
+
+.tit-aside {
+  font-size: 1.5em;
+  font-weight: bold;
+  background-color: #007bff;
+  color: #fff;
+  padding: 10px 0px;
+  border-bottom: 2px solid #ccc;
+  text-transform: uppercase;
+  margin-bottom: 0px;
+}
+
+.dentistryService {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.dentistryService li,
+.phongKham {
+  border-bottom: 1px solid #ccc;
+}
+
+.dentistryService li a,
+.phongKham {
+  text-decoration: none;
+  font-size: 1em;
+  color: #555;
+  display: flex;
+  align-items: center;
+  padding: 10px;
+  font-weight: bold;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.dentistryService li a:hover {
+  background-color: #007bff;
+  color: #fff;
+}
+
+.dentistryService li.active a {
+  background-color: #007bff;
+  color: #fff;
+}
+
+.dentistryService li a i {
+  margin-right: 8px;
+  font-size: 1.2em;
+}
+
+@media (max-width: 768px) {
+  .col-md-3 {
+    flex: 0 0 100%;
+    max-width: 100%;
+  }
+}
+
+/* ContentMucluc */
+.tit-post {
+  font-size: 2em;
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 20px;
+  text-transform: uppercase;
+  border-bottom: 2px solid #007bff;
+  padding-bottom: 10px;
+}
+
+.block-mucluc {
+  background-color: #f1f1f1;
+  border-radius: 8px;
+  padding: 10px;
+  margin-bottom: 20px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.top-mucluc {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  cursor: pointer;
+}
+
+.flex {
+  display: flex;
+  align-items: center;
+}
+
+.content-mucluc {
+  font-size: 1.2em;
+  font-weight: bold;
+  margin-left: 10px;
+}
+
+.arr-down-mucluc i {
+  font-size: 1.5em;
+}
+
+.bottom-mucluc {
+  display: none;
+  margin-top: 10px;
+}
+
+.bottom-mucluc ul {
+  list-style: none;
+  padding: 0;
+}
+
+.bottom-mucluc ul li {
+  margin-bottom: 10px;
+}
+
+.bottom-mucluc ul li a {
+  text-decoration: none;
+  color: #007bff;
+  font-weight: bold;
+  transition: color 0.3s ease;
+}
+
+.bottom-mucluc ul li a:hover {
+  color: #0056b3;
+}
+
+.bottom-mucluc ul li ul {
+  margin-top: 10px;
+  margin-left: 20px;
+}
+
+.bottom-mucluc ul li ul li {
+  margin-bottom: 5px;
+}
+
+.des-dv p,
+.af-dv p {
+  font-size: 1em;
+  color: #555;
+  line-height: 1.6;
+  margin-bottom: 10px;
+}
+
+.af-dv.hide {
+  display: none;
+}
+
+@media (max-width: 768px) {
+  .col-md-9 {
+    flex: 0 0 100%;
+    max-width: 100%;
+  }
+
+  .tit-post {
+    font-size: 1.5em;
+  }
+
+  .content-mucluc {
+    font-size: 1em;
+  }
+}
+
+/*  */
