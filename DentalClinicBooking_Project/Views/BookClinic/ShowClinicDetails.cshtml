@@ -68,7 +68,7 @@
                 </div>
             </div>
         </div>
-        
+
         <div class="informationButton">
             <a style="margin-left: 255rem"> Thông tin </a>
         </div>
@@ -83,9 +83,9 @@
 
         <div>
             <button class="quickBooking"
-                    onclick="window.location.href='https://localhost:7121/BookClinic/BookingClinic?id=@(Model.Id)'"
-                    style="margin-left: 22rem">
-                Đặt khám ngay
+                    style="margin-left: 22rem"
+                    onclick="window.location.href='@Url.Action("BookingClinic", "BookClinic", new { id = Model.Id })'">
+                Đặt khám ngay
             </button>
         </div>
     </div>
