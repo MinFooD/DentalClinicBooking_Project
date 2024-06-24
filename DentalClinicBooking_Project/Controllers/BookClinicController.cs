@@ -57,15 +57,12 @@ namespace DentalClinicBooking_Project.Controllers
             return RedirectToAction("ShowAllClinics");
         }
 
+        [HttpGet]
+        public async Task<IActionResult> BookingClinic()
+        {
 
-
-        //[HttpGet]
-        //public async Task<IActionResult> BookingClinic()
-        //{
-        //    var Slot = await bookClinicRepository.GetAsync(1);
-
-        //    return View(Slot);
-        //}
+            return View();
+        }
 
         //[HttpPost]
         //public IActionResult BookingClinic([FromBody] BookingClinic bookingModel)
