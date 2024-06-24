@@ -46,6 +46,7 @@ namespace DentalClinicBooking_Project.Repositories
             return await dentalClinicBookingProjectContext.Clinics
                 .Include(x => x.Basics)
                 .Include(x => x.ClinicImages)
+                .Include(x => x.SlotOfClinics)
                 .FirstOrDefaultAsync(x => x.ClinicId == id);
 
         }

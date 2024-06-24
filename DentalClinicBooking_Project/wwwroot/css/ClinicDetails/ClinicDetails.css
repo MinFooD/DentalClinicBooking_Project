@@ -9,10 +9,11 @@ html{
     font-family: Arial, Helvetica, sans-serif;
   }
   
-  p{
+  /*p {
     color: #374151;
     font-weight: 500;
-  }
+  }*/
+
   .navbar {
     background-color: #ffffff;
   }
@@ -201,23 +202,31 @@ html{
 .phongKhamClinicDetails {
     display: flex;
     align-items: center;
-    gap: 1rem; /* Khoảng cách giữa các phần tử bên trong */
-    text-decoration: none; /* Loại bỏ gạch chân mặc định của thẻ a */
-    color: inherit; /* Giữ nguyên màu chữ */
-    width: 80%; /* Đảm bảo các phần tử có cùng chiều rộng */
-    max-width: 800px; /* Đặt chiều rộng tối đa */
-    margin: 0 auto; /* Căn giữa các phần tử */
+    gap: 1rem;
+    text-decoration: none;
+    color: inherit;
+    width: 80%;
+    max-width: 800px;
+    margin: 0 auto;
+    padding-bottom: 0.5rem;
 }
 
 .imgClinicDetails {
-    width: 100px;
-    height: 100px;
+    width: 180px;
+    height: 128px;
     overflow: hidden;
-    border-radius: 1rem; /* Bo tròn góc */
+    border-radius: 1rem;
     position: relative;
 }
-  
-  
+
+.lineClinicDetails {
+    margin-bottom: 3.5rem;
+}
+
+    .lineClinicDetails p {
+        opacity: 0.8;
+        font-weight: 500;
+    }
     
   /* thông tin */
   .informationButton {
@@ -338,42 +347,6 @@ html{
     border-bottom: 1px solid #e0e0e0; 
     padding-bottom: 8px;
   }
-  
-  /* footer */
-  
-  .footer-section {
-    display: flex;
-    flex-direction: column;
-  }
-  
-  .footer-section h5 {
-    font-weight: bold;
-    margin-bottom: 1rem;
-  }
-  
-  .footer-section p {
-    margin: 0 0 10px;
-  }
-  .footer1 {
-    background-color: rgb(25 117 220);
-    color: white;
-    padding-left: 100px;
-    padding-right: 100px;
-    padding-left: 100px;
-    padding-top: 20px;
-    padding-bottom: 20px;
-  }
-  .footer1 p {
-    color: white;
-  }
-  .container-md .flex2{
-    display: flex;
-    
-  }
-  .footer-direction{
-    display: flex;  
-  }
-  
   
   /* Xem thêm, thu gọn */
   .toggle-button {
