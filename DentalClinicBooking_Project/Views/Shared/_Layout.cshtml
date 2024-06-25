@@ -8,15 +8,18 @@
     <title>Document</title>
 
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet" />
-	<link href="~/css/hf.css" rel="stylesheet" />
+
+    
+
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <link href="~/css/hf.css" rel="stylesheet" />
 </head>
 
 <!-- NavBar -->
-<header class="row navbar" style="margin-right: 0px;">
+<header class="row navbar" id="navbar_id" style="margin-right: 0px;">
     <div class="col-md-2 navbar-brand">
-        <a asp-area="" asp-controller="Home" asp-action="HomePage"><img src="https://cdn.youmed.vn/wp-content/themes/youmed/images/logo.svg" alt="YouMed Logo"></a>
+        <a asp-area="" asp-controller="Home" asp-action="HomePage"><img src="https://scontent.xx.fbcdn.net/v/t1.15752-9/447893264_1021972442656184_4043330415758757619_n.png?_nc_cat=109&ccb=1-7&_nc_sid=0024fc&_nc_eui2=AeFcd2BENlfYNkd4LCIysQ1DfbxKM85a27d9vEozzlrbty9rn_ynFsp8hjOmFZz73Ps4BeEExi1k01N7zuB3jOLR&_nc_ohc=9nWBJeHV-WUQ7kNvgHeZY0K&_nc_ad=z-m&_nc_cid=0&_nc_ht=scontent.xx&oh=03_Q7cD1QFVswz1ZYq6MQ-kizmEdENZIJob6pt1YgHF-72Es1_h9A&oe=66A1CBF1" alt="SunShine Logo"></a>
     </div>
     <nav class="navbar navbar-expand-md">
         <div class="navbar-menu">
@@ -41,7 +44,7 @@
                 <li class="nav-item"><a asp-area="" asp-controller="Test" asp-action="Test1" class="nav-link">Đặt khám</a></li>
                 <li class="nav-item"><a href="#" class="nav-link">Xem lịch khám</a></li>
                 <li class="nav-item"><a asp-area="" asp-controller="Dentist" asp-action="SearchDentist" asp-route-page="1" class="nav-link">Nha sĩ</a></li>
-                <li class="nav-item"><a href="#" class="nav-link">Dịch vụ</a></li>
+                <li class="nav-item"><a asp-area="" asp-controller="Service" asp-action="Service" class="nav-link">Dịch vụ</a></li>
                 <li class="nav-item"><a asp-area="" asp-controller="Contact" asp-action="ChooseClinicContact" class="nav-link">Liên hệ</a></li>
             </ul>
         </div>

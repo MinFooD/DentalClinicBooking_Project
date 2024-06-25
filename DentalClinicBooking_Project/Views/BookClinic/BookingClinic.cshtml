@@ -1,0 +1,258 @@
+﻿
+@{
+}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Booking</title>
+  <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet" />
+
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+  
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+  <script src="script.js"></script> 
+</head>
+
+<body>
+  </div>
+  <div class="container-md">
+    <div class="grid-container">
+      <div class="main-content">
+        <div class="steps">
+          <div class="step-item">
+            <div class="step-content">
+              <div class="step-title">
+                <div class="step-header">
+                  <div style="display: flex; justify-content: space-between; text-align: center;">
+                    <div class="step-icon"> 1</div>
+                    <div class="step-name">Cơ sở</div>
+                  </div>
+                  <img src="https://youmed.vn/dat-kham/assets/img/booking/svg/arrow-down.svg" alt="arrow-down"
+                    title="Xem thêm thông tin" class="toggle-icon" id="toggleSearchForm">
+                </div>
+              </div>
+              <div class="step-description hidden" id="searchFormContainer">
+                <div class="branch-list mt-4">
+                  <div class="branch-item">
+                    <div class="branch-header">
+                      <div class="branch-name"> Chi nhánh 3 - Địa chỉ 2 </div>
+                    </div>
+                    <p class="branch-address"> 131/3 Ngọc Hồi, Hoàng Liệt, Hoàng Mai, Hà Nội </p>
+                  </div>
+                  <div class="branch-item">
+                    <div class="branch-header">
+                      <div class="branch-name"> Chi nhánh 3 - Địa chỉ 1 </div>
+                    </div>
+                    <p class="branch-address"> Số 5, Ngõ 95, Ngách 4, Hoàng Cầu, Đống Đa, Hà Nội </p>
+                  </div>
+                  <div class="branch-item">
+                    <div class="branch-header">
+                      <div class="branch-name"> Chi nhánh 2 </div>
+                    </div>
+                    <p class="branch-address"> 14 Lê Doãn Nhạ, Hòa Khánh Nam, Liên Chiểu, Đà Nẵng </p>
+                  </div>
+                  <div class="branch-item" style="margin-bottom: 4rem;">
+                    <div class="branch-header">
+                      <div class="branch-name"> Chi nhánh 1 </div>
+                    </div>
+                    <p class="branch-address"> 152/6 Thành Thái, P. 12, Q. 10, TP.HCM </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+
+          <div class="step-item">
+            <div class="step-content">
+              <div class="step-title">
+                <div class="step-header">
+                  <div style="display: flex; justify-content: space-between; text-align: center;">
+                    <div class="step-icon">2</div>
+                    <div class="step-name">Ngày khám</div>
+                  </div>
+                  <img src="https://youmed.vn/dat-kham/assets/img/booking/svg/arrow-down.svg" alt="arrow-down"
+                    title="Xem thêm thông tin" class="toggle-icon" id="toggleSearchForm2">
+                </div>
+              </div>
+              <div class="step-description hidden" id="searchFormContainer2">
+                <div class="calendar-container">
+                  <div class="calendar-header">
+                    <div class="month-title"> </div>
+                    <div class="">
+                      <button class="prev-month-btn" title="Xem tháng trước">&#x2BC7;</button>
+                      <button class="next-month-btn" title="Xem tháng kế">&#x2BC8;</button>
+                    </div>
+                  </div>
+                  <div class="calendar-body">
+                    <div class="weekdays">
+                      <div class="weekday">T2</div>
+                      <div class="weekday">T3</div>
+                      <div class="weekday">T4</div>
+                      <div class="weekday">T5</div>
+                      <div class="weekday">T6</div>
+                      <div class="weekday">T7</div>
+                      <div class="weekday">CN</div>
+                    </div>
+                    <div class="dates-grid">
+                      <!-- Dates will be inserted here -->
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+          </div>
+
+
+          <div class="step-item" >
+            <div class="step-content">
+              <div class="step-title">
+                <div class="step-header">
+                  <div style="display: flex; justify-content: space-between; text-align: center;">
+                    <div class="step-icon"> 3</div>
+                    <div class="step-name">Giờ khám</div>
+                  </div>
+                  <img src="https://youmed.vn/dat-kham/assets/img/booking/svg/arrow-down.svg" alt="arrow-down"
+                    title="Xem thêm thông tin" class="toggle-icon" id="toggleSearchForm3">
+                </div>
+              </div>
+              <div class="step-description hidden" id="searchFormContainer3">
+                <div class="time-slot-container">
+                  <div class="time-slot-group">
+                    <div class="time-slot-group-header">
+                      <img src="https://youmed.vn/dat-kham/assets/img/booking/svg/sun.svg" alt="Buổi sáng"
+                        class="time-slot-icon">
+                      <p class="time-slot-group-title">Buổi sáng</p>
+                    </div>
+                    <div class="time-slot-list">
+                      <a class="time-slot-item disabled" title="Slot này đã đặt hết">
+                        07:00-9:00
+                      </a>
+                      <style>
+                        .time-slot-item.disabled {
+                          color: gray;
+                          background-color: #E5E7EB;
+                          pointer-events: none;
+                          cursor: not-allowed;
+                        }
+                      </style>
+                      <a class="time-slot-item" title="Chọn slot này">09:00-11:00</a>
+                    </div>
+                  </div>
+                  <div class="time-slot-group" style="margin-bottom: 6rem;">
+                    <div class="time-slot-group-header">
+                      <img src="https://youmed.vn/dat-kham/assets/img/booking/svg/sun-fog.svg" alt="Buổi chiều"
+                        class="time-slot-icon">
+                      <p class="time-slot-group-title">Buổi chiều</p>
+                    </div>
+                    <div class="time-slot-list">
+                      <a class="time-slot-item" title="Chọn slot này">13:00-15:00</a>
+                      <a class="time-slot-item" title="Chọn slot này">15:00-17:00</a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+          </div>
+          <div class="step-item">
+            <div class="step-content">
+              <div class="step-title">
+                <div class="step-header">
+                  <div style="display: flex; justify-content: space-between; text-align: center;">
+                    <div class="step-icon">4</div>
+                    <div class="step-name">Dịch vụ</div>
+                  </div>
+                  <img src="https://youmed.vn/dat-kham/assets/img/booking/svg/arrow-down.svg" alt="arrow-down"
+                    title="Xem thêm thông tin" class="toggle-icon" id="toggleSearchForm4">
+                </div>
+              </div>
+              <div class="step-description hidden" id="searchFormContainer4">
+                <div class="service-list mt-4">
+                  <div class="service-item" data-service="Trám răng">
+                    <div class="service-header">
+                      <div class="service-name">Trám răng</div>
+                    </div>
+                  </div>
+                  <div class="service-item" data-service="Chữa tủy">
+                    <div class="service-header">
+                      <div class="service-name">Chữa tủy</div>
+                    </div>
+                  </div>
+                  <div class="service-item" data-service="Niềng răng">
+                    <div class="service-header">
+                      <div class="service-name">Niềng răng</div>
+                    </div>
+                  </div>
+                  <div class="service-item" data-service="Làm trắng">
+                    <div class="service-header">
+                      <div class="service-name">Làm trắng</div>
+                    </div>
+                  </div>
+                  <div class="service-item" data-service="Vệ sinh răng miệng">
+                    <div class="service-header">
+                      <div class="service-name">Vệ sinh răng miệng</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+
+        </div>
+      </div>
+      <div class="sidebar">
+        <div class="sidebar-sticky">
+          <div class="sidebar-info">
+            <div class="sidebar-header">
+              <div class="sidebar-title">Thông tin đặt khám</div>
+            </div>
+            <div class="sidebar-details">
+              <div class="clinic-info">
+                <img src="https://youmed.vn/photos/6b69fe19-023e-481e-909f-cdc83a45ede4.png"
+                  alt="Phòng khám Hello Doctor" class="clinic-avatar">
+                <div class="clinic-text">
+                  <p class="clinic-name">Phòng khám Hello Doctor</p>
+                </div>
+              </div>
+              <div class="info-item" style="display: none;">
+                <div class="info-label">Cơ sở</div>
+                <div class="info-value"></div>
+              </div>
+              <div class="info-itemadd" style="display: none;">
+                <div class="info-labeladd">Địa chỉ đặt khám</div>
+                <div class="info-valueadd"></div>
+              </div>
+              <div class="info-item" style="display: none;">
+                <div class="info-label">Ngày Khám</div>
+                <div class="info-value"></div>
+              </div>
+              <div class="info-item" style="display: none;">
+                <div class="info-label">Giờ Khám</div>
+                <div class="info-value"></div>
+              </div>
+              <div class="info-item" style="display: none;">
+                <div class="info-label">Dịch vụ</div>
+                <div class="info-value"></div>
+              </div>
+            </div>
+          </div>
+          <div class="confirmation"
+            style="display: flex;text-align: center;align-items: center;justify-content: center;">
+            <button class="confirm-button">Đặt lịch</button>
+            <button class="cancel-button">Hủy</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+
+
+</html>

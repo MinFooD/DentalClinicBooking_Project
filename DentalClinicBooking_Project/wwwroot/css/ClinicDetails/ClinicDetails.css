@@ -1,0 +1,245 @@
+
+/*html{
+    font-family: Arial, Helvetica, sans-serif;
+  }*/
+  /*  navbar */
+body, html {
+    margin: 0;
+    padding: 0 0;
+    font-family: Arial, Helvetica, sans-serif;
+    overflow-x: hidden;
+}
+  
+  /*p {
+    color: #374151;
+    font-weight: 500;
+  }*/
+  
+  /* Home */
+  .homeClinic {
+    display: flex;
+    justify-content: left;
+    align-items: flex-start;
+    margin-left: -14rem;
+    font-weight: 600;
+  }
+  
+  .homeClinic ul {
+    list-style: none;
+    display: flex;
+    align-items: center;
+    margin: 0;
+    padding: 0;
+    padding-left: 20rem;
+  }
+  
+  .homeClinic ul li {
+    margin-right: 0.4rem;
+  }
+  
+  .homeClinic ul li:last-child {
+    margin-right: 0;
+  }
+  
+  .homeClinic ul li a,
+  .homeClinic ul li span {
+    text-decoration: none;
+    color: #333;
+    transition: color 0.3s;
+  }
+  
+  .homeClinic ul li a:hover,
+  .homeClinic ul li span:hover {
+    color: rgb(0, 183, 255);
+  }
+  
+  
+  /* container */
+  .containerClinicDetails {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+  }
+
+.phongKhamClinicDetails {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    text-decoration: none;
+    color: inherit;
+    width: 80%;
+    max-width: 800px;
+    margin: 0 auto;
+    padding-bottom: 0.5rem;
+}
+
+.imgClinicDetails {
+    width: 180px;
+    height: 128px;
+    overflow: hidden;
+    border-radius: 1rem;
+    position: relative;
+}
+
+.lineClinicDetails {
+    margin-bottom: 3.5rem;
+}
+
+    .lineClinicDetails p {
+        opacity: 0.8;
+        font-weight: 500;
+    }
+    
+  /* thông tin */
+  .informationButton {
+    font-weight: 600;
+    gap: 10px; /* Khoảng cách giữa các liên kết */
+    margin-left: -250rem;
+    margin-right: -250rem;
+    border-bottom: 1px solid #F1F5F9;
+    border-top: 1px solid #F1F5F9;
+    padding: 1rem;
+  
+    
+  }
+  
+  .informationButton a {
+    text-decoration: none;
+    color: inherit; /* Màu chữ thừa kế từ phần tử cha */
+    font-size: larger;
+  }
+  
+  /* ảnh */
+  .image-container {
+    position: relative;
+    text-align: center;
+    margin-top: 50px;
+    justify-content: center;
+    display: flex;
+  }
+  
+  #mainImage {
+    width: 70%;
+    height: auto;
+    border-radius: 3%;
+  }
+  
+  .prev,
+  .next {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: rgba(0, 0, 0, 0.5);
+    color: white;
+    padding: 10px;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+  }
+  
+  .prev:hover,
+  .next:hover {
+    background-color: rgba(0, 0, 0, 0.8);
+  }
+  
+  .prev {
+    left: 10px;
+  }
+  
+  .next {
+    right: 10px;
+  }
+  
+  
+  .information{
+    margin-top: 2rem;
+  }
+  
+  
+  /* Slot khám */
+  .working-hours-container {
+    padding: 0 24px;
+  }
+  
+  .title {
+    font-weight: 600;
+  }
+  
+  .hours-list {
+    margin-top: 16px;
+    font-size: 1rem;
+  }
+  
+  .days-columns {
+    display: flex;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  
+  .day-item {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    margin-bottom: 16px;
+    padding-bottom: 8px;
+    width: 50%;
+    box-sizing: border-box;
+    padding-right: 16px;
+  }
+  
+  .day-item:first-child {
+    /* border-right: 1px solid #e0e0e0;  */
+    margin-right: 16px; 
+  }
+  
+  .day-name {
+    font-weight: 600;
+    white-space: nowrap;
+    flex: 1;
+    margin-bottom: 8px;
+    text-align: center;
+    border-bottom: 1px solid #e0e0e0; 
+  }
+  
+  .day-time {
+    font-variant-numeric: tabular-nums;
+    margin-bottom: 8px;
+    border-bottom: 1px solid #e0e0e0; 
+    padding-bottom: 8px;
+  }
+  
+  /* Xem thêm, thu gọn */
+  .toggle-button {
+    border: none;
+    background-color: transparent;
+    cursor: pointer;
+    text-decoration: none;
+    color: #666;
+    padding: 0;
+    margin: 0;
+    outline: none;
+  }
+  
+  /* Form Đặt Lịch */
+  .quickBooking {
+    margin-top: 1rem;
+    margin-left: 6rem;
+    background-color: #00b7ff; 
+    color: white; 
+    border: none; 
+    padding: 0.5rem 8rem; 
+    border-radius: 0.4rem; 
+    font-size: 16px; 
+    font-weight: bold;
+    cursor: pointer; 
+    transition: background-color 0.3s; 
+  }
+
+#fullText {
+    display: none;
+}
+  
+  
