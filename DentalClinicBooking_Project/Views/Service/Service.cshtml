@@ -1,275 +1,95 @@
-﻿
+﻿@model DentalClinicBooking_Project.Models.ViewModels.ServiceAndClinic
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Service</title>
-    <link rel="stylesheet" href="service.css" />
-    <link
-      href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
-      rel="stylesheet"
-    />
-    <link href="~/css/service.css" rel="stylesheet" />
+<head>
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<title>Service</title>
+	<link href="~/css/service.css" rel="stylesheet" />
+	<link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+		  rel="stylesheet" />
+</head>
 
-  </head>
+<body>
+	<div class="main-wraper">
+		<div class="container">
+			<nav class="homeService">
+				<ul class="home">
+					<li>
+						<a href="#">Trang chủ</a>
+					</li>
+					<li>
+						<span class="separator">/</span>
+					</li>
+					<li>
+						<a href="#">Dịch vụ</a>
+					</li>
+				</ul>
+			</nav>
+			<div class="row flex-order">
+				<div class="col-md-3">
+					<div class="block-aside" s>
+						<h4 class="tit-aside">dịch vụ nha khoa</h4>
+						<ul class="dentistryService">
+							@if (Model.services != null && Model.services.Any())
+							{
+								foreach (var item in Model.services)
+								{
+									<li class="">
+										<a asp-area="" asp-controller="Service" asp-action="Service" asp-route-id="@item.ServiceId">
+											<i class="fas fa-angle-right"></i>
+											<span>
+												@item.ServiceName
+											</span>
+										</a>
+									</li>
+								}
+							}
+						</ul>
+					</div>
+				</div>
+				<div class="col-md-9">
+					<div class="container-md">
+						<div class="introBookClinic text-center">
+							<h2 class="tit-aside">Đa dạng phòng khám</h2>
+							<!-- <p style="text-align: center; white-space: nowrap; display: flex; justify-content: center; background-color: ;">
+											Đặt khám dễ dàng và tiện lợi hơn với các phòng khám cùng nhiều chuyên khoa
+										</p> -->
+						</div>
+					</div>
 
-  <body>
-    <div class="main-wraper">
-      <div class="container">
-        <nav class="homeService">
-          <ul class="home">
-            <li>
-              <a href="#">Trang chủ</a>
-            </li>
-            <li>
-              <span class="separator">/</span>
-            </li>
-            <li>
-              <a href="#">Dịch vụ</a>
-            </li>
-          </ul>
-        </nav>
-        <div class="row flex-order">
-          <div class="col-md-3">
-            <div class="block-aside" s>
-              <h4 class="tit-aside">dịch vụ nha khoa</h4>
-              <ul class="dentistryService">
-                <li class="">
-                  <a
-                    href="dich-vu/cay-ghep-implant-giai-phap-khoi-phuc-rang-mat-hoan-hao-903.html"
-                    data-category="implant"
-                    ><i class="fas fa-angle-right"></i>
-                    <span
-                      >CẤY GHÉP IMPLANT - GIẢI PHÁP KHÔI PHỤC RĂNG MẤT HOÀN
-                      HẢO</span
-                    ></a
-                  >
-                </li>
-                <li class="">
-                  <a
-                    href="dich-vu/nieng-rang-chinh-nha-kien-tao-nu-cuoi-bao-ton-rang-goc-2.html"
-                    data-category="nieng-rang"
-                    ><i class="fas fa-angle-right"></i>
-                    <span
-                      >NIỀNG RĂNG CHỈNH NHA - KIẾN TẠO NỤ CƯỜI BẢO TỒN RĂNG
-                      GỐC</span
-                    ></a
-                  >
-                </li>
-                <li class="">
-                  <a
-                    href="dich-vu/boc-rang-su-tham-my-thay-ao-moi-nu-cuoi-3.html"
-                    data-category="boc-rang"
-                    ><i class="fas fa-angle-right"></i>
-                    <span>BỌC RĂNG SỨ THẨM MỸ - THAY ÁO MỚI NỤ CƯỜI</span></a
-                  >
-                </li>
-                <li class="">
-                  <a href="dich-vu/tay-trang-rang-5.html"
-                    ><i
-                      class="fas fa-angle-right"
-                      data-category="tay-trang"
-                    ></i>
-                    <span>TẨY TRẮNG RĂNG</span></a
-                  >
-                </li>
-                <li class="">
-                  <a href="dich-vu/tram-rang-tham-my-6.html"
-                    ><i
-                      class="fas fa-angle-right"
-                      data-category="tram-rang"
-                    ></i>
-                    <span>TRÁM RĂNG THẨM MỸ</span></a
-                  >
-                </li>
-                <li class="">
-                  <a href="dich-vu/nho-rang-khon-10.html"
-                    ><i class="fas fa-angle-right" data-category="nho-rang"></i>
-                    <span>NHỔ RĂNG KHÔN</span></a
-                  >
-                </li>
-                <li class="">
-                  <a href="dich-vu/noi-nha-chua-tuy-9.html"
-                    ><i class="fas fa-angle-right" data-category="noi-nha"></i>
-                    <span>NỘI NHA CHỮA TUỶ</span></a
-                  >
-                </li>
-                <li class="">
-                  <a
-                    href="dich-vu/ham-gia-thao-lap-khoi-phuc-an-nhai-tiet-kiem-chi-phi-4.html"
-                    data-category="ham-gia"
-                    ><i class="fas fa-angle-right"></i>
-                    <span
-                      >HÀM GIẢ THÁO LẮP - KHÔI PHỤC ĂN NHAI TIẾT KIỆM CHI
-                      PHÍ</span
-                    ></a
-                  >
-                </li>
-                <li class="">
-                  <a href="dich-vu/cao-voi-rang-7.html"
-                    ><i class="fas fa-angle-right" data-category="cao-voi"></i>
-                    <span>CẠO VÔI RĂNG</span></a
-                  >
-                </li>
-                <li class="">
-                  <a href="dich-vu/cat-nao-chop-8.html"
-                    ><i class="fas fa-angle-right" data-category="cat-nao"></i>
-                    <span>CẮT NẠO CHÓP</span></a
-                  >
-                </li>
-                <li class="">
-                  <a href="dich-vu/nho-rang-thuong-11.html"
-                    ><i
-                      class="fas fa-angle-right"
-                      data-category="nho-rang-thuong"
-                    ></i>
-                    <span>NHỔ RĂNG THƯỜNG</span></a
-                  >
-                </li>
-                <li class="">
-                  <a
-                    href="dich-vu/dieu-tri-cuoi-ho-loi-tai-tam-duc-smile-1045.html"
-                    data-category="cuoi-ho-loi"
-                    ><i class="fas fa-angle-right"></i>
-                    <span>ĐIỀU TRỊ CƯỜI HỞ LỢI TẠI TÂM ĐỨC SMILE</span></a
-                  >
-                </li>
-                <li class="">
-                  <a href="dich-vu/phau-thuat-nuou-12.html"
-                    ><i
-                      class="fas fa-angle-right"
-                      data-category="phau-thuat-nuou"
-                    ></i>
-                    <span>PHẪU THUẬT NƯỚU</span></a
-                  >
-                </li>
-              </ul>
-            </div>
-          </div>
-          <div class="col-md-9">
-            <div class="container-md">
-              <div class="introBookClinic text-center">
-                <h2 class="tit-aside">Đa dạng phòng khám</h2>
-                <!-- <p style="text-align: center; white-space: nowrap; display: flex; justify-content: center; background-color: ;">
-                                Đặt khám dễ dàng và tiện lợi hơn với các phòng khám cùng nhiều chuyên khoa
-                            </p> -->
-              </div>
-            </div>
+					<div class="container-md">
+						@if (Model.clinics != null && Model.clinics.Any())
+						{
+							foreach (var item in Model.clinics)
+							{
+								<div class="phongKham">
+									<div class="img-container">
+										<img class="img"
+											 alt="Phòng khám @item.ClinicName"
+											 style="height:120px"
+											 src=@item.MainImage />
+									</div>
+									<div class="line">
+										<div>
+											<a href="#" style="color: black">Phòng khám Hello Doctor</a>
+											@foreach (var temp in item.Basics)
+											{
+												<p>@temp.Address</p>
+												break;
+											}
 
-            <div class="container-md">
-              <div
-                class="phongKham"
-                data-category="implant"
-                style="display: none"
-              >
-                <div class="img-container">
-                  <img
-                    class="img"
-                    alt="Phòng khám Hello Doctor"
-                    src="https://i.pinimg.com/736x/b2/46/8f/b2468f173babb6aacd76a75ba5d65056.jpg"
-                  />
-                </div>
-                <div class="line">
-                  <div>
-                    <a href="#" style="color: black">Phòng khám Hello Doctor</a>
-                    <p>152/6 Thành Thái, P.12, Q.10, TP.HCM</p>
-                  </div>
-                </div>
-              </div>
-              <div
-                class="phongKham"
-                data-category="nieng-rang"
-                style="display: none"
-              >
-                <div class="img-container">
-                  <img
-                    class="img"
-                    alt="Phòng khám Nhi Mỹ Mỹ"
-                    src="https://cellphones.com.vn/sforum/wp-content/uploads/2023/08/hinh-nen-desktop-18.jpg"
-                  />
-                </div>
-                <div class="line">
-                  <div>
-                    <a href="#" style="color: black">Phòng khám Nhi Mỹ Mỹ</a>
-                    <p>
-                      105/10 Nguyễn Thị Tú, P. Bình Hưng Hòa B, Q. Bình Tân,
-                      TP.HCM
-                    </p>
-                  </div>
-                </div>
-              </div>
-              <div
-                class="phongKham"
-                data-category="boc-rang"
-                style="display: none"
-              >
-                <div class="img-container">
-                  <img
-                    class="img"
-                    alt="Phòng Khám Nhi Đồng 315 Quận 10"
-                    src="https://i.pinimg.com/736x/b2/46/8f/b2468f173babb6aacd76a75ba5d65056.jpg"
-                  />
-                </div>
-                <div class="line3">
-                  <div>
-                    <a href="#" style="color: black"
-                      >Phòng Khám Nhi Đồng 315 Quận 10</a
-                    >
-                    <p>307 Tô Hiến Thành, P. 13, Q. 10, TP.HCM</p>
-                  </div>
-                </div>
-              </div>
-              <div
-                class="phongKham"
-                data-category="boc-rang"
-                style="display: none"
-              >
-                <div class="img-container">
-                  <img
-                    class="img"
-                    alt="Phòng Khám Phụ Sản 315 Quận Thủ Đức"
-                    src="https://images.fpt.shop/unsafe/filters:quality(5)/fptshop.com.vn/uploads/images/tin-tuc/168111/Originals/hinh%20nen%20may%20tinh%20dep%20(2).jpg"
-                  />
-                </div>
-                <div class="line4">
-                  <div>
-                    <a href="#" style="color: black"
-                      >Phòng Khám Phụ Sản 315 Quận Thủ Đức</a
-                    >
-                    <p>175 Lê Văn Việt, P. Hiệp Phú, Q.9, Q.Thủ Đức, TP.HCM</p>
-                  </div>
-                </div>
-              </div>
-              <div
-                class="phongKham"
-                data-category="boc-rang"
-                style="display: none"
-              >
-                <div class="img-container">
-                  <img
-                    class="img"
-                    alt="ALMA Clinic by TS.BS Trần Ngọc Ánh "
-                    src="https://i1.taimienphi.vn/tmp/cf/aut/hinh-nen-desktop-full-hd-2.jpg"
-                  />
-                </div>
-                <div class="line5">
-                  <div>
-                    <a href="#" style="color: black"
-                      >ALMA Clinic by TS.BS Trần Ngọc Ánh</a
-                    >
-                    <p>290 Nguyễn Thị Minh Khai, P.5, Q.3, TP. HCM</p>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <!-- col-md-9 ở trên-->
-        </div>
-      </div>
-    </div>
+										</div>
+									</div>
+								</div>
+							}
+						}
+					</div>
+				</div>
+				<!-- col-md-9 ở trên-->
+			</div>
+		</div>
+	</div>
 
-  </body>
+</body>
 </html>
-
-
