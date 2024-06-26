@@ -1,0 +1,175 @@
+﻿@model DentalClinicBooking_Project.Models.ViewModels.SearchDentist
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SearchDoctor</title>
+
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet" />
+
+	<link href="~/css/showalldentist.css" rel="stylesheet" />
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</head>
+
+<body>
+    <div class="container" style="max-width: 1600px; padding: 0 0;">
+        <nav class="homeClinic">
+            <ul class="home">
+                <li>
+                    <a asp-area="" asp-controller="Home" asp-action="HomePage">Trang chủ</a>
+                </li>
+                <li>
+                    <span class="separator">/</span>
+                </li>
+                <li>
+                    <a asp-area="" asp-controller="Dentist" asp-action="ShowAllDentist">Nha sĩ</a>
+                </li>
+                <li>
+                    <span class="separator">/</span>
+                </li>
+                <li>
+                    <span class="separator">Tìm kiếm</span>
+                </li>
+            </ul>
+        </nav>
+    </div>
+
+    <!-- Search Service Banner -->
+    <div class=" " style="max-width: 10000px; padding: 0 0; background-color: #1975DC;">
+        <div class="banner-bg container-md" style="max-width: 1600px;  position: sticky; top: 0;">
+            <div class="banner-container">
+                <form id="searchForm" method="GET" asp-area="" asp-controller="Dentist" asp-action="ShowAllDentist" class="search-form">
+                    <input name="searchString" type="search" formcontrolname="query"
+                           placeholder="Tìm theo triệu chứng, bác sĩ, bệnh viện..." class="search-input">
+                    <svg id="searchIcon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="search-icon" viewBox="0 0 16 16">
+                        <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001q.044.06.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1 1 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0"></path>
+                    </svg>
+                </form>
+
+                <script>
+                    document.getElementById('searchIcon').addEventListener('click', function () {
+                        document.getElementById('searchForm').submit();
+                    });
+                </script>
+            </div>
+        </div>
+
+        <!-- Speciality List -->
+        <div class="speciality-container">
+            <div class="speciality-list">
+                <app-speciality-list>
+                    <div class="speciality-grid">
+                        <nz-collapse nzghost class="collapse-container">
+                            <nz-collapse-panel nzshowarrow="false" nzactive class="collapse-panel">
+                            </nz-collapse-panel>
+                        </nz-collapse>
+                    </div>
+                </app-speciality-list>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="container">
+        <div class="search-results-container">
+            <h1 class="search-results-heading">
+                Tìm thấy <span class="search-results-count">@Model.ResultCount</span> kết quả.
+            </h1>
+        </div>
+        @if (Model.dentists != null && Model.dentists.Any())
+        {
+            @foreach (var item in Model.dentists)
+            {
+                <div class="doctor-card">
+                    <a class="doctor-link" asp-area="" asp-controller="Dentist" asp-action="ShowDentistInfo" asp-route-id="@item.DentistId">
+                        <div class="doctor-image-container">
+                            <img class="doctor-image"
+                                 src=@item.Image
+                                 alt="Ảnh nha sĩ @item.DentistName">
+                        </div>
+                        <div class="doctor-info">
+                            <div class="doctor-header">
+                                <h2 class="doctor-name"><span class="doctor-title">TS. BS @item.DentistName</span> </h2>
+                            </div>
+                            <p class="doctor-address">@item.Address</p>
+                        </div>
+                    </a>
+                    <div class="appointment-button-container">
+                        <a class="appointment-button" href="#">
+                            Đặt khám
+                        </a>
+                    </div>
+                </div>
+            }
+        }
+    </div>
+    <ol class="pagination-container">
+        <li><!----></li>
+        @{
+            decimal PrevPage = ViewBag.Page - 1;
+            if (PrevPage <= 0)
+            {
+                PrevPage = 1;
+            }
+            decimal NextPage = ViewBag.Page + 1;
+            if (NextPage > ViewBag.NoOfPaging)
+            {
+                NextPage = ViewBag.NoOfPaging;
+            }
+
+            decimal pageRange = 2; // Số lượng trang hiển thị trước và sau trang hiện tại
+            decimal startPage = ViewBag.Page - pageRange;
+            decimal endPage = ViewBag.Page + pageRange;
+
+            if (startPage < 1)
+            {
+                startPage = 1;
+            }
+            if (endPage > ViewBag.NoOfPaging)
+            {
+                endPage = ViewBag.NoOfPaging;
+            }
+        }
+        <li class="ng-star-inserted">
+            <a class="bg-blue-600 block border-blue-600 h-8 hover:text-white leading-8 rounded text-center text-white w-8"
+               asp-area="" asp-controller="Dentist" asp-action="ShowAllDentist" asp-route-page="@PrevPage">
+                <<
+            </a>
+        </li>
+        @for (decimal i = startPage; i <= endPage; i++)
+        {
+            if (i == ViewBag.Page)
+            {
+                <li class="ng-star-inserted">
+                    <a class=" block border-blue-600 h-8 hover:text-white leading-8 rounded text-center text-white w-8 " style="background-color:#000db8"
+                       asp-area="" asp-controller="Dentist" asp-action="ShowAllDentist" asp-route-page="@(i)">
+                        @(i)
+                    </a>
+                </li>
+
+            }
+            else
+            {
+                <li class="ng-star-inserted">
+                    <a class="bg-blue-600 block border-blue-600 h-8 hover:text-white leading-8 rounded text-center text-white w-8"
+                       asp-area="" asp-controller="Dentist" asp-action="ShowAllDentist" asp-route-page="@(i)">
+                        @(i)
+                    </a>
+                </li>
+            }
+        }
+        <li class="ng-star-inserted">
+            <a class="bg-blue-600 block border-blue-600 h-8 hover:text-white leading-8 rounded text-center text-white w-8"
+               asp-area="" asp-controller="Dentist" asp-action="ShowAllDentist" asp-route-page="@NextPage">
+                >>
+            </a>
+        </li>
+
+    </ol>
+</body>
+</html>

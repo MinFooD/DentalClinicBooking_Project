@@ -155,6 +155,7 @@ body, html {
   
   /* Home */
   .homeClinic {
+      margin-top:20px;
     display: flex;
     justify-content: left;
     align-items: flex-start;
