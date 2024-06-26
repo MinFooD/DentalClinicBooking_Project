@@ -1,0 +1,94 @@
+﻿{
+   "CodeGenerationMode": 4,
+   "ContextClassName": "DentalClinicBookingProjectContext",
+   "ContextNamespace": null,
+   "FilterSchemas": false,
+   "IncludeConnectionString": false,
+   "ModelNamespace": null,
+   "OutputContextPath": "Data",
+   "OutputPath": "Domain",
+   "PreserveCasingWithRegex": true,
+   "ProjectRootNamespace": "DentalClinicBooking_Project",
+   "Schemas": null,
+   "SelectedHandlebarsLanguage": 2,
+   "SelectedToBeGenerated": 0,
+   "T4TemplatePath": null,
+   "Tables": [
+      {
+         "Name": "[dbo].[Account]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[Admin]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[Basic]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[Clinic]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[ClinicAppointmentSchedule]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[ClinicImage]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[Dentist]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[Owner]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[Patient]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[Service]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[ServiceOfClinic]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[Slot]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[SlotOfClinic]",
+         "ObjectType": 0
+      }
+   ],
+   "UiHint": null,
+   "UncountableWords": null,
+   "UseAsyncStoredProcedureCalls": true,
+   "UseBoolPropertiesWithoutDefaultSql": false,
+   "UseDatabaseNames": false,
+   "UseDateOnlyTimeOnly": true,
+   "UseDbContextSplitting": false,
+   "UseDecimalDataAnnotationForSprocResult": true,
+   "UseFluentApiOnly": true,
+   "UseHandleBars": false,
+   "UseHierarchyId": false,
+   "UseInflector": true,
+   "UseLegacyPluralizer": false,
+   "UseManyToManyEntity": false,
+   "UseNoDefaultConstructor": false,
+   "UseNoNavigations": false,
+   "UseNoObjectFilter": false,
+   "UseNodaTime": false,
+   "UseNullableReferences": false,
+   "UsePrefixNavigationNaming": false,
+   "UseSchemaFolders": false,
+   "UseSchemaNamespaces": false,
+   "UseSpatial": false,
+   "UseT4": false
+}

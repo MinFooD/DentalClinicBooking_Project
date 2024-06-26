@@ -11,7 +11,7 @@ namespace DentalClinicBooking_Project.Repositories
             int pageSize = 100);
 
         Task<Clinic?> GetAsync(Guid id);
-
         Task<int> CountAsync();
+        Task<int> CountAppointmentAsync();
     }
 }

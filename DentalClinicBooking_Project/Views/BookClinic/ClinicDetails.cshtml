@@ -1,6 +1,6 @@
 ﻿@using DentalClinicBooking_Project.Models.Domain
 @using Newtonsoft.Json
-@model DentalClinicBooking_Project.Models.ViewModels.ClinicDetailsModel
+@model DentalClinicBooking_Project.Models.ViewModels.ShowClinicDetails
 
 @{
     TimeOnly stAM = new TimeOnly(7, 0);
@@ -23,10 +23,14 @@
     <link href="~/css/clinicdetails/clinicdetails.css" rel="stylesheet" />
     <link href="~/css/clinicdetails/collapse.css" rel="stylesheet" />
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet" />
+    
+    <script type="text/javascript">
+        const images = @Html.Raw(JsonConvert.SerializeObject(Model.ClinicImages.Select(m => m.Image).ToList()));
+    </script>
     <script src="~/js/clinicdetails/collapse.js"></script>
     <script src="~/js/clinicdetails/img.js"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>  
 </head>
 
 <body>
@@ -47,7 +51,7 @@
                 <li>
                     <a asp-area=""
                        asp-controller="BookClinic"
-                       asp-action="ShowAllClinics">
+                       asp-action="AllClinics">
                         Phòng khám
                     </a>
                 </li>
