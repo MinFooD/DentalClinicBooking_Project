@@ -62,7 +62,7 @@
                     </p>
                 </div>
 
-                <form method="GET" class="search-form" asp-controller="BookClinic" asp-action="ShowAllClinics">
+                <form method="GET" class="search-form" asp-controller="BookClinic" asp-action="AllClinics">
                     <div class="search-bar">
                         <input name="searchQuery" type="search" placeholder="Tìm kiếm phòng khám..." class="Search"
                                value="@ViewBag.searchQuery" />
@@ -95,7 +95,7 @@
         {
             <a asp-area=""
                asp-controller="BookClinic"
-               asp-action="ShowClinicDetails"
+               asp-action="ClinicDetails"
                asp-route-id="@clinic.ClinicId"
                class="no-underline">
                 <div class="phongKham">
@@ -121,7 +121,7 @@
     <ol class="pagination-container">
         <li class="ng-star-inserted">
             <a class="bg-blue-600 block border-blue-600 h-8 hover:text-white leading-8 rounded text-center text-white w-8"
-               asp-area="" asp-controller="BookClinic" asp-action="ShowAllClinics" asp-route-PageNumber="@PrevPage">
+               asp-area="" asp-controller="BookClinic" asp-action="AllClinics" asp-route-PageNumber="@PrevPage">
                 <<
             </a>
         </li>
@@ -131,7 +131,7 @@
             {
                 <li class="ng-star-inserted">
                     <a class=" block border-blue-600 h-8 hover:text-white leading-8 rounded text-center text-white w-8 " style="background-color:#000db8"
-                       asp-area="" asp-controller="BookClinic" asp-action="ShowAllClinics" asp-route-PageNumber="@(i)">
+                       asp-area="" asp-controller="BookClinic" asp-action="AllClinics" asp-route-PageNumber="@(i)">
                         @(i)
                     </a>
                 </li>
@@ -141,7 +141,7 @@
             {
                 <li class="ng-star-inserted">
                     <a class="bg-blue-600 block border-blue-600 h-8 hover:text-white leading-8 rounded text-center text-white w-8"
-                       asp-area="" asp-controller="BookClinic" asp-action="ShowAllClinics" asp-route-PageNumber="@(i)">
+                       asp-area="" asp-controller="BookClinic" asp-action="AllClinics" asp-route-PageNumber="@(i)">
                         @(i)
                     </a>
                 </li>
@@ -149,7 +149,7 @@
         }
         <li class="ng-star-inserted">
             <a class="bg-blue-600 block border-blue-600 h-8 hover:text-white leading-8 rounded text-center text-white w-8"
-               asp-area="" asp-controller="BookClinic" asp-action="ShowAllClinics" asp-route-PageNumber="@NextPage">
+               asp-area="" asp-controller="BookClinic" asp-action="AllClinics" asp-route-PageNumber="@NextPage">
                 >>
             </a>
         </li>

@@ -1,4 +1,5 @@
-﻿using DentalClinicBooking_Project.Models.ViewModels;
+﻿using DentalClinicBooking_Project.Models.Domain;
+using DentalClinicBooking_Project.Models.ViewModels;
 using DentalClinicBooking_Project.Repositories;
 using Microsoft.AspNetCore.Mvc;
 
@@ -15,7 +16,7 @@ namespace DentalClinicBooking_Project.Controllers
 
 
         [HttpGet]
-        public async Task<IActionResult> ShowAllClinics(
+        public async Task<IActionResult> AllClinics(
             string? searchQuery,
             int pageSize = 2,
             int pageNumber = 1)
@@ -35,13 +36,13 @@ namespace DentalClinicBooking_Project.Controllers
 
 
         [HttpGet]
-        public async Task<IActionResult> ShowClinicDetails(Guid id)
+        public async Task<IActionResult> ClinicDetails(Guid id)
         {
             var clinic = await bookClinicRepository.GetAsync(id);
 
             if (clinic != null)
             {
-                var Model = new ClinicDetailsModel
+                var Model = new ShowClinicDetails
                 {
                     Id = clinic.ClinicId,
                     ClinicName = clinic.ClinicName,
@@ -54,14 +55,26 @@ namespace DentalClinicBooking_Project.Controllers
                 return View(Model);
             }
 
-            return RedirectToAction("ShowAllClinics");
+            return RedirectToAction("AllClinics");
         }
 
         [HttpGet]
-        public async Task<IActionResult> BookingClinic()
+        public async Task<IActionResult> BookingClinic(Guid id)
         {
+            var clinic = await bookClinicRepository.GetAsync(id);
+            var model = new ShowBookingClinic
+            {
+                ClinicName = clinic?.ClinicName ?? string.Empty,
+                MainImage = clinic?.MainImage ?? string.Empty,
+                Basics = clinic?.Basics ?? Enumerable.Empty<Basic>(),
+                SlotOfClinics = clinic?.SlotOfClinics ?? Enumerable.Empty<SlotOfClinic>(),
+                Services = clinic?.Services ?? Enumerable.Empty<Service>(),
+            };
 
-            return View();
+            var count = await bookClinicRepository.CountAppointmentAsync();
+            ViewBag.Count = count;
+
+            return View(model);
         }
 
         //[HttpPost]

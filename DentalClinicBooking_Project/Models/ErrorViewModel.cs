@@ -1,4 +1,4 @@
-namespace DentalClinicBooking_Project.Models.Domain
+namespace DentalClinicBooking_Project.Models
 {
     public class ErrorViewModel
     {
