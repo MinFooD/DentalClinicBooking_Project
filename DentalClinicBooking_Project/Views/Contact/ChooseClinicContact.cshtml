@@ -1,0 +1,221 @@
+﻿@model List<DentalClinicBooking_Project.Models.ViewModels.ClinicWithAddress>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact</title>
+
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="~/css/choosecliniccontact.css" rel="stylesheet" />
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</head>
+
+
+
+<body>
+    <section id="top" class="bg-gradient">
+        <div class="container-md1 flex-container">
+            <div class="content">
+                <h1 class="title">
+                    Liên hệ ngay - Chọn SunShine ngay!<br class="line-break">
+                </h1>
+                <p class="subtitle">Chủ động đặt khám với các bác sĩ mọi lúc, mọi nơi.</p>
+                <div class="doctor-info">
+                    <div class="doctor-images">
+                        <img src="https://cdn.youmed.vn/photos/3e400fb3-0a41-4686-9a3a-8b01e488a367.png" alt="Doctor 1" class="doctor-img">
+                        <img src="https://cdn.youmed.vn/photos/1bd8ca79-9e6d-46fb-9b64-3d2a7cc736f2.jpg" alt="Doctor 2" class="doctor-img">
+                        <img src="https://cdn.youmed.vn/photos/10882d42-34b8-4632-b0ef-67f42706fa19.jpg" alt="Doctor 3" class="doctor-img">
+                    </div>
+                    <div class="doctor-status hidden-status">
+                        <span class="status-ping"></span>
+                        <span class="status-dot"></span>
+                    </div>
+                    <p class="doctor-text" style="display: contents;">
+                        200+ bác sĩ SunShine sẵn sàng giúp bạn
+                    </p>
+                </div>
+            </div>
+            <div class="image-container">
+                <img src="https://cdn.youmed.vn/wp-content/themes/youmed/images/main-tele.svg" alt="Telemedicine" class="main-image">
+            </div>
+        </div>
+    </section>
+
+
+    <div class=" " style="max-width: 10000px; padding: 0 0; background-color: #039CEE;">
+        <!-- Search Service Banner -->
+        <div class="banner-bg container-md" style="max-width: 1600px;  position: sticky; top: 0; z-index: 1000;">
+            <div class="banner-container">
+                <div class="">
+                    <a routerlink="./dat-kham" class="appointment-button" href="#" style="margin-left: -20rem;"> Trở lại </a>
+                </div>
+                <form id="searchForm" method="GET" asp-area="" asp-controller="Contact" asp-action="Index" class="search-form">
+                    <input name="searchString" type="search" formcontrolname="query" placeholder="Tìm theo phòng khám..."
+                           class="search-input">
+                    <svg id="searchIcon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                         class="search-icon" viewBox="0 0 16 16">
+                        <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001q.044.06.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1 1 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0">
+                        </path>
+                    </svg>
+                </form>
+                <script>
+                    document.getElementById('searchIcon').addEventListener('click', function () {
+                        document.getElementById('searchForm').submit();
+                    });
+                </script>
+
+            </div>
+        </div>
+
+        <!-- Speciality List -->
+        <div class="speciality-container">
+            <div class="speciality-list">
+                <app-speciality-list>
+                    <div class="speciality-grid">
+                        <nz-collapse nzghost class="collapse-container">
+                            <nz-collapse-panel nzshowarrow="false" nzactive class="collapse-panel">
+                            </nz-collapse-panel>
+                        </nz-collapse>
+                    </div>
+                </app-speciality-list>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="container-md">
+        <div class="introBookClinic">
+            <h2>Liên hệ phòng khám</h2>
+            <p style="text-align: center; white-space: nowrap; display: flex; justify-content: center;">
+                Đặt khám dễ dàng và tiện lợi hơn với các phòng khám cùng nhiều chuyên khoa
+            </p>
+        </div>
+    </div>
+
+    <div class="container-md">
+        @if (Model != null && Model.Any())
+        {
+            foreach (var item in Model)
+            {
+                <div class="phongKham1">
+                    <div>
+                        <img class="img1" style="height:150px;width:250px" alt="Ảnh phòng khám @item.ClinicName"
+                             src="@item.MainImage;height=128" />
+                    </div>
+                    <div class="line1">
+                        <div>
+                            <a asp-area="" asp-controller="Contact" asp-action="ShowBasicContact" asp-route-id="@item.ClinicId" style="color: black;">Phòng khám @item.ClinicName</a>
+                            <p>@item.Address</p>
+                        </div>
+                    </div>
+                </div>
+            }
+        }
+    </div>
+    <ol class="pagination-container">
+        <li><!----></li>
+        @{
+            decimal PrevPage = ViewBag.Page - 1;
+            if (PrevPage <= 0)
+            {
+                PrevPage = 1;
+            }
+            decimal NextPage = ViewBag.Page + 1;
+            if (NextPage > ViewBag.NoOfPaging)
+            {
+                NextPage = ViewBag.NoOfPaging;
+            }
+
+            decimal pageRange = 2; // Số lượng trang hiển thị trước và sau trang hiện tại
+            decimal startPage = ViewBag.Page - pageRange;
+            decimal endPage = ViewBag.Page + pageRange;
+
+            if (startPage < 1)
+            {
+                startPage = 1;
+            }
+            if (endPage > ViewBag.NoOfPaging)
+            {
+                endPage = ViewBag.NoOfPaging;
+            }
+        }
+        <li class="ng-star-inserted">
+            <a class="bg-blue-600 block border-blue-600 h-8 hover:text-white leading-8 rounded text-center text-white w-8"
+               asp-area="" asp-controller="Contact" asp-action="Index" asp-route-page="@PrevPage">
+                <<
+            </a>
+        </li>
+        @for (decimal i = startPage; i <= endPage; i++)
+        {
+            if (i == ViewBag.Page)
+            {
+                <li class="ng-star-inserted">
+                    <a class=" block border-blue-600 h-8 hover:text-white leading-8 rounded text-center text-white w-8 " style="background-color:#000db8"
+                       asp-area="" asp-controller="Contact" asp-action="Index" asp-route-page="@(i)">
+                        @(i)
+                    </a>
+                </li>
+
+            }
+            else
+            {
+                <li class="ng-star-inserted">
+                    <a class="bg-blue-600 block border-blue-600 h-8 hover:text-white leading-8 rounded text-center text-white w-8"
+                       asp-area="" asp-controller="Contact" asp-action="Index" asp-route-page="@(i)">
+                        @(i)
+                    </a>
+                </li>
+            }
+        }
+        <li class="ng-star-inserted">
+            <a class="bg-blue-600 block border-blue-600 h-8 hover:text-white leading-8 rounded text-center text-white w-8"
+               asp-area="" asp-controller="Contact" asp-action="Index" asp-route-page="@NextPage">
+                >>
+            </a>
+        </li>
+
+    </ol>
+
+    <!-- <div class="m-maps">
+        <div class="wrapper">
+          <div class="m-maps_item">
+            <div class="maps-info">
+              <h2 class="title">CƠ SỞ 1</h2>
+              <address>CS1: 19V Nguyễn Hữu Cảnh, P.19, Q.Bình Thạnh, Tp.Hồ Chí Minh</address>
+              <p class="phone">Điện thoại : (028) 38406854</p>
+            </div>
+            <div class="maps-iframe">
+              <iframe loading="lazy" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3919.2814386043055!2d106.70864757686947!3d10.789743358944122!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x317528b2b83f167f%3A0x557143a02eb14d0e!2sNha%20khoa%20Implant%20I-DENT!5e0!3m2!1svi!2s!4v1683012660132!5m2!1svi!2s" width="600" height="450" style="border:0;" allowfullscreen="" referrerpolicy="no-referrer-when-downgrade"></iframe>
+            </div>
+          </div>
+          <div class="m-maps_item">
+            <div class="maps-info">
+              <h2 class="title">CƠ SỞ 2</h2>
+              <address>CS2: 193A - 195 Hùng Vương, Phường 9, Quận 5, Tp.Hồ Chí Minh</address>
+              <p class="phone">Điện thoại : (028) 38336818</p>
+            </div>
+            <div class="maps-iframe">
+              <iframe loading="lazy" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d489.95690971388325!2d106.67439424392184!3d10.761028469337875!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31752ee258086271%3A0x7686738d866a2c7a!2sNha%20khoa%20Implant%20I-DENT!5e0!3m2!1svi!2s!4v1683013013394!5m2!1svi!2s" width="600" height="450" style="border:0;" allowfullscreen="" referrerpolicy="no-referrer-when-downgrade"></iframe>
+            </div>
+          </div>
+          <div class="m-maps_item">
+            <div class="maps-info">
+              <h2 class="title">CƠ SỞ 3</h2>
+              <address>CS3: 83 Đường Số 3, KDC CityLand, P.10, Q.Gò Vấp, Tp.Hồ Chí Minh</address>
+              <p class="phone">Điện thoại : (028) 22036818</p>
+            </div>
+            <div class="maps-iframe">
+              <iframe loading="lazy" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d282.96430421753814!2d106.67025952182688!3d10.837677938245045!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31752995ed8ccc6b%3A0xc1147d116f1c5645!2sNha%20Khoa%20I-Dent!5e0!3m2!1svi!2s!4v1683013094762!5m2!1svi!2s" width="600" height="450" style="border:0;" allowfullscreen="" referrerpolicy="no-referrer-when-downgrade"></iframe>
+            </div>
+          </div>
+        </div>
+      </div> -->
+</body>
+
+
+</html>

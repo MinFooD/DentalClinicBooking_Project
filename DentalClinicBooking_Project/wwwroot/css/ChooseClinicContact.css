@@ -1,0 +1,705 @@
+﻿html {
+    font-family: Arial, Helvetica, sans-serif;
+}
+/*Paging*/
+.pagination-container {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 1rem;
+    /* Khoảng cách giữa các phần tử */
+    padding: 1rem;
+}
+
+    .pagination-container li {
+        list-style: none;
+        /* Loại bỏ dấu chấm của danh sách */
+    }
+
+    .pagination-container a {
+        display: block;
+        width: 2rem;
+        height: 2rem;
+        line-height: 2rem;
+        text-align: center;
+        border-radius: 0.5rem;
+        border: 1px solid #ddd;
+        text-decoration: none;
+        /* Loại bỏ gạch chân mặc định */
+        color: #333;
+        transition: background-color 0.3s, color 0.3s;
+        /* Hiệu ứng chuyển đổi màu */
+    }
+
+        .pagination-container a.bg-blue-600 {
+            background-color: rgb(25 117 220);
+            color: white;
+            border: 1px solid rgb(25 117 220);
+        }
+
+        .pagination-container a:hover {
+            background-color: white;
+            color: white;
+        }
+
+        .pagination-container a.bg-white {
+            background-color: white;
+        }
+
+        .pagination-container a:hover.bg-white {
+            background-color: #f8f9fa;
+        }
+
+    .pagination-container .ellipsis {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 2rem;
+        height: 2rem;
+        color: #333;
+    }
+
+    .pagination-container .next-page {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 2rem;
+        height: 2rem;
+        border-radius: 0.5rem;
+        border: 1px solid #ddd;
+        background-color: white;
+        color: #333;
+        transition: background-color 0.3s, color 0.3s;
+    }
+
+        .pagination-container .next-page:hover {
+            background-color: #f8f9fa;
+            color: #333;
+        }
+
+    .pagination-container svg {
+        width: 1rem;
+        height: 1rem;
+    }
+
+.buttonPhanTrang {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    border: 1px solid #ddd;
+    border-radius: 0.5rem;
+    width: 4rem;
+    /* Đặt chiều rộng cố định cho nút "Next Page" */
+    height: 2rem;
+    /* Đặt chiều cao cố định cho nút "Next Page" */
+    background-color: white;
+    color: white;
+    transition: background-color 0.3s, color 0.3s;
+    white-space: nowrap;
+}
+
+    .buttonPhanTrang:hover {
+        background-color: white;
+        color: white;
+    }
+
+    .buttonPhanTrang svg {
+        margin-left: 0.5rem;
+    }
+
+    .buttonPhanTrang a {
+        width: 4rem;
+        height: 2rem;
+    }
+
+
+/* Phần tử chứa tất cả các bản đồ */
+.m-maps {
+    display: flex;
+    justify-content: center;
+    padding: 20px 0;
+}
+
+/* Phần tử bọc */
+.wrapper {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+/* Phần tử mỗi item của bản đồ */
+.m-maps_item {
+    max-width: 300px;
+    width: 100%;
+    padding: 20px;
+    background-color: #1975DC;
+    ;
+    color: white;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Phần tử thông tin của bản đồ */
+.maps-info {
+    margin-bottom: 15px;
+}
+
+    .maps-info p {
+        color: white;
+    }
+
+/* Phần tử tiêu đề */
+.title {
+    font-size: 18px;
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+/* Phần tử địa chỉ và số điện thoại */
+.address,
+.phone {
+    font-size: 14px;
+    color: #555;
+    margin-bottom: 5px;
+}
+
+/* Phần tử iframe chứa bản đồ */
+.maps-iframe {
+    width: 100%;
+    overflow: hidden;
+    border-radius: 10px;
+}
+
+    /* Phần tử iframe chứa bản đồ trong bản đồ */
+    .maps-iframe iframe {
+        width: 100%;
+        height: 200px; /* Điều chỉnh chiều cao tùy thuộc vào nhu cầu */
+        border: none;
+        border-radius: 10px;
+    }
+
+
+/* Image */
+/* General Styles */
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+}
+
+a {
+    text-decoration: none;
+}
+
+/* Section Styles */
+.bg-gradient {
+    background: linear-gradient(to bottom, #00C6FB, #0758D8);
+    color: white;
+}
+
+.container-md1 {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 16px;
+}
+
+@media (min-width: 768px) {
+    .container {
+        grid-template-columns: repeat(12, 1fr);
+    }
+}
+
+/* Content Styles */
+.content {
+    padding: 32px;
+    grid-column: span 12;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+}
+
+@media (min-width: 768px) {
+    .content {
+        grid-column: span 6;
+    }
+}
+
+@media (min-width: 1280px) {
+    .content {
+        grid-column: span 8;
+    }
+}
+
+.title {
+    font-size: 24px;
+    font-weight: bold;
+}
+
+@media (min-width: 768px) {
+    .title {
+        font-size: 32px;
+    }
+}
+
+.subtitle {
+    margin-top: 8px;
+    font-size: 18px;
+}
+
+@media (min-width: 768px) {
+    .subtitle {
+        font-size: 20px;
+    }
+}
+
+/* Doctor Info Styles */
+.doctor-info {
+    display: flex;
+    align-items: center;
+    background: rgba(255, 255, 255, 0.4);
+    padding: 8px;
+    border-radius: 9999px;
+    margin: 24px 0;
+}
+
+.doctor-images {
+    display: flex;
+    margin-right: 8px;
+}
+
+.doctor-img {
+    height: 32px;
+    width: 32px;
+    border-radius: 9999px;
+    border: 2px solid white;
+}
+
+@media (min-width: 768px) {
+    .doctor-img {
+        height: 40px;
+        width: 40px;
+    }
+}
+
+.doctor-status {
+    display: none;
+    height: 12px;
+    width: 12px;
+    position: relative;
+    margin-right: 8px;
+}
+
+@media (min-width: 768px) {
+    .doctor-status {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+}
+
+.status-ping {
+    animation: ping 1s cubic-bezier(0, 0, 0.2, 1) infinite;
+    height: 100%;
+    width: 100%;
+    background: #38A169;
+    border-radius: 9999px;
+    position: absolute;
+    opacity: 0.75;
+}
+
+.status-dot {
+    height: 8px;
+    width: 8px;
+    background: #38A169;
+    border-radius: 9999px;
+    position: relative;
+}
+
+@keyframes ping {
+    0% {
+        transform: scale(1);
+        opacity: 1;
+    }
+
+    75%, 100% {
+        transform: scale(2);
+        opacity: 0;
+    }
+}
+
+.doctor-text {
+    font-size: 12px;
+    font-weight: 500;
+}
+
+@media (min-width: 768px) {
+    .doctor-text {
+        font-size: 14px;
+    }
+}
+
+/* Image Container Styles */
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+}
+
+a {
+    text-decoration: none;
+}
+
+/* Section Styles */
+.bg-gradient {
+    background: linear-gradient(to bottom, #00C6FB, #0758D8);
+    color: white;
+}
+
+.container {
+    max-width: 1120px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 16px;
+}
+
+@media (min-width: 768px) {
+    .container {
+        grid-template-columns: repeat(12, 1fr);
+    }
+}
+
+/* Content Styles */
+.content {
+    padding: 32px;
+    grid-column: span 12;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+}
+
+@media (min-width: 768px) {
+    .content {
+        grid-column: span 6;
+    }
+}
+
+@media (min-width: 1280px) {
+    .content {
+        grid-column: span 8;
+    }
+}
+
+.title {
+    font-size: 24px;
+    font-weight: bold;
+}
+
+@media (min-width: 768px) {
+    .title {
+        font-size: 32px;
+    }
+}
+
+.subtitle {
+    margin-top: 8px;
+    font-size: 18px;
+}
+
+@media (min-width: 768px) {
+    .subtitle {
+        font-size: 20px;
+    }
+}
+
+/* Doctor Info Styles */
+.doctor-info {
+    display: flex;
+    align-items: center;
+    background: rgba(255, 255, 255, 0.4);
+    padding: 8px;
+    border-radius: 9999px;
+    margin: 24px 0;
+}
+
+.doctor-images {
+    display: flex;
+    margin-right: 8px;
+}
+
+.doctor-img {
+    height: 32px;
+    width: 32px;
+    border-radius: 9999px;
+    border: 2px solid white;
+}
+
+@media (min-width: 768px) {
+    .doctor-img {
+        height: 40px;
+        width: 40px;
+    }
+}
+
+.doctor-status {
+    display: none;
+    height: 12px;
+    width: 12px;
+    position: relative;
+    margin-right: 8px;
+}
+
+@media (min-width: 768px) {
+    .doctor-status {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+}
+
+.status-ping {
+    animation: ping 1s cubic-bezier(0, 0, 0.2, 1) infinite;
+    height: 100%;
+    width: 100%;
+    background: #38A169;
+    border-radius: 9999px;
+    position: absolute;
+    opacity: 0.75;
+}
+
+.status-dot {
+    height: 8px;
+    width: 8px;
+    background: #38A169;
+    border-radius: 9999px;
+    position: relative;
+}
+
+@keyframes ping {
+    0% {
+        transform: scale(1);
+        opacity: 1;
+    }
+
+    75%, 100% {
+        transform: scale(2);
+        opacity: 0;
+    }
+}
+
+.doctor-text {
+    font-size: 12px;
+    font-weight: 500;
+}
+
+@media (min-width: 768px) {
+    .doctor-text {
+        font-size: 14px;
+    }
+}
+
+
+
+/* Image Container Styles */
+.image-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    grid-column: span 12;
+}
+
+@media (min-width: 768px) {
+    .image-container {
+        grid-column: span 6;
+    }
+}
+
+@media (min-width: 1280px) {
+    .image-container {
+        grid-column: span 4;
+    }
+}
+
+.main-image {
+    height: 500px;
+    width: 500px;
+}
+
+/* thanh search */
+.banner-bg {
+    background-color: #039CEE;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.banner-container {
+    width: 60%;
+    max-width: 4xl;
+    padding: 24px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.search-form {
+    position: relative;
+    width: 100%;
+    display: flex;
+    align-items: center;
+}
+
+.search-input {
+    width: 100%;
+    border: 0;
+    border-radius: 9999px;
+    padding: 12px 40px 12px 24px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.search-icon {
+    position: absolute;
+    right: 16px;
+    bottom: 50%;
+    transform: translateY(50%);
+    cursor: pointer;
+    object-fit: cover;
+}
+
+
+/* Speciality List Styles */
+.speciality-container {
+    max-width: 7xl;
+    margin: auto;
+    display: grid;
+    grid-template-columns: 1fr;
+    padding-bottom: 16px;
+    grid-template-columns: repeat(12, 1fr);
+    padding-left: 16px;
+    padding-right: 16px;
+}
+
+.speciality-list {
+    grid-column: span 4 / span 4;
+}
+
+.speciality-grid {
+    display: grid;
+    gap: 24px;
+}
+
+.collapse-container {
+    background-color: white;
+}
+
+.collapse-panel {
+    display: none;
+}
+
+
+
+
+
+
+
+/* danh sach phong kham */
+.introBookClinic {
+    padding-top: 30px;
+    margin: 0 35%;
+}
+
+.container {
+    display: flex;
+    width: 100% !important;
+    flex-direction: column;
+    align-items: center;
+    margin: 0 15% !important;
+    gap: 1rem;
+    /* Khoảng cách giữa các phần tử */
+}
+
+.phongKham1 {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+    /* Khoảng cách giữa các phần tử bên trong */
+    text-decoration: none;
+    /* Loại bỏ gạch chân mặc định của thẻ a */
+    color: inherit;
+    /* Giữ nguyên màu chữ */
+    border-bottom: 1px solid #ddd;
+    /* Đường line mỏng dưới cùng */
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+    /* Khoảng cách giữa nội dung và đường line */
+    /*width: 80%;
+     Đảm bảo các phần tử có cùng chiều rộng 
+    max-width: 800px;*/
+    /* Đặt chiều rộng tối đa */
+    margin: 0 auto;
+    /* Căn giữa các phần tử */
+}
+
+.img1,
+.img2,
+.img3,
+.img4,
+.img5 {
+    width: 128px;
+    height: 128px;
+    overflow: hidden;
+    border-radius: 1rem;
+    /* Bo tròn góc */
+    position: relative;
+}
+
+    .img1 img,
+    .img2 img,
+    .img3 img,
+    .img4 img,
+    .img5 img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        /* Đảm bảo hình ảnh bao phủ toàn bộ khung */
+    }
+
+.line1,
+.line2,
+.line3,
+.line4,
+.line5 {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    color: #2d3748;
+    /* Màu xám */
+}
+
+    .line1 h2,
+    .line2 h2,
+    .line3 h2,
+    .line4 h2,
+    .line5 h2 {
+        font-size: 1.125rem;
+        /* Kích thước chữ lớn */
+        font-weight: 600;
+        /* Font-weight đậm */
+        margin: 0;
+        /* Loại bỏ khoảng cách mặc định */
+    }
+
+    .line1 p,
+    .line2 p,
+    .line3 p,
+    .line4 p,
+    .line5 p {
+        opacity: 0.8;
+        font-weight: 500;
+        margin: 0;
+        /* Loại bỏ khoảng cách mặc định */
+    }
