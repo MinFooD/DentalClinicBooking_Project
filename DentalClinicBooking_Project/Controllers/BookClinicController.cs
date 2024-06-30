@@ -2,6 +2,7 @@
 using DentalClinicBooking_Project.Models.ViewModels;
 using DentalClinicBooking_Project.Repositories;
 using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json;
 
 namespace DentalClinicBooking_Project.Controllers
 {
@@ -62,27 +63,58 @@ namespace DentalClinicBooking_Project.Controllers
         public async Task<IActionResult> BookingClinic(Guid id)
         {
             var clinic = await bookClinicRepository.GetAsync(id);
+            //var model = new ShowBookingClinic
+            //{
+            //    ClinicName = clinic?.ClinicName ?? string.Empty,
+            //    MainImage = clinic?.MainImage ?? string.Empty,
+            //    Basics = clinic?.Basics ?? Enumerable.Empty<Basic>(),
+            //    SlotOfClinics = clinic?.SlotOfClinics ?? Enumerable.Empty<SlotOfClinic>(),
+            //    Services = clinic?.Services ?? Enumerable.Empty<Service>(),
+            //};
             var model = new ShowBookingClinic
             {
-                ClinicName = clinic?.ClinicName ?? string.Empty,
-                MainImage = clinic?.MainImage ?? string.Empty,
-                Basics = clinic?.Basics ?? Enumerable.Empty<Basic>(),
-                SlotOfClinics = clinic?.SlotOfClinics ?? Enumerable.Empty<SlotOfClinic>(),
-                Services = clinic?.Services ?? Enumerable.Empty<Service>(),
+                ClinicId = clinic.ClinicId,
+                ClinicName = clinic.ClinicName,
+                MainImage = clinic.MainImage,
+                Basics = clinic.Basics,
+                SlotOfClinics = clinic.SlotOfClinics,
+                Services = clinic.Services,
             };
 
-            var count = await bookClinicRepository.CountAppointmentAsync();
-            ViewBag.Count = count;
 
             return View(model);
         }
 
-        //[HttpPost]
-        //public IActionResult BookingClinic([FromBody] BookingClinic bookingModel)
-        //{
-        //    ClinicAppointmentSchedule clinicAppointmentSchedule = new ClinicAppointmentSchedule();
-        //    return View();
-        //}
+        [HttpPost]
+        public async Task<IActionResult> CheckSlots([FromBody] BookingClinicModel bookingModel)
+        {
+            //var clinic = await bookClinicRepository.GetAsync(bookingModel.ClinicId);
+            //var model = new BookingResponse
+            //{
+            //    ClinicId = clinic.ClinicId,
+            //    ClinicName = clinic.ClinicName,
+            //    MainImage = clinic.MainImage,
+            //    Basics = clinic.Basics,
+            //    SlotOfClinics = clinic.SlotOfClinics,
+            //    Services = clinic.Services,
+            //};
+
+            var bookings = await bookClinicRepository
+                .GetBookingsByDateAndClinic(bookingModel.Day,
+                bookingModel.ClinicName,
+                bookingModel.BasicName);
+
+            var slots = new Dictionary<string, int> { { "1", 0 }, { "2", 0 }, { "3", 0 } };
+            foreach (var booking in bookings)
+            {
+                if (slots.ContainsKey(booking.SlotName))
+                {
+                    slots[booking.SlotName] = booking.Count;
+                }
+            }
+
+            return Ok(slots);
+        }
 
     }
 }
