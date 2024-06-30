@@ -31,14 +31,7 @@ namespace DentalClinicBooking_Project.Repositories
             query = query.Skip(skipResults).Take(pageSize);
 
             return await query.Include(x => x.Basics).ToListAsync();
-            //return await dentalClinicBookingContext.Clinics.Include(x => x.Basics).ToListAsync();
         }
-
-        //public async Task<Clinic?> GetAsync(Guid id)
-        //{
-        //    return await dentalClinicBookingContext.Slots.FirstOrDefaultAsync(x => x.SlotId == id);
-
-        //}
 
         public async Task<Clinic?> GetAsync(Guid id)
         {
@@ -47,6 +40,7 @@ namespace DentalClinicBooking_Project.Repositories
                 .Include(x => x.Basics)
                 .Include(x => x.ClinicImages)
                 .Include(x => x.SlotOfClinics)
+                .Include(x => x.Services)
                 .FirstOrDefaultAsync(x => x.ClinicId == id);
 
         }
@@ -57,6 +51,19 @@ namespace DentalClinicBooking_Project.Repositories
             return await dentalClinicBookingProjectContext.Clinics.CountAsync();
         }
 
-
+        public async Task<int> CountAppointmentAsync()
+        {
+            var count = await dentalClinicBookingProjectContext.ClinicAppointmentSchedules
+                            .GroupBy(a => new { a.ClinicName, a.BasicName, a.Day, a.SlotName })
+                            .Select(g => new
+                            {
+                                g.Key.ClinicName,
+                                g.Key.BasicName,
+                                g.Key.Day,
+                                g.Key.SlotName,
+                                Count = g.Count()
+                            }).SumAsync(x => x.Count);
+            return count;
+        }
     }
 }

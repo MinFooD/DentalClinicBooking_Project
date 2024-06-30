@@ -3,7 +3,7 @@ using DentalClinicBooking_Project.Models.Domain;
 
 namespace DentalClinicBooking_Project.Models.ViewModels
 {
-    public class ClinicDetailsModel
+    public class ShowClinicDetails
     {
         public Guid Id { get; set; }
         public string ClinicName { get; set; } = null!;
