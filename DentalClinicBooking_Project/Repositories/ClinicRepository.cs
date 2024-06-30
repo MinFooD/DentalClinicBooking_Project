@@ -1,6 +1,7 @@
 ﻿using DentalClinicBooking_Project.Data;
 using DentalClinicBooking_Project.Models;
 using DentalClinicBooking_Project.Models.Domain;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
 
@@ -40,6 +41,7 @@ namespace DentalClinicBooking_Project.Repositories
                 .Include(x => x.Basics)
                 .Include(x => x.ClinicImages)
                 .Include(x => x.SlotOfClinics)
+                .ThenInclude(x => x.Slot)
                 .Include(x => x.Services)
                 .FirstOrDefaultAsync(x => x.ClinicId == id);
 
@@ -51,19 +53,23 @@ namespace DentalClinicBooking_Project.Repositories
             return await dentalClinicBookingProjectContext.Clinics.CountAsync();
         }
 
-        public async Task<int> CountAppointmentAsync()
+
+        public async Task<List<dynamic>> GetBookingsByDateAndClinic(DateOnly date, string clinicName, string basicName)
         {
-            var count = await dentalClinicBookingProjectContext.ClinicAppointmentSchedules
-                            .GroupBy(a => new { a.ClinicName, a.BasicName, a.Day, a.SlotName })
-                            .Select(g => new
-                            {
-                                g.Key.ClinicName,
-                                g.Key.BasicName,
-                                g.Key.Day,
-                                g.Key.SlotName,
-                                Count = g.Count()
-                            }).SumAsync(x => x.Count);
-            return count;
+            return await dentalClinicBookingProjectContext.ClinicAppointmentSchedules
+                .Where(b => b.Day == date && b.ClinicName == clinicName && b.BasicName == basicName)
+                .GroupBy(b => b.SlotName)
+                .Select(g => new { SlotName = g.Key, Count = g.Count() })
+                .ToListAsync<dynamic>();
         }
+
+        //public List<dynamic> GetBookingsByDateAndClinic(DateOnly date, string clinicName, string basicName)
+        //{
+        //    return  dentalClinicBookingProjectContext.ClinicAppointmentSchedules
+        //        .Where(b => b.Day == date && b.ClinicName == clinicName && b.BasicName == basicName)
+        //        .GroupBy(b => b.SlotName)
+        //        .Select(g => new { SlotName = g.Key, Count = g.Count() })
+        //        .ToList<dynamic>();
+        //}
     }
 }
