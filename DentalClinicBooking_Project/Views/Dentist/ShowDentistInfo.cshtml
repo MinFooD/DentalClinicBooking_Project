@@ -1,0 +1,73 @@
+﻿@model DentalClinicBooking_Project.Models.ViewModels.DentistWithClinicName
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DoctorInformation</title>
+    
+	<link href="~/css/dentist/dentistinfo.css" rel="stylesheet" />
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet" />
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</head>
+
+<body>
+    <div class="bg-light">
+        <nav class="breadcrumb-container">
+            <ol class="breadcrumb" style="background-color: #F8F9FA; ">
+                <li><a asp-area="" asp-controller="Home" asp-action="HomePage">Trang chủ</a></li>
+                <li><span>/</span></li>
+                <li><a href="">Bác sĩ</a></li>
+            </ol>
+        </nav>
+        <main class="main-content">
+            <div class="doctor-info ">
+                <div class="doctor-bio">
+                    <div class="doctor-photo-container">
+                        <div class="doctor-photo">
+                            <img src="@Model.Image" alt="Ảnh nha sĩ @Model.DentistName">
+                        </div>
+                    </div>
+                    <div class="doctor-details" style="text-align: left; margin-top:1.5rem;">
+                        <h1 class="doctor-name" style="margin-right: 5rem;">Nha sĩ @Model.DentistName</h1>
+                        <div class="doctor-status">
+                            <div class="status-verified"><img src="https://youmed.vn/dat-kham/assets/images/verified.svg">Bác sĩ</div>
+                            <div class="experience" style="margin-right: 8rem;"><strong>@Model.Experience</strong></div>
+                        </div>
+                        <div class="workplace-container">
+                            <h2 class="workplace-label">Nơi công tác</h2>
+                            <div class="workplace">Phòng khám @Model.ClinicName</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="doctor-intro">
+                <div class="intro-content" >                  
+                    <p class="intro-text" id="description">
+                        @Html.Raw(@Model.Description)
+                    </p>
+                </div>
+            </div>
+
+            
+            <div class="appointment-buttons">
+                <a class="btn-consult" href="#">Đặt khám ngay</a>
+                <a class="btn-appointment" href="#">Hủy</a>
+            </div>
+        </main>
+    </div>
+</body>
+@section Scripts {
+    <script>
+        var editor = new FroalaEditor('#description');
+    </script>
+}
+</html>
+
+                

@@ -8,29 +8,29 @@ namespace DentalClinicBooking_Project.Controllers
     public class DentistController : Controller
     {
         public DentalClinicBookingProjectContext _context;
-        //public IActionResult ShowDentistInfo(int id)
-        //{
-        //    _context = new DentalClinicBookingProjectContext();
+        public IActionResult ShowDentistInfo(Guid? id)
+        {
+            _context = new DentalClinicBookingProjectContext();
 
-        //    var dentist = _context.Dentists.Select(a => new DentistWithClinicName
-        //    {
-        //        DentistId = a.DentistId,
-        //        DentistName = a.DentistName,
-        //        Image = a.Image,
-        //        Experience = a.Experience,
-        //        BasicId = a.BasicId,
-        //        AccountId = a.AccountId,
-        //        ClinicName = a.Basic.Clinic.ClinicName,
-        //        Description = a.Description,
-        //        Address = a.Basic.Address
-        //    }).FirstOrDefault(x => x.DentistId == id);
+            var dentist = _context.Dentists.Select(a => new DentistWithClinicName
+            {
+                DentistId = a.DentistId,
+                DentistName = a.DentistName,
+                Image = a.Image,
+                Experience = a.Experience,
+                BasicId = a.BasicId,
+                AccountId = a.AccountId,
+                ClinicName = a.Basic.Clinic.ClinicName,
+                Description = a.Description,
+                Address = a.Basic.Address
+            }).FirstOrDefault(x => x.DentistId.Equals(id));
 
-        //    if (dentist != null)
-        //    {
-        //        return View(dentist);
-        //    }
-        //    return View(null);
-        //}
+            if (dentist != null)
+            {
+                return View(dentist);
+            }
+            return View(null);
+        }
 
         [HttpGet]
         public IActionResult ShowAllDentist(string searchString, int page = 1)
