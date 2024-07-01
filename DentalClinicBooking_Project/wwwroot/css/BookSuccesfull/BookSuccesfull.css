@@ -1,1 +1,218 @@
-﻿
+﻿html{
+    font-family: Arial, Helvetica, sans-serif;
+  }
+  /*  navbar */
+  /* body {
+    margin: 0;
+    padding: 0 0;
+    font-family: Arial, Helvetica, sans-serif;
+  } */
+
+  
+  
+    /* thông tin khách hàng */
+  .container {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      margin-bottom: 16px;
+      padding: 16px;
+      width: 100%;
+      max-width: 600px;
+  }
+  
+  .success-message {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+  }
+  
+  .success-title {
+      margin-top: 8px;
+      font-size: 1.25rem;
+      font-weight: 600;
+  }
+  
+  .info-card {
+      background-color: #fff;
+      border-radius: 8px;
+      padding: 16px;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+  
+  .info-card-header {
+      display: flex;
+      justify-content: center;
+      gap: 24px;
+      align-items: center;
+  }
+  
+  .info-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;  
+  }
+  .info-item p{
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-left: 1rem;
+  }
+  
+  .info-title {
+      font-size: 1rem;
+      font-weight: 500;
+      color: #333;
+  }
+  
+  .info-value {
+      font-size: 2rem;
+      font-weight: 600;
+      color: #22C55E;
+  }
+  
+  .info-qrcode {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+  }
+  
+  .info-clinic {
+      display: flex;
+      gap: 16px;
+      padding-top: 16px;
+  }
+  
+  .clinic-image img {
+      width: 60px;
+      height: 60px;
+      object-fit: cover;
+      border-radius: 50%;
+  }
+  
+  .clinic-details {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+  }
+  
+  .clinic-name {
+      font-size: 1rem;
+      font-weight: 600;
+      color: #333;
+  }
+  
+  .clinic-address {
+      font-size: 0.875rem;
+      color: #666;
+  }
+  
+  .info-section {
+      margin-top: 16px;
+      border-top: 1px solid #e5e5e5;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+  }
+  
+  .info-list {
+      background-color: #fff;
+      border-radius: 8px;
+      padding: 16px;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+  
+  .info-heading {
+      font-size: 1rem;
+      font-weight: 600;
+      margin-bottom: 8px;
+  }
+  
+  .info-row {
+      display: flex;
+      padding: 8px 0;
+      border-bottom: 1px dashed #e5e5e5;
+  }
+  
+  .info-row:last-child {
+      border-bottom: none;
+  }
+  
+  .info-title {
+      font-size: 0.875rem;
+      font-weight: 500;
+      color: #333;
+  }
+  
+  .info-titleSTT {
+      font-size: 0.875rem;
+      font-weight: 500;
+      color: #333;
+      font-size: x-large;
+  }
+  
+  
+  .info-value {
+      font-size: 0.875rem;
+      color: #666;
+      margin-left: auto;
+  }
+  
+  .info-value.greenSTT {
+      color: #22C55E;
+      margin-right: 1rem;
+      font-size: x-large;
+  }
+  
+  .info-value.green {
+      color: #22C55E;
+  }
+  
+  .success-title,
+  .info-heading {
+      color: #22C55E;
+      
+  }
+  
+  /* Xem lịch khám */
+  .footer-buttons {
+      padding-bottom: 8px;
+      padding-left: 16px;
+      padding-right: 16px;
+      padding-top: 16px;
+      position: sticky;
+      bottom: 4px;
+      width: 100%;
+  }
+  
+  .button-container {
+      display: flex;
+      justify-content: space-between;
+      gap: 16px;
+      align-items: center;
+  }
+  
+  .view-button {
+      text-align: center;
+      flex: 1;
+      padding: 10px 24px;
+      font-size: 0.875rem;
+      color: #fff;
+      font-weight: 500;
+      background-color: #3b82f6;
+      border: 1px solid #e5e5e5;
+      border-radius: 8px;
+      transition: color 0.2s, border-color 0.2s;
+  }
+  
+  .view-button:hover {
+      color: #1e3a8a; 
+      border-color: #1e3a8a; 
+      text-decoration: none;
+  }
+  
+  
+  
