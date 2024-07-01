@@ -1,6 +1,7 @@
 ﻿using DentalClinicBooking_Project.Data;
 using DentalClinicBooking_Project.Models;
 using DentalClinicBooking_Project.Models.Domain;
+using DentalClinicBooking_Project.Models.ViewModels.BookingClinicModels;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -54,22 +55,13 @@ namespace DentalClinicBooking_Project.Repositories
         }
 
 
-        public async Task<List<dynamic>> GetBookingsByDateAndClinic(DateOnly date, string clinicName, string basicName)
+        public async Task<List<BookingInfo>> GetBookingsByDateAndClinic(DateOnly date, string clinicName, string basicName)
         {
             return await dentalClinicBookingProjectContext.ClinicAppointmentSchedules
-                .Where(b => b.Day == date && b.ClinicName == clinicName && b.BasicName == basicName)
-                .GroupBy(b => b.SlotName)
-                .Select(g => new { SlotName = g.Key, Count = g.Count() })
-                .ToListAsync<dynamic>();
+                   .Where(b => b.Day == date && b.ClinicName == clinicName && b.BasicName == basicName)
+                   .GroupBy(b => b.SlotName)
+                   .Select(g => new BookingInfo { SlotName = g.Key, Count = g.Count() })
+                   .ToListAsync();
         }
-
-        //public List<dynamic> GetBookingsByDateAndClinic(DateOnly date, string clinicName, string basicName)
-        //{
-        //    return  dentalClinicBookingProjectContext.ClinicAppointmentSchedules
-        //        .Where(b => b.Day == date && b.ClinicName == clinicName && b.BasicName == basicName)
-        //        .GroupBy(b => b.SlotName)
-        //        .Select(g => new { SlotName = g.Key, Count = g.Count() })
-        //        .ToList<dynamic>();
-        //}
     }
 }
