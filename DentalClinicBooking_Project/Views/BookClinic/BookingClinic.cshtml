@@ -1,4 +1,5 @@
-﻿@model DentalClinicBooking_Project.Models.ViewModels.ShowBookingClinic
+﻿@using DentalClinicBooking_Project.Models.ViewModels.BookingClinicModels
+@model ShowBookingClinic
 @using DentalClinicBooking_Project.Models.Domain
 @{
     TimeOnly stAM = new TimeOnly(7, 0);
@@ -8,7 +9,6 @@
     TimeOnly enPM = new TimeOnly(17, 0);
 
     var model = Model.SlotOfClinics;
-    // // IEnumerable<SlotOfClinic> model = Model.SlotOfClinics;
     List<SlotOfClinic> slotOfClinics = model.OrderBy(slot => slot.StartTime).ThenBy(slot => slot.EndTime).ToList();
 
     var clinicIdString = Model.ClinicId.ToString();
@@ -25,9 +25,8 @@
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet" />
 
     <script src="~/js/bookingclinic/bookingclinic.js"></script>
-@*     <script src="~/js/bookingclinic/updatetime .js"></script>
- *@    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script src="https://code.jquery.com/jquery-latest.min.js"></script>
+    <script src="~/js/bookingclinic/updatetime.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </head>
@@ -100,7 +99,10 @@
                                             <div class="weekday">T7</div>
                                             <div class="weekday">CN</div>
                                         </div>
-                                        <div class="dates-grid">
+                                        <div class="dates-grid"
+                                             data-url="@Url.Action("CheckSlots", "BookClinic")"
+                                             data-clinic-id="@Model.ClinicId"
+                                             data-clinic-name="@Model.ClinicName">
                                             <!-- Dates will be inserted here -->
                                         </div>
                                     </div>
@@ -110,7 +112,7 @@
                         </div>
                     </div>
 
-                    <script>
+                   @*  <script>
                         $(document).ready(function () {
                             var clinicId = null;
                             var clinicName = null;
@@ -131,6 +133,7 @@
                                     ClinicName: clinicName,
                                     Day: dateOnlyValue
                                 };
+
                                 $.ajax({
                                     url: '@Url.Action("CheckSlots", "BookClinic")',
                                     type: 'POST',
@@ -139,8 +142,7 @@
                                     success: function (data) {
                                         $('.time-slot-item').each(function () {
                                             var slotId = $(this).data('slot-id');
-                                            console.log('Slot ID:', slotId);
-                                            if (data[slotId] >= 2) { 
+                                            if (data[slotId] >= 2) {
                                                 $(this).addClass('disabled')
                                             } else {
                                                 $(this).removeClass('disabled')
@@ -150,7 +152,7 @@
                                 });
                             });
                         });
-                    </script>
+                    </script> *@
 
                     <div class="step-item">
                         <div class="step-content">
@@ -207,7 +209,7 @@
                                                 @if (item.EndTime >= stPM && item.EndTime <= enPM)
                                                 {
                                                     <button class="time-slot-item"
-                                                       title="Chọn slot này">
+                                                            title="Chọn slot này">
                                                         @item.StartTime.ToString("HH:mm") -
                                                         @item.EndTime.ToString("HH:mm")
                                                     </button>

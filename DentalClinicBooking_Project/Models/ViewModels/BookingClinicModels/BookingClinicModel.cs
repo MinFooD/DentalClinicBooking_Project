@@ -1,6 +1,6 @@
 ﻿using DentalClinicBooking_Project.Models.Domain;
 
-namespace DentalClinicBooking_Project.Models.ViewModels
+namespace DentalClinicBooking_Project.Models.ViewModels.BookingClinicModels
 {
     public class BookingClinicModel
     {

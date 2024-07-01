@@ -1,5 +1,6 @@
 ﻿using Azure;
 using DentalClinicBooking_Project.Models.Domain;
+using DentalClinicBooking_Project.Models.ViewModels.BookingClinicModels;
 
 namespace DentalClinicBooking_Project.Repositories
 {
@@ -12,13 +13,9 @@ namespace DentalClinicBooking_Project.Repositories
 
         Task<Clinic?> GetAsync(Guid id);
         Task<int> CountAsync();
-        Task<List<dynamic>> GetBookingsByDateAndClinic(
+        Task<List<BookingInfo>> GetBookingsByDateAndClinic(
             DateOnly date,
             string clinicName,
             string basicName);
-        //List<dynamic> GetBookingsByDateAndClinic(
-        //    DateOnly date,
-        //    string clinicName,
-        //    string basicName);
     }
 }

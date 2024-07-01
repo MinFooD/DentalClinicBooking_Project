@@ -1,5 +1,6 @@
 ﻿using DentalClinicBooking_Project.Models.Domain;
 using DentalClinicBooking_Project.Models.ViewModels;
+using DentalClinicBooking_Project.Models.ViewModels.BookingClinicModels;
 using DentalClinicBooking_Project.Repositories;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
@@ -88,23 +89,19 @@ namespace DentalClinicBooking_Project.Controllers
         [HttpPost]
         public async Task<IActionResult> CheckSlots([FromBody] BookingClinicModel bookingModel)
         {
-            //var clinic = await bookClinicRepository.GetAsync(bookingModel.ClinicId);
-            //var model = new BookingResponse
-            //{
-            //    ClinicId = clinic.ClinicId,
-            //    ClinicName = clinic.ClinicName,
-            //    MainImage = clinic.MainImage,
-            //    Basics = clinic.Basics,
-            //    SlotOfClinics = clinic.SlotOfClinics,
-            //    Services = clinic.Services,
-            //};
+            bookingModel ??= new BookingClinicModel();
 
             var bookings = await bookClinicRepository
-                .GetBookingsByDateAndClinic(bookingModel.Day,
+                .GetBookingsByDateAndClinic(
+                bookingModel.Day,
                 bookingModel.ClinicName,
-                bookingModel.BasicName);
+                bookingModel.BasicName)
+                ?? new List<BookingInfo>();
 
-            var slots = new Dictionary<string, int> { { "1", 0 }, { "2", 0 }, { "3", 0 } };
+            var slots = new Dictionary<string, int> 
+            { { "1", 0 }, { "2", 0 }, { "3", 0 },
+              { "4", 0},  {"5", 0 }, {"6", 0 } };
+
             foreach (var booking in bookings)
             {
                 if (slots.ContainsKey(booking.SlotName))

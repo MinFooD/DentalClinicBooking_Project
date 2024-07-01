@@ -4,12 +4,14 @@
     var basic = null;
 
     $('.branch-item').click(function () {
-        clinicId = '@Model.ClinicId.ToString()';
-        clinicName = '@Model.ClinicName';
+        clinicId = $(this).data('clinic-id').ToString();
+        clinicName = $(this).data('clinic-name');
         basic = $('.info-item:nth-child(2) .info-value').text();
+        console.log('Id: \nName: ', clinicId, clinicName)
     });
 
     $('.dates-grid').click(function () {
+        var url = $(this).data('url');
         var dateString = $('.info-item:nth-child(4) .info-value').text();
         var dateOnlyValue = moment(dateString, 'DD/MM/YYYY').format('YYYY-MM-DD');
         var patientData = {
@@ -18,23 +20,21 @@
             ClinicName: clinicName,
             Day: dateOnlyValue
         };
-        console.log('Patient Data:', patientData); 
 
         $.ajax({
-            url: '@Url.Action("CheckSlots", "BookClinic")',
+            url: url,
             type: 'POST',
             data: JSON.stringify(patientData),
             contentType: 'application/json; charset=utf-8',
             success: function (data) {
-                 console.log(data);
-                //$('#slot option').each(function () {
-                //    var slot = $(this).val();
-                //    if (data[slot] >= 2) { 
-                //        $(this).prop('disabled', true);
-                //    } else {
-                //        $(this).prop('disabled', false);
-                //    }
-                //});
+                $('.time-slot-item').each(function () {
+                    var slotId = $(this).data('slot-id');
+                    if (data[slotId] >= 2) {
+                        $(this).addClass('disabled')
+                    } else {
+                        $(this).removeClass('disabled')
+                    }
+                });
             }
         });
     });
