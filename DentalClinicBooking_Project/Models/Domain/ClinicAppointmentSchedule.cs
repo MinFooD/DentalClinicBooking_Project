@@ -9,19 +9,21 @@ public partial class ClinicAppointmentSchedule
 {
     public Guid ClinicAppointmentScheduleId { get; set; }
 
-    public string Code { get; set; }
+    public DateOnly Date { get; set; }
 
     public Guid PatientId { get; set; }
 
-    public string ClinicName { get; set; }
+    public string SlotName { get; set; }
 
     public string BasicName { get; set; }
 
+    public string Code { get; set; }
+
     public string Address { get; set; }
 
-    public DateOnly Day { get; set; }
+    public string ClinicName { get; set; }
 
-    public string SlotName { get; set; }
+    public string Service { get; set; }
 
     public virtual Patient Patient { get; set; }
 }

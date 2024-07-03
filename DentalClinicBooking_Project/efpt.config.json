@@ -31,7 +31,7 @@
          "ObjectType": 0
       },
       {
-         "Name": "[dbo].[ClinicAppointmentSchedule]",
+         "Name": "[dbo].[CLinicAppointmentSchedule]",
          "ObjectType": 0
       },
       {
@@ -40,6 +40,10 @@
       },
       {
          "Name": "[dbo].[Dentist]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[DescriptionClinic]",
          "ObjectType": 0
       },
       {
