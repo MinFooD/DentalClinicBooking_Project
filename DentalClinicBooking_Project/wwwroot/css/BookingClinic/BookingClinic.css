@@ -1,150 +1,6 @@
 ﻿html {
     font-family: Arial, Helvetica, sans-serif;
 }
-/*  navbar */
-body {
-    margin: 0;
-    padding: 0 0;
-}
-
-.navbar {
-    background-color: #ffffff;
-}
-
-header.row.navbar {
-    border-bottom: 1px solid #F1F5F9;
-}
-
-header.row.navbar {
-    border-bottom: 1px solid #F1F5F9;
-}
-
-.navbar-container {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 16px 32px;
-}
-
-.navbar-brand img {
-    width: 118px;
-}
-
-.navbar-toggle {
-    display: none;
-    background: none;
-    border: none;
-    cursor: pointer;
-}
-
-.navbar-menu {
-    display: flex;
-    justify-content: center;
-    width: 100%;
-}
-
-ul.navbar-nav {
-    flex-direction: row;
-}
-
-.navbar-nav {
-    display: none;
-    flex-direction: none;
-    list-style-type: none;
-    margin: 0;
-    padding: 0;
-    align-items: flex-start;
-    display: flex;
-    justify-content: center;
-    width: 100%;
-}
-
-.nav-item {
-    margin-right: 50px;
-    font-weight: 600;
-    margin: 0 10px;
-    position: relative;
-}
-
-.nav-link {
-    text-decoration: none;
-    color: #1f2937;
-    padding: 12px;
-    transition: background-color 0.3s ease;
-    border-radius: 15%;
-}
-
-.navbar-login .btn {
-    display: flex;
-    justify-content: end;
-    padding: 8px 16px;
-    color: rgb(25 117 220);
-    text-decoration: none;
-    transition: background-color 0.3s ease, color 0.3s ease;
-    margin-left: 100px;
-}
-
-.navbar-login {
-    display: flex;
-    margin-right: 0px !important;
-    padding-right: 0px !important;
-    justify-content: end;
-}
-
-.nav-item:hover .dropdown-menu {
-    display: block;
-}
-
-a.btn {
-    margin: 0 !important;
-    border: 2px solid rgb(25 117 220);
-}
-
-    a.btn:hover {
-        margin: 0;
-        background-color: rgb(25 117 220);
-        color: #fff;
-    }
-
-.dropdown-toggle::after {
-    margin-left: 0.255em;
-    vertical-align: 0.255em;
-    border: none;
-}
-
-.dropdown-menu {
-    display: block;
-    display: flex;
-    flex-direction: column;
-    left: 50%;
-    transform: translateX(-50%);
-}
-
-.dropdown-container {
-    display: flex;
-    flex-direction: column;
-    margin-bottom: 16px;
-}
-
-.dropdown-item {
-    padding: 0px 0px;
-}
-
-.dropdown-container a {
-    text-decoration: none;
-    color: #1f2937;
-    font-weight: 600;
-}
-
-    .dropdown-container a + a {
-        font-weight: normal;
-    }
-
-    .dropdown-container a:hover {
-        color: rgb(25 117 220);
-        background-color: white;
-    }
-
 
 /* Main body */
 body {
@@ -585,7 +441,7 @@ body {
     font-family: Arial, sans-serif;
     border: 1px solid #ccc;
     border-radius: 10px;
-    max-width: 600px; /* Điều chỉnh kích thước tối đa */
+    max-width: 600px; 
     margin: 0 auto;
     background-color: #fff;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
@@ -605,7 +461,7 @@ body {
 }
 
 .month-title {
-    font-size: 30px; /* Điều chỉnh kích thước tiêu đề */
+    font-size: 30px; 
     font-weight: bold;
     color: white;
 }
@@ -614,7 +470,7 @@ body {
 .next-month-btn {
     background: none;
     border: none;
-    font-size: 20px; /* Điều chỉnh kích thước nút */
+    font-size: 20px; 
     cursor: pointer;
 }
 
@@ -660,13 +516,6 @@ body {
         background-color: #f0f0f0;
     }
 
-
-/* .selected {
-  background-color: #007bff;
-  color: white;
-  border: 1px solid #007bff;
-} */
-
 .service-item::after {
     content: '';
     position: absolute;
@@ -678,13 +527,13 @@ body {
     background: url('path_to_checkmark_icon') no-repeat center center;
     background-size: contain;
     opacity: 0;
-    transition: opacity 0.3s, transform 0.3s; /* Thêm transform vào transition */
+    transition: opacity 0.3s, transform 0.3s; 
 }
 
 .service-item.selected::after {
     opacity: 1;
-    transform: translateY(-50%) scale(1.2); /* Tạo hiệu ứng phóng to khi xuất hiện */
-    background-image: url('https://www.iconpacks.net/icons/2/free-check-icon-3278-thumb.png'); /* Đường dẫn đến hình ảnh dấu tích màu xanh lá */
+    transform: translateY(-50%) scale(1.2); 
+    background-image: url('https://www.iconpacks.net/icons/2/free-check-icon-3278-thumb.png');
 }
 
 
@@ -795,8 +644,8 @@ select[name="service"] {
 
 select[multiple] {
     width: 100%;
-    height: auto; /* Cho phép điều chỉnh chiều cao tự động */
-    overflow-y: auto; /* Cho phép cuộn nếu có nhiều lựa chọn */
+    height: auto; 
+    overflow-y: auto; 
 }
 
 
@@ -874,47 +723,3 @@ select[multiple] {
         text-decoration: none;
         color: white;
     }
-
-
-/* footer  */
-.footer1 {
-    background-color: #f8f8f8;
-    padding: 20px 0;
-    margin-top: 2rem;
-}
-
-.footer-section {
-    display: flex;
-    flex-direction: column;
-}
-
-    .footer-section h5 {
-        font-weight: bold;
-        margin-bottom: 1rem;
-    }
-
-    .footer-section p {
-        margin: 0 0 10px;
-    }
-
-.footer1 {
-    background-color: rgb(25 117 220);
-    color: white;
-    padding-left: 100px;
-    padding-right: 100px;
-    padding-left: 100px;
-    padding-top: 20px;
-    padding-bottom: 20px;
-}
-
-.container-md .flex2 {
-    display: flex;
-}
-
-.footer-direction {
-    display: flex;
-}
-
-.hidden {
-    display: none;
-}
