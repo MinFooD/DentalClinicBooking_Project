@@ -9,7 +9,7 @@ builder.Services.AddControllersWithViews();
 
 builder.Services.AddDbContext<DentalClinicBookingProjectContext>(options =>
 {
-	options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
+	options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnectionStringDB"));
 });
 
 builder.Services.AddScoped<IClinicRepository, ClinicRepository>();

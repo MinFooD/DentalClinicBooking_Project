@@ -58,7 +58,7 @@ namespace DentalClinicBooking_Project.Repositories
         public async Task<List<BookingInfo>> GetBookingsByDateAndClinic(DateOnly date, string clinicName, string basicName)
         {
             return await dentalClinicBookingProjectContext.ClinicAppointmentSchedules
-                   .Where(b => b.Day == date && b.ClinicName == clinicName && b.BasicName == basicName)
+                   .Where(b => b.Date == date && b.ClinicName == clinicName && b.BasicName == basicName)
                    .GroupBy(b => b.SlotName)
                    .Select(g => new BookingInfo { SlotName = g.Key, Count = g.Count() })
                    .ToListAsync();
