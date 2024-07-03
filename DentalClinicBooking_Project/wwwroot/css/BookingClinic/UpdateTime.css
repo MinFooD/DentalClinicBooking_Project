@@ -1,0 +1,6 @@
+﻿.disabled {
+    color: gray;
+    background-color: #E5E7EB;
+    pointer-events: none;
+    cursor: not-allowed;
+}

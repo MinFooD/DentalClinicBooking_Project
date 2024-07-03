@@ -1,5 +1,4 @@
-﻿@using DentalClinicBooking_Project.Models.ViewModels.BookingClinicModels
-@model ShowBookingClinic
+﻿@model DentalClinicBooking_Project.Models.ViewModels.BookingClinicModels.ClinicBookingDisplay
 @using DentalClinicBooking_Project.Models.Domain
 @{
     TimeOnly stAM = new TimeOnly(7, 0);
@@ -11,7 +10,6 @@
     var model = Model.SlotOfClinics;
     List<SlotOfClinic> slotOfClinics = model.OrderBy(slot => slot.StartTime).ThenBy(slot => slot.EndTime).ToList();
 
-    var clinicIdString = Model.ClinicId.ToString();
 }
 
 <!DOCTYPE html>
@@ -22,10 +20,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Booking</title>
     <link href="~/css/bookingclinic/bookingclinic.css" rel="stylesheet" />
+    <link href="~/css/bookingclinic/updatetime.css" rel="stylesheet" />
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet" />
 
-    <script src="~/js/bookingclinic/bookingclinic.js"></script>
     <script src="~/js/bookingclinic/updatetime.js"></script>
+    <script src="~/js/bookingclinic/bookingclinic.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
@@ -101,7 +100,6 @@
                                         </div>
                                         <div class="dates-grid"
                                              data-url="@Url.Action("CheckSlots", "BookClinic")"
-                                             data-clinic-id="@Model.ClinicId"
                                              data-clinic-name="@Model.ClinicName">
                                             <!-- Dates will be inserted here -->
                                         </div>
@@ -111,48 +109,6 @@
 
                         </div>
                     </div>
-
-                   @*  <script>
-                        $(document).ready(function () {
-                            var clinicId = null;
-                            var clinicName = null;
-                            var basic = null;
-
-                            $('.branch-item').click(function () {
-                                clinicId = '@Model.ClinicId.ToString()';
-                                clinicName = '@Model.ClinicName';
-                                basic = $('.info-item:nth-child(2) .info-value').text();
-                            });
-
-                            $('.dates-grid').click(function () {
-                                var dateString = $('.info-item:nth-child(4) .info-value').text();
-                                var dateOnlyValue = moment(dateString, 'DD/MM/YYYY').format('YYYY-MM-DD');
-                                var patientData = {
-                                    clinicId: clinicId,
-                                    BasicName: basic,
-                                    ClinicName: clinicName,
-                                    Day: dateOnlyValue
-                                };
-
-                                $.ajax({
-                                    url: '@Url.Action("CheckSlots", "BookClinic")',
-                                    type: 'POST',
-                                    data: JSON.stringify(patientData),
-                                    contentType: 'application/json; charset=utf-8',
-                                    success: function (data) {
-                                        $('.time-slot-item').each(function () {
-                                            var slotId = $(this).data('slot-id');
-                                            if (data[slotId] >= 2) {
-                                                $(this).addClass('disabled')
-                                            } else {
-                                                $(this).removeClass('disabled')
-                                            }
-                                        });
-                                    }
-                                });
-                            });
-                        });
-                    </script> *@
 
                     <div class="step-item">
                         <div class="step-content">
@@ -175,24 +131,19 @@
                                             <p class="time-slot-group-title">Buổi sáng</p>
                                         </div>
 
-                                        <style>
-                                            .disabled {
-                                                color: gray;
-                                                background-color: #E5E7EB;
-                                                pointer-events: none;
-                                                cursor: not-allowed;
-                                            }
-                                        </style>
-
                                         <div class="time-slot-list">
-                                            @foreach (var item in slotOfClinics)
-                                            {
-                                                @if ((item.StartTime >= stAM && item.StartTime <= enAM))
+                                            @{
+                                                @foreach (var item in slotOfClinics)
                                                 {
-                                                    <button class="time-slot-item" data-slot-id="@item.Slot.SlotName" title="Not">
-                                                        @item.StartTime.ToString("HH:mm") -
-                                                        @item.EndTime.ToString("HH:mm")
-                                                    </button>
+                                                    var formattedTime = $"{item.StartTime} - {item.EndTime}";
+                                                    @if ((item.StartTime >= stAM && item.StartTime <= enAM))
+                                                    {
+                                                        <button class="time-slot-item"
+                                                                data-slot-id="@formattedTime">
+                                                            @item.StartTime.ToString("HH:mm") -
+                                                            @item.EndTime.ToString("HH:mm")
+                                                        </button>
+                                                    }
                                                 }
                                             }
                                         </div>
@@ -204,15 +155,19 @@
                                             <p class="time-slot-group-title">Buổi chiều</p>
                                         </div>
                                         <div class="time-slot-list">
-                                            @foreach (var item in slotOfClinics)
-                                            {
-                                                @if (item.EndTime >= stPM && item.EndTime <= enPM)
+                                            @{
+                                                @foreach (var item in slotOfClinics)
                                                 {
-                                                    <button class="time-slot-item"
-                                                            title="Chọn slot này">
-                                                        @item.StartTime.ToString("HH:mm") -
-                                                        @item.EndTime.ToString("HH:mm")
-                                                    </button>
+                                                    var formattedTime = $"{item.StartTime} - {item.EndTime}";
+                                                    @if (item.EndTime >= stPM && item.EndTime <= enPM)
+                                                    {
+
+                                                        <button class="time-slot-item"
+                                                                data-slot-id="@formattedTime">
+                                                            @item.StartTime.ToString("HH:mm") -
+                                                            @item.EndTime.ToString("HH:mm")
+                                                        </button>
+                                                    }
                                                 }
                                             }
                                         </div>
@@ -271,7 +226,7 @@
                             </div>
                             <div class="info-item" style="display: none;">
                                 <div class="info-label">Cơ sở</div>
-                                <div class="info-value"></div>
+                                <div id="basicName" class="info-value"></div>
                             </div>
                             <div class="info-itemadd" style="display: none;">
                                 <div class="info-labeladd">Địa chỉ đặt khám</div>
@@ -301,7 +256,39 @@
         </div>
     </div>
 </body>
-
-
 </html>
 
+<script>
+    $(document).ready(function () {
+        $('.confirm-button').click(function () {
+            var clinicName = $('.clinic-name').text();
+            var basicName = $('.info-item:nth-child(2) .info-value').text();
+            var address = $('.info-itemadd .info-valueadd').text();
+            var dateString = $('.info-item:nth-child(4) .info-value').text();
+            var dateOnlyValue = moment(dateString, 'DD/MM/YYYY').format('YYYY-MM-DD');
+            var time = $('.info-item:nth-child(5) .info-value').text().trim().replace(/\s+/g, ' ');
+            var service = $('.info-item:nth-child(6) .info-value').text();
+            const data = {
+                ClinicName: clinicName,
+                Date: dateOnlyValue,
+                Address: address,
+                BasicName: basicName,
+                SlotName: time,
+                Service: service
+            };
+            console.log('data: ', data);
+            $.ajax({
+                url: '@Url.Action("AppointmentBookingInfo", "BookClinic")',
+                type: 'POST',
+                data: JSON.stringify(data),
+                contentType: 'application/json; charset=utf-8',
+                success: function (response) {
+                    console.log('Success:', response);
+                },
+                error: function (xhr, status, error) {
+                    console.error('Error:', error);
+                }
+            });
+        });
+    });
+</script>

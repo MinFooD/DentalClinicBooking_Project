@@ -4,6 +4,7 @@ using DentalClinicBooking_Project.Models.Domain;
 using DentalClinicBooking_Project.Models.ViewModels.BookingClinicModels;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 
 namespace DentalClinicBooking_Project.Repositories
@@ -55,13 +56,36 @@ namespace DentalClinicBooking_Project.Repositories
         }
 
 
-        public async Task<List<BookingInfo>> GetBookingsByDateAndClinic(DateOnly date, string clinicName, string basicName)
+        public async Task<List<BookingSlot>> GetBookingsByDateAndClinicAsync(DateOnly date, string clinicName, string basicName)
         {
             return await dentalClinicBookingProjectContext.ClinicAppointmentSchedules
-                   .Where(b => b.Date == date && b.ClinicName == clinicName && b.BasicName == basicName)
+                   .Where(b => b.Date == date && b.ClinicName.Contains(clinicName) && b.BasicName.Contains(basicName))
                    .GroupBy(b => b.SlotName)
-                   .Select(g => new BookingInfo { SlotName = g.Key, Count = g.Count() })
+                   .Select(g => new BookingSlot { SlotName = g.Key, Count = g.Count() })
                    .ToListAsync();
+        }
+
+        public async Task<ClinicAppointmentSchedule> AddAsync(ClinicAppointmentSchedule clinicAppointmentSchedule)
+        {
+            await dentalClinicBookingProjectContext.AddAsync(clinicAppointmentSchedule);
+            await dentalClinicBookingProjectContext.SaveChangesAsync();
+            return clinicAppointmentSchedule;
+        }
+
+        public async Task<SlotOfClinic[]> GetAllSlotsAsync()
+        {
+            return await dentalClinicBookingProjectContext.SlotOfClinics
+                .GroupBy(s => new { s.SlotId, s.StartTime, s.EndTime })
+                .Select(g => g.FirstOrDefault()!)
+                .ToArrayAsync();
+
+            //return await dentalClinicBookingProjectContext.SlotOfClinics
+            //    .GroupBy(s => new { s.SlotId, s.StartTime, s.EndTime })
+            //    .Select(g => new BookingTime{ 
+            //        SlotId = g.,
+            //        StartTime = g.s=
+            //    })
+
         }
     }
 }

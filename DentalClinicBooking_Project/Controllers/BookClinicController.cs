@@ -4,6 +4,7 @@ using DentalClinicBooking_Project.Models.ViewModels.BookingClinicModels;
 using DentalClinicBooking_Project.Repositories;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
+using static System.Reflection.Metadata.BlobBuilder;
 
 namespace DentalClinicBooking_Project.Controllers
 {
@@ -64,43 +65,49 @@ namespace DentalClinicBooking_Project.Controllers
         public async Task<IActionResult> BookingClinic(Guid id)
         {
             var clinic = await bookClinicRepository.GetAsync(id);
-            //var model = new ShowBookingClinic
-            //{
-            //    ClinicName = clinic?.ClinicName ?? string.Empty,
-            //    MainImage = clinic?.MainImage ?? string.Empty,
-            //    Basics = clinic?.Basics ?? Enumerable.Empty<Basic>(),
-            //    SlotOfClinics = clinic?.SlotOfClinics ?? Enumerable.Empty<SlotOfClinic>(),
-            //    Services = clinic?.Services ?? Enumerable.Empty<Service>(),
-            //};
-            var model = new ShowBookingClinic
+            var model = new ClinicBookingDisplay
             {
-                ClinicId = clinic.ClinicId,
-                ClinicName = clinic.ClinicName,
-                MainImage = clinic.MainImage,
-                Basics = clinic.Basics,
-                SlotOfClinics = clinic.SlotOfClinics,
-                Services = clinic.Services,
+                ClinicName = clinic?.ClinicName ?? string.Empty,
+                MainImage = clinic?.MainImage ?? string.Empty,
+                Basics = clinic?.Basics ?? Enumerable.Empty<Basic>(),
+                SlotOfClinics = clinic?.SlotOfClinics ?? Enumerable.Empty<SlotOfClinic>(),
+                Services = clinic?.Services ?? Enumerable.Empty<Service>(),
             };
+            //var model = new ClinicBookingDisplay
+            //{
+            //    //ClinicId = clinic.ClinicId,
+            //    ClinicName = clinic?.ClinicName,
+            //    MainImage = clinic.MainImage,
+            //    Basics = clinic.Basics,
+            //    SlotOfClinics = clinic.SlotOfClinics,
+            //    Services = clinic.Services,
+            //};
 
 
             return View(model);
         }
 
         [HttpPost]
-        public async Task<IActionResult> CheckSlots([FromBody] BookingClinicModel bookingModel)
+        public async Task<IActionResult> CheckSlots([FromBody] BookingInfo bookingModel)
         {
-            bookingModel ??= new BookingClinicModel();
+            bookingModel ??= new BookingInfo();
 
             var bookings = await bookClinicRepository
-                .GetBookingsByDateAndClinic(
+                .GetBookingsByDateAndClinicAsync(
                 bookingModel.Day,
                 bookingModel.ClinicName,
                 bookingModel.BasicName)
-                ?? new List<BookingInfo>();
+                ?? new List<BookingSlot>();
 
-            var slots = new Dictionary<string, int> 
-            { { "1", 0 }, { "2", 0 }, { "3", 0 },
-              { "4", 0},  {"5", 0 }, {"6", 0 } };
+            var arrSlots = await bookClinicRepository.GetAllSlotsAsync();
+            var slots = new Dictionary<string, int>();
+
+            for (int i = 0; i < arrSlots.Length; i++)
+            {
+                slots.Add(arrSlots[i].StartTime
+                    + " - " +
+                    arrSlots[i].EndTime, 0);
+            }
 
             foreach (var booking in bookings)
             {
@@ -111,6 +118,26 @@ namespace DentalClinicBooking_Project.Controllers
             }
 
             return Ok(slots);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> AppointmentBookingInfoAsync([FromBody] AppointmentBookingViewModel appointmentBookingModel)
+        {
+            ClinicAppointmentSchedule model = new ClinicAppointmentSchedule
+            {
+                Code = ClinicAppointmentSchedule.BookingCode(),
+                PatientId = Guid.Parse("78987C55-FA52-48A1-9F2A-44803E560A40"),
+                ClinicName = appointmentBookingModel.ClinicName,
+                BasicName = appointmentBookingModel?.BasicName,
+                Address = appointmentBookingModel?.Address,
+                Date = appointmentBookingModel?.Date ?? DateOnly.FromDateTime(DateTime.Now),
+                SlotName = appointmentBookingModel?.SlotName,
+                Service = appointmentBookingModel?.Service,
+            };
+
+            var test = await bookClinicRepository.AddAsync(model);
+
+            return View();
         }
 
     }

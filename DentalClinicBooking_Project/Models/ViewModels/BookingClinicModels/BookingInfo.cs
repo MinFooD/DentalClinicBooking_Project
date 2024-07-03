@@ -2,7 +2,8 @@
 {
     public class BookingInfo
     {
-        public string SlotName { get; set; }
-        public int Count { get; set; } = 0;
+        public string ClinicName { get; set; } = null!;
+        public DateOnly Day { get; set; }
+        public string BasicName { get; set; } = null!;
     }
 }

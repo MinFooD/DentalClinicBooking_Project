@@ -1,6 +1,7 @@
 ﻿using Azure;
 using DentalClinicBooking_Project.Models.Domain;
 using DentalClinicBooking_Project.Models.ViewModels.BookingClinicModels;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace DentalClinicBooking_Project.Repositories
 {
@@ -13,9 +14,11 @@ namespace DentalClinicBooking_Project.Repositories
 
         Task<Clinic?> GetAsync(Guid id);
         Task<int> CountAsync();
-        Task<List<BookingInfo>> GetBookingsByDateAndClinic(
+        Task<List<BookingSlot>> GetBookingsByDateAndClinicAsync(
             DateOnly date,
             string clinicName,
             string basicName);
+        Task<ClinicAppointmentSchedule> AddAsync(ClinicAppointmentSchedule clinicAppointmentSchedule);
+        Task<SlotOfClinic[]> GetAllSlotsAsync();
     }
 }

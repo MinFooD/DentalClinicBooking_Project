@@ -43,9 +43,8 @@ public partial class DentalClinicBookingProjectContext : DbContext
     public virtual DbSet<Slot> Slots { get; set; }
 
     public virtual DbSet<SlotOfClinic> SlotOfClinics { get; set; }
-
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-    => optionsBuilder.UseSqlServer("server=PHUC\\PHUC;uid=sa;pwd=123456;database= DentalCLinicBookingProject;TrustServerCertificate=True");
+    => optionsBuilder.UseSqlServer("Server=DESKTOP-20AJ10N\\SQLEXPRESS;uid=sa;pwd=12345;database= DentalCLinicBookingProject;TrustServerCertificate=True");
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
@@ -164,8 +163,7 @@ public partial class DentalClinicBookingProjectContext : DbContext
             entity.Property(e => e.Service).HasMaxLength(100);
             entity.Property(e => e.SlotName)
                 .IsRequired()
-                .HasMaxLength(50)
-                .IsUnicode(false);
+                .HasMaxLength(50);
 
             entity.HasOne(d => d.Patient).WithMany(p => p.ClinicAppointmentSchedules)
                 .HasForeignKey(d => d.PatientId)
