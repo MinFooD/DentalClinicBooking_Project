@@ -13,7 +13,7 @@ public partial class ClinicAppointmentSchedule
 
     public Guid PatientId { get; set; }
 
-    public string SlotName { get; set; }
+    public string ClinicName { get; set; }
 
     public string BasicName { get; set; }
 
@@ -21,7 +21,7 @@ public partial class ClinicAppointmentSchedule
 
     public string Address { get; set; }
 
-    public DateOnly Date { get; set; }
+    //public DateOnly Date { get; set; }
 
     public string SlotName { get; set; }
 
