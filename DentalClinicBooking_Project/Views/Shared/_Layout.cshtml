@@ -1,4 +1,12 @@
-﻿
+﻿@using DentalClinicBooking_Project.Models.Domain
+@using Newtonsoft.Json
+
+@inject IHttpContextAccessor HttpContextAccessor
+@{
+    string accountString = HttpContextAccessor.HttpContext.Session.GetString("account");
+    // var account = JsonConvert.DeserializeObject<Account>(accountString);
+    var account = !string.IsNullOrEmpty(accountString) ? JsonConvert.DeserializeObject<Account>(accountString) : null;
+}
 
 <!DOCTYPE html>
 <html lang="en">
@@ -21,7 +29,7 @@
     <nav class="navbar navbar-expand-md">
         <div class="navbar-menu">
             <ul class="navbar-nav">
-
+@*                 <li class="nav-item"><a asp-area="" asp-controller="HashPassword" asp-action="HashPassword" class="nav-link">Mã hóa</a></li> *@
                 <li class="nav-item"><a asp-area="" asp-controller="BookClinic" asp-action="AllClinics" class="nav-link">Đặt khám</a></li>
                 <li class="nav-item"><a href="#" class="nav-link">Xem lịch khám</a></li>
                 <li class="nav-item"><a asp-area="" asp-controller="Dentist" asp-action="ShowAllDentist" asp-route-page="1" class="nav-link">Nha sĩ</a></li>
@@ -30,9 +38,19 @@
             </ul>
         </div>
     </nav>
-    <div class="col-md-2 navbar-login">
-        <div class="fomart-btLogin"> <a asp-area="" asp-controller="Login" asp-action="Login" class="btn">Đăng nhập</a></div>
-    </div>
+    
+    @if (account == null)
+    {
+        <div class="fomart-btLogin">
+            <a asp-area="" asp-controller="Login" asp-action="Login" class="btn">Đăng nhập</a>
+        </div>
+    }
+    else
+    {
+        <div class="fomart-btLogin">
+            <a asp-area="" asp-controller="Login" asp-action="Logout" class="btn">Đăng xuất</a>
+        </div>
+    }
 </header>
 
 

@@ -14,6 +14,15 @@ builder.Services.AddDbContext<DentalClinicBookingProjectContext>(options =>
 
 builder.Services.AddScoped<IClinicRepository, ClinicRepository>();
 
+builder.Services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+
+builder.Services.AddDistributedMemoryCache();
+
+builder.Services.AddSession(options =>
+{
+    options.IdleTimeout = TimeSpan.FromSeconds(60);
+});
+
 var app = builder.Build();
 
 
@@ -32,6 +41,8 @@ app.UseStaticFiles();
 app.UseRouting();
 
 app.UseAuthorization();
+
+app.UseSession();
 
 app.MapControllerRoute(
     name: "default",
