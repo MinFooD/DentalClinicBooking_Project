@@ -137,7 +137,7 @@
         }
         <li class="ng-star-inserted">
             <a class="bg-blue-600 block border-blue-600 h-8 hover:text-white leading-8 rounded text-center text-white w-8"
-               asp-area="" asp-controller="Dentist" asp-action="ShowAllDentist" asp-route-page="@PrevPage">
+               asp-area="" asp-controller="Dentist" asp-action="ShowAllDentist" asp-route-page="@PrevPage" asp-route-searchString="@Model.SearchString">
                 <<
             </a>
         </li>
@@ -147,7 +147,7 @@
             {
                 <li class="ng-star-inserted">
                     <a class=" block border-blue-600 h-8 hover:text-white leading-8 rounded text-center text-white w-8 " style="background-color:#000db8"
-                       asp-area="" asp-controller="Dentist" asp-action="ShowAllDentist" asp-route-page="@(i)">
+                       asp-area="" asp-controller="Dentist" asp-action="ShowAllDentist" asp-route-page="@(i)" asp-route-searchString="@Model.SearchString">
                         @(i)
                     </a>
                 </li>
@@ -157,7 +157,7 @@
             {
                 <li class="ng-star-inserted">
                     <a class="bg-blue-600 block border-blue-600 h-8 hover:text-white leading-8 rounded text-center text-white w-8"
-                       asp-area="" asp-controller="Dentist" asp-action="ShowAllDentist" asp-route-page="@(i)">
+                       asp-area="" asp-controller="Dentist" asp-action="ShowAllDentist" asp-route-page="@(i)" asp-route-searchString="@Model.SearchString">
                         @(i)
                     </a>
                 </li>
@@ -165,7 +165,7 @@
         }
         <li class="ng-star-inserted">
             <a class="bg-blue-600 block border-blue-600 h-8 hover:text-white leading-8 rounded text-center text-white w-8"
-               asp-area="" asp-controller="Dentist" asp-action="ShowAllDentist" asp-route-page="@NextPage">
+               asp-area="" asp-controller="Dentist" asp-action="ShowAllDentist" asp-route-page="@NextPage" asp-route-searchString="@Model.SearchString">
                 >>
             </a>
         </li>
