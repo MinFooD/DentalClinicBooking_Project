@@ -1,1 +1,156 @@
-﻿
+﻿@model DentalClinicBooking_Project.Models.ViewModels.RegisterVM
+@{
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Login</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+          rel="stylesheet" />
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css"
+          rel="stylesheet" />
+    @* <link rel="stylesheet" href="./style.css" />
+    <link rel="stylesheet" href="./../HF/style.css" />
+    <link rel="stylesheet" href="./../cssForAllPage/style.css" /> *@
+    <script src="~/js/login/login.js"></script>
+    <link href="~/css/login/login.css" rel="stylesheet" />
+</head>
+<body>
+    <div class="background"></div>
+    <div class="container mx-auto mt-8">
+        <div class="flex flex-col md:flex-row items-center justify-center space-x-0 md:space-x-60">
+            <div class="w-full md:w-1/3 mb-8 md:mb-0"
+                 style="width: 550px; height: 450px">
+                <img style="border-radius: 50px; height: 100%; width: 100%"
+                     src="https://alonadecor.com/wp-content/uploads/2017/09/alona41-1024x576.jpg"
+                     alt="Ảnh phòng khám"
+                     class="w-full rounded-md shadow-md" />
+            </div>
+            <div class="form-container" style="margin-left: 150px">
+                @if (ViewData.ModelState.ContainsKey("Fail"))
+                {
+                    <div class="alert alert-danger">@ViewData.ModelState["Fail"].Errors[0].ErrorMessage</div>
+                }
+                @if (ViewData.ModelState.ContainsKey("Success"))
+                {
+                    <div class="alert alert-danger">@ViewData.ModelState["Success"].Errors[0].ErrorMessage</div>
+                }
+                <!-- regis-form -->
+                <form id="register-form" class="register-form active" onsubmit="return saveRegisterForm(event)" style="display: none">
+                    <div class="title">Register</div>
+                    <div class="des">
+                        Please fill in this form to create an account.
+                    </div>
+                    <div class="group">
+                        <span>👤</span>
+                        <input type="text" id="username" placeholder="Username" required oninput="checkInput()" />
+                    </div>
+                    <div class="group">
+                        <span>🔒</span>
+                        <input type="password" id="password" placeholder="Password" required oninput="checkInput()" />
+                    </div>
+                    <div class="group">
+                        <span>🔒</span>
+                        <input type="password" id="re-password" placeholder="Re-enter Password" required oninput="checkInput()" />
+                    </div>
+                    <div class="recovery">
+                        <div class="checkbox">
+                            <input type="checkbox" id="terms" required onchange="checkInput()" />
+                            Accept Terms
+                        </div>
+                    </div>
+                    <div class="signIn">
+                        <button type="submit" id="nextButton" disabled>Next</button>
+                    </div>
+                </form>
+
+                <!-- regis-detail-form -->
+                <form id="register-details-form" class="register-details-form" onsubmit="return submitForm()" style="display: none" method="post"
+                      asp-area="" asp-action="Register" asp-controller="Login">
+                    <div class="title">Register Details</div>
+                    <div class="des">Please fill in your details.</div>
+
+                    <input type="hidden" id="hiddenUsername" name="username" asp-for="UserName" />
+                    <input type="hidden" id="hiddenPassword" name="password" asp-for="Password" />
+
+                    <div class="group">
+                        <span>👤</span>
+                        <input type="text" id="name" placeholder="Name" required oninput="checkDetailInput()"
+                               asp-for="PatientName" />
+                    </div>
+                    <div class="group">
+                        <span>📞</span>
+                        <input type="text" id="phone" placeholder="Phone" required oninput="checkDetailInput()"
+                               asp-for="Phone" />
+                    </div>
+                    <div class="group">
+                        <span>🎂</span>
+                        <input type="date" id="birthday" required onchange="checkDetailInput()" asp-for="BirthDay" />
+                    </div>
+                    <div class="group">
+                        <span style="margin-left:6px">⚥</span>
+                        <select id="gender" required onchange="checkDetailInput()"
+                                asp-for="Gender">
+                            <option value="">Select Gender</option>
+                            <option value="male">Male</option>
+                            <option value="female">Female</option>
+                        </select>
+                    </div>
+                    <div class="group">
+                        <span>🏠</span>
+                        <input type="text" id="address" placeholder="Address" requiredoninput="checkDetailInput()"
+                               asp-for="Address" />
+                    </div>
+                    <div class="group">
+                        <span>🆔</span>
+                        <input type="text" id="citizenId" placeholder="Citizen ID" required oninput="checkDetailInput()"
+                               asp-for="CitizenIdentificationCard" />
+                    </div>
+                    <div class="group">
+                        <span>🌍</span>
+                        <input type="text" id="nation" placeholder="Nation" required oninput="checkDetailInput()"
+                               asp-for="Nation" />
+                    </div>
+                    <div class="group">
+                        <span>💼</span>
+                        <input type="text" id="job" placeholder="Job" required oninput="checkDetailInput()"
+                               asp-for="Job" />
+                    </div>
+                    <div class="group">
+                        <span>🏥</span>
+                        <input type="text" id="healthInsurance" placeholder="Health Insurance" required oninput="checkDetailInput()"
+                               asp-for="HealthInsuranceCardCode" />
+                    </div>
+                    <div class="recovery">
+                        <div class="checkbox">
+                            <input type="checkbox"
+                                   id="terms-detail"
+                                   required
+                                   onchange="checkDetailInput()" />
+                            Accept Terms
+                        </div>
+                    </div>
+                    <div class="signIn">
+                        <button type="submit" id="registerButton" disabled>
+                            Submit
+                        </button>
+                    </div>
+                </form>
+
+            </div>
+        </div>
+    </div>
+    <script type="module"
+            src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule
+            src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+    <script src="./script.js"></script>
+
+</body>
+</html>
+
+
+
