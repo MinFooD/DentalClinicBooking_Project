@@ -140,5 +140,11 @@ namespace DentalClinicBooking_Project.Controllers
             return View();
         }
 
+        //[HttpGet]
+        //public IActionResult ViewSchedule()
+        //{
+        //    return View();
+        //}
+
     }
 }
