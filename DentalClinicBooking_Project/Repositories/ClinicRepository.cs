@@ -75,17 +75,9 @@ namespace DentalClinicBooking_Project.Repositories
         public async Task<SlotOfClinic[]> GetAllSlotsAsync()
         {
             return await dentalClinicBookingProjectContext.SlotOfClinics
-                .GroupBy(s => new { s.SlotId, s.StartTime, s.EndTime })
+                .GroupBy(s => s.SlotId)
                 .Select(g => g.FirstOrDefault()!)
                 .ToArrayAsync();
-
-            //return await dentalClinicBookingProjectContext.SlotOfClinics
-            //    .GroupBy(s => new { s.SlotId, s.StartTime, s.EndTime })
-            //    .Select(g => new BookingTime{ 
-            //        SlotId = g.,
-            //        StartTime = g.s=
-            //    })
-
         }
     }
 }
