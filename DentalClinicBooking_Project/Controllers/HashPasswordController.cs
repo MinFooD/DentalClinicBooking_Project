@@ -21,9 +21,9 @@
 //                string hashedPassword = BCrypt.Net.BCrypt.HashPassword(account.Password);
 //                account.Password = hashedPassword;
 
-//                //bool isValidVerify = BCrypt.Net.BCrypt.Verify(password, hashedPassword);
+//                bool isValidVerify = BCrypt.Net.BCrypt.Verify(password, hashedPassword);
 //            }
-//            _context.SaveChanges(); 
+//            _context.SaveChanges();
 //            return View();
 //        }
 //    }

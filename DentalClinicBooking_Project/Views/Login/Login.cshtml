@@ -3,336 +3,274 @@
 }
 
 <!DOCTYPE html>
-<html lang="vi">
-  <head>
+<html lang="en">
+<head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Login Page</title>
-    <link
-      href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css"
-      rel="stylesheet"
-    />
+    <title>Login</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+          rel="stylesheet" />
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css"
+          rel="stylesheet" />
+    @* <link rel="stylesheet" href="./style.css" />
+    <link rel="stylesheet" href="./../HF/style.css" />
+    <link rel="stylesheet" href="./../cssForAllPage/style.css" /> *@
+	<script src="~/js/login/login.js"></script>
 	<link href="~/css/login/login.css" rel="stylesheet" />
-    
-    
-  </head>
+</head>
+    <body>
+        <div class="background"></div>
+        <div class="container mx-auto mt-8">
+            <div class="flex flex-col md:flex-row items-center justify-center space-x-0 md:space-x-60">
+                <div class="w-full md:w-1/3 mb-8 md:mb-0"
+                     style="width: 550px; height: 450px">
+                    <img style="border-radius: 50px; height: 100%; width: 100%"
+                         src="https://alonadecor.com/wp-content/uploads/2017/09/alona41-1024x576.jpg"
+                         alt="Ảnh phòng khám"
+                         class="w-full rounded-md shadow-md" />
+                </div>
+                <div class="form-container" style="margin-left: 150px">
+                @if (ViewData.ModelState.ContainsKey("Fail"))
+                {
+                    <div class="alert alert-danger">@ViewData.ModelState["Fail"].Errors[0].ErrorMessage</div>
+                }
+                @if (ViewData.ModelState.ContainsKey("Success"))
+                {
+                    <div class="alert alert-danger">@ViewData.ModelState["Success"].Errors[0].ErrorMessage</div>
+                }
+                    <!-- regis-form -->
+                    <form id="register-form" class="register-form active" onsubmit="return saveRegisterForm(event)" style="display: none">
+                        <div class="title">Register</div>
+                        <div class="des">
+                            Please fill in this form to create an account.
+                        </div>
+                        <div class="group">
+                            <span>👤</span>
+                            <input type="text" id="username" placeholder="Username" required oninput="checkInput()"/>
+                        </div>
+                        <div class="group">
+                            <span>🔒</span>
+                            <input type="password"  id="password"  placeholder="Password" required oninput="checkInput()"/>
+                        </div>
+                        <div class="group">
+                            <span>🔒</span>
+                            <input type="password" id="re-password"  placeholder="Re-enter Password" required oninput="checkInput()" />
+                        </div>
+                        <div class="recovery">
+                            <div class="checkbox">
+                                <input type="checkbox"id="terms" required onchange="checkInput()" />
+                                Accept Terms
+                            </div>
+                        </div>
+                        <div class="signIn">
+                            <button type="submit" id="nextButton" disabled>Next</button>
+                        </div>
+                    </form>
 
-  <body>
-    <div class="container mx-auto mt-8">
-      <div
-        class="flex flex-col md:flex-row items-center justify-center space-x-0 md:space-x-60"
-      >
-        <div class="w-full md:w-1/3 mb-8 md:mb-0" style="width: 550px; height: 450px;">
-          <img style="border-radius: 100px; height: 100%; width: 100%;"
-            src="https://bambufit.vn/images/image/NhakhoaMinhan4.jpg"
-            
-            alt="Ảnh phòng khám"
-            class="w-full rounded-md shadow-md"
-          />
+                    <!-- regis-detail-form -->
+                    <form id="register-details-form"  class="register-details-form" onsubmit="return submitForm()" style="display: none"  method="post"
+                    asp-area="" asp-action="Register" asp-controller="Login">
+                        <div class="title">Register Details</div>
+                        <div class="des">Please fill in your details.</div>
+
+                        <input type="hidden" id="hiddenUsername" name="username" asp-for="Gmail"/>
+                        <input type="hidden" id="hiddenPassword" name="password" asp-for="Password"/>
+
+                        <div class="group">
+                            <span>👤</span>
+                            <input type="text"  id="name" placeholder="Name"required oninput="checkDetailInput()"
+                                asp-for="PatientName"/>
+                        </div>
+                        <div class="group">
+                            <span>📞</span>
+                            <input type="text" id="phone" placeholder="Phone" required oninput="checkDetailInput()"
+                                   asp-for="Phone"/>
+                        </div>
+                        <div class="group">
+                            <span>🎂</span>
+                            <input type="date" id="birthday"  required onchange="checkDetailInput()" asp-for="BirthDay"/>
+                        </div>
+                        <div class="group">
+                            <span style="margin-left:6px">⚥</span>
+                            <select id="gender" required onchange="checkDetailInput()"
+                                asp-for="Gender">
+                                <option value="">Select Gender</option>
+                                <option value="male">Male</option>
+                                <option value="female">Female</option>
+                            </select>
+                        </div>
+                        <div class="group">
+                            <span>🏠</span>
+                            <input type="text" id="address" placeholder="Address" requiredoninput="checkDetailInput()"
+                                   asp-for="Address"/>
+                        </div>
+                        <div class="group">
+                            <span>🆔</span>
+                            <input type="text" id="citizenId"  placeholder="Citizen ID" required oninput="checkDetailInput()" 
+                                   asp-for="CitizenIdentificationCard"/>
+                        </div>
+                        <div class="group">
+                            <span>🌍</span>
+                            <input type="text"  id="nation" placeholder="Nation"  required oninput="checkDetailInput()"
+                                   asp-for="Nation"/>
+                        </div>
+                        <div class="group">
+                            <span>💼</span>
+                            <input type="text" id="job"  placeholder="Job"required  oninput="checkDetailInput()"
+                                   asp-for="Job"/>
+                        </div>
+                        <div class="group">
+                            <span>🏥</span>
+                            <input type="text" id="healthInsurance"  placeholder="Health Insurance"  required oninput="checkDetailInput()"
+                                   asp-for="HealthInsuranceCardCode"/>
+                        </div>
+                        <div class="recovery">
+                            <div class="checkbox">
+                                <input type="checkbox"
+                                       id="terms-detail"
+                                       required
+                                       onchange="checkDetailInput()" />
+                                Accept Terms
+                            </div>
+                        </div>
+                        <div class="signIn">
+                            <button type="submit" id="registerButton" disabled>
+                                Submit
+                            </button>
+                        </div>
+                    </form>
+
+                    <form id="otp-form" style="display: none">
+                        <div class="title">Nhập mã OTP</div>
+                        <div class="des">
+                            Nhập mã OTP đã được gửi đến Gmail của bạn để hoàn tất đăng kí.
+                        </div>
+                        <div class="group">
+                            <span>
+                                <ion-icon name="key-outline"></ion-icon>
+                            </span>
+                            <input type="text"
+                                   id="otp"
+                                   placeholder="Mã OTP"
+                                   autocomplete="off"
+                                   onkeyup="checkOTPInput()" />
+                        </div>
+                        <div class="signIn">
+                            <button id="verifyOTPButton" disabled onclick="verifyOTP()">
+                                Xác minh
+                            </button>
+                        </div>
+                    </form>
+
+                    <form id="login-form" asp-area="" asp-controller="Login" asp-action="Login" method="post">
+                        <div class="title">Đăng Nhập</div>
+                        <div class="des">Đăng nhập để sử dụng dịch vụ của phòng khám</div>
+                        <div class="group">
+                            <span>
+                                <ion-icon name="mail-outline"></ion-icon>
+                            </span>
+                            <input type="email" id="loginEmail" placeholder="Email" asp-for="Gmail"/>
+                        </div>
+                        <div class="group">
+                            <span>
+                                <ion-icon name="lock-closed-outline"></ion-icon>
+                            </span>
+                            <input type="password"
+                                   id="loginPassword"
+                                   placeholder="Mật khẩu" asp-for="Password" />
+                        </div>
+                        <div class="recovery">
+                            <div class="checkbox">
+                                <input type="checkbox" id="rememberMe" />
+                                <label for="rememberMe">Ghi nhớ đăng nhập</label>
+                            </div>
+                            <a href="#" onclick="showForgotPasswordForm()">Quên mật khẩu?</a>
+                        </div>
+                        <div class="list">
+                            <div class="item">
+                                <img src="https://cdn1.iconfinder.com/data/icons/google-s-logo/150/Google_Icons-09-512.png"
+                                     alt="Google Icon" />
+                                <span>Đăng nhập với Gmail</span>
+                            </div>
+                        </div>
+                        <div class="signIn">
+                            <button style="submit">Đăng Nhập</button>
+                        </div>
+                        <div class="register">
+                            Bạn chưa có tài khoản?
+                            <a href="#" onclick="showRegisterForm()">Đăng kí ngay</a>
+                        </div>
+                    </form>
+
+                <form id="forgot-password-form" style="display: none">
+                    <div class="title">Quên Mật Khẩu</div>
+                    <div class="des">
+                        Nhập email của bạn để nhận mã OTP đặt lại mật khẩu.
+                    </div>
+                    <div class="group">
+                        <span>
+                            <ion-icon name="mail-outline"></ion-icon>
+                        </span>
+                        <input type="email"
+                               id="forgotEmail"
+                               placeholder="Email"
+                               autocomplete="off"
+                               onkeyup="checkForgotEmailInput()" />
+                    </div>
+                    <div class="signIn">
+                        <button id="sendOTPButton" disabled onclick="sendForgotOTP()">
+                            Gửi OTP
+                        </button>
+                        <button onclick="showLoginForm()">Quay lại đăng nhập</button>
+                    </div>
+                </form>
+
+                <form id="reset-password-form" style="display: none">
+                    <div class="title">Đặt Lại Mật Khẩu</div>
+                    <div class="des">
+                        Nhập mã OTP đã được gửi đến email của bạn và đặt lại mật khẩu
+                        mới.
+                    </div>
+                    <div class="group">
+                        <span>
+                            <ion-icon name="key-outline"></ion-icon>
+                        </span>
+                        <input type="text"
+                               id="resetOTP"
+                               placeholder="Mã OTP"
+                               autocomplete="off"
+                               onkeyup="checkResetOTPInput()" />
+                    </div>
+                    <div class="group">
+                        <span>
+                            <ion-icon name="lock-closed-outline"></ion-icon>
+                        </span>
+                        <input type="password"
+                               id="newPassword"
+                               placeholder="Mật khẩu mới"
+                               autocomplete="off"
+                               onkeyup="checkResetOTPInput()" />
+                    </div>
+                    <div class="signIn">
+                        <button id="resetPasswordButton"
+                                disabled
+                                onclick="resetPassword()">
+                            Đặt lại mật khẩu
+                        </button>
+                        <button onclick="showLoginForm()">Quay lại đăng nhập</button>
+                    </div>
+                </form>
+                </div>
+            </div>
         </div>
-        <div class="form-container" style=" margin-left: 150px;">
-          <form id="register-form" style="display: none">
-            <div class="title">Đăng kí</div>
-            <div class="des">
-              Đăng kí ngay để được tư vấn và nhận nhiều ưu đãi của phòng khám
-            </div>
-            <div class="group">
-              <span>
-                <ion-icon name="person-circle-outline"></ion-icon>
-              </span>
-              <input
-                type="text"
-                id="name"
-                placeholder="Họ và tên"
-                autocomplete="off"
-                onkeyup="checkInput()"
-              />
-            </div>
-            <div class="group">
-              <span>
-                <ion-icon name="call-outline"></ion-icon>
-              </span>
-              <input
-                type="tel"
-                id="phone"
-                placeholder="Số điện thoại"
-                autocomplete="off"
-                onkeyup="checkInput()"
-              />
-            </div>
-            <div class="group">
-              <span>
-                <ion-icon name="mail-outline"></ion-icon>
-              </span>
-              <input
-                type="email"
-                id="email"
-                placeholder="Email"
-                autocomplete="off"
-                onkeyup="checkInput()"
-              />
-            </div>
-            <div class="recovery">
-              <div class="checkbox">
-                <input type="checkbox" id="terms" onchange="checkInput()" />
-                <label for="terms">Tôi đồng ý với các điều khoản</label>
-              </div>
-            </div>
-            <div class="signIn">
-              <button id="registerButton" onclick="showOTPForm()" disabled>
-                Đăng kí
-              </button>
-              <button id="goToLoginButton" onclick="showLoginForm()">
-                Đăng nhập
-              </button>
-            </div>
-          </form>
+        <script type="module"
+                src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+        <script nomodule
+                src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+        <script src="./script.js"></script>
 
-          <form id="otp-form" style="display: none">
-            <div class="title">Nhập mã OTP</div>
-            <div class="des">
-              Nhập mã OTP đã được gửi đến Gmail của bạn để hoàn tất đăng kí.
-            </div>
-            <div class="group">
-              <span>
-                <ion-icon name="key-outline"></ion-icon>
-              </span>
-              <input
-                type="text"
-                id="otp"
-                placeholder="Mã OTP"
-                autocomplete="off"
-                onkeyup="checkOTPInput()"
-              />
-            </div>
-            <div class="signIn">
-              <button id="verifyOTPButton" disabled onclick="verifyOTP()">
-                Xác minh
-              </button>
-            </div>
-          </form>
-
-          <form id="login-form" asp-area="" asp-controller="Login" asp-action="Login" method="post">
-            <div class="title">Đăng Nhập</div>
-            <div class="des">Đăng nhập để sử dụng dịch vụ của phòng khám</div>
-                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-            <div class="group">
-              <span>
-                <ion-icon name="mail-outline"></ion-icon>
-              </span>
-              <input type="email" id="loginEmail" placeholder="Email" asp-for="Gmail"/>
-                        @Html.ValidationMessageFor(m => m.Gmail, "", new { @class = "text-danger" })
-            </div>
-            <div class="group">
-              <span>
-                <ion-icon name="lock-closed-outline"></ion-icon>
-              </span>
-              <input
-                type="password" id="loginPassword" placeholder="Mật khẩu" asp-for="Password"/>
-                        @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger" })
-            </div>
-            <div class="recovery">
-              <div class="checkbox">
-                <input type="checkbox" id="rememberMe" />
-                <label for="rememberMe">Ghi nhớ đăng nhập</label>
-              </div>
-              <a href="#" onclick="showForgotPasswordForm()">Quên mật khẩu?</a>
-            </div>
-            <div class="list">
-              <div class="item">
-                <img
-                  src="https://cdn1.iconfinder.com/data/icons/google-s-logo/150/Google_Icons-09-512.png"
-                  alt="Google Icon"
-                />
-                <span>Đăng nhập với Gmail</span>
-              </div>
-            </div>
-            <div class="signIn">
-              <button type="submit" >Đăng Nhập</button>
-            </div>
-            <div class="register">
-              Bạn chưa có tài khoản?
-              <a href="#" onclick="showRegisterForm()">Đăng kí ngay</a>
-            </div>
-          </form>
-
-          <form id="forgot-password-form" style="display: none">
-            <div class="title">Quên Mật Khẩu</div>
-            <div class="des">
-              Nhập email của bạn để nhận mã OTP đặt lại mật khẩu.
-            </div>
-            <div class="group">
-              <span>
-                <ion-icon name="mail-outline"></ion-icon>
-              </span>
-              <input
-                type="email"
-                id="forgotEmail"
-                placeholder="Email"
-                autocomplete="off"
-                onkeyup="checkForgotEmailInput()"
-              />
-            </div>
-            <div class="signIn">
-              <button id="sendOTPButton" disabled onclick="sendForgotOTP()">
-                Gửi OTP
-              </button>
-              <button onclick="showLoginForm()">Quay lại đăng nhập</button>
-            </div>
-          </form>
-
-          <form id="reset-password-form" style="display: none">
-            <div class="title">Đặt Lại Mật Khẩu</div>
-            <div class="des">
-              Nhập mã OTP đã được gửi đến email của bạn và đặt lại mật khẩu mới.
-            </div>
-            <div class="group">
-              <span>
-                <ion-icon name="key-outline"></ion-icon>
-              </span>
-              <input
-                type="text"
-                id="resetOTP"
-                placeholder="Mã OTP"
-                autocomplete="off"
-                onkeyup="checkResetOTPInput()"
-              />
-            </div>
-            <div class="group">
-              <span>
-                <ion-icon name="lock-closed-outline"></ion-icon>
-              </span>
-              <input
-                type="password"
-                id="newPassword"
-                placeholder="Mật khẩu mới"
-                autocomplete="off"
-                onkeyup="checkResetOTPInput()"
-              />
-            </div>
-            <div class="signIn">
-              <button
-                id="resetPasswordButton"
-                disabled
-                onclick="resetPassword()"
-              >
-                Đặt lại mật khẩu
-              </button>
-              <button onclick="showLoginForm()">Quay lại đăng nhập</button>
-            </div>
-          </form>
-        </div>
-      </div>
-    </div>
-
-    <!-- Add these scripts at the end of the body -->
-    <script
-      type="module"
-      src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"
-    ></script>
-    <script
-      nomodule
-      src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"
-    ></script>
-    <script>
-      function checkInput() {
-        var name = document.getElementById("name").value;
-        var phone = document.getElementById("phone").value;
-        var email = document.getElementById("email").value;
-        var terms = document.getElementById("terms").checked;
-
-        var registerButton = document.getElementById("registerButton");
-
-        if (name && email && terms) {
-          registerButton.disabled = false;
-        } else {
-          registerButton.disabled = true;
-        }
-      }
-
-      function showRegisterForm() {
-        document.getElementById("login-form").style.display = "none";
-        document.getElementById("register-form").style.display = "block";
-        document.getElementById("forgot-password-form").style.display = "none";
-        document.getElementById("reset-password-form").style.display = "none";
-      }
-
-      // function showOTPForm() {
-      //   document.getElementById("register-form").style.display = "none";
-      //   document.getElementById("otp-form").style.display = "block";
-      // }
-
-      // function showLoginForm() {
-      //   document.getElementById("register-form").style.display = "none";
-      //   document.getElementById("login-form").style.display = "block";
-      //   document.getElementById("forgot-password-form").style.display = "none";
-      //   document.getElementById("reset-password-form").style.display = "none";
-      // }
-
-      // function showForgotPasswordForm() {
-      //   document.getElementById("login-form").style.display = "none";
-      //   document.getElementById("forgot-password-form").style.display = "block";
-      //   document.getElementById("reset-password-form").style.display = "none";
-      // }
-
-      function showResetPasswordForm() {
-        document.getElementById("forgot-password-form").style.display = "none";
-        document.getElementById("reset-password-form").style.display = "block";
-      }
-
-      function checkOTPInput() {
-        var otp = document.getElementById("otp").value;
-        var verifyOTPButton = document.getElementById("verifyOTPButton");
-
-        if (otp) {
-          verifyOTPButton.disabled = false;
-        } else {
-          verifyOTPButton.disabled = true;
-        }
-      }
-
-      function checkForgotEmailInput() {
-        var forgotEmail = document.getElementById("forgotEmail").value;
-        var sendOTPButton = document.getElementById("sendOTPButton");
-
-        if (forgotEmail) {
-          sendOTPButton.disabled = false;
-        } else {
-          sendOTPButton.disabled = true;
-        }
-      }
-
-      function checkResetOTPInput() {
-        var resetOTP = document.getElementById("resetOTP").value;
-        var newPassword = document.getElementById("newPassword").value;
-        var resetPasswordButton = document.getElementById(
-          "resetPasswordButton"
-        );
-
-        if (resetOTP && newPassword) {
-          resetPasswordButton.disabled = false;
-        } else {
-          resetPasswordButton.disabled = true;
-        }
-      }
-
-      function login() {
-        // Implement login functionality
-      }
-
-      function sendForgotOTP() {
-        showResetPasswordForm();
-        // Implement sending OTP functionality
-      }
-
-      function resetPassword() {
-        // Implement password reset functionality
-      }
-
-      function verifyOTP() {
-        // Implement OTP verification functionality
-      }
-    </script>
-  </body>
+    </body>
 </html>
+
+
 
