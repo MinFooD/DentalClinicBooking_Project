@@ -73,13 +73,18 @@ namespace DentalClinicBooking_Project.Controllers
 
             return RedirectToAction("Login", "Login");
         }
+        [HttpGet]
+        public IActionResult Register()
+        {
+            return View();
+        }
 
         [HttpPost]
-        public IActionResult Register(LoginVM loginVM)
+        public IActionResult Register(RegisterVM registerVM)
         {
             if(ModelState.IsValid)
             {
-                var checkGmail = _context.Accounts.FirstOrDefault(x => x.Gmail.Equals(loginVM.Gmail));
+                var checkGmail = _context.Accounts.FirstOrDefault(x => x.Gmail.Equals(registerVM.UserName));
                 if (checkGmail!=null)
                 {
                     ModelState.AddModelError("General", "Username already exists. Please choose another one.");
@@ -87,8 +92,8 @@ namespace DentalClinicBooking_Project.Controllers
                 }
                 var account = new Account
                 {
-                    Gmail = loginVM.Gmail,
-                    Password = BCrypt.Net.BCrypt.HashPassword(loginVM.Password),
+                    Gmail = registerVM.UserName,
+                    Password = BCrypt.Net.BCrypt.HashPassword(registerVM.Password),
                     RoleId = 2,
                 };
                 _context.Accounts.Add(account);
@@ -96,15 +101,15 @@ namespace DentalClinicBooking_Project.Controllers
 
                 var patient = new Patient
                 {
-                    PatientName = loginVM.PatientName,
-                    Phone = loginVM.Phone,
-                    BirthDay = loginVM.BirthDay,
-                    Gender = loginVM.Gender,
-                    Address = loginVM.Address,
-                    CitizenIdentificationCard = loginVM.CitizenIdentificationCard,
-                    Nation = loginVM.Nation,
-                    Job = loginVM.Job,
-                    HealthInsuranceCardCode = loginVM.HealthInsuranceCardCode,
+                    PatientName = registerVM.PatientName,
+                    Phone = registerVM.Phone,
+                    BirthDay = registerVM.BirthDay,
+                    Gender = registerVM.Gender,
+                    Address = registerVM.Address,
+                    CitizenIdentificationCard = registerVM.CitizenIdentificationCard,
+                    Nation = registerVM.Nation,
+                    Job = registerVM.Job,
+                    HealthInsuranceCardCode = registerVM.HealthInsuranceCardCode,
                     AccountId = account.AccountId
                 };
                 _context.Patients.Add(patient);
