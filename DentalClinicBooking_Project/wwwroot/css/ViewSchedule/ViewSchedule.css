@@ -1,1 +1,293 @@
 ﻿
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Arial', sans-serif;
+}
+
+
+.container {
+    display: flex;
+    width: 100%;
+    height: 100%;
+}
+
+
+.menu {
+    padding: 20px 0;
+}
+
+.menu-list {
+    list-style: none;
+}
+
+.menu-item {
+    margin-bottom: 10px;
+}
+
+.menu-link {
+    text-decoration: none;
+    color: #333333;
+    display: block;
+    padding: 10px 20px;
+    border-left: 5px solid transparent;
+    transition: all 0.3s ease;
+}
+
+.menu-link:hover, .menu-link.active {
+    background-color: #f9f9f9;
+    border-left-color: #007bff;
+    color: #007bff;
+}
+
+.main-content {
+    flex: 1;
+    padding: 20px;
+    overflow-y: auto;
+    display: flex;
+    justify-content: start;
+    align-items: flex-start;
+}
+
+
+.header-title {
+    font-size: 24px;
+    color: #333333;
+}
+
+.filter-button {
+    background-color: white;
+    color: black;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    border: 1px solid black;
+}
+
+.filter-button .filter-icon {
+    margin-right: 10px;
+}
+
+.appointments {
+    display: flex;
+    gap: 20px;
+}
+
+.appointment-list {
+    flex: 1;
+    background-color: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    max-height: 500px;
+    overflow-y: auto;
+}
+
+.appointment-item {
+    padding: 20px;
+    /* border-bottom: 1px solid #f0f0f0; */
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.appointment-item:hover {
+    background-color: #f9f9f9;
+}
+
+.appointment-item:last-child {
+    border-bottom: none;
+}
+
+.appointment-details {
+    flex: 1;
+}
+
+.appointment-title {
+    font-size: 18px;
+    margin-bottom: 5px;
+    color: #333333;
+}
+
+.appointment-time, .appointment-patient {
+    color: #555555;
+    margin-bottom: 5px;
+}
+
+.appointment-status .status {
+    display: inline-block;
+    padding: 5px 10px;
+    border-radius: 5px;
+    color: rgb(34 197 94 );
+}
+
+.appointment-status1 .status {
+    display: inline-block;
+    padding: 5px 10px;
+    border-radius: 5px;
+    color: #6B7680;
+}
+
+.appointment-status .confirmed {
+    background-color: #F0FDF4;
+}
+
+.appointment-status1 .canceled {
+    background-color: #F9FAFB;
+}
+
+.appointment-number {
+    text-align: center;
+}
+
+.number-label {
+    font-size: 14px;
+    color: #555555;
+    margin-bottom: 5px;
+}
+
+.number-value {
+    font-size: 20px;
+    color: #333333;
+}
+
+.appointment-details-container {
+    flex: 2;
+    background-color: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    padding: 20px;
+}
+
+.appointment-summary {
+    margin-bottom: 20px;
+}
+
+.summary-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.summary-status {
+    display: flex;
+    gap: 32rem;
+}
+
+.status-text {
+    font-size: 16px;
+    color: #22C55E;
+}
+
+.status-text.confirmed {
+    color: #22C55E;
+}
+
+.status-text1 {
+  font-size: 16px;
+  color: #6B7680;
+}
+
+.status-text1.failed {
+  color: #6B7680;
+}
+
+.summary-info {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-top: 1px solid #f0f0f0;
+    padding-top: 10px;
+    margin-top: 10px;
+}
+
+.clinic-logo {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.clinic-details {
+    flex: 1;
+    padding: 0 20px;
+}
+
+.clinic-name {
+    font-size: larger;
+    color: #333333;
+    margin-bottom: 5px;
+    font-weight: 600;
+}
+
+.clinic-address {
+    color: #555555;
+    font-size: small;
+}
+
+
+.appointment-info, .patient-info, .result-info {
+    margin-bottom: 20px;
+}
+
+.info-title {
+    font-size: larger;
+    color: #333333;
+    margin-bottom: 10px;
+    font-weight: 600;
+}
+
+.info-item {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 5px;
+}
+
+.item-label {
+    color: #555555;
+}
+
+.item-value {
+    color: #333333;
+}
+
+.action-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1.5rem; 
+}
+
+.cancel-button {
+    color: #FFA500; 
+    text-decoration: none; 
+    transition: color 0.3s; 
+    background-color: white;
+}
+
+.cancel-button:hover {
+    text-decoration: underline; 
+}
+
+/* chuyển qua chuyển lại giữa 2 trường thông tin */
+.appointment-details-container {
+  display: none;
+}
+.appointment-details-container.active {
+  display: block;
+}
+.appointment-item {
+  cursor: pointer;
+}
+.details-display {
+  flex: 2;
+  /* border: 1px solid #ccc;  */
+  min-height: 200px; 
+}
+
