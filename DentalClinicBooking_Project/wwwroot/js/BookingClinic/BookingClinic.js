@@ -230,13 +230,23 @@ document.addEventListener('DOMContentLoaded', function () {
     });
 
     // Khi hoàn thành bước 2
-    const dateItems = document.querySelectorAll('.date');
-    dateItems.forEach(item => {
-        item.addEventListener('click', () => {
-            stepDescriptions[1].classList.add('hidden');
-            stepItems[2].classList.remove('hidden');
-            stepDescriptions[2].classList.remove('hidden');
-        });
+    //const dateItems = document.querySelectorAll('.date');
+    //dateItems.forEach(item => {
+    //    item.addEventListener('click', () => {
+    //        stepDescriptions[1].classList.add('hidden');
+    //        stepItems[2].classList.remove('hidden');
+    //        stepDescriptions[2].classList.remove('hidden');
+    //    });
+    //});
+    // Khi hoàn thành bước 2
+    const calendarBody = document.querySelector('.dates-grid');
+    calendarBody.addEventListener('click', function (event) {
+        const dateElement = event.target.closest('.date');
+        if (dateElement && !dateElement.classList.contains('past-date')) {
+            stepDescriptions[1].classList.add('hidden'); // Đóng mô tả bước 2
+            stepItems[2].classList.remove('hidden'); // Hiển thị bước 3
+            stepDescriptions[2].classList.remove('hidden'); // Mở mô tả bước 3
+        }
     });
 
     // Khi hoàn thành bước 3

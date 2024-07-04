@@ -73,16 +73,6 @@ namespace DentalClinicBooking_Project.Controllers
                 SlotOfClinics = clinic?.SlotOfClinics ?? Enumerable.Empty<SlotOfClinic>(),
                 Services = clinic?.Services ?? Enumerable.Empty<Service>(),
             };
-            //var model = new ClinicBookingDisplay
-            //{
-            //    //ClinicId = clinic.ClinicId,
-            //    ClinicName = clinic?.ClinicName,
-            //    MainImage = clinic.MainImage,
-            //    Basics = clinic.Basics,
-            //    SlotOfClinics = clinic.SlotOfClinics,
-            //    Services = clinic.Services,
-            //};
-
 
             return View(model);
         }
@@ -104,9 +94,10 @@ namespace DentalClinicBooking_Project.Controllers
 
             for (int i = 0; i < arrSlots.Length; i++)
             {
-                slots.Add(arrSlots[i].StartTime
+                slots.Add(
+                    arrSlots[i].StartTime.ToString("HH:mm")
                     + " - " +
-                    arrSlots[i].EndTime, 0);
+                    arrSlots[i].EndTime.ToString("HH:mm"), 0);
             }
 
             foreach (var booking in bookings)
@@ -121,22 +112,31 @@ namespace DentalClinicBooking_Project.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> AppointmentBookingInfoAsync([FromBody] AppointmentBookingViewModel appointmentBookingModel)
+        public IActionResult AppointmentBookingInfo([FromBody] AppointmentBookingViewModel appointmentBookingModel)
         {
-            ClinicAppointmentSchedule model = new ClinicAppointmentSchedule
-            {
-                Code = ClinicAppointmentSchedule.BookingCode(),
-                PatientId = Guid.Parse("78987C55-FA52-48A1-9F2A-44803E560A40"),
-                ClinicName = appointmentBookingModel.ClinicName,
-                BasicName = appointmentBookingModel?.BasicName,
-                Address = appointmentBookingModel?.Address,
-                Date = appointmentBookingModel?.Date ?? DateOnly.FromDateTime(DateTime.Now),
-                SlotName = appointmentBookingModel?.SlotName,
-                Service = appointmentBookingModel?.Service,
-            };
+            //ClinicAppointmentSchedule clinicAppointmentSchedule = new ClinicAppointmentSchedule
+            //{
+            //    Code = ClinicAppointmentSchedule.BookingCode(),
+            //    PatientId = Guid.Parse("78987C55-FA52-48A1-9F2A-44803E560A40"),
+            //    ClinicName = appointmentBookingModel.ClinicName,
+            //    BasicName = appointmentBookingModel?.BasicName,
+            //    Address = appointmentBookingModel?.Address,
+            //    Date = appointmentBookingModel?.Date ?? DateOnly.FromDateTime(DateTime.Now),
+            //    SlotName = appointmentBookingModel?.SlotName,
+            //    Service = appointmentBookingModel?.Service,
+            //};
 
-            var test = await bookClinicRepository.AddAsync(model);
+            //Còn trường hợp người dùng không thể chọn cùng 1 slot trong một ngày
 
+            //var model = await bookClinicRepository.AddAsync(clinicAppointmentSchedule);
+
+            //return Json(new { success = true, redirectUrl = Url.Action("ConfirmBooking") });
+            return RedirectToAction("ConfirmBooking");
+        }
+
+        [HttpGet]
+        public IActionResult ConfirmBooking()
+        {
             return View();
         }
 

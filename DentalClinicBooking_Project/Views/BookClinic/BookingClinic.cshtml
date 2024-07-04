@@ -21,10 +21,13 @@
     <title>Booking</title>
     <link href="~/css/bookingclinic/bookingclinic.css" rel="stylesheet" />
     <link href="~/css/bookingclinic/updatetime.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@10/dist/sweetalert2.min.css">
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet" />
 
     <script src="~/js/bookingclinic/updatetime.js"></script>
     <script src="~/js/bookingclinic/bookingclinic.js"></script>
+    <script src="~/js/bookingclinic/bookingconfirmation.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10/dist/sweetalert2.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
@@ -132,20 +135,20 @@
                                         </div>
 
                                         <div class="time-slot-list">
-                                            @{
-                                                @foreach (var item in slotOfClinics)
+
+                                            @foreach (var item in slotOfClinics)
+                                            {
+                                                var formattedTime = $"{item.StartTime} - {item.EndTime}";
+                                                @if ((item.StartTime >= stAM && item.StartTime <= enAM))
                                                 {
-                                                    var formattedTime = $"{item.StartTime} - {item.EndTime}";
-                                                    @if ((item.StartTime >= stAM && item.StartTime <= enAM))
-                                                    {
-                                                        <button class="time-slot-item"
-                                                                data-slot-id="@formattedTime">
-                                                            @item.StartTime.ToString("HH:mm") -
-                                                            @item.EndTime.ToString("HH:mm")
-                                                        </button>
-                                                    }
+                                                    <button class="time-slot-item"
+                                                            data-slot-id="@formattedTime">
+                                                        @item.StartTime.ToString("HH:mm") -
+                                                        @item.EndTime.ToString("HH:mm")
+                                                    </button>
                                                 }
                                             }
+
                                         </div>
                                     </div>
                                     <div class="time-slot-group" style="margin-bottom: 6rem;">
@@ -155,21 +158,21 @@
                                             <p class="time-slot-group-title">Buổi chiều</p>
                                         </div>
                                         <div class="time-slot-list">
-                                            @{
-                                                @foreach (var item in slotOfClinics)
-                                                {
-                                                    var formattedTime = $"{item.StartTime} - {item.EndTime}";
-                                                    @if (item.EndTime >= stPM && item.EndTime <= enPM)
-                                                    {
 
-                                                        <button class="time-slot-item"
-                                                                data-slot-id="@formattedTime">
-                                                            @item.StartTime.ToString("HH:mm") -
-                                                            @item.EndTime.ToString("HH:mm")
-                                                        </button>
-                                                    }
+                                            @foreach (var item in slotOfClinics)
+                                            {
+                                                var formattedTime = $"{item.StartTime.ToString("HH:mm")} - {item.EndTime.ToString("HH:mm")}";
+                                                @if (item.EndTime >= stPM && item.EndTime <= enPM)
+                                                {
+
+                                                    <button class="time-slot-item"
+                                                            data-slot-id="@formattedTime">
+                                                        @item.StartTime.ToString("HH:mm") -
+                                                        @item.EndTime.ToString("HH:mm")
+                                                    </button>
                                                 }
                                             }
+
                                         </div>
                                     </div>
                                 </div>
@@ -226,11 +229,11 @@
                             </div>
                             <div class="info-item" style="display: none;">
                                 <div class="info-label">Cơ sở</div>
-                                <div id="basicName" class="info-value"></div>
+                                <div class="info-value" data-field="basicName"></div>
                             </div>
                             <div class="info-itemadd" style="display: none;">
                                 <div class="info-labeladd">Địa chỉ đặt khám</div>
-                                <div class="info-valueadd"></div>
+                                <div class="info-valueadd" data-field="address"></div>
                             </div>
                             <div class="info-item" style="display: none;">
                                 <div class="info-label">Ngày Khám</div>
@@ -244,12 +247,17 @@
                                 <div class="info-label">Dịch vụ</div>
                                 <div class="info-value"></div>
                             </div>
+                            <div id="error-message" style="display:none; color: red;"></div>
                         </div>
                     </div>
                     <div class="confirmation"
                          style="display: flex;text-align: center;align-items: center;justify-content: center;">
-                        <button class="confirm-button">Đặt lịch</button>
-                        <button class="cancel-button">Hủy</button>
+                        <button class="confirm-button" 
+                        data-url="@Url.Action("AppointmentBookingInfo", "BookClinic")"
+                        >Đặt lịch</button>
+                        <button class="cancel-button" 
+                        onclick="window.location.href='@Url.Action("AllClinics", "BookClinic")'"
+                        >Hủy</button>
                     </div>
                 </div>
             </div>
@@ -257,38 +265,3 @@
     </div>
 </body>
 </html>
-
-<script>
-    $(document).ready(function () {
-        $('.confirm-button').click(function () {
-            var clinicName = $('.clinic-name').text();
-            var basicName = $('.info-item:nth-child(2) .info-value').text();
-            var address = $('.info-itemadd .info-valueadd').text();
-            var dateString = $('.info-item:nth-child(4) .info-value').text();
-            var dateOnlyValue = moment(dateString, 'DD/MM/YYYY').format('YYYY-MM-DD');
-            var time = $('.info-item:nth-child(5) .info-value').text().trim().replace(/\s+/g, ' ');
-            var service = $('.info-item:nth-child(6) .info-value').text();
-            const data = {
-                ClinicName: clinicName,
-                Date: dateOnlyValue,
-                Address: address,
-                BasicName: basicName,
-                SlotName: time,
-                Service: service
-            };
-            console.log('data: ', data);
-            $.ajax({
-                url: '@Url.Action("AppointmentBookingInfo", "BookClinic")',
-                type: 'POST',
-                data: JSON.stringify(data),
-                contentType: 'application/json; charset=utf-8',
-                success: function (response) {
-                    console.log('Success:', response);
-                },
-                error: function (xhr, status, error) {
-                    console.error('Error:', error);
-                }
-            });
-        });
-    });
-</script>
