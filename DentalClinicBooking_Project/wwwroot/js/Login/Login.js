@@ -146,7 +146,7 @@ function checkDetailInput() {
     var nation = document.getElementById("nation").value;
     var job = document.getElementById("job").value;
     var healthInsurance = document.getElementById("healthInsurance").value;
-    var terms = document.getElementById("terms").checked;
+    var terms = document.getElementById("terms-detail").checked;
 
     var registerButton = document.getElementById("registerButton");
 
@@ -156,10 +156,6 @@ function checkDetailInput() {
         birthday &&
         gender &&
         address &&
-        citizenId &&
-        nation &&
-        job &&
-        healthInsurance &&
         terms
     ) {
         registerButton.disabled = false;

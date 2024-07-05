@@ -17,16 +17,16 @@ namespace DentalClinicBooking_Project.Models.ViewModels
         [Required(ErrorMessage = "BirthDay can not be blank.")]
         public DateOnly BirthDay { get; set; }
         [Required(ErrorMessage = "Gender can not be blank.")]
-        public bool? Gender { get; set; }
+        public bool Gender { get; set; }
         [Required(ErrorMessage = "Address can not be blank.")]
         public string Address { get; set; }
 
-        public string CitizenIdentificationCard { get; set; }
+        public string? CitizenIdentificationCard { get; set; }
 
-        public string Nation { get; set; }
+        public string? Nation { get; set; }
 
-        public string Job { get; set; }
+        public string? Job { get; set; }
 
-        public string HealthInsuranceCardCode { get; set; }
+        public string? HealthInsuranceCardCode { get; set; }
     }
 }

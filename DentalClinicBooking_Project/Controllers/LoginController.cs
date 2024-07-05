@@ -13,6 +13,11 @@ namespace DentalClinicBooking_Project.Controllers
 
         private readonly IHttpContextAccessor _contx;
 
+        public JsonSerializerSettings settings = new JsonSerializerSettings
+        {
+            ReferenceLoopHandling = ReferenceLoopHandling.Ignore
+        };//cấu hình JsonSerializerSettings để bỏ qua các vòng lặp tham chiếu:
+
         public LoginController(DentalClinicBookingProjectContext context, IHttpContextAccessor contx)
         {
             _context = context;
@@ -46,7 +51,11 @@ namespace DentalClinicBooking_Project.Controllers
                         {
                             //HttpContext.Session.SetString("patient", Newtonsoft.Json.JsonConvert.SerializeObject(patient));
                             //session.SetString("PatientName",patient.PatientName);
-                            string patientString = JsonConvert.SerializeObject(patient);
+                            //var settings = new JsonSerializerSettings
+                            //{
+                            //    ReferenceLoopHandling = ReferenceLoopHandling.Ignore
+                            //};//cấu hình JsonSerializerSettings để bỏ qua các vòng lặp tham chiếu:
+                            string patientString = JsonConvert.SerializeObject(patient,settings);
                             _contx.HttpContext.Session.SetString("patient", patientString);
                         }
                     }
@@ -87,8 +96,8 @@ namespace DentalClinicBooking_Project.Controllers
                 var checkGmail = _context.Accounts.FirstOrDefault(x => x.Gmail.Equals(registerVM.UserName));
                 if (checkGmail!=null)
                 {
-                    ModelState.AddModelError("General", "Username already exists. Please choose another one.");
-                    return RedirectToAction("Login", "Login");
+                    ModelState.AddModelError("General", "Username already exists.");
+                    return View(registerVM);
                 }
                 var account = new Account
                 {
@@ -114,11 +123,21 @@ namespace DentalClinicBooking_Project.Controllers
                 };
                 _context.Patients.Add(patient);
                 _context.SaveChanges();
+
+
+                // Tự động đăng nhập sau khi đăng ký thành công
+                string accountString = JsonConvert.SerializeObject(account,settings);
+                _contx.HttpContext.Session.SetString("account", accountString);
+
+                
+                string patientString = JsonConvert.SerializeObject(patient, settings);
+                _contx.HttpContext.Session.SetString("patient", patientString);
+
                 ModelState.AddModelError("Success", "Register successful.");
-                return RedirectToAction("Login", "Login");
+                return RedirectToAction("HomePage", "Home");
             }
             ModelState.AddModelError("Fail", "Register Fail");
-            return RedirectToAction("Login", "Login");
+            return View(registerVM);
         }
     }
 }
