@@ -10,110 +10,87 @@
 
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
 
-    <link
-      href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
-      rel="stylesheet"
-    />
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet" />
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-    <link href="style.css" rel="stylesheet" />
-  </head>
+	<link href="~/css/header+footer/hf.css" rel="stylesheet" />
+</head>
 
-  <!-- NavBar -->
-  <header class="row navbar">
-    <div class="col-md-2 navbar-brand" style="z-index: 9999">
-      <img
-        src="https://scontent.xx.fbcdn.net/v/t1.15752-9/447893264_1021972442656184_4043330415758757619_n.png?_nc_cat=109&ccb=1-7&_nc_sid=0024fc&_nc_eui2=AeFcd2BENlfYNkd4LCIysQ1DfbxKM85a27d9vEozzlrbty9rn_ynFsp8hjOmFZz73Ps4BeEExi1k01N7zuB3jOLR&_nc_ohc=9nWBJeHV-WUQ7kNvgHeZY0K&_nc_ad=z-m&_nc_cid=0&_nc_ht=scontent.xx&oh=03_Q7cD1QFVswz1ZYq6MQ-kizmEdENZIJob6pt1YgHF-72Es1_h9A&oe=66A1CBF1"
-        alt="YouMed Logo"
-      />
+<!-- NavBar -->
+<header class="row navbar" id="navbar_id" style="margin-right: 0px;">
+    <div class="col-md-2 navbar-brand">
+        <a asp-area="" asp-controller="Home" asp-action="HomePage"><img src="https://scontent.xx.fbcdn.net/v/t1.15752-9/447893264_1021972442656184_4043330415758757619_n.png?_nc_cat=109&ccb=1-7&_nc_sid=0024fc&_nc_eui2=AeFcd2BENlfYNkd4LCIysQ1DfbxKM85a27d9vEozzlrbty9rn_ynFsp8hjOmFZz73Ps4BeEExi1k01N7zuB3jOLR&_nc_ohc=9nWBJeHV-WUQ7kNvgHeZY0K&_nc_ad=z-m&_nc_cid=0&_nc_ht=scontent.xx&oh=03_Q7cD1QFVswz1ZYq6MQ-kizmEdENZIJob6pt1YgHF-72Es1_h9A&oe=66A1CBF1" alt="SunShine Logo"></a>
     </div>
     <nav class="navbar navbar-expand-md">
-      <div class="navbar-menu">
-        <ul class="navbar-nav">
-          <li class="nav-item">
-            <a
-              asp-area=""
-              asp-controller="BookClinic"
-              asp-action="AllClinics"
-              class="nav-link"
-              >Đặt khám</a
-            >
-          </li>
-          <li class="nav-item">
-            <a href="#" class="nav-link">Xem lịch khám</a>
-          </li>
-          <li class="nav-item">
-            <a
-              asp-area=""
-              asp-controller="Dentist"
-              asp-action="ShowAllDentist"
-              asp-route-page="1"
-              class="nav-link"
-              >Nha sĩ</a
-            >
-          </li>
-          <li class="nav-item">
-            <a
-              asp-area=""
-              asp-controller="Service"
-              asp-action="Service"
-              class="nav-link"
-              >Dịch vụ</a
-            >
-          </li>
-          <li class="nav-item">
-            <a
-              asp-area=""
-              asp-controller="Contact"
-              asp-action="ChooseClinicContact"
-              class="nav-link"
-              >Liên hệ</a
-            >
-          </li>
-        </ul>
-      </div>
+        <div class="navbar-menu">
+            <ul class="navbar-nav">
+                <li class="nav-item"><a asp-area="" asp-controller="BookClinic" asp-action="AllClinics" class="nav-link">Đặt khám</a></li>
+                <li class="nav-item"><a href="#" class="nav-link">Xem lịch khám</a></li>
+                <li class="nav-item"><a asp-area="" asp-controller="Dentist" asp-action="ShowAllDentist" asp-route-page="1" class="nav-link">Nha sĩ</a></li>
+                <li class="nav-item"><a asp-area="" asp-controller="Service" asp-action="Service" class="nav-link">Dịch vụ</a></li>
+                <li class="nav-item"><a asp-area="" asp-controller="Contact" asp-action="ChooseClinicContact" class="nav-link">Liên hệ</a></li>
+            </ul>
+        </div>
     </nav>
-    <div class="navbar-login">
-      <a href="./../loginPage/index.html" class="btn">Đăng nhập</a>
-    </div>
-  </header>
-  <div style="height: 1000px"></div>
+    
+    @if (account == null)
+    {
+        <div class="fomart-btLogin">
+            <a asp-area="" asp-controller="Login" asp-action="Login" class="btn">Đăng nhập</a>
+        </div>
+    }
+    else
+    {
+        <div class="fomart-btLogin">
+            <a asp-area="" asp-controller="Login" asp-action="Logout" class="btn">Đăng xuất</a>
+        </div>
+    }
+</header>
 
-  <!-- Footer -->
-  <footer class="footer1">
+
+<body>
+    @RenderBody()
+    @RenderSection("Scripts", required: false)
+</body>
+
+
+
+<!-- Footer -->
+<footer class="footer1">
     <div class="container-md">
-      <div class="footer-direction">
-        <div class="col-md-3 footer-section">
-          <h5 style="font-size: 17px">CÔNG TY SunShine VIỆT NAM</h5>
-          <p><b>VPĐD</b>: FPT University, Campus HCM, Q.9, TP. HCM</p>
-          <p><b>Hotline:</b> 0000-0000 (8:30 - 20:30 từ T2 đến T7)</p>
-          <p>Chịu trách nhiệm nội dung: Biên soạn Huỳnh Trọng Nghĩa.</p>
+        <div class="footer-direction">
+            <div class="col-md-3 footer-section">
+                <h5 style="font-size: 17px">CÔNG TY SunShine VIỆT NAM</h5>
+                <p><b>VPĐD</b>: FPT University, Campus HCM, Q.9, TP. HCM</p>
+                <p><b>Hotline:</b> 0000-0000 (8:30 - 20:30 từ T2 đến T7)</p>
+                <p>Chịu trách nhiệm nội dung: Biên soạn Huỳnh Trọng Nghĩa.</p>
+            </div>
+            <div class="col-md-3 footer-section">
+                <h5>Về SunShine</h5>
+                <p>Giới thiệu về SunShine Ban điều hành</p>
+                <p>Nhân sự & Tuyển dụng</p>
+                <p>Liên hệ</p>
+            </div>
+            <div class="col-md-3 footer-section">
+                <h5>Dịch vụ</h5>
+                <p>Đặt khám nha sĩ</p>
+                <p>Đặt khám theo ca</p>
+                <p>SunShine Store</p>
+            </div>
+            <div class="col-md-3 footer-section">
+                <h5>Hỗ trợ</h5>
+                <p>Điều Khoản Sử Dụng</p>
+                <p>Chính Sách Bảo Mật</p>
+                <p>Chính sách giải quyết khiếu nại</p>
+                <p>Hỗ trợ khách hàng: cskh@sunshine.vn</p>
+            </div>
         </div>
-        <div class="col-md-3 footer-section">
-          <h5>Về SunShine</h5>
-          <p>Giới thiệu về SunShine Ban điều hành</p>
-          <p>Nhân sự & Tuyển dụng</p>
-          <p>Liên hệ</p>
-        </div>
-        <div class="col-md-3 footer-section">
-          <h5>Dịch vụ</h5>
-          <p>Đặt khám nha sĩ</p>
-          <p>Đặt khám theo ca</p>
-          <p>SunShine Store</p>
-        </div>
-        <div class="col-md-3 footer-section">
-          <h5>Hỗ trợ</h5>
-          <p>Điều Khoản Sử Dụng</p>
-          <p>Chính Sách Bảo Mật</p>
-          <p>Chính sách giải quyết khiếu nại</p>
-          <p>Hỗ trợ khách hàng: cskh@sunshine.vn</p>
-        </div>
-      </div>
     </div>
-  </footer>
+</footer>
+
 </html>
