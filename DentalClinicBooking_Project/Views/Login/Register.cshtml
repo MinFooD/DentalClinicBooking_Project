@@ -1,5 +1,13 @@
 ﻿@model DentalClinicBooking_Project.Models.ViewModels.RegisterVM
-@{
+@{ 
+    var userName = Model?.UserName ?? string.Empty;
+    var patientName = Model?.PatientName ?? string.Empty;
+    var phone = Model?.Phone ?? string.Empty;
+    var address = Model?.Address ?? string.Empty;
+    var citizenId = Model?.CitizenIdentificationCard ?? string.Empty;
+    var nation = Model?.Nation ?? string.Empty;
+    var job = Model?.Job ?? string.Empty;
+    var healthInsurance = Model?.HealthInsuranceCardCode ?? string.Empty;
 }
 
 <!DOCTYPE html>
@@ -34,23 +42,29 @@
                 {
                     <div class="alert alert-danger">@ViewData.ModelState["Fail"].Errors[0].ErrorMessage</div>
                 }
+                @if (ViewData.ModelState.ContainsKey("General"))
+                {
+                    <div class="alert alert-danger">@ViewData.ModelState["General"].Errors[0].ErrorMessage</div>
+                }
                 @if (ViewData.ModelState.ContainsKey("Success"))
                 {
-                    <div class="alert alert-danger">@ViewData.ModelState["Success"].Errors[0].ErrorMessage</div>
+                    <div class="alert alert-success">@ViewData.ModelState["Success"].Errors[0].ErrorMessage</div>
                 }
                 <!-- regis-form -->
-                <form id="register-form" class="register-form active" onsubmit="return saveRegisterForm(event)" style="display: none">
+                <form id="register-form" class="register-form active" onsubmit="return saveRegisterForm(event)" style="display: block">
                     <div class="title">Register</div>
                     <div class="des">
                         Please fill in this form to create an account.
                     </div>
                     <div class="group">
                         <span>👤</span>
-                        <input type="text" id="username" placeholder="Username" required oninput="checkInput()" />
+                        <input type="text" id="username" placeholder="Username" required oninput="checkInput()" value="@userName" asp-for="UserName" />
+                        <span asp-validation-for="UserName" class="text-danger"></span>
                     </div>
                     <div class="group">
                         <span>🔒</span>
-                        <input type="password" id="password" placeholder="Password" required oninput="checkInput()" />
+                        <input type="password" id="password" placeholder="Password" required oninput="checkInput()" asp-for="Password" />
+                        <span asp-validation-for="Password" class="text-danger"></span>
                     </div>
                     <div class="group">
                         <span>🔒</span>
@@ -78,57 +92,61 @@
 
                     <div class="group">
                         <span>👤</span>
-                        <input type="text" id="name" placeholder="Name" required oninput="checkDetailInput()"
+                        <input type="text" id="name" placeholder="Name" required oninput="checkDetailInput()" value="@patientName"
                                asp-for="PatientName" />
+                        <span asp-validation-for="PatientName" class="text-danger"></span>
                     </div>
                     <div class="group">
                         <span>📞</span>
-                        <input type="text" id="phone" placeholder="Phone" required oninput="checkDetailInput()"
+                        <input type="text" id="phone" placeholder="Phone" required oninput="checkDetailInput()" value="@phone"
                                asp-for="Phone" />
+                        <span asp-validation-for="Phone" class="text-danger"></span>
                     </div>
                     <div class="group">
                         <span>🎂</span>
-                        <input type="date" id="birthday" required onchange="checkDetailInput()" asp-for="BirthDay" />
+                        <input type="date" id="birthday" required onchange="checkDetailInput()" asp-for="BirthDay"/>
+                        <span asp-validation-for="BirthDay" class="text-danger"></span>
                     </div>
                     <div class="group">
                         <span style="margin-left:6px">⚥</span>
-                        <select id="gender" required onchange="checkDetailInput()"
-                                asp-for="Gender">
+                        <select id="gender" required onchange="checkDetailInput()" 
+                                asp-for="Gender" >
                             <option value="">Select Gender</option>
-                            <option value="male">Male</option>
-                            <option value="female">Female</option>
+                            <option value="true">Male</option>
+                            <option value="false">Female</option>
                         </select>
+                        <span asp-validation-for="Gender" class="text-danger"></span>
                     </div>
                     <div class="group">
                         <span>🏠</span>
-                        <input type="text" id="address" placeholder="Address" requiredoninput="checkDetailInput()"
+                        <input type="text" id="address" placeholder="Address" requiredoninput="checkDetailInput()" value="@address"
                                asp-for="Address" />
+                        <span asp-validation-for="Address" class="text-danger"></span>
                     </div>
                     <div class="group">
                         <span>🆔</span>
-                        <input type="text" id="citizenId" placeholder="Citizen ID" required oninput="checkDetailInput()"
+                        <input type="text" id="citizenId" placeholder="Citizen ID" oninput="checkDetailInput()" value="@citizenId"
                                asp-for="CitizenIdentificationCard" />
                     </div>
                     <div class="group">
                         <span>🌍</span>
-                        <input type="text" id="nation" placeholder="Nation" required oninput="checkDetailInput()"
+                        <input type="text" id="nation" placeholder="Nation" oninput="checkDetailInput()" value="@nation"
                                asp-for="Nation" />
                     </div>
                     <div class="group">
                         <span>💼</span>
-                        <input type="text" id="job" placeholder="Job" required oninput="checkDetailInput()"
+                        <input type="text" id="job" placeholder="Job" oninput="checkDetailInput()" value="@job"
                                asp-for="Job" />
                     </div>
                     <div class="group">
                         <span>🏥</span>
-                        <input type="text" id="healthInsurance" placeholder="Health Insurance" required oninput="checkDetailInput()"
+                        <input type="text" id="healthInsurance" placeholder="Health Insurance" oninput="checkDetailInput()" value="@healthInsurance"
                                asp-for="HealthInsuranceCardCode" />
                     </div>
                     <div class="recovery">
                         <div class="checkbox">
                             <input type="checkbox"
                                    id="terms-detail"
-                                   required
                                    onchange="checkDetailInput()" />
                             Accept Terms
                         </div>

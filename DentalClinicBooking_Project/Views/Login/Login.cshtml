@@ -34,9 +34,13 @@
                 {
                     <div class="alert alert-danger">@ViewData.ModelState["Fail"].Errors[0].ErrorMessage</div>
                 }
+                @if (ViewData.ModelState.ContainsKey("General"))
+                {
+                    <div class="alert alert-danger">@ViewData.ModelState["General"].Errors[0].ErrorMessage</div>
+                }
                 @if (ViewData.ModelState.ContainsKey("Success"))
                 {
-                    <div class="alert alert-danger">@ViewData.ModelState["Success"].Errors[0].ErrorMessage</div>
+                    <div class="alert alert-success">@ViewData.ModelState["Success"].Errors[0].ErrorMessage</div>
                 }
                     
                     @* <form id="otp-form" style="display: none">
