@@ -138,7 +138,7 @@
 
                                             @foreach (var item in slotOfClinics)
                                             {
-                                                var formattedTime = $"{item.StartTime} - {item.EndTime}";
+                                                var formattedTime = $"{item.StartTime.ToString("HH:mm")} - {item.EndTime.ToString("HH:mm")}";
                                                 @if ((item.StartTime >= stAM && item.StartTime <= enAM))
                                                 {
                                                     <button class="time-slot-item"

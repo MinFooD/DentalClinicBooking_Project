@@ -2,7 +2,7 @@
 {
     public class BookingSlot
     {
-        public string SlotName { get; set; }
+        public string? SlotName { get; set; }
         public int Count { get; set; } = 0;
     }
 }

@@ -13,6 +13,8 @@ builder.Services.AddDbContext<DentalClinicBookingProjectContext>(options =>
 });
 
 builder.Services.AddScoped<IClinicRepository, ClinicRepository>();
+builder.Services.AddScoped<IClinicAppointmentScheduleRepository, ClinicAppointmentScheduleRepository>();
+builder.Services.AddScoped<ISlotRepository, SlotRepository>();
 
 builder.Services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 

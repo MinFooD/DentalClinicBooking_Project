@@ -8,7 +8,7 @@ namespace DentalClinicBooking_Project.Controllers
 {
 	public class ContactController : Controller
 	{
-		public DentalClinicBookingProjectContext _context;
+        public DentalClinicBookingProjectContext _context;
 		public IActionResult ChooseClinicContact(string searchString, int page = 1)
 		{
 			_context = new DentalClinicBookingProjectContext();

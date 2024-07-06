@@ -11,10 +11,16 @@ namespace DentalClinicBooking_Project.Controllers
     public class BookClinicController : Controller
     {
         private readonly IClinicRepository bookClinicRepository;
+        private readonly IClinicAppointmentScheduleRepository clinicAppointmentScheduleRepository;
+        private readonly ISlotRepository slotRepository;
 
-        public BookClinicController(IClinicRepository bookClinicRepository)
+        public BookClinicController(IClinicRepository bookClinicRepository, 
+            IClinicAppointmentScheduleRepository clinicAppointmentScheduleRepository,
+            ISlotRepository slotRepository)
         {
             this.bookClinicRepository = bookClinicRepository;
+            this.clinicAppointmentScheduleRepository = clinicAppointmentScheduleRepository;
+            this.slotRepository = slotRepository;
         }
 
 
@@ -82,14 +88,14 @@ namespace DentalClinicBooking_Project.Controllers
         {
             bookingModel ??= new BookingInfo();
 
-            var bookings = await bookClinicRepository
+            var bookings = await clinicAppointmentScheduleRepository
                 .GetBookingsByDateAndClinicAsync(
                 bookingModel.Day,
                 bookingModel.ClinicName,
                 bookingModel.BasicName)
                 ?? new List<BookingSlot>();
 
-            var arrSlots = await bookClinicRepository.GetAllSlotsAsync();
+            var arrSlots = await slotRepository.GetAllSlotsAsync();
             var slots = new Dictionary<string, int>();
 
             for (int i = 0; i < arrSlots.Length; i++)
@@ -102,9 +108,9 @@ namespace DentalClinicBooking_Project.Controllers
 
             foreach (var booking in bookings)
             {
-                if (slots.ContainsKey(booking.SlotName))
+                if (slots.ContainsKey(booking.SlotName!))
                 {
-                    slots[booking.SlotName] = booking.Count;
+                    slots[booking.SlotName!] = booking.Count;
                 }
             }
 
@@ -112,39 +118,52 @@ namespace DentalClinicBooking_Project.Controllers
         }
 
         [HttpPost]
-        public IActionResult AppointmentBookingInfo([FromBody] AppointmentBookingViewModel appointmentBookingModel)
+        public async Task<IActionResult> AppointmentBookingInfo([FromBody] AppointmentBookingViewModel appointmentBookingModel)
         {
-            //ClinicAppointmentSchedule clinicAppointmentSchedule = new ClinicAppointmentSchedule
-            //{
-            //    Code = ClinicAppointmentSchedule.BookingCode(),
-            //    PatientId = Guid.Parse("78987C55-FA52-48A1-9F2A-44803E560A40"),
-            //    ClinicName = appointmentBookingModel.ClinicName,
-            //    BasicName = appointmentBookingModel?.BasicName,
-            //    Address = appointmentBookingModel?.Address,
-            //    Date = appointmentBookingModel?.Date ?? DateOnly.FromDateTime(DateTime.Now),
-            //    SlotName = appointmentBookingModel?.SlotName,
-            //    Service = appointmentBookingModel?.Service,
-            //};
+            ClinicAppointmentSchedule clinicAppointmentSchedule = new ClinicAppointmentSchedule
+            {
+                Code = ClinicAppointmentSchedule.BookingCode(),
+                PatientId = Guid.Parse("78987C55-FA52-48A1-9F2A-44803E560A40"),
+                ClinicName = appointmentBookingModel.ClinicName,
+                BasicName = appointmentBookingModel?.BasicName,
+                Address = appointmentBookingModel?.Address,
+                Date = appointmentBookingModel?.Date ?? DateOnly.FromDateTime(DateTime.Now),
+                SlotName = appointmentBookingModel?.SlotName,
+                Service = appointmentBookingModel?.Service,
+            };
 
             //Còn trường hợp người dùng không thể chọn cùng 1 slot trong một ngày
 
-            //var model = await bookClinicRepository.AddAsync(clinicAppointmentSchedule);
+            var model = await clinicAppointmentScheduleRepository.AddAsync(clinicAppointmentSchedule);
 
-            //return Json(new { success = true, redirectUrl = Url.Action("ConfirmBooking") });
-            return RedirectToAction("ConfirmBooking");
+            return Ok(new { redirectUrl = Url.Action("ConfirmBooking", new { id = model.ClinicAppointmentScheduleId }) });
         }
 
         [HttpGet]
-        public IActionResult ConfirmBooking()
+        public async Task<IActionResult> ConfirmBooking(Guid id)
+        {
+            var clinicAppointmentSchedule = await clinicAppointmentScheduleRepository.GetAsync(id);
+
+            // Thiếu thông tin bệnh nhân
+            var model = new AppointmentBookingSuccess
+            {
+                ClinicName = clinicAppointmentSchedule?.ClinicName!,
+                ClinicAddress = clinicAppointmentSchedule?.Address!,
+                Code = clinicAppointmentSchedule?.Code!,
+                Date = clinicAppointmentSchedule?.Date ?? DateOnly.FromDateTime(DateTime.Now)!,
+                SlotName = clinicAppointmentSchedule?.SlotName!,
+                BasicName = clinicAppointmentSchedule?.BasicName!,
+                Service = clinicAppointmentSchedule?.Service!
+            };
+
+            return View(model);
+        }
+
+        [HttpGet]
+        public IActionResult ViewSchedule()
         {
             return View();
         }
-
-        //[HttpGet]
-        //public IActionResult ViewSchedule()
-        //{
-        //    return View();
-        //}
 
     }
 }
