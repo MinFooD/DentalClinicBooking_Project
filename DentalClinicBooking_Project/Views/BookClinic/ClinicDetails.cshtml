@@ -1,5 +1,6 @@
 ﻿@using DentalClinicBooking_Project.Models.Domain
 @using Newtonsoft.Json
+@inject IHttpContextAccessor HttpContextAccessor
 @model DentalClinicBooking_Project.Models.ViewModels.ShowClinicDetails
 
 @{
@@ -11,6 +12,14 @@
 
     IEnumerable<SlotOfClinic> model = Model.SlotOfClinics;
     List<SlotOfClinic> slotOfClinics = model.OrderBy(slot => slot.StartTime).ThenBy(slot => slot.EndTime).ToList();
+
+    string accountString = HttpContextAccessor.HttpContext.Session.GetString("account");
+    // var account = JsonConvert.DeserializeObject<Account>(accountString);
+    var account = !string.IsNullOrEmpty(accountString) ? JsonConvert.DeserializeObject<Account>(accountString) : null;
+
+    string patientString = HttpContextAccessor.HttpContext.Session.GetString("patient");
+    // var patient = JsonConvert.DeserializeObject<Patient>(patientString);
+    var patient = !string.IsNullOrEmpty(patientString) ? JsonConvert.DeserializeObject<Patient>(patientString) : null;
 }
 
 <!DOCTYPE html>
@@ -85,14 +94,40 @@
             <button class="next" onclick="nextImage()">&#10095;</button>
         </div>
 
-        <div>
+        @* <div>
             <button class="quickBooking"
                     style="margin-left: 22rem"
                     onclick="window.location.href='@Url.Action("BookingClinic", "BookClinic", new { id = Model.Id })'">
                 Đặt khám ngay
             </button>
-        </div>
+        </div> *@
+        @if (account != null && account.RoleId == 2)
+        {
+            <div>
+                <button class="quickBooking"
+                        style="margin-left: 22rem"
+                        onclick="window.location.href='@Url.Action("BookingClinic", "BookClinic", new { id = Model.Id })'">
+                    Đặt khám ngay
+                </button>
+            </div>
+        }
+        else if (account != null && account.RoleId == 3)
+        {
+
+        }
+        else
+        {
+            <div>
+                <button class="quickBooking"
+                        style="margin-left: 22rem"
+                        onclick="window.location.href='@Url.Action("Login", "Login")'">
+                    Đặt khám ngay
+                </button>
+            </div>
+        }
     </div>
+
+    
 
     <div class="row information">
 
