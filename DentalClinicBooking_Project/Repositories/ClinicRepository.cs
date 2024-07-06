@@ -35,7 +35,6 @@ namespace DentalClinicBooking_Project.Repositories
 
             return await query.Include(x => x.Basics).ToListAsync();
         }
-
         public async Task<Clinic?> GetAsync(Guid id)
         {
 
@@ -50,34 +49,9 @@ namespace DentalClinicBooking_Project.Repositories
         }
 
 
-        public async Task<int> CountAsync(string searchString)
+        public async Task<int> CountAsync(string? searchString)
         {
             return await dentalClinicBookingProjectContext.Clinics.Where(x => x.ClinicName.Contains(searchString)).CountAsync();
-        }
-
-
-        public async Task<List<BookingSlot>> GetBookingsByDateAndClinicAsync(DateOnly date, string clinicName, string basicName)
-        {
-            return await dentalClinicBookingProjectContext.ClinicAppointmentSchedules
-                   .Where(b => b.Date == date && b.ClinicName.Contains(clinicName) && b.BasicName.Contains(basicName))
-                   .GroupBy(b => b.SlotName)
-                   .Select(g => new BookingSlot { SlotName = g.Key, Count = g.Count() })
-                   .ToListAsync();
-        }
-
-        public async Task<ClinicAppointmentSchedule> AddAsync(ClinicAppointmentSchedule clinicAppointmentSchedule)
-        {
-            await dentalClinicBookingProjectContext.AddAsync(clinicAppointmentSchedule);
-            await dentalClinicBookingProjectContext.SaveChangesAsync();
-            return clinicAppointmentSchedule;
-        }
-
-        public async Task<SlotOfClinic[]> GetAllSlotsAsync()
-        {
-            return await dentalClinicBookingProjectContext.SlotOfClinics
-                .GroupBy(s => s.SlotId)
-                .Select(g => g.FirstOrDefault()!)
-                .ToArrayAsync();
         }
     }
 }

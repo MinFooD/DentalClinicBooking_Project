@@ -1,4 +1,6 @@
-﻿@{
+﻿@model DentalClinicBooking_Project.Models.ViewModels.BookingClinicModels.AppointmentBookingSuccess
+
+@{
 }
 
 <!DOCTYPE html>
@@ -11,6 +13,7 @@
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet" />
     <link href="~/css/bookingclinic/booksuccesfull.css" rel="stylesheet" />
 
+    <script src="~/js/bookingclinic/determinesessiontime.js"></script>
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </head>
@@ -33,8 +36,8 @@
                     <img src="https://cdn.youmed.vn/photos/9bb621c9-2fff-49fe-8e88-31ce6f905e0a.png" alt="Header Info">
                 </div>
                 <div class="clinic-details">
-                    <h3 class="clinic-name">Phòng khám Hello Doctor</h3>
-                    <p class="clinic-address">152/6 Thành Thái, P.12, Q.10, TP.HCM</p>
+                    <h3 class="clinic-name">@Model.ClinicName</h3>
+                    <p class="clinic-address">@Model.ClinicAddress</p>
                 </div>
             </div>
         </div>
@@ -43,21 +46,27 @@
                 <p class="info-heading">Thông tin đặt lịch</p>
                 <div class="info-row">
                     <dt class="info-title">Mã phiếu khám</dt>
-                    <dd class="info-value">YMA2405290499</dd>
+                    <dd class="info-value">@Model.Code</dd>
                 </div>
                 <div class="info-row">
                     <dt class="info-title">Ngày</dt>
-                    <dd class="info-value">31/05/2024</dd>
+                    <dd class="info-value">@Model.Date</dd>
                 </div>
                 <div class="info-row">
                     <dt class="info-title">Giờ khám</dt>
-                    <dd class="info-value green">09:00 <span>(Buổi sáng)</span></dd>
+                    <dd class="info-value green">@Model.SlotName <span class="session-time">(Buổi sáng)</span></dd>
                 </div>
                 <div class="info-row">
                     <dt class="info-title">Chi nhánh</dt>
-                    <dd class="info-value">Chi nhánh 3 - Địa chỉ 2</dd>
+                    <dd class="info-value">@Model.BasicName</dd>
+                </div>
+                <div class="info-row">
+                    <dt class="info-title">Dịch vụ</dt>
+                    <dd class="info-value">@Model.Service</dd>
                 </div>
             </dl>
+
+            @*Thông tin bệnh nhân chưa hoàn thành*@
             <dl class="info-list">
                 <p class="info-heading">Thông tin bệnh nhân</p>
                 <div class="info-row">
@@ -85,5 +94,4 @@
         </div>
     </div>
 </body>
-
 </html>

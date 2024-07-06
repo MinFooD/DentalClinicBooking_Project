@@ -13,12 +13,7 @@ namespace DentalClinicBooking_Project.Repositories
             int pageSize = 100);
 
         Task<Clinic?> GetAsync(Guid id);
+
         Task<int> CountAsync(string? searchQuery);
-        Task<List<BookingSlot>> GetBookingsByDateAndClinicAsync(
-            DateOnly date,
-            string clinicName,
-            string basicName);
-        Task<ClinicAppointmentSchedule> AddAsync(ClinicAppointmentSchedule clinicAppointmentSchedule);
-        Task<SlotOfClinic[]> GetAllSlotsAsync();
     }
 }

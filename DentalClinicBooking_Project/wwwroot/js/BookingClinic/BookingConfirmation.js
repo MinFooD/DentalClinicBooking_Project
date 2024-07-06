@@ -51,9 +51,7 @@
                 contentType: 'application/json; charset=utf-8',
                 success: function (response) {
                     console.log('Success:', response);
-                    if (response.success) {
-                        window.location.href = response.redirectUrl;
-                    }
+                    window.location.href = response.redirectUrl;                    
                 },
                 error: function (xhr, status, error) {
                     console.error('Error:', error);
