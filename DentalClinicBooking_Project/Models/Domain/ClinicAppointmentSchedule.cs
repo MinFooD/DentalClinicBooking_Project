@@ -13,7 +13,7 @@ public partial class ClinicAppointmentSchedule
 
     public Guid PatientId { get; set; }
 
-    public string ClinicName { get; set; }
+    public string SlotName { get; set; }
 
     public string BasicName { get; set; }
 
@@ -21,19 +21,9 @@ public partial class ClinicAppointmentSchedule
 
     public string Address { get; set; }
 
-    public string SlotName { get; set; }
+    public string ClinicName { get; set; }
 
     public string Service { get; set; }
 
     public virtual Patient Patient { get; set; }
-
-    public static string BookingCode()
-    {
-        const string prefix = "YMA";
-        string datePart = DateTime.Now.ToString("yyMMdd");
-        Random random = new Random();
-        string randomPart = random.Next(1000, 10000).ToString();
-        return prefix + datePart + randomPart;
-    }
-
 }

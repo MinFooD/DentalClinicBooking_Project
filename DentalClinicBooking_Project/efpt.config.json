@@ -43,10 +43,6 @@
          "ObjectType": 0
       },
       {
-         "Name": "[dbo].[DescriptionClinic]",
-         "ObjectType": 0
-      },
-      {
          "Name": "[dbo].[Owner]",
          "ObjectType": 0
       },

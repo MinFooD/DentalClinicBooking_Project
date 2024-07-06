@@ -50,9 +50,9 @@ namespace DentalClinicBooking_Project.Repositories
         }
 
 
-        public async Task<int> CountAsync()
+        public async Task<int> CountAsync(string searchString)
         {
-            return await dentalClinicBookingProjectContext.Clinics.CountAsync();
+            return await dentalClinicBookingProjectContext.Clinics.Where(x => x.ClinicName.Contains(searchString)).CountAsync();
         }
 
 

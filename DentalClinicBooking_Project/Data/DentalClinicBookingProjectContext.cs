@@ -32,8 +32,6 @@ public partial class DentalClinicBookingProjectContext : DbContext
 
     public virtual DbSet<Dentist> Dentists { get; set; }
 
-    public virtual DbSet<DescriptionClinic> DescriptionClinics { get; set; }
-
     public virtual DbSet<Owner> Owners { get; set; }
 
     public virtual DbSet<Patient> Patients { get; set; }
@@ -43,8 +41,9 @@ public partial class DentalClinicBookingProjectContext : DbContext
     public virtual DbSet<Slot> Slots { get; set; }
 
     public virtual DbSet<SlotOfClinic> SlotOfClinics { get; set; }
+
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-    => optionsBuilder.UseSqlServer("Server=PHUC\\PHUC;uid=sa;pwd=123456;database= DentalCLinicBookingProject;TrustServerCertificate=True");
+        => optionsBuilder.UseSqlServer("Server= PHUC\\PHUC;uid=sa;pwd=123456;database= DentalCLinicBookingProject;TrustServerCertificate=True");
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
@@ -163,7 +162,8 @@ public partial class DentalClinicBookingProjectContext : DbContext
             entity.Property(e => e.Service).HasMaxLength(100);
             entity.Property(e => e.SlotName)
                 .IsRequired()
-                .HasMaxLength(50);
+                .HasMaxLength(50)
+                .IsUnicode(false);
 
             entity.HasOne(d => d.Patient).WithMany(p => p.ClinicAppointmentSchedules)
                 .HasForeignKey(d => d.PatientId)
@@ -224,26 +224,6 @@ public partial class DentalClinicBookingProjectContext : DbContext
             entity.HasOne(d => d.Basic).WithMany(p => p.Dentists)
                 .HasForeignKey(d => d.BasicId)
                 .HasConstraintName("FK__Dentist__BasicID__5629CD9C");
-        });
-
-        modelBuilder.Entity<DescriptionClinic>(entity =>
-        {
-            entity.HasKey(e => e.DescriptionId).HasName("PK__Descript__A58A9FEBDACCDE4E");
-
-            entity.ToTable("DescriptionClinic");
-
-            entity.Property(e => e.DescriptionId)
-                .HasDefaultValueSql("(newid())")
-                .HasColumnName("DescriptionID");
-            entity.Property(e => e.ClinicId).HasColumnName("ClinicID");
-            entity.Property(e => e.Content).IsRequired();
-            entity.Property(e => e.Type)
-                .IsRequired()
-                .HasMaxLength(20);
-
-            entity.HasOne(d => d.Clinic).WithMany(p => p.DescriptionClinics)
-                .HasForeignKey(d => d.ClinicId)
-                .HasConstraintName("FK__Descripti__Clini__49C3F6B7");
         });
 
         modelBuilder.Entity<Owner>(entity =>
