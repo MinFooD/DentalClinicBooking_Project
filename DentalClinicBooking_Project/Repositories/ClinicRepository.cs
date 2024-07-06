@@ -49,7 +49,7 @@ namespace DentalClinicBooking_Project.Repositories
         }
 
 
-        public async Task<int> CountAsync(string? searchString)
+        public async Task<int> CountAsync(string searchString)
         {
             return await dentalClinicBookingProjectContext.Clinics.Where(x => x.ClinicName.Contains(searchString)).CountAsync();
         }
