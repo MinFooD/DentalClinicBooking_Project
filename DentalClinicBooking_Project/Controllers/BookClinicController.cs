@@ -24,13 +24,13 @@ namespace DentalClinicBooking_Project.Controllers
             int pageSize = 2,
             int pageNumber = 1)
         {
-            var totalRecords = await bookClinicRepository.CountAsync();
-            var totalPages = Math.Ceiling((decimal)totalRecords / pageSize);
+            var totalRecords = await bookClinicRepository.CountAsync(searchQuery);
+            var totalPages = Math.Ceiling((decimal)totalRecords / pageSize);//bao nhiêu trang
 
             ViewBag.TotalPages = totalPages;
             ViewBag.SearchQuery = searchQuery;
-            ViewBag.PageSize = pageSize;
-            ViewBag.PageNumber = pageNumber;
+            ViewBag.PageSize = pageSize;//số phần tử mỗi trang
+            ViewBag.PageNumber = pageNumber;//trang bao nhiêu
 
             var Model = await bookClinicRepository.GetAllAsync(searchQuery, pageNumber, pageSize);
 

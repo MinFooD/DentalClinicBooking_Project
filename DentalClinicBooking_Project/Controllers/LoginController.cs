@@ -39,13 +39,12 @@ namespace DentalClinicBooking_Project.Controllers
 				var account = _context.Accounts.FirstOrDefault(x => x.Gmail.Equals(_login.Gmail));
                 if(account != null && BCrypt.Net.BCrypt.Verify(_login.Password, account.Password))
                 {
+                    //HttpContext.Session.SetObject("account", Newtonsoft.Json.JsonConvert.SerializeObject(account));
+                    //session.SetString("Gmail", account.Gmail);
+                    string accountString = JsonConvert.SerializeObject(account);
+                    _contx.HttpContext.Session.SetString("account", accountString);
                     if (account.RoleId == 2)
                     {
-                        //HttpContext.Session.SetObject("account", Newtonsoft.Json.JsonConvert.SerializeObject(account));
-                        //session.SetString("Gmail", account.Gmail);
-                        string accountString = JsonConvert.SerializeObject(account);
-                        _contx.HttpContext.Session.SetString("account", accountString);
-
                         var patient = _context.Patients.Where(x => x.AccountId.Equals(account.AccountId));
                         if (patient != null)
                         {
@@ -59,8 +58,23 @@ namespace DentalClinicBooking_Project.Controllers
                             _contx.HttpContext.Session.SetString("patient", patientString);
                         }
                     }
+                    if (account.RoleId == 3)
+                    {
+                        var owner = _context.Owners.Where(x => x.AccountId.Equals(account.AccountId));
+                        if (owner != null)
+                        {
+                            //HttpContext.Session.SetString("patient", Newtonsoft.Json.JsonConvert.SerializeObject(patient));
+                            //session.SetString("PatientName",patient.PatientName);
+                            //var settings = new JsonSerializerSettings
+                            //{
+                            //    ReferenceLoopHandling = ReferenceLoopHandling.Ignore
+                            //};//cấu hình JsonSerializerSettings để bỏ qua các vòng lặp tham chiếu:
+                            string patientString = JsonConvert.SerializeObject(owner, settings);
+                            _contx.HttpContext.Session.SetString("owner", patientString);
+                        }
+                    }
 
-                    
+
                     return RedirectToAction("HomePage", "Home");
                 }
                 
@@ -79,6 +93,7 @@ namespace DentalClinicBooking_Project.Controllers
         {
             _contx.HttpContext.Session.Remove("account");
             _contx.HttpContext.Session.Remove("patient");
+            _contx.HttpContext.Session.Remove("owner");
 
             return RedirectToAction("Login", "Login");
         }
