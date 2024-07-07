@@ -45,7 +45,7 @@ namespace DentalClinicBooking_Project.Controllers
                     _contx.HttpContext.Session.SetString("account", accountString);
                     if (account.RoleId == 2)
                     {
-                        var patient = _context.Patients.Where(x => x.AccountId.Equals(account.AccountId));
+                        var patient = _context.Patients.FirstOrDefault(x => x.AccountId.Equals(account.AccountId));
                         if (patient != null)
                         {
                             //HttpContext.Session.SetString("patient", Newtonsoft.Json.JsonConvert.SerializeObject(patient));
@@ -54,13 +54,13 @@ namespace DentalClinicBooking_Project.Controllers
                             //{
                             //    ReferenceLoopHandling = ReferenceLoopHandling.Ignore
                             //};//cấu hình JsonSerializerSettings để bỏ qua các vòng lặp tham chiếu:
-                            string patientString = JsonConvert.SerializeObject(patient,settings);
+                            string patientString = JsonConvert.SerializeObject(patient, settings);
                             _contx.HttpContext.Session.SetString("patient", patientString);
                         }
                     }
                     if (account.RoleId == 3)
                     {
-                        var owner = _context.Owners.Where(x => x.AccountId.Equals(account.AccountId));
+                        var owner = _context.Owners.FirstOrDefault(x => x.AccountId.Equals(account.AccountId));
                         if (owner != null)
                         {
                             //HttpContext.Session.SetString("patient", Newtonsoft.Json.JsonConvert.SerializeObject(patient));
