@@ -10,9 +10,8 @@
         public string? BasicName { get; set; }               
         public string? Service { get; set; }
         public string? PatientName { get; set; }
-        public string? BirthDate { get; set; }
-        public string? Gender { get; set; }
-        public string? MyProperty { get; set; }
+        public DateOnly? BirthDate { get; set; }
+        public bool? Gender { get; set; }
         public string? PatientAddress { get; set; }
     }
 }

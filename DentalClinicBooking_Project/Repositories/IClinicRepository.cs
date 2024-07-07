@@ -14,6 +14,6 @@ namespace DentalClinicBooking_Project.Repositories
 
         Task<Clinic?> GetAsync(Guid id);
 
-        Task<int> CountAsync(string? searchQuery);
+        Task<int?> CountAsync(string? searchQuery);
     }
 }

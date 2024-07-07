@@ -15,7 +15,7 @@ public partial class Patient
 
     public DateOnly BirthDay { get; set; }
 
-    public bool? Gender { get; set; }
+    public bool Gender { get; set; }
 
     public string Address { get; set; }
 

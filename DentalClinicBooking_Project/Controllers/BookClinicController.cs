@@ -4,6 +4,7 @@ using DentalClinicBooking_Project.Models.ViewModels.BookingClinicModels;
 using DentalClinicBooking_Project.Repositories;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
+using System.Reflection;
 using static System.Reflection.Metadata.BlobBuilder;
 
 namespace DentalClinicBooking_Project.Controllers
@@ -13,14 +14,20 @@ namespace DentalClinicBooking_Project.Controllers
         private readonly IClinicRepository bookClinicRepository;
         private readonly IClinicAppointmentScheduleRepository clinicAppointmentScheduleRepository;
         private readonly ISlotRepository slotRepository;
+        private readonly IPatientRepository patientRepository;
+        private readonly IHttpContextAccessor _contx;
 
-        public BookClinicController(IClinicRepository bookClinicRepository, 
+        public BookClinicController(IClinicRepository bookClinicRepository,
             IClinicAppointmentScheduleRepository clinicAppointmentScheduleRepository,
-            ISlotRepository slotRepository)
+            ISlotRepository slotRepository,
+            IPatientRepository patientRepository,
+            IHttpContextAccessor contx)
         {
             this.bookClinicRepository = bookClinicRepository;
             this.clinicAppointmentScheduleRepository = clinicAppointmentScheduleRepository;
             this.slotRepository = slotRepository;
+            this.patientRepository = patientRepository;
+            _contx = contx;
         }
 
 
@@ -120,48 +127,75 @@ namespace DentalClinicBooking_Project.Controllers
         [HttpPost]
         public async Task<IActionResult> AppointmentBookingInfo([FromBody] AppointmentBookingViewModel appointmentBookingModel)
         {
-            ClinicAppointmentSchedule clinicAppointmentSchedule = new ClinicAppointmentSchedule
+            string patientString = _contx.HttpContext.Session.GetString("patient");
+            if (!string.IsNullOrEmpty(patientString))
             {
-                Code = ClinicAppointmentSchedule.BookingCode(),
-                PatientId = Guid.Parse("78987C55-FA52-48A1-9F2A-44803E560A40"),
-                ClinicName = appointmentBookingModel.ClinicName,
-                BasicName = appointmentBookingModel?.BasicName,
-                Address = appointmentBookingModel?.Address,
-                Date = appointmentBookingModel?.Date ?? DateOnly.FromDateTime(DateTime.Now),
-                SlotName = appointmentBookingModel?.SlotName,
-                Service = appointmentBookingModel?.Service,
-            };
+                var patient = JsonConvert.DeserializeObject<Patient>(patientString);
+                ClinicAppointmentSchedule clinicAppointmentSchedule = new ClinicAppointmentSchedule
+                {
+                    Code = AppointmentBookingViewModel.BookingCode(),
+                    PatientId = patient!.PatientId,
+                    ClinicName = appointmentBookingModel.ClinicName,
+                    BasicName = appointmentBookingModel?.BasicName,
+                    Address = appointmentBookingModel?.Address,
+                    Date = appointmentBookingModel?.Date ?? DateOnly.FromDateTime(DateTime.Now),
+                    SlotName = appointmentBookingModel?.SlotName,
+                    Service = appointmentBookingModel?.Service,
+                };
 
-            //Còn trường hợp người dùng không thể chọn cùng 1 slot trong một ngày
+                //Còn trường hợp người dùng không thể chọn cùng 1 slot trong một ngày
 
-            var model = await clinicAppointmentScheduleRepository.AddAsync(clinicAppointmentSchedule);
+                var model = await clinicAppointmentScheduleRepository.AddAsync(clinicAppointmentSchedule);
 
-            return Ok(new { redirectUrl = Url.Action("ConfirmBooking", new { id = model.ClinicAppointmentScheduleId }) });
+                return Ok(new { redirectUrl = Url.Action("ConfirmBooking", new { id = model.ClinicAppointmentScheduleId }) });
+            }
+            return RedirectToAction("Login", "Login");
         }
 
         [HttpGet]
         public async Task<IActionResult> ConfirmBooking(Guid id)
         {
-            var clinicAppointmentSchedule = await clinicAppointmentScheduleRepository.GetAsync(id);
 
-            // Thiếu thông tin bệnh nhân
-            var model = new AppointmentBookingSuccess
+            string patientString = _contx.HttpContext.Session.GetString("patient");
+            if (!string.IsNullOrEmpty(patientString))
             {
-                ClinicName = clinicAppointmentSchedule?.ClinicName!,
-                ClinicAddress = clinicAppointmentSchedule?.Address!,
-                Code = clinicAppointmentSchedule?.Code!,
-                Date = clinicAppointmentSchedule?.Date ?? DateOnly.FromDateTime(DateTime.Now)!,
-                SlotName = clinicAppointmentSchedule?.SlotName!,
-                BasicName = clinicAppointmentSchedule?.BasicName!,
-                Service = clinicAppointmentSchedule?.Service!
-            };
+                var patient = JsonConvert.DeserializeObject<Patient>(patientString);
+                var clinicAppointmentSchedule = await clinicAppointmentScheduleRepository.GetAsync(id);
 
-            return View(model);
+                // Thiếu thông tin bệnh nhân
+                var model = new AppointmentBookingSuccess
+                {
+                    ClinicName = clinicAppointmentSchedule?.ClinicName!,
+                    ClinicAddress = clinicAppointmentSchedule?.Address!,
+                    Code = clinicAppointmentSchedule?.Code!,
+                    Date = clinicAppointmentSchedule?.Date ?? DateOnly.FromDateTime(DateTime.Now)!,
+                    SlotName = clinicAppointmentSchedule?.SlotName!,
+                    BasicName = clinicAppointmentSchedule?.BasicName!,
+                    Service = clinicAppointmentSchedule?.Service!,
+                    PatientName = patient?.PatientName,
+                    BirthDate = patient?.BirthDay,
+                    Gender = patient?.Gender,
+                    PatientAddress = patient?.Address
+                };
+
+                return View(model);
+            }
+            return RedirectToAction("Login", "Login");
         }
 
         [HttpGet]
-        public IActionResult ViewSchedule()
+        public async Task<IActionResult> ViewSchedule()
         {
+            //var patient = await patientRepository.GetAsync(Guid.Parse("78987C55-FA52-48A1-9F2A-44803E560A40"));
+            //var model = new ClinicAppointmentViewModel
+            //{
+            //    PatientName = patient?.PatientName,
+            //    BirthDate = patient?.BirthDay,
+            //    Gender = patient?.Gender,
+            //    PatientAddress = patient?.Address,
+            //    ClinicAppointmentSchedules = patient!.ClinicAppointmentSchedules!,
+            //};
+
             return View();
         }
 

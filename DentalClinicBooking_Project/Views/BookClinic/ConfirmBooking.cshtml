@@ -66,30 +66,33 @@
                 </div>
             </dl>
 
-            @*Thông tin bệnh nhân chưa hoàn thành*@
+            
             <dl class="info-list">
                 <p class="info-heading">Thông tin bệnh nhân</p>
                 <div class="info-row">
                     <dt class="info-title">Bệnh nhân</dt>
-                    <dd class="info-value">svw</dd>
+                    <dd class="info-value">@Model.PatientName</dd>
                 </div>
                 <div class="info-row">
                     <dt class="info-title">Ngày sinh</dt>
-                    <dd class="info-value">01/01/1990</dd>
+                    <dd class="info-value">@Model.BirthDate</dd>
                 </div>
                 <div class="info-row">
                     <dt class="info-title">Giới tính</dt>
-                    <dd class="info-value">Nam</dd>
+                    <dd class="info-value">@Model.Gender</dd>
                 </div>
                 <div class="info-row">
                     <dt class="info-title">Địa chỉ</dt>
-                    <dd class="info-value">1412</dd>
+                    <dd class="info-value">@Model.PatientAddress</dd>
                 </div>
             </dl>
         </div>
         <div class="footer-buttons">
             <div class="button-container">
-                <a class="view-button" href="/dat-kham/lich-kham">Xem phiếu khám</a>
+                <a class="view-button"
+                   asp-area=""
+                   asp-controller="BookClinic"
+                   asp-action="ViewSchedule">Xem phiếu khám</a>
             </div>
         </div>
     </div>
