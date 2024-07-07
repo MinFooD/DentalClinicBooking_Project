@@ -6,6 +6,12 @@
     string accountString = HttpContextAccessor.HttpContext.Session.GetString("account");
     // var account = JsonConvert.DeserializeObject<Account>(accountString);
     var account = !string.IsNullOrEmpty(accountString) ? JsonConvert.DeserializeObject<Account>(accountString) : null;
+    string patientString = HttpContextAccessor.HttpContext.Session.GetString("patient");
+    // var account = JsonConvert.DeserializeObject<Account>(accountString);
+    var patient = !string.IsNullOrEmpty(patientString) ? JsonConvert.DeserializeObject<Patient>(patientString) : null;
+    string ownerString = HttpContextAccessor.HttpContext.Session.GetString("owner");
+    // var account = JsonConvert.DeserializeObject<Account>(accountString);
+    var owner = !string.IsNullOrEmpty(ownerString) ? JsonConvert.DeserializeObject<Owner>(ownerString) : null;
 }
 
 <!DOCTYPE html>
@@ -47,6 +53,7 @@
                 }
                 else
                 {
+                    @* <li class="nav-item"><a asp-area="" asp-controller="HashPassword" asp-action="HashPassword" class="nav-link">Mã hóa</a></li> *@
                     <li class="nav-item"><a asp-area="" asp-controller="BookClinic" asp-action="AllClinics" class="nav-link">Đặt khám</a></li>
                     <li class="nav-item"><a href="#" class="nav-link">Xem lịch khám</a></li>
                     <li class="nav-item"><a asp-area="" asp-controller="Dentist" asp-action="ShowAllDentist" asp-route-page="1" class="nav-link">Nha sĩ</a></li>
