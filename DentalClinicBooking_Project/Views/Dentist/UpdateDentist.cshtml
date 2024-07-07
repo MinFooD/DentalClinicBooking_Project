@@ -1,0 +1,192 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Update Dentist</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+    />
+    <link
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <link
+      href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css"
+      rel="stylesheet"
+    />
+
+    <link rel="stylesheet" href="./style.css" />
+  </head>
+  <body>
+    <div class="background"></div>
+    <div class="container">
+      <h1>Danh sách Bác sĩ</h1>
+      <div class="doctors-list">
+        <div class="doctor" onclick="showDetails(this)">
+          <div class="image-container">
+            <img
+              src="https://nhakhoanhantam.com/stmresource/files/rang-su/phuc-hinh-rang-su-la-gi-co-anh-huong-den-suc-khoe-khong.jpg"
+              alt="Doctor 1"
+            />
+          </div>
+          <h2>Dr. Nguyễn Văn A</h2>
+          <div class="doctor-info" style="display: none">
+            <span class="doctor-email">nguyenvana@example.com</span>
+            <span class="doctor-password">password123</span>
+            <span class="doctor-experience">10 years</span>
+            <span class="doctor-description">Chuyên khoa nội tổng hợp</span>
+          </div>
+        </div>
+        <div class="doctor" onclick="showDetails(this)">
+          <div class="image-container">
+            <img
+              src="https://cdn.tuoitre.vn/thumb_w/480/2021/7/30/bs-phung-16276352494101117208235-1627637885130908378938.png"
+              alt="Doctor 1"
+            />
+          </div>
+          <h2>Dr. Nguyễn Văn A</h2>
+          <div class="doctor-info" style="display: none">
+            <span class="doctor-email">nguyenvana@example.com</span>
+            <span class="doctor-password">password123</span>
+            <span class="doctor-experience">10 years</span>
+            <span class="doctor-description">Chuyên khoa nội tổng hợp</span>
+          </div>
+        </div>
+        <div class="doctor" onclick="showDetails(this)">
+          <div class="image-container">
+            <img
+              src="https://cdn.tuoitre.vn/thumb_w/480/2021/7/30/bs-phung-16276352494101117208235-1627637885130908378938.png"
+              alt="Doctor 1"
+            />
+          </div>
+          <h2>Dr. Nguyễn Văn A</h2>
+          <div class="doctor-info" style="display: none">
+            <span class="doctor-email">nguyenvana@example.com</span>
+            <span class="doctor-password">password123</span>
+            <span class="doctor-experience">10 years</span>
+            <span class="doctor-description">Chuyên khoa nội tổng hợp</span>
+          </div>
+        </div>
+        <div class="doctor" onclick="showDetails(this)">
+          <div class="image-container">
+            <img
+              src="https://cdn.tuoitre.vn/thumb_w/480/2021/7/30/bs-phung-16276352494101117208235-1627637885130908378938.png"
+              alt="Doctor 1"
+            />
+          </div>
+          <h2>Dr. Nguyễn Văn A</h2>
+          <div class="doctor-info" style="display: none">
+            <span class="doctor-email">nguyenvana@example.com</span>
+            <span class="doctor-password">password123</span>
+            <span class="doctor-experience">10 years</span>
+            <span class="doctor-description">Chuyên khoa nội tổng hợp</span>
+          </div>
+        </div>
+        <div class="doctor" onclick="showDetails(this)">
+          <div class="image-container">
+            <img
+              src="https://cdn.tuoitre.vn/thumb_w/480/2021/7/30/bs-phung-16276352494101117208235-1627637885130908378938.png"
+              alt="Doctor 1"
+            />
+          </div>
+          <h2>Dr. Nguyễn Văn A</h2>
+          <div class="doctor-info" style="display: none">
+            <span class="doctor-email">nguyenvana@example.com</span>
+            <span class="doctor-password">password123</span>
+            <span class="doctor-experience">10 years</span>
+            <span class="doctor-description">Chuyên khoa nội tổng hợp</span>
+          </div>
+        </div>
+        <div class="doctor" onclick="showDetails(this)">
+          <div class="image-container">
+            <img
+              src="https://cdn.tuoitre.vn/thumb_w/480/2021/7/30/bs-phung-16276352494101117208235-1627637885130908378938.png"
+              alt="Doctor 1"
+            />
+          </div>
+          <h2>Dr. Nguyễn Văn A</h2>
+          <div class="doctor-info" style="display: none">
+            <span class="doctor-email">nguyenvana@example.com</span>
+            <span class="doctor-password">password123</span>
+            <span class="doctor-experience">10 years</span>
+            <span class="doctor-description">Chuyên khoa nội tổng hợp</span>
+          </div>
+        </div>
+        <div class="doctor" onclick="showDetails(this)">
+          <div class="image-container">
+            <img
+              src="https://cdn.tuoitre.vn/thumb_w/480/2021/7/30/bs-phung-16276352494101117208235-1627637885130908378938.png"
+              alt="Doctor 1"
+            />
+          </div>
+          <h2>Dr. Nguyễn Văn A</h2>
+          <div class="doctor-info" style="display: none">
+            <span class="doctor-email">nguyenvana@example.com</span>
+            <span class="doctor-password">password123</span>
+            <span class="doctor-experience">10 years</span>
+            <span class="doctor-description">Chuyên khoa nội tổng hợp</span>
+          </div>
+        </div>
+        <div id="doctor-details" class="doctor-details" hidden>
+          <form>
+            <h2 id="detail-name"></h2>
+            <span class="close" onclick="closeDoctorDetail()">&times;</span>
+            <div id="detail-img-container">
+              <img id="detail-img" src="" alt="Dr. Nguyễn Văn A" />
+              <i
+                id="camera-icon"
+                class="fas fa-camera"
+                onclick="openModal()"
+              ></i>
+            </div>
+            <label for="name">Tên:</label>
+            <input type="text" id="name" name="name" />
+
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" />
+
+            <label for="password">Mật khẩu:</label>
+            <input type="password" id="password" name="password" />
+
+            <label for="knl_viec">Kinh nghiệm làm việc:</label>
+            <input type="text" id="knl_viec" name="knl_viec" />
+
+            <label for="description">Mô tả:</label>
+            <textarea id="description" name="description" rows="4"></textarea>
+
+            <input type="submit" value="Cập nhật" />
+          </form>
+          <!-- <div style="text-align: center">
+            <button onclick="closeDetails()">Đóng</button>
+          </div> -->
+        </div>
+      </div>
+    </div>
+    <!-- The Modal -->
+    <div id="urlModal" class="modal">
+      <div class="modal-content">
+        <div class="input-container">
+          <label for="new-image-url"
+            ><strong>Nhập URL hình ảnh mới:</strong></label
+          >
+          <input
+            style="border: solid 1px"
+            type="text"
+            id="new-image-url"
+            name="new-image-url"
+          />
+          <span class="close" onclick="closeModal()">&times;</span>
+        </div>
+        <button class="btn-update-img" onclick="updateImage()">
+          Cập nhật ảnh
+        </button>
+      </div>
+    </div>
+    <script src="./script.js"></script>
+    <script src="./../HF/script.js"></script>
+    <script src="https://code.ionicframework.com/ionicons/2.0.1/ionicons.min.js"></script>
+  </body>
+</html>
