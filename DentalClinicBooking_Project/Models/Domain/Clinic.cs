@@ -13,9 +13,9 @@ public partial class Clinic
 
     public string MainImage { get; set; }
 
-    public Guid? OwnerId { get; set; }
-
     public string Description { get; set; }
+
+    public Guid? OwnerId { get; set; }
 
     public virtual ICollection<Basic> Basics { get; set; } = new List<Basic>();
 

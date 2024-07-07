@@ -4,6 +4,7 @@ using DentalClinicBooking_Project.Models.Domain;
 using DentalClinicBooking_Project.Models.ViewModels.BookingClinicModels;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using System.Linq;
 using static System.Runtime.InteropServices.JavaScript.JSType;
 
 
@@ -49,9 +50,9 @@ namespace DentalClinicBooking_Project.Repositories
         }
 
 
-        public async Task<int> CountAsync(string searchString)
+        public async Task<int?> CountAsync(string? searchString)
         {
-            return await dentalClinicBookingProjectContext.Clinics.Where(x => x.ClinicName.Contains(searchString)).CountAsync();
+            return await dentalClinicBookingProjectContext.Clinics.Where(x => x.ClinicName.Contains(searchString ?? string.Empty)).CountAsync();
         }
     }
 }
