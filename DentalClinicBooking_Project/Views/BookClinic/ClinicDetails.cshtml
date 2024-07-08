@@ -19,7 +19,11 @@
 
     string patientString = HttpContextAccessor.HttpContext.Session.GetString("patient");
     // var account = JsonConvert.DeserializeObject<Account>(accountString);
-    var patient = !string.IsNullOrEmpty(accountString) ? JsonConvert.DeserializeObject<Patient>(patientString) : null;
+    var patient = !string.IsNullOrEmpty(patientString) ? JsonConvert.DeserializeObject<Patient>(patientString) : null;
+
+    string ownerString = HttpContextAccessor.HttpContext.Session.GetString("owner");
+    // var account = JsonConvert.DeserializeObject<Account>(accountString);
+    var owner = !string.IsNullOrEmpty(ownerString) ? JsonConvert.DeserializeObject<Owner>(ownerString) : null;
 }
 
 <!DOCTYPE html>

@@ -1,0 +1,58 @@
+@model List<DentalClinicBooking_Project.Models.Domain.Dentist>
+@TempData["result"]
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+    />
+    <link
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <link
+      href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css"
+      rel="stylesheet"
+    />
+	<link href="~/css/dentist/showdentistforowner.css" rel="stylesheet" />
+	
+  </head>
+  <body>
+    <div class="background"></div>
+    <div class="container">
+      <h1>Danh sách Bác sĩ</h1>
+      <div class="doctors-list">
+            @if(Model!= null && Model.Any())
+            {
+                foreach (var item in Model)
+                {
+                    
+                    <div class="doctor">
+                        <a asp-area="" asp-controller="Dentist" asp-action="UpdateDentist" asp-route-id="@item.DentistId">
+                        <div class="image-container">
+                                <img src=@item.Image
+                                     alt="Dentist @item.DentistName's photo" />
+                        </div>
+                            <h2>@item.DentistName</h2>
+                            
+                        <div class="doctor-info" style="display: none">
+                                <span class="doctor-email">@item.Account.Gmail</span>
+                                <span class="doctor-password">@item.Account.Password</span>
+                                <span class="doctor-experience">@item.Experience</span>
+                                <span class="doctor-description">@item.Description</span>
+                        </div>
+                        </a>
+                    </div>
+                    
+                }
+            }
+      </div>
+    </div>
+    <script src="./script.js"></script>
+    <script src="https://code.ionicframework.com/ionicons/2.0.1/ionicons.min.js"></script>
+  </body>
+</html>

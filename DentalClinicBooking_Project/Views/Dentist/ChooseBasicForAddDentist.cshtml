@@ -1,0 +1,28 @@
+﻿@model DentalClinicBooking_Project.Models.ViewModels.Dentist.BasicWithClinicName
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8" />
+    <title>Hiển Thị Cơ Sở</title>
+	<link href="~/css/dentist/choosebasicforadddentist.css" rel="stylesheet" />
+</head>
+<body>
+    <div class="container">
+        <div class="header">Chọn cơ sở</div>
+
+        @if(Model!=null)
+        {
+            foreach (var basic in Model.basics)
+            {
+                <div class="clinic">
+                    <a asp-area="" asp-controller="Dentist" asp-action="AddDentist" asp-route-basicId="@basic.BasicId">
+                    <h2>@Model.clinicName - @basic.BasicName</h2>
+                    <p><span>Số điện thoại: @basic.Phone</span></p>
+                    <p><span>Địa chỉ: @basic.Address</span> </p>
+                    </a>               
+                </div>
+            }
+        }
+    </div>
+</body>
+</html>

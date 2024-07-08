@@ -4,6 +4,7 @@
 	{
 		public Guid DentistId { get; set; }
 
+		public Guid ClinicId { get; set; }
 		public string DentistName { get; set; } = null!;
 
 		public string Image { get; set; } = null!;

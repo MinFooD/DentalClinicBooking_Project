@@ -1,0 +1,640 @@
+/* Thiết lập hình nền mờ */
+/*.background {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url("https://png.pngtree.com/thumb_back/fh260/back_our/20190621/ourmid/pngtree-dental-beauty-oral-health-background-image_195889.jpg");*/ /* Đường dẫn đến hình ảnh của bạn */
+    /*background-size: contain;
+    background-position: center;
+    filter: blur(10px);*/ /* Độ mờ của hình nền */
+    /*z-index: -1;*/ /* Đảm bảo hình nền nằm phía sau nội dung chính */
+/*}
+
+html {
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: #fff;
+    color: #333;
+}
+
+.container {
+    width: 74%;
+    margin: 50px auto;
+    padding: 20px;
+    background-color: #fff;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    position: relative;
+    min-height: 70vh;
+}
+
+.doctors-list {*/
+    /* background-color: #fff; */
+    /* width: 2000px; */
+    /* max-width: 500px; */
+    /*height: 100%;
+    width: 100%;
+    text-align: left;
+    border-radius: 10px;
+    padding: 40px 30px;*/
+    /* box-shadow: 0 0 15px rgba(0, 0, 0, 0.1); */
+    /*position: relative;*/ /* Thay đổi position từ absolute thành relative */
+/*}
+
+h1 {
+    text-align: center;
+    color: #000;
+    margin-bottom: 20px;
+    font-size: 2.5em;
+    text-transform: uppercase;
+    margin-bottom: 30px;
+    font-weight: bolder;
+}
+
+.doctors-list {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-bottom: 40px;
+    gap: 20px;
+    padding: 20px;
+}
+a {
+    text-decoration: none;
+}
+
+    a:hover {
+        text-decoration: none;
+    }
+
+    .doctor {
+        width: 200px;
+        background-color: #fff;
+        padding: 15px;
+        border-radius: 10px;
+        text-align: center;
+        cursor: pointer;
+        transition: transform 0.3s, box-shadow 0.3s;
+        border: 1px solid #000;
+        overflow: hidden;
+        position: relative;
+    }
+
+    .doctor:hover {
+        transform: translateY(-10px);
+        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    }
+
+    .doctor img {
+        width: 80%;
+        height: auto;
+        border-radius: 50%;
+        margin-bottom: 10px;
+        transition: transform 0.3s;
+    }
+
+    .doctor:hover img {
+        transform: scale(1.1);
+    }
+
+    .doctor h2 {
+        font-size: 1.2em;
+        color: #000;
+        margin: 15px 0;
+    }
+
+    .doctor:hover .doctor-info {
+        display: block;
+    }
+
+.doctor-info span {
+    display: block;
+    color: #555;
+    margin-top: 5px;
+}
+
+.doctor-info .doctor-email,
+.doctor-info .doctor-experience {
+    font-size: 0.9em;
+}
+
+.doctor-details {
+    max-height: 70vh;
+    max-width: 40vw;
+    width: 100%;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #ffffff;
+    padding: 20px;
+    border: 2px solid #3498db;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+    overflow-y: auto;
+}
+
+    .doctor-details h2 {
+        text-align: center;
+        margin-bottom: 20px;
+        color: #3498db;*/ /* Màu xanh dương */
+    /*}
+
+.container-img {
+    width: 100%;
+    height: 150px;*/ /* Thiết lập chiều cao cố định cho container */
+    /*overflow: hidden;*/ /* Đảm bảo hình ảnh không tràn ra ngoài */
+/*}
+
+    .container-img img {
+        width: 100%;
+        height: auto;*/ /* Đảm bảo hình ảnh tự động điều chỉnh chiều cao để không bị tràn ra ngoài */
+        /*object-fit: cover;*/ /* Đảm bảo ảnh không bị lệch và điền đầy đủ trong container */
+    /*}
+
+.doctor-details img {
+    display: block;
+    margin: 0 auto 20px auto;
+    max-width: 150px;
+    border-radius: 50%;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.doctor-details form {
+    margin-top: 20px;
+}
+
+    .doctor-details form label {
+        display: block;
+        margin-bottom: 5px;
+        font-weight: bold;
+        color: #555;
+    }
+
+    .doctor-details form input,
+    .doctor-details form textarea {
+        width: 100%;
+        padding: 10px;
+        margin-top: 5px;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+        font-size: 14px;
+    }
+
+        .doctor-details form input[type="submit"] {
+            margin-top: 20px;
+            background-color: #3498db;*/ /* Màu xanh dương */
+            /*color: white;
+            border: none;
+            cursor: pointer;
+            padding: 12px 20px;
+            font-size: 16px;
+            text-transform: uppercase;
+            transition: background-color 0.3s ease;
+        }
+
+            .doctor-details form input[type="submit"]:hover {
+                background-color: #2980b9;*/ /* Màu xanh dương nhạt */
+            /*}
+
+.doctor-details button {
+    margin-top: 10px;
+    background-color: #ecf0f1;*/ /* Màu xám nhạt */
+    /*color: #333;*/ /* Màu chữ xám đậm */
+    /*border: none;
+    padding: 12px 20px;
+    cursor: pointer;
+    border-radius: 5px;
+    font-size: 16px;
+    text-transform: uppercase;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+    .doctor-details button:hover {
+        background-color: #bdc3c7;*/ /* Màu xám nhạt hơn */
+        /*color: #000;*/ /* Màu chữ đen */
+    /*}*/
+/* Add this to your existing CSS */
+/*#detail-img-container {
+    position: relative;
+    display: flex;
+    object-fit: cover;
+}
+
+#detail-img {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+}
+
+#camera-icon {
+    position: absolute;
+    bottom: 0;
+    right: 35%;
+    background-color: white;
+    border: 1px solid #ccc;
+    border-radius: 50%;
+    padding: 5px;
+    cursor: pointer;
+}
+
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgb(0, 0, 0);
+    background-color: rgba(0, 0, 0, 0.4);
+}
+
+.modal-content {
+    background-color: #fefefe;
+    margin: 15% auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%;
+    max-width: 500px;
+}
+
+.close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+    .close:hover,
+    .close:focus {
+        color: black;
+        text-decoration: none;
+        cursor: pointer;
+    }*/
+
+/* Input field styling */
+/*#new-image-url {
+    flex: 1;
+    padding: 10px;
+    margin-left: 1px;
+    font-size: 16px;
+    border-radius: 10px;
+}*/
+/* Button styling */
+/* Button styling */
+/*.btn-update-img {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px 20px;
+    font-size: 16px;
+    margin: 20px auto 0;*/ /* Center button and adjust top margin */
+    /*background-color: #aaa;
+    color: white;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    border-radius: 10px;
+}
+
+    .btn-update-img:hover {
+        background-color: #3498db;
+    }
+
+.image-container {*/
+    /* width: 200px; */
+    /*height: 150px;
+    overflow: hidden;*/ /* Đảm bảo hình ảnh không tràn ra ngoài thẻ div */
+/*}
+
+    .image-container img {*/
+        /* max-width: 100%;
+  max-height: 100%; */
+        /*width: 100%;
+        height: 100%;
+        object-fit: cover;*/ /* Đảm bảo toàn bộ hình ảnh nằm gọn trong khung div */ /* Đảm bảo hình ảnh được cắt để vừa với khung div */
+    /*}*/
+
+/* Thiết lập hình nền mờ */
+.background {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url("https://png.pngtree.com/thumb_back/fh260/back_our/20190621/ourmid/pngtree-dental-beauty-oral-health-background-image_195889.jpg"); /* Đường dẫn đến hình ảnh của bạn */
+    background-size: contain;
+    background-position: center;
+    filter: blur(10px); /* Độ mờ của hình nền */
+    z-index: -1; /* Đảm bảo hình nền nằm phía sau nội dung chính */
+}
+
+html {
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: #f4f7f6;
+    color: #333;
+}
+
+.container {
+    width: 74%;
+    margin: 20px auto;
+    padding: 20px;
+    /* background-image: url("https://png.pngtree.com/thumb_back/fh260/back_our/20190621/ourmid/pngtree-dental-beauty-oral-health-background-image_195889.jpg");  */
+    background-color: #ffffff;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    position: relative;
+    min-height: 70vh;
+}
+
+h1 {
+    text-align: center;
+    color: #2c3e50;
+    margin-bottom: 20px;
+    font-size: 2.5em;
+    text-transform: uppercase;
+    margin-bottom: 30px;
+    font-weight: bolder;
+}
+
+.doctors-list {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-bottom: 40px;
+    gap: 20px;
+    padding: 20px;
+}
+
+.doctor {
+    width: 200px;
+    height: 250px; /* Thiết lập chiều cao cứng cho các ô */
+    background-color: #ffffff;
+    padding: 15px;
+    border-radius: 10px;
+    text-align: center;
+    cursor: pointer;
+    transition: transform 0.3s, box-shadow 0.3s;
+    border: 2px solid #000;
+    overflow: hidden;
+    position: relative;
+}
+
+    .doctor:hover {
+        transform: translateY(-10px);
+        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    }
+
+    .doctor img {
+        width: 100px;
+        height: 100px;
+        border-radius: 10%; /* Chuyển hình ảnh thành hình vuông hoặc hình chữ nhật */
+        margin-bottom: 10px;
+        transition: transform 0.3s;
+    }
+
+    .doctor:hover img {
+        transform: scale(1.1);
+    }
+
+    .doctor h2 {
+        font-size: 1.2em;
+        color: #34495e;
+        margin: 15px 0;
+        font-weight:bold;
+    }
+
+.doctor-info span {
+    display: block;
+    color: #555;
+    margin-top: 5px;
+}
+
+.doctor-info .doctor-email,
+.doctor-info .doctor-experience {
+    font-size: 0.9em;
+}
+
+.doctor-details {
+    max-height: 70vh;
+    max-width: 40vw;
+    width: 100%;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #ffffff;
+    padding: 20px;
+    border: 2px solid #3498db;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+    overflow-y: auto;
+}
+
+    .doctor-details h2 {
+        text-align: center;
+        margin-bottom: 20px;
+        color: #3498db; /* Màu xanh dương */
+    }
+
+.container-img {
+    width: 100%;
+    height: 150px; /* Thiết lập chiều cao cố định cho container */
+    overflow: hidden; /* Đảm bảo hình ảnh không tràn ra ngoài */
+}
+
+    .container-img img {
+        width: 100%;
+        height: auto; /* Đảm bảo hình ảnh tự động điều chỉnh chiều cao để không bị tràn ra ngoài */
+        object-fit: cover; /* Đảm bảo ảnh không bị lệch và điền đầy đủ trong container */
+    }
+
+.doctor-details img {
+    display: block;
+    margin: 0 auto 20px auto;
+    max-width: 150px;
+    border-radius: 50%;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.doctor-details form {
+    margin-top: 20px;
+}
+
+    .doctor-details form label {
+        display: block;
+        margin-bottom: 5px;
+        font-weight: bold;
+        color: #555;
+    }
+
+    .doctor-details form input,
+    .doctor-details form textarea {
+        width: 100%;
+        padding: 10px;
+        margin-top: 5px;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+        font-size: 14px;
+    }
+
+        .doctor-details form input[type="submit"] {
+            margin-top: 20px;
+            background-color: #3498db; /* Màu xanh dương */
+            color: white;
+            border: none;
+            cursor: pointer;
+            padding: 12px 20px;
+            font-size: 16px;
+            text-transform: uppercase;
+            transition: background-color 0.3s ease;
+        }
+
+            .doctor-details form input[type="submit"]:hover {
+                background-color: #2980b9; /* Màu xanh dương nhạt */
+            }
+
+.doctor-details button {
+    margin-top: 10px;
+    background-color: #ecf0f1; /* Màu xám nhạt */
+    color: #333; /* Màu chữ xám đậm */
+    border: none;
+    padding: 12px 20px;
+    cursor: pointer;
+    border-radius: 5px;
+    font-size: 16px;
+    text-transform: uppercase;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+    .doctor-details button:hover {
+        background-color: #bdc3c7; /* Màu xám nhạt hơn */
+        color: #000; /* Màu chữ đen */
+    }
+
+#detail-img-container {
+    position: relative;
+    display: flex;
+    object-fit: cover;
+}
+
+#detail-img {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+}
+
+#camera-icon {
+    position: absolute;
+    bottom: 0;
+    right: 35%;
+    background-color: white;
+    border: 1px solid #ccc;
+    border-radius: 50%;
+    padding: 5px;
+    cursor: pointer;
+}
+
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgb(0, 0, 0);
+    background-color: rgba(0, 0, 0, 0.4);
+}
+
+.modal-content {
+    background-color: #fefefe;
+    margin: 15% auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%;
+    max-width: 500px;
+}
+
+.close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+    .close:hover,
+    .close:focus {
+        color: black;
+        text-decoration: none;
+        cursor: pointer;
+    }
+
+#new-image-url {
+    flex: 1;
+    padding: 10px;
+    margin-left: 1px;
+    font-size: 16px;
+    border-radius: 10px;
+}
+
+.btn-update-img {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px 20px;
+    font-size: 16px;
+    margin: 20px auto 0; /* Center button and adjust top margin */
+    background-color: #aaa;
+    color: white;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    border-radius: 10px;
+}
+
+    .btn-update-img:hover {
+        background-color: #3498db;
+    }
+
+.image-container {
+    height: 150px;
+    overflow: hidden; /* Đảm bảo hình ảnh không tràn ra ngoài thẻ div */
+}
+
+    .image-container img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover; /* Đảm bảo toàn bộ hình ảnh nằm gọn trong khung div */
+    }
+
+    a{
+        text-decoration:none
+    }
+    a:hover{
+        text-decoration:none
+    }
