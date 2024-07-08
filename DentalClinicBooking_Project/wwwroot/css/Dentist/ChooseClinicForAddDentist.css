@@ -10,11 +10,18 @@
     /* Khoảng cách giữa các phần tử */
     padding: 1rem;
 }
+a {
+    text-decoration: none
+}
+
+    a:hover {
+        text-decoration: none
+    }
 
     .pagination-container li {
         list-style: none;
         /* Loại bỏ dấu chấm của danh sách */
-    }
+}   
 
     .pagination-container a {
         display: block;

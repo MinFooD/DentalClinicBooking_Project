@@ -1,5 +1,19 @@
 ﻿@model DentalClinicBooking_Project.Models.ViewModels.SearchDentist
+@using DentalClinicBooking_Project.Models.Domain
+@using Newtonsoft.Json
 
+@inject IHttpContextAccessor HttpContextAccessor
+@{
+    string accountString = HttpContextAccessor.HttpContext.Session.GetString("account");
+    // var account = JsonConvert.DeserializeObject<Account>(accountString);
+    var account = !string.IsNullOrEmpty(accountString) ? JsonConvert.DeserializeObject<Account>(accountString) : null;
+    string patientString = HttpContextAccessor.HttpContext.Session.GetString("patient");
+    // var account = JsonConvert.DeserializeObject<Account>(accountString);
+    var patient = !string.IsNullOrEmpty(patientString) ? JsonConvert.DeserializeObject<Patient>(patientString) : null;
+    string ownerString = HttpContextAccessor.HttpContext.Session.GetString("owner");
+    // var account = JsonConvert.DeserializeObject<Account>(accountString);
+    var owner = !string.IsNullOrEmpty(ownerString) ? JsonConvert.DeserializeObject<Owner>(ownerString) : null;
+}
 <!DOCTYPE html>
 <html lang="en">
 
@@ -100,9 +114,21 @@
                         </div>
                     </a>
                     <div class="appointment-button-container">
-                        <a class="appointment-button" href="#">
-                            Đặt khám
-                        </a>
+                        @if (account!=null && account.RoleId==2)
+                        {
+                            <a class="appointment-button" asp-area="" asp-controller="BookClinic" asp-action="BookingClinic" asp-route-id="@item.ClinicId">
+                                Đặt khám
+                            </a>
+                        }
+                        else if (account!= null && account.RoleId == 3)
+                        {
+                        }
+                        else
+                        {
+                            <a class="appointment-button" asp-area="" asp-controller="Login" asp-action="Login" asp-route-id="@item.ClinicId">
+                                Đặt khám
+                            </a>
+                        }
                     </div>
                 </div>
             }

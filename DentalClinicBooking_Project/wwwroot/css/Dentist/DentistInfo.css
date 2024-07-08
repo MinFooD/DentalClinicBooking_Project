@@ -146,6 +146,11 @@ body {
 
 .intro-content, .experience-content, .awards-content {
     margin-top: 1rem;
+    border: 2px solid;
+    border-radius: 15px;
+}
+.form-load-data{
+    margin: 0 10px 0 10px;
 }
 
 

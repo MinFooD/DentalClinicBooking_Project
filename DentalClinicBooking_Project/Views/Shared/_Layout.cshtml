@@ -25,6 +25,8 @@
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 	<link href="~/css/header+footer/hf.css" rel="stylesheet" />
+    <link href='https://cdn.jsdelivr.net/npm/froala-editor@latest/css/froala_editor.pkgd.min.css' rel='stylesheet' type='text/css' />
+    <script type='text/javascript' src='https://cdn.jsdelivr.net/npm/froala-editor@latest/js/froala_editor.pkgd.min.js'></script>
 </head>
 
 <!-- NavBar -->
@@ -38,7 +40,7 @@
                 @if(account!=null && account.RoleId == 3)
                 {
                     <li class="nav-item"> <a class="nav-link">Thêm phòng khám</a></li>
-                    <li class="nav-item"> <a class="nav-link">Thêm nha sĩ</a> </li>
+                    <li class="nav-item"> <a asp-area="" asp-controller="Dentist" asp-action="ChooseClinicForAddDentist" class="nav-link">Thêm nha sĩ</a> </li>
                     <li class="nav-item">
                         <div class="dropdown">
                             <button class="dropbtn">
@@ -46,7 +48,7 @@
                             </button>
                             <div class="dropdown-content">
                                 <a>Phòng khám</a>
-                                <a>Nha sĩ</a>
+                                <a asp-area="" asp-controller="Dentist" asp-action="ShowDentistForOwner">Nha sĩ</a>
                             </div>
                         </div>
                     </li>
@@ -58,7 +60,6 @@
                     <li class="nav-item"><a asp-area="" asp-controller="BookClinic" asp-action="ViewSchedule" class="nav-link">Xem lịch khám</a></li>
                     <li class="nav-item"><a asp-area="" asp-controller="Dentist" asp-action="ShowAllDentist" asp-route-page="1" class="nav-link">Nha sĩ</a></li>
                     <li class="nav-item"><a asp-area="" asp-controller="Service" asp-action="Service" class="nav-link">Dịch vụ</a></li>
-                    <li class="nav-item"><a asp-area="" asp-controller="Contact" asp-action="ChooseClinicContact" class="nav-link">Liên hệ</a></li>
 
                 }
                 </ul>

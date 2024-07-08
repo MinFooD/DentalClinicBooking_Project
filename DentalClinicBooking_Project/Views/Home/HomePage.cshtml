@@ -78,7 +78,7 @@
 					<!-- Clinic items go here -->				
 					@foreach (var item in Model.clinicWithAddress)
 					{
-						<a href="#" class="clinic-item">
+						<a asp-area="" asp-controller="BookClinic" asp-action="ClinicDetails" asp-route-id="@item.ClinicId" class="clinic-item">
 							<div class="clinic-info">
 								<div class="imgClinic">
 									<img style="height:150px;width:250px" src="@item.MainImage;" alt="ảnh phòng khám @item.ClinicName">
@@ -103,7 +103,7 @@
 					<p style="text-align: justify;">
 						Hội đồng tham vấn y khoa cùng đội ngũ biên tập viên là các bác sĩ, dược sĩ đảm bảo nội dung chúng tôi cung cấp chính xác về mặt y khoa và cập nhật những thông tin mới nhất.
 					</p>
-					<a href="#" class="link" style="display: flex; text-align: center; justify-content: center;">
+					<a asp-area="" asp-controller="Dentist" asp-action="ShowAllDentist" class="link" style="display: flex; text-align: center; justify-content: center;">
 						<p style="margin-bottom: 0 ; margin-right: 0;">Đội ngũ chuyên gia</p>
 						<svg width="10" height="10" viewBox="0 0 10 10" aria-hidden="true" class="arrow-icon">
 							<g fill-rule="evenodd">

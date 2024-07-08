@@ -1,192 +1,102 @@
-
+﻿@model DentalClinicBooking_Project.Models.ViewModels.Dentist.UpdateDentistVM
 <!DOCTYPE html>
-<html lang="en">
-  <head>
+<html lang="en" >
+<head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Update Dentist</title>
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
-    />
-    <link
-      href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
-      rel="stylesheet"
-    />
-    <link
-      href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css"
-      rel="stylesheet"
-    />
+    <title>Document</title>
+    <link rel="stylesheet"
+          href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" />
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
+	<link href="~/css/dentist/updatedentist.css" rel="stylesheet" />
+    <link href="node_modules/froala-editor/css/froala_editor.pkgd.min.css" rel="stylesheet" type="text/css" />
+    <script type="text/javascript" src="node_modules/froala-editor/js/froala_editor.pkgd.min.js"></script>
 
-    <link rel="stylesheet" href="./style.css" />
-  </head>
-  <body>
+</head>
+<body>
     <div class="background"></div>
-    <div class="container">
-      <h1>Danh sách Bác sĩ</h1>
-      <div class="doctors-list">
-        <div class="doctor" onclick="showDetails(this)">
-          <div class="image-container">
-            <img
-              src="https://nhakhoanhantam.com/stmresource/files/rang-su/phuc-hinh-rang-su-la-gi-co-anh-huong-den-suc-khoe-khong.jpg"
-              alt="Doctor 1"
-            />
-          </div>
-          <h2>Dr. Nguyễn Văn A</h2>
-          <div class="doctor-info" style="display: none">
-            <span class="doctor-email">nguyenvana@example.com</span>
-            <span class="doctor-password">password123</span>
-            <span class="doctor-experience">10 years</span>
-            <span class="doctor-description">Chuyên khoa nội tổng hợp</span>
-          </div>
+    <div class="container" style="margin-top: 50px">
+        <div id="edit-dentist-form" class="form-container edit-form">
+            <form asp-area="" asp-controller="Dentist" asp-action="UpdateDentist"
+                  id="register-info-form"
+                  method="post">
+                <h2 style="margin-bottom: 30px;">Cập nhật Nha Sĩ</h2>
+                <input type="hidden" id="hiddenUsername" name="username" />
+                <input type="hidden" id="hiddenPassword" name="password" />
+                <input type="hidden" id="hiddenRePassword" name="re-password" />
+                <div class="form-group">
+                    <label for="id">ID:</label>
+                    <input readonly
+                           class="form-control"
+                           id="id"
+                           placeholder="Nhập gmail"
+                           asp-for="DentistId" />
+                </div>
+                <div class="form-group">
+                    <label for="gmail">Gmail:</label>
+                    <input type="gmail"
+                           class="form-control"
+                           id="gmail"
+                           placeholder="Nhập gmail"
+                           asp-for="Gmail"/>
+                </div>
+                <div class="form-group">
+                    <label for="password">Password:</label>
+                    <input type="text"
+                           class="form-control"
+                           id="password"
+                           placeholder="Nhập password"
+                           asp-for="NewPassword"/>
+                </div>
+                <div class="form-group">
+                    <label for="password">PassWord:</label>
+                    <input type="text"
+                           class="form-control"
+                           id="password"
+                           placeholder="Nhập password"
+                           asp-for="ConfirmPassword" />
+                </div>
+                <div class="form-group">
+                    <label for="dentist-name">Tên Nha Sĩ:</label>
+                    <input type="text"
+                           class="form-control"
+                           id="dentist-name"
+                           placeholder="Nhập tên nha sĩ"
+                           asp-for="DentistName"/>
+                </div>
+                <div class="form-group">
+                    <label for="dentist-image">Ảnh:</label>
+                    <input type="text"
+                           class="form-control"
+                           id="dentist-image"
+                           placeholder="URL"
+                           asp-for="Image"/>
+                </div>
+                <div class="form-group">
+                    <label for="edit-dentist-experience">Kinh Nghiệm:</label>
+                    <input type="text"
+                           class="form-control"
+                           id="edit-dentist-experience"
+                           placeholder="Nhập số năm kinh nghiệm"
+                           asp-for="Experience"/>
+                </div>
+                <div class="form-group">
+                    <label @* for="edit-dentist-description" *@>Mô Tả:</label>
+                    <textarea class="form-control"
+                              id="edit-dentist-description"
+                              rows="3"
+                              placeholder="Nhập mô tả"
+                    asp-for="Description"></textarea>
+                </div>
+                <button type="submit" class="btn btn-primary">Lưu thay đổi</button>
+            </form>
         </div>
-        <div class="doctor" onclick="showDetails(this)">
-          <div class="image-container">
-            <img
-              src="https://cdn.tuoitre.vn/thumb_w/480/2021/7/30/bs-phung-16276352494101117208235-1627637885130908378938.png"
-              alt="Doctor 1"
-            />
-          </div>
-          <h2>Dr. Nguyễn Văn A</h2>
-          <div class="doctor-info" style="display: none">
-            <span class="doctor-email">nguyenvana@example.com</span>
-            <span class="doctor-password">password123</span>
-            <span class="doctor-experience">10 years</span>
-            <span class="doctor-description">Chuyên khoa nội tổng hợp</span>
-          </div>
-        </div>
-        <div class="doctor" onclick="showDetails(this)">
-          <div class="image-container">
-            <img
-              src="https://cdn.tuoitre.vn/thumb_w/480/2021/7/30/bs-phung-16276352494101117208235-1627637885130908378938.png"
-              alt="Doctor 1"
-            />
-          </div>
-          <h2>Dr. Nguyễn Văn A</h2>
-          <div class="doctor-info" style="display: none">
-            <span class="doctor-email">nguyenvana@example.com</span>
-            <span class="doctor-password">password123</span>
-            <span class="doctor-experience">10 years</span>
-            <span class="doctor-description">Chuyên khoa nội tổng hợp</span>
-          </div>
-        </div>
-        <div class="doctor" onclick="showDetails(this)">
-          <div class="image-container">
-            <img
-              src="https://cdn.tuoitre.vn/thumb_w/480/2021/7/30/bs-phung-16276352494101117208235-1627637885130908378938.png"
-              alt="Doctor 1"
-            />
-          </div>
-          <h2>Dr. Nguyễn Văn A</h2>
-          <div class="doctor-info" style="display: none">
-            <span class="doctor-email">nguyenvana@example.com</span>
-            <span class="doctor-password">password123</span>
-            <span class="doctor-experience">10 years</span>
-            <span class="doctor-description">Chuyên khoa nội tổng hợp</span>
-          </div>
-        </div>
-        <div class="doctor" onclick="showDetails(this)">
-          <div class="image-container">
-            <img
-              src="https://cdn.tuoitre.vn/thumb_w/480/2021/7/30/bs-phung-16276352494101117208235-1627637885130908378938.png"
-              alt="Doctor 1"
-            />
-          </div>
-          <h2>Dr. Nguyễn Văn A</h2>
-          <div class="doctor-info" style="display: none">
-            <span class="doctor-email">nguyenvana@example.com</span>
-            <span class="doctor-password">password123</span>
-            <span class="doctor-experience">10 years</span>
-            <span class="doctor-description">Chuyên khoa nội tổng hợp</span>
-          </div>
-        </div>
-        <div class="doctor" onclick="showDetails(this)">
-          <div class="image-container">
-            <img
-              src="https://cdn.tuoitre.vn/thumb_w/480/2021/7/30/bs-phung-16276352494101117208235-1627637885130908378938.png"
-              alt="Doctor 1"
-            />
-          </div>
-          <h2>Dr. Nguyễn Văn A</h2>
-          <div class="doctor-info" style="display: none">
-            <span class="doctor-email">nguyenvana@example.com</span>
-            <span class="doctor-password">password123</span>
-            <span class="doctor-experience">10 years</span>
-            <span class="doctor-description">Chuyên khoa nội tổng hợp</span>
-          </div>
-        </div>
-        <div class="doctor" onclick="showDetails(this)">
-          <div class="image-container">
-            <img
-              src="https://cdn.tuoitre.vn/thumb_w/480/2021/7/30/bs-phung-16276352494101117208235-1627637885130908378938.png"
-              alt="Doctor 1"
-            />
-          </div>
-          <h2>Dr. Nguyễn Văn A</h2>
-          <div class="doctor-info" style="display: none">
-            <span class="doctor-email">nguyenvana@example.com</span>
-            <span class="doctor-password">password123</span>
-            <span class="doctor-experience">10 years</span>
-            <span class="doctor-description">Chuyên khoa nội tổng hợp</span>
-          </div>
-        </div>
-        <div id="doctor-details" class="doctor-details" hidden>
-          <form>
-            <h2 id="detail-name"></h2>
-            <span class="close" onclick="closeDoctorDetail()">&times;</span>
-            <div id="detail-img-container">
-              <img id="detail-img" src="" alt="Dr. Nguyễn Văn A" />
-              <i
-                id="camera-icon"
-                class="fas fa-camera"
-                onclick="openModal()"
-              ></i>
-            </div>
-            <label for="name">Tên:</label>
-            <input type="text" id="name" name="name" />
-
-            <label for="email">Email:</label>
-            <input type="email" id="email" name="email" />
-
-            <label for="password">Mật khẩu:</label>
-            <input type="password" id="password" name="password" />
-
-            <label for="knl_viec">Kinh nghiệm làm việc:</label>
-            <input type="text" id="knl_viec" name="knl_viec" />
-
-            <label for="description">Mô tả:</label>
-            <textarea id="description" name="description" rows="4"></textarea>
-
-            <input type="submit" value="Cập nhật" />
-          </form>
-          <!-- <div style="text-align: center">
-            <button onclick="closeDetails()">Đóng</button>
-          </div> -->
-        </div>
-      </div>
     </div>
-    <!-- The Modal -->
-    <div id="urlModal" class="modal">
-      <div class="modal-content">
-        <div class="input-container">
-          <label for="new-image-url"
-            ><strong>Nhập URL hình ảnh mới:</strong></label
-          >
-          <input
-            style="border: solid 1px"
-            type="text"
-            id="new-image-url"
-            name="new-image-url"
-          />
-          <span class="close" onclick="closeModal()">&times;</span>
-        </div>
-        <button class="btn-update-img" onclick="updateImage()">
-          Cập nhật ảnh
-        </button>
-      </div>
-    </div>
-    <script src="./script.js"></script>
-    <script src="./../HF/script.js"></script>
-    <script src="https://code.ionicframework.com/ionicons/2.0.1/ionicons.min.js"></script>
-  </body>
+</body>
+@section Scripts {
+    <script>
+        var editor = new FroalaEditor('#edit-dentist-description');
+    </script>
+}
 </html>

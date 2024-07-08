@@ -1,0 +1,96 @@
+﻿@model DentalClinicBooking_Project.Models.ViewModels.Dentist.AddDentistVM
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet"
+          href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" />
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
+
+	<script src="~/js/dentist/adddentist.js"></script>
+	<link href="~/css/dentist/adddentist.css" rel="stylesheet" />
+</head>
+<body>
+    <div class="background"></div>
+    <div class="container" style="margin-top: 100px">
+        <div id="edit-dentist-form" class="form-container edit-form">
+            <form class="form-c" onsubmit="return saveRegisterForm(event)" id="register-form">
+                <h2 style="margin-bottom: 30px;">Thêm Tài khoản Nha Sĩ</h2>
+                <div class="form-group">
+                    <label class="label-fo" for="dentist-username">Tên tài khoản:</label>
+                    <input type="text"
+                           class="form-control"
+                           id="dentist-username"
+                           placeholder="Nhập tên tài khoản" required oninput="checkInput()" />
+                </div>
+                <div class="form-group">
+                    <label class="label-fo" for="dentist-password">Mật khẩu:</label>
+                    <input type="text"
+                           class="form-control"
+                           id="dentist-password"
+                           placeholder="Nhập mật khẩu" required oninput="checkInput()" />
+                </div>
+                <div class="form-group">
+                    <label class="label-fo" for="dentist-password">Mật khẩu:</label>
+                    <input type="text"
+                           class="form-control"
+                           id="dentist-re-password"
+                           placeholder="Xác nhận mật khẩu" required oninput="checkInput()" />
+                </div>
+                <div>
+                    <button type="submit" id="nextButton" class="btn btn-primary" disabled>Next</button>
+                </div>
+            </form>
+
+            <form class="form-c" asp-area="" asp-controller="Dentist" asp-action="AddDentist"
+                  id="register-info-form"
+                  style="display: none"
+                  method="post">
+                <h2 style="margin-bottom: 30px;">Thêm Thông Tin Nha Sĩ</h2>
+                <input type="hidden" id="hiddenUsername" name="username" asp-for="UserName"/>
+                <input type="hidden" id="hiddenPassword" name="password" asp-for="Password"/>
+                <input type="hidden" id="hiddenRePassword" name="re-password" />
+                <div class="form-group">
+                    <label class="label-fo" for="dentist-name">Tên Nha Sĩ:</label>
+                    <input type="text"
+                           class="form-control"
+                           id="dentist-name"
+                           placeholder="Nhập tên nha sĩ" asp-for="DentistName"/>
+                </div>
+                <div class="form-group">
+                    <label class="label-fo" for="dentist-image">Ảnh:</label>
+                    <input type="text"
+                           class="form-control"
+                           id="dentist-image"
+                           placeholder="URL" asp-for="Image"/>
+                </div>
+                <div class="form-group">
+                    <label class="label-fo" for="edit-dentist-experience">Kinh Nghiệm:</label>
+                    <input type="text"
+                           class="form-control"
+                           id="edit-dentist-experience"
+                           placeholder="Nhập số năm kinh nghiệm" asp-for="Experience"/>
+                </div>
+                <div class="form-group">
+                    <label class="label-fo" for="basicID">BasicID:</label>
+                    <input type="text" readonly
+                           class="form-control"
+                           id="basicID"
+                           placeholder="BasicID" asp-for="BasicId" />
+                </div>
+                <div class="form-group">
+                    <label class="label-fo" for="edit-dentist-description">Mô Tả:</label>
+                    <textarea class="form-control"
+                              id="edit-dentist-description"
+                              rows="3"
+                              placeholder="Nhập mô tả" asp-for="Description"></textarea>
+                </div>
+                <button type="submit" class="btn btn-primary">Lưu thay đổi</button>
+            </form>
+        </div>
+    </div>
+</body>
+</html>
