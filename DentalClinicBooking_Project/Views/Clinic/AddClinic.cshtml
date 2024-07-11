@@ -1,0 +1,161 @@
+﻿@model DentalClinicBooking_Project.Models.ViewModels.ClinicModels.AddClinicVM
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<title>Document</title>
+	<link rel="stylesheet"
+		  href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" />
+	<link rel="stylesheet"
+		  href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
+	<link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/css/select2.min.css"
+		  rel="stylesheet" />
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js"></script>
+	<link href="~/css/clinic/addclinic.css" rel="stylesheet" />
+	<script src="~/js/clinic/addclinic.js"></script>
+	<!-- <link rel="stylesheet" href="./../cssForAllPage/style.css" /> -->
+</head>
+
+<body>
+	<div class="background"></div>
+	<div class="container">
+		<!-- <form id="combined-form" class="form-container"> -->
+		<div id="clinic-form" class="form-container">
+			<h2>Phòng khám</h2>
+			<form class="form-clinic" id="clinic-form" method="post" asp-area="" asp-controller="Clinic" asp-action="AddClinic">
+				<div class="form-group">
+					<label for="edit-clinic-name">Tên phòng khám:</label>
+					<input type="text"
+						   class="form-control"
+						   id="edit-clinic-name"
+						   asp-for="ClinicName"
+						   placeholder="Nhập tên phòng khám" />
+				</div>
+				<div class="form-group">
+					<label for="edit-main-image">Ảnh chính phòng khám:</label>
+					<input type="text"
+						   class="form-control"
+						   id="edit-main-image"
+						   asp-for="MainImage"
+						   placeholder="URL" />
+				</div>
+				<div class="form-group" id="additional-images">
+					<label for="clinic-image">Ảnh:</label>
+					<input type="text"
+						   class="form-control clinic-image"
+						   placeholder="URL" />
+				</div>
+				<button type="button"
+						class="btn btn-primary"
+						onclick="addImageInput()">
+					Thêm ảnh
+				</button>
+				<div class="form-group">
+					<label for="ownerId">OwnerID:</label>
+					<input type="text"
+						   class="form-control" readonly
+						   placeholder="URL" asp-for="OwnerId" />
+				</div>
+				<div class="form-group" style="margin-top: 20px">
+					<label for="edit-description">Mô Tả:</label>
+					<textarea class="form-control"
+							  id="edit-description"
+							  rows="3" asp-for="Description"
+							  placeholder="Nhập mô tả"></textarea>
+				</div>
+				<div class="form-group">
+					<label for="select-services">Các dịch vụ bao gồm:</label>
+					@if (Model != null && Model.AvailableServices != null)
+					{
+						<select class="form-control select2-multiple" id="select-services" multiple="multiple" asp-for="ServiceIds">
+							@foreach (var service in Model.AvailableServices)
+							{
+								<option value="@service.ServiceId">Dịch vụ @service.ServiceName</option>
+							}
+						</select>
+					}
+					else
+					{
+						<p>Không có dịch vụ nào có sẵn.</p>
+					}
+				</div>
+				<div class="form-group">
+					<label for="slots">Thời gian của các slot:</label>
+					<div id="slots">
+						@for (int i = 0; i < 6; i++)
+						{
+							<div class="row">
+								<div class="col-md-6">
+									<label for="slot@(i)-start">Slot @(i + 1) Start:</label>
+									<input type="text" class="form-control time-input" id="slot@(i)-start" name="Slots[@i].StartTime" placeholder="HH:MM" asp-for="Slots[i].StartTime"/>
+								</div>
+								<div class="col-md-6">
+									<label for="slot@(i)-end">Slot @(i + 1) End:</label>
+									<input type="text" class="form-control time-input" id="slot@(i)-end" name="Slots[@i].EndTime" placeholder="HH:MM" asp-for="Slots[i].EndTime"/>
+								</div>
+							</div>
+							<input type="hidden" id="slot@(i)-slotid" name="Slots[@i].SlotId" asp-for="Slots[i].SlotId"/>
+						}
+					</div>
+				</div>
+				<input type="hidden" id="imageurlsjson" name="ImageUrlsJson" asp-for="ImageUrlsJson" />
+				<div class="btn-container">
+					<button type="submit" class="btn btn-primary" id="submit-button">Submit</button>
+				</div>
+			</form>
+		</div>
+		<!-- </form> -->
+	</div>
+</body>
+<script>
+	function addImageInput() {
+		// Tạo một div mới chứa trường input mới
+		var newDiv = document.createElement("div");
+		newDiv.classList.add("form-group");
+		var newLabel = document.createElement("label");
+		newLabel.innerText = "Ảnh:";
+		var newInput = document.createElement("input");
+		newInput.type = "text";
+		newInput.classList.add("form-control", "clinic-image");
+		newInput.placeholder = "URL";
+
+		newDiv.appendChild(newLabel);
+		newDiv.appendChild(newInput);
+
+		// Thêm div mới vào phần bổ sung ảnh
+		document.getElementById("additional-images").appendChild(newDiv);
+
+		newInput.addEventListener("input", validateForm);
+	}
+	$(document).ready(function () {
+		$('.select2-multiple').select2();
+	});
+	document.querySelector(".form-clinic").addEventListener("submit", function (e) {
+		e.preventDefault();
+
+		// Bắt các trường nhập liệu hình ảnh
+		let imageUrls = [];
+		document.querySelectorAll(".clinic-image").forEach(function (input) {
+			if (input.value) {
+				imageUrls.push(input.value);
+			}
+		});
+
+		//document.querySelectorAll("#additional-images input").forEach(function (input) {
+		//    if (input.value) {
+		//        imageUrls.push(input.value);
+		//    }
+		//});
+
+		// Chuyển đổi thành JSON và lưu vào input ẩn
+		document.getElementById("imageurlsjson").value = JSON.stringify(imageUrls);
+
+		// Gửi form (ví dụ bạn có thể sử dụng AJAX để gửi hoặc chỉ cần gửi form bình thường)
+		// e.target.submit(); // uncomment this if you want to actually submit the form
+		 // In ra để kiểm tra
+		e.target.submit();
+	});
+</script>
+</html>

@@ -82,7 +82,7 @@
                            placeholder="BasicID" asp-for="BasicId" />
                 </div>
                 <div class="form-group">
-                    <label class="label-fo" for="edit-dentist-description">Mô Tả:</label>
+                    <label class="label-fo">Mô Tả:</label>
                     <textarea class="form-control"
                               id="edit-dentist-description"
                               rows="3"
@@ -93,4 +93,9 @@
         </div>
     </div>
 </body>
+@section Scripts {
+    <script>
+        var editor = new FroalaEditor('#edit-dentist-description');
+    </script>
+}
 </html>

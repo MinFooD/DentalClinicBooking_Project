@@ -12,6 +12,19 @@
 
   <ItemGroup>
     <None Include="efpt.config.json.user" />
+    <None Include="wwwroot\js\BookingClinic\BookingClinic.js" />
+    <None Include="wwwroot\js\BookingClinic\BookingConfirmation.js" />
+    <None Include="wwwroot\js\BookingClinic\DetermineSessionTime.js" />
+    <None Include="wwwroot\js\BookingClinic\UpdateTime.js" />
+    <None Include="wwwroot\js\ClinicDetails\collapse.js" />
+    <None Include="wwwroot\js\ClinicDetails\Img.js" />
+    <None Include="wwwroot\js\Clinic\AddClinic.js" />
+    <None Include="wwwroot\js\Dentist\AddDentist.js" />
+    <None Include="wwwroot\js\Login\script.js" />
+    <None Include="wwwroot\js\Owner\UpdateDentist.js" />
+    <None Include="wwwroot\js\Service\Service.js" />
+    <None Include="wwwroot\js\site.js" />
+    <None Include="wwwroot\js\ViewSchedule\ViewSchedule.js" />
   </ItemGroup>
 
   <ItemGroup>
