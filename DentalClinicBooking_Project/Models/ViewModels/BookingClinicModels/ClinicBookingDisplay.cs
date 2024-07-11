@@ -4,7 +4,7 @@ namespace DentalClinicBooking_Project.Models.ViewModels.BookingClinicModels
 {
     public class ClinicBookingDisplay
     {
-        //public Guid ClinicId { get; set; }
+        public Guid ClinicId { get; set; }
         public string ClinicName { get; set; } = null!;
         public string MainImage { get; set; } = null!;
         public IEnumerable<Basic> Basics { get; set; } = new List<Basic>();

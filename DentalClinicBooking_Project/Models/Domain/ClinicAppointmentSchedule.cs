@@ -13,20 +13,25 @@ public partial class ClinicAppointmentSchedule
 
     public Guid? PatientId { get; set; }
 
-    public string SlotName { get; set; }
+    public Guid? SlotId { get; set; }
 
-    public string BasicName { get; set; }
+    public Guid? BasicId { get; set; }
 
     public string Code { get; set; }
 
-    public string Address { get; set; }
+    public Guid? ServiceId { get; set; }
 
-    public string Service { get; set; }
+    public Guid? ClinicId { get; set; }
 
-    public string ClinicName { get; set; }
+    public string Type { get; set; }
 
-    public bool Status { get; set; }
+    public virtual Basic Basic { get; set; }
+
+    public virtual Clinic Clinic { get; set; }
 
     public virtual Patient Patient { get; set; }
 
+    public virtual Service Service { get; set; }
+
+    public virtual Slot Slot { get; set; }
 }

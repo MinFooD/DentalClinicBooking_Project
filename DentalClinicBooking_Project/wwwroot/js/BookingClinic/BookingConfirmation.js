@@ -1,4 +1,28 @@
 ﻿$(document).ready(function () {
+    var clinicId = $('.clinic-info').data('idclinic');
+    var basicId = null;
+    var dateString = null;
+    var dateOnlyValue = null;
+    var slotId = null;
+    var serviceId = null;
+    $('.branch-item').click(function () {
+        basicId = $(this).data('idbasic');
+    });
+
+    $('.dates-grid').click(function () {
+        dateString = $('.info-item:nth-child(4) .info-value').text();
+        dateOnlyValue = moment(dateString, 'DD/MM/YYYY').format('YYYY-MM-DD');
+    });
+
+    $('.time-slot-item').click(function () {
+        slotId = $(this).data('slot-id');
+        console.log(slotId);
+    });
+
+    $('.service-item').click(function () {
+        serviceId = $(this).data('serviceid');
+    });
+
     $('.confirm-button').click(function (event) {
         let isValid = true;
         $('.info-item .info-value, .info-itemadd .info-valueadd').each(function () {
@@ -27,34 +51,45 @@
             });
             event.preventDefault();
         } else {
-            var clinicName = $('.clinic-name').text();
-            var basicName = $('.info-item:nth-child(2) .info-value').text();
-            var address = $('.info-itemadd .info-valueadd').text();
-            var dateString = $('.info-item:nth-child(4) .info-value').text();
-            var dateOnlyValue = moment(dateString, 'DD/MM/YYYY').format('YYYY-MM-DD');
-            var time = $('.info-item:nth-child(5) .info-value').text().trim().replace(/\s+/g, ' ');
-            var service = $('.info-item:nth-child(6) .info-value').text();
             var url = $(this).data('url');
             const data = {
-                ClinicName: clinicName,
+                ClinicId: clinicId,
                 Date: dateOnlyValue,
-                Address: address,
-                BasicName: basicName,
-                SlotName: time,
-                Service: service
+                BasicId: basicId,
+                SlotId: slotId,
+                ServiceId: serviceId
             };
-            console.log('data: ', data);
+            //console.log(data);
             $.ajax({
                 url: url,
                 type: 'POST',
                 data: JSON.stringify(data),
                 contentType: 'application/json; charset=utf-8',
                 success: function (response) {
-                    console.log('Success:', response);
-                    window.location.href = response.redirectUrl;                    
+                    console.log(response.success);
+                    if (response.success === true) {
+                        window.location.href = response.redirectUrl;
+                    } else {
+                        Swal.fire({
+                            title: 'Thông báo',
+                            html: '<span style="font-weight: 450;">Bệnh nhân này đã đặt lịch trước đó, nếu bạn muốn đặt lịch khám mới, vui lòng huỷ lịch khám hiện tại và thử lại.</span>',
+                            icon: 'warning',
+                            customClass: {
+                                confirmButton: 'd-none',  // Ẩn nút xác nhận
+                                cancelButton: 'd-none'  // Ẩn nút hủy
+                            },
+                            showCloseButton: true,  // Hiển thị nút đóng
+                            timer: 10000,  // Thời gian hiển thị thông báo (10000ms = 10 giây)
+                            timerProgressBar: true,  // Hiển thị thanh tiến trình của bộ đếm thời gian
+                            allowOutsideClick: true,  // Cho phép đóng thông báo khi nhấp ra ngoài
+                            allowEscapeKey: false,  // Không cho phép đóng thông báo khi nhấn phím Esc
+                            width: '500px',  // Chiều rộng của thông báo
+                            heightAuto: true,  // Tự động điều chỉnh chiều cao dựa trên nội dung
+                        });
+                    }
                 },
-                error: function (xhr, status, error) {
-                    console.error('Error:', error);
+                error: function () {
+                    console.log("An error occurred");
                 }
             });
         }

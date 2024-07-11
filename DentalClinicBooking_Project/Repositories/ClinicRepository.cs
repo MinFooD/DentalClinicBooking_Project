@@ -38,7 +38,6 @@ namespace DentalClinicBooking_Project.Repositories
         }
         public async Task<Clinic?> GetAsync(Guid id)
         {
-
             return await dentalClinicBookingProjectContext.Clinics
                 .Include(x => x.Basics)
                 .Include(x => x.ClinicImages)
@@ -46,7 +45,6 @@ namespace DentalClinicBooking_Project.Repositories
                 .ThenInclude(x => x.Slot)
                 .Include(x => x.Services)
                 .FirstOrDefaultAsync(x => x.ClinicId == id);
-
         }
 
 

@@ -21,5 +21,7 @@ public partial class Basic
 
     public virtual Clinic Clinic { get; set; }
 
+    public virtual ICollection<ClinicAppointmentSchedule> ClinicAppointmentSchedules { get; set; } = new List<ClinicAppointmentSchedule>();
+
     public virtual ICollection<Dentist> Dentists { get; set; } = new List<Dentist>();
 }

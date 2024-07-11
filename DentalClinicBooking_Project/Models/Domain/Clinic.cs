@@ -19,6 +19,8 @@ public partial class Clinic
 
     public virtual ICollection<Basic> Basics { get; set; } = new List<Basic>();
 
+    public virtual ICollection<ClinicAppointmentSchedule> ClinicAppointmentSchedules { get; set; } = new List<ClinicAppointmentSchedule>();
+
     public virtual ICollection<ClinicImage> ClinicImages { get; set; } = new List<ClinicImage>();
 
     public virtual Owner Owner { get; set; }

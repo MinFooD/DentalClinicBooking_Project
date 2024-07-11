@@ -2,8 +2,8 @@
 {
     public class BookingInfo
     {
-        public string ClinicName { get; set; } = null!;
-        public DateOnly Day { get; set; }
-        public string BasicName { get; set; } = null!;
+        public Guid clinicId { get; set; }
+        public DateOnly date { get; set; }
+        public Guid basicId { get; set; } 
     }
 }

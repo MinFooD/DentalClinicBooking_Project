@@ -33,17 +33,18 @@
         <div class="info-card">
             <div class="info-clinic">
                 <div class="clinic-image">
-                    <img src="https://cdn.youmed.vn/photos/9bb621c9-2fff-49fe-8e88-31ce6f905e0a.png" alt="Header Info">
+                    <img src="@Model.MainImage" alt="@Model.ClinicName">
                 </div>
                 <div class="clinic-details">
                     <h3 class="clinic-name">@Model.ClinicName</h3>
-                    <p class="clinic-address">@Model.ClinicAddress</p>
+                    <p class="clinic-address">@Model.basicAddress</p>
                 </div>
             </div>
         </div>
         <div class="info-section">
             <dl class="info-list">
-                <p class="info-heading">Thông tin đặt lịch</p>
+                @* <p class="info-heading">Thông tin đặt lịch</p> *@
+                <div class="info-heading">Thông tin đặt lịch</div>
                 <div class="info-row">
                     <dt class="info-title">Mã phiếu khám</dt>
                     <dd class="info-value">@Model.Code</dd>
@@ -54,36 +55,46 @@
                 </div>
                 <div class="info-row">
                     <dt class="info-title">Giờ khám</dt>
-                    <dd class="info-value green">@Model.SlotName <span class="session-time">(Buổi sáng)</span></dd>
+                    <dd class="info-value green">
+
+                        @foreach (var item in Model.SlotOfClinics)
+                        {
+                            @item.StartTime.ToString("HH:mm") 
+                            @(" - ") 
+                            @item.EndTime.ToString("HH:mm")
+                            <span class="session-time"></span>
+                        }
+
+                    </dd>
                 </div>
                 <div class="info-row">
                     <dt class="info-title">Chi nhánh</dt>
-                    <dd class="info-value">@Model.BasicName</dd>
+                    <dd class="info-value">@Model?.BasicName</dd>
                 </div>
                 <div class="info-row">
                     <dt class="info-title">Dịch vụ</dt>
-                    <dd class="info-value">@Model.Service</dd>
+                    <dd class="info-value">@Model?.Service</dd>
                 </div>
             </dl>
 
-            
+
             <dl class="info-list">
                 <p class="info-heading">Thông tin bệnh nhân</p>
                 <div class="info-row">
                     <dt class="info-title">Bệnh nhân</dt>
-                    <dd class="info-value">@Model.PatientName</dd>
+                    <dd class="info-value">@Model?.PatientName</dd>
                 </div>
                 <div class="info-row">
                     <dt class="info-title">Ngày sinh</dt>
-                    <dd class="info-value">@Model.BirthDate</dd>
+                    <dd class="info-value">@Model?.BirthDate</dd>
                 </div>
                 <div class="info-row">
                     <dt class="info-title">Giới tính</dt>
-                    <dd class="info-value">@Model.Gender</dd>
+                    <dd class="info-value">@Model?.Gender</dd>
                 </div>
                 <div class="info-row">
                     <dt class="info-title">Địa chỉ</dt>
-                    <dd class="info-value">@Model.PatientAddress</dd>
+                    <dd class="info-value">@Model?.PatientAddress</dd>
                 </div>
             </dl>
         </div>
