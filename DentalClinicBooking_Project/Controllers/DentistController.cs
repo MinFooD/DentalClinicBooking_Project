@@ -236,7 +236,7 @@ namespace DentalClinicBooking_Project.Controllers
                 _context.Add(dentist);
                 _context.SaveChanges();
 				ModelState.AddModelError("Success", "Register successful.");
-				return RedirectToAction("ShowDentist", "Home");
+				return RedirectToAction("ShowAllDentist", "Dentist");
 
 			}
 			ModelState.AddModelError("Success", "Register successful.");
