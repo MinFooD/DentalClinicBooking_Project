@@ -524,7 +524,7 @@ body {
     transform: translateY(-50%);
     width: 20px;
     height: 20px;
-    background: url('path_to_checkmark_icon') no-repeat center center;
+    /*background: url('path_to_checkmark_icon') no-repeat center center;*/
     background-size: contain;
     opacity: 0;
     transition: opacity 0.3s, transform 0.3s; 
@@ -597,6 +597,10 @@ body {
     border-radius: 0.25rem;
     padding: 0.5rem 1rem;
     cursor: pointer;
+}
+
+.text-time {
+    color: black;
 }
 
     .time-slot-item:hover {

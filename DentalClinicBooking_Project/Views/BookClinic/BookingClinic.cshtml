@@ -23,7 +23,7 @@
     <link href="~/css/bookingclinic/updatetime.css" rel="stylesheet" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@10/dist/sweetalert2.min.css">
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet" />
-
+    
     <script src="~/js/bookingclinic/updatetime.js"></script>
     <script src="~/js/bookingclinic/bookingclinic.js"></script>
     <script src="~/js/bookingclinic/bookingconfirmation.js"></script>
@@ -58,7 +58,7 @@
                                 <div class="branch-list mt-4">
                                     @foreach (var item in Model.Basics)
                                     {
-                                        <div class="branch-item">
+                                        <div class="branch-item" data-idbasic="@item.BasicId.ToString()">
                                             <div class="branch-header">
                                                 <div class="branch-name">@item.BasicName</div>
                                             </div>
@@ -102,8 +102,7 @@
                                             <div class="weekday">CN</div>
                                         </div>
                                         <div class="dates-grid"
-                                             data-url="@Url.Action("CheckSlots", "BookClinic")"
-                                             data-clinic-name="@Model.ClinicName">
+                                             data-url="@Url.Action("CheckSlots", "BookClinic")">
                                             <!-- Dates will be inserted here -->
                                         </div>
                                     </div>
@@ -138,14 +137,13 @@
 
                                             @foreach (var item in slotOfClinics)
                                             {
-                                                var formattedTime = $"{item.StartTime.ToString("HH:mm")} - {item.EndTime.ToString("HH:mm")}";
                                                 @if ((item.StartTime >= stAM && item.StartTime <= enAM))
                                                 {
-                                                    <button class="time-slot-item"
-                                                            data-slot-id="@formattedTime">
+                                                    <a class="time-slot-item text-time"
+                                                            data-slot-id="@item.SlotId.ToString()">
                                                         @item.StartTime.ToString("HH:mm") -
                                                         @item.EndTime.ToString("HH:mm")
-                                                    </button>
+                                                    </a>
                                                 }
                                             }
 
@@ -161,15 +159,14 @@
 
                                             @foreach (var item in slotOfClinics)
                                             {
-                                                var formattedTime = $"{item.StartTime.ToString("HH:mm")} - {item.EndTime.ToString("HH:mm")}";
                                                 @if (item.EndTime >= stPM && item.EndTime <= enPM)
                                                 {
 
-                                                    <button class="time-slot-item"
-                                                            data-slot-id="@formattedTime">
+                                                    <a class="time-slot-item text-time"
+                                                            data-slot-id="@item.SlotId.ToString()">
                                                         @item.StartTime.ToString("HH:mm") -
                                                         @item.EndTime.ToString("HH:mm")
-                                                    </button>
+                                                    </a>
                                                 }
                                             }
 
@@ -197,7 +194,9 @@
                                 <div class="service-list mt-4">
                                     @foreach (var item in Model.Services)
                                     {
-                                        <div class="service-item" data-service="@item.ServiceName">
+                                        <div class="service-item"
+                                             data-service="@item.ServiceName"
+                                             data-serviceid="@item.ServiceId">
                                             <div class="service-header">
                                                 <div class="service-name">@item.ServiceName</div>
                                             </div>
@@ -220,7 +219,8 @@
                             <div class="sidebar-title">Thông tin đặt khám</div>
                         </div>
                         <div class="sidebar-details">
-                            <div class="clinic-info">
+                            <div class="clinic-info"
+                                 data-idclinic="@Model.ClinicId.ToString()">
                                 <img src="@Model.MainImage"
                                      alt="@Model.ClinicName" class="clinic-avatar">
                                 <div class="clinic-text">
@@ -237,6 +237,7 @@
                             </div>
                             <div class="info-item" style="display: none;">
                                 <div class="info-label">Ngày Khám</div>
+                                @* <div class="info-value" class="date"></div> *@
                                 <div class="info-value"></div>
                             </div>
                             <div class="info-item" style="display: none;">
@@ -252,12 +253,14 @@
                     </div>
                     <div class="confirmation"
                          style="display: flex;text-align: center;align-items: center;justify-content: center;">
-                        <button class="confirm-button" 
-                        data-url="@Url.Action("AppointmentBookingInfo", "BookClinic")"
-                        >Đặt lịch</button>
-                        <button class="cancel-button" 
-                        onclick="window.location.href='@Url.Action("AllClinics", "BookClinic")'"
-                        >Hủy</button>
+                        <button class="confirm-button"
+                                data-url="@Url.Action("AppointmentBookingInfo", "BookClinic")">
+                            Đặt lịch
+                        </button>
+                        <button class="cancel-button"
+                                onclick="window.location.href='@Url.Action("AllClinics", "BookClinic")'">
+                            Hủy
+                        </button>
                     </div>
                 </div>
             </div>

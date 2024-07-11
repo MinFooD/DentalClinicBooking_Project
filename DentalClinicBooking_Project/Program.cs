@@ -12,6 +12,8 @@ builder.Services.AddDbContext<DentalClinicBookingProjectContext>(options =>
 	options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnectionStringDB"));
 });
 
+builder.Services.AddScoped<IServiceRepository, ServiceRepository>();
+builder.Services.AddScoped<IBasicRepository, BasicRepository>();
 builder.Services.AddScoped<IClinicRepository, ClinicRepository>();
 builder.Services.AddScoped<IClinicAppointmentScheduleRepository, ClinicAppointmentScheduleRepository>();
 builder.Services.AddScoped<ISlotRepository, SlotRepository>();

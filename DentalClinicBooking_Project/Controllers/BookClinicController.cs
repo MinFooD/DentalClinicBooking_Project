@@ -3,6 +3,7 @@ using DentalClinicBooking_Project.Models.ViewModels;
 using DentalClinicBooking_Project.Models.ViewModels.BookingClinicModels;
 using DentalClinicBooking_Project.Repositories;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using Newtonsoft.Json;
 using System.Reflection;
 using static System.Reflection.Metadata.BlobBuilder;
@@ -11,23 +12,29 @@ namespace DentalClinicBooking_Project.Controllers
 {
     public class BookClinicController : Controller
     {
-        private readonly IClinicRepository bookClinicRepository;
+        private readonly IClinicRepository clinicRepository;
         private readonly IClinicAppointmentScheduleRepository clinicAppointmentScheduleRepository;
         private readonly ISlotRepository slotRepository;
         private readonly IPatientRepository patientRepository;
         private readonly IHttpContextAccessor _contx;
+        private readonly IBasicRepository basicRepository;
+        private readonly IServiceRepository serviceRepository;
 
         public BookClinicController(IClinicRepository bookClinicRepository,
             IClinicAppointmentScheduleRepository clinicAppointmentScheduleRepository,
             ISlotRepository slotRepository,
             IPatientRepository patientRepository,
-            IHttpContextAccessor contx)
+            IHttpContextAccessor contx,
+            IBasicRepository basicRepository,
+            IServiceRepository serviceRepository)
         {
-            this.bookClinicRepository = bookClinicRepository;
+            this.clinicRepository = bookClinicRepository;
             this.clinicAppointmentScheduleRepository = clinicAppointmentScheduleRepository;
             this.slotRepository = slotRepository;
             this.patientRepository = patientRepository;
             _contx = contx;
+            this.basicRepository = basicRepository;
+            this.serviceRepository = serviceRepository;
         }
 
 
@@ -37,7 +44,7 @@ namespace DentalClinicBooking_Project.Controllers
             int pageSize = 2,
             int pageNumber = 1)
         {
-            var totalRecords = await bookClinicRepository.CountAsync(searchQuery);
+            var totalRecords = await clinicRepository.CountAsync(searchQuery);
             var totalPages = Math.Ceiling((decimal)totalRecords / pageSize);//bao nhiêu trang
 
             ViewBag.TotalPages = totalPages;
@@ -45,7 +52,7 @@ namespace DentalClinicBooking_Project.Controllers
             ViewBag.PageSize = pageSize;//số phần tử mỗi trang
             ViewBag.PageNumber = pageNumber;//trang bao nhiêu
 
-            var Model = await bookClinicRepository.GetAllAsync(searchQuery, pageNumber, pageSize);
+            var Model = await clinicRepository.GetAllAsync(searchQuery, pageNumber, pageSize);
 
             return View(Model);
         }
@@ -54,7 +61,7 @@ namespace DentalClinicBooking_Project.Controllers
         [HttpGet]
         public async Task<IActionResult> ClinicDetails(Guid id)
         {
-            var clinic = await bookClinicRepository.GetAsync(id);
+            var clinic = await clinicRepository.GetAsync(id);
 
             if (clinic != null)
             {
@@ -77,9 +84,10 @@ namespace DentalClinicBooking_Project.Controllers
         [HttpGet]
         public async Task<IActionResult> BookingClinic(Guid id)
         {
-            var clinic = await bookClinicRepository.GetAsync(id);
+            var clinic = await clinicRepository.GetAsync(id);
             var model = new ClinicBookingDisplay
             {
+                ClinicId = clinic?.ClinicId ?? Guid.Empty,
                 ClinicName = clinic?.ClinicName ?? string.Empty,
                 MainImage = clinic?.MainImage ?? string.Empty,
                 Basics = clinic?.Basics ?? Enumerable.Empty<Basic>(),
@@ -96,28 +104,25 @@ namespace DentalClinicBooking_Project.Controllers
             bookingModel ??= new BookingInfo();
 
             var bookings = await clinicAppointmentScheduleRepository
-                .GetBookingsByDateAndClinicAsync(
-                bookingModel.Day,
-                bookingModel.ClinicName,
-                bookingModel.BasicName)
+                .GetSlotAsync(
+                bookingModel.date,
+                bookingModel.clinicId,
+                bookingModel.basicId)
                 ?? new List<BookingSlot>();
 
             var arrSlots = await slotRepository.GetAllSlotsAsync();
-            var slots = new Dictionary<string, int>();
+            var slots = new Dictionary<Guid, int>();
 
             for (int i = 0; i < arrSlots.Length; i++)
             {
-                slots.Add(
-                    arrSlots[i].StartTime.ToString("HH:mm")
-                    + " - " +
-                    arrSlots[i].EndTime.ToString("HH:mm"), 0);
+                slots.Add(arrSlots[i].SlotId, 0);
             }
 
             foreach (var booking in bookings)
             {
-                if (slots.ContainsKey(booking.SlotName!))
+                if (slots.ContainsKey(booking?.SlotId ?? Guid.Empty))
                 {
-                    slots[booking.SlotName!] = booking.Count;
+                    slots[booking?.SlotId ?? Guid.Empty] = booking?.Count ?? 0;
                 }
             }
 
@@ -127,7 +132,7 @@ namespace DentalClinicBooking_Project.Controllers
         [HttpPost]
         public async Task<IActionResult> AppointmentBookingInfo([FromBody] AppointmentBookingViewModel appointmentBookingModel)
         {
-            string patientString = _contx.HttpContext.Session.GetString("patient");
+            string? patientString = _contx.HttpContext?.Session.GetString("patient");
             if (!string.IsNullOrEmpty(patientString))
             {
                 var patient = JsonConvert.DeserializeObject<Patient>(patientString);
@@ -135,19 +140,28 @@ namespace DentalClinicBooking_Project.Controllers
                 {
                     Code = AppointmentBookingViewModel.BookingCode(),
                     PatientId = patient!.PatientId,
-                    ClinicName = appointmentBookingModel.ClinicName,
-                    BasicName = appointmentBookingModel?.BasicName,
-                    Address = appointmentBookingModel?.Address,
+                    ClinicId = appointmentBookingModel.ClinicId,
+                    BasicId = appointmentBookingModel?.BasicId,
                     Date = appointmentBookingModel?.Date ?? DateOnly.FromDateTime(DateTime.Now),
-                    SlotName = appointmentBookingModel?.SlotName,
-                    Service = appointmentBookingModel?.Service,
+                    SlotId = appointmentBookingModel?.SlotId,
+                    ServiceId = appointmentBookingModel?.ServiceId,
                 };
 
-                //Còn trường hợp người dùng không thể chọn cùng 1 slot trong một ngày
+                var model = await clinicAppointmentScheduleRepository.GetDuplicateAsync(clinicAppointmentSchedule);
 
-                var model = await clinicAppointmentScheduleRepository.AddAsync(clinicAppointmentSchedule);
-
-                return Ok(new { redirectUrl = Url.Action("ConfirmBooking", new { id = model.ClinicAppointmentScheduleId }) });
+                if (model == null)
+                {
+                    model = await clinicAppointmentScheduleRepository.AddAsync(clinicAppointmentSchedule);
+                    return Ok(new
+                    {
+                        redirectUrl = Url.Action("ConfirmBooking", new { id = model.ClinicAppointmentScheduleId }),
+                        success = true
+                    });
+                }
+                else
+                {
+                    return Ok(new { success = false});
+                }
             }
             return RedirectToAction("Login", "Login");
         }
@@ -155,29 +169,33 @@ namespace DentalClinicBooking_Project.Controllers
         [HttpGet]
         public async Task<IActionResult> ConfirmBooking(Guid id)
         {
-
-            string patientString = _contx.HttpContext.Session.GetString("patient");
+            string? patientString = _contx.HttpContext?.Session.GetString("patient");
             if (!string.IsNullOrEmpty(patientString))
             {
                 var patient = JsonConvert.DeserializeObject<Patient>(patientString);
-                var clinicAppointmentSchedule = await clinicAppointmentScheduleRepository.GetAsync(id);
+                var appointmentSchedule = await clinicAppointmentScheduleRepository.GetAsync(id);
+                var clinic = await clinicRepository.GetAsync(appointmentSchedule?.ClinicId ?? Guid.Empty);
+                var basic = await basicRepository.GetAsync(appointmentSchedule?.BasicId ?? Guid.Empty);
+                var slot = await slotRepository.GetAsync(
+                    appointmentSchedule?.ClinicId ?? Guid.Empty,
+                    appointmentSchedule?.SlotId ?? Guid.Empty);
+                var service = await serviceRepository.GetAsync(appointmentSchedule?.ServiceId ?? Guid.Empty);
 
-                // Thiếu thông tin bệnh nhân
                 var model = new AppointmentBookingSuccess
                 {
-                    ClinicName = clinicAppointmentSchedule?.ClinicName!,
-                    ClinicAddress = clinicAppointmentSchedule?.Address!,
-                    Code = clinicAppointmentSchedule?.Code!,
-                    Date = clinicAppointmentSchedule?.Date ?? DateOnly.FromDateTime(DateTime.Now)!,
-                    SlotName = clinicAppointmentSchedule?.SlotName!,
-                    BasicName = clinicAppointmentSchedule?.BasicName!,
-                    Service = clinicAppointmentSchedule?.Service!,
+                    ClinicName = clinic?.ClinicName,
+                    MainImage = clinic?.MainImage,
+                    basicAddress = basic?.Address,
+                    Code = appointmentSchedule?.Code,
+                    Date = appointmentSchedule?.Date ?? DateOnly.FromDateTime(DateTime.Now),
+                    SlotOfClinics = slot,
+                    BasicName = basic?.BasicName,
+                    Service = service?.ServiceName,
                     PatientName = patient?.PatientName,
                     BirthDate = patient?.BirthDay,
-                    Gender = patient?.Gender,
+                    Gender = AppointmentBookingSuccess.GetGender(patient?.Gender),
                     PatientAddress = patient?.Address
                 };
-
                 return View(model);
             }
             return RedirectToAction("Login", "Login");

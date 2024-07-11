@@ -11,5 +11,7 @@ public partial class Slot
 
     public string SlotName { get; set; }
 
+    public virtual ICollection<ClinicAppointmentSchedule> ClinicAppointmentSchedules { get; set; } = new List<ClinicAppointmentSchedule>();
+
     public virtual ICollection<SlotOfClinic> SlotOfClinics { get; set; } = new List<SlotOfClinic>();
 }

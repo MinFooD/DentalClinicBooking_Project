@@ -6,10 +6,12 @@ namespace DentalClinicBooking_Project.Repositories
     public interface IClinicAppointmentScheduleRepository
     {
         Task<ClinicAppointmentSchedule?> GetAsync(Guid id);
-        Task<List<BookingSlot>> GetBookingsByDateAndClinicAsync(
+        Task<ClinicAppointmentSchedule?> GetDuplicateAsync(
+            ClinicAppointmentSchedule clinicAppointmentSchedule);
+        Task<List<BookingSlot>> GetSlotAsync(
             DateOnly date,
-            string clinicName,
-            string basicName);
+            Guid clinicId,
+            Guid basicId);
         Task<ClinicAppointmentSchedule> AddAsync(ClinicAppointmentSchedule clinicAppointmentSchedule);
     }
 }
