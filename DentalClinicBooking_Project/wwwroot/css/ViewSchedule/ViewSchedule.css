@@ -1,4 +1,13 @@
 ﻿
+.info-value, 
+.info-label, 
+.clinic-address, 
+.appointment-time, 
+.appointment-patient,
+.status{
+    font-weight: 500;
+    color: #6B7680;
+}
 * {
     margin: 0;
     padding: 0;
@@ -181,8 +190,9 @@
 }
 
 .status-text {
-    font-size: 16px;
+    font-size: 18px;
     color: #22C55E;
+    font-weight: 500;
 }
 
 .status-text.confirmed {
@@ -265,10 +275,11 @@
 }
 
 .cancel-button {
-    color: #FFA500; 
-    text-decoration: none; 
-    transition: color 0.3s; 
+    color: #FFA500;
+    text-decoration: none;
+    transition: color 0.3s;
     background-color: white;
+    font-weight: 500;
 }
 
 .cancel-button:hover {

@@ -145,6 +145,7 @@ namespace DentalClinicBooking_Project.Controllers
                     Date = appointmentBookingModel?.Date ?? DateOnly.FromDateTime(DateTime.Now),
                     SlotId = appointmentBookingModel?.SlotId,
                     ServiceId = appointmentBookingModel?.ServiceId,
+                    Type = "Book Appointment"
                 };
 
                 var model = await clinicAppointmentScheduleRepository.GetDuplicateAsync(clinicAppointmentSchedule);
@@ -199,22 +200,6 @@ namespace DentalClinicBooking_Project.Controllers
                 return View(model);
             }
             return RedirectToAction("Login", "Login");
-        }
-
-        [HttpGet]
-        public async Task<IActionResult> ViewSchedule()
-        {
-            //var patient = await patientRepository.GetAsync(Guid.Parse("78987C55-FA52-48A1-9F2A-44803E560A40"));
-            //var model = new ClinicAppointmentViewModel
-            //{
-            //    PatientName = patient?.PatientName,
-            //    BirthDate = patient?.BirthDay,
-            //    Gender = patient?.Gender,
-            //    PatientAddress = patient?.Address,
-            //    ClinicAppointmentSchedules = patient!.ClinicAppointmentSchedules!,
-            //};
-
-            return View();
         }
 
     }
