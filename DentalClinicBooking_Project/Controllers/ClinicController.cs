@@ -124,5 +124,44 @@ namespace DentalClinicBooking_Project.Controllers
 			}
 			return RedirectToAction("HomePage","Home");
 		}
+
+		public IActionResult DeleteClinic(Guid id)
+		{
+			var clinic = _context.Clinics?.Include(x => x.Basics).ThenInclude(x=> x.Dentists).Include(x=>x.SlotOfClinics).Include(x => x.Services).Include(x=>x.ClinicAppointmentSchedules).Include(x=>x.ClinicImages).FirstOrDefault(x => x.ClinicId.Equals(id));
+
+			if (clinic == null)
+			{
+				return RedirectToAction("CLinic", "ShowAllClinicForOwner");
+			}
+
+			foreach (var image in clinic.ClinicImages)
+			{
+				_context.ClinicImages.Remove(image);
+			}
+
+			foreach (var basic in clinic.Basics)
+			{
+				foreach (var dentist in basic.Dentists)
+				{
+					_context.Dentists.Remove(dentist);
+				}				
+				_context.Basics.Remove(basic);
+			}
+
+			foreach (var slot in clinic.SlotOfClinics)
+			{
+				_context.SlotOfClinics.Remove(slot);
+			}
+
+			clinic.Services.Clear();
+
+			foreach (var schedule in clinic.ClinicAppointmentSchedules)
+			{
+				_context.ClinicAppointmentSchedules.Remove(schedule);
+			}
+			_context.Clinics.Remove(clinic);
+			_context.SaveChanges();
+			return RedirectToAction("ShowAllClinicForOwner", "Clinic");
+		}
 	}
 }

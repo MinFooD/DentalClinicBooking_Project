@@ -1,5 +1,4 @@
 ﻿
-
 * {
     margin: 0;
     padding: 0;
@@ -147,7 +146,7 @@ body {
     border-radius: 15px;
 }
 .form-load-data{
-    margin: 0 10px 0 10px;
+    margin: 0 10px 0 30px;
 }
 
 
