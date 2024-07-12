@@ -1,11 +1,11 @@
-﻿/*html {
-  font-family: Arial, Helvetica, sans-serif;
-}*/
-/*  navbar */
-/*body {
-  margin: 0;
-  padding: 0 0;
-  font-family: Arial, Helvetica, sans-serif;
+﻿html {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+}
+
+body {
+    margin: 0;
+    padding: 0 0;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
 }
 
 #navbar_id {
@@ -109,108 +109,33 @@ a.btn:hover {
   margin: 0;
   background-color: rgb(25 117 220);
   color: #fff;
-}*/
-
-/* ---------------------------------------------------------------------- */
-/*.contact-container {
-  display: inline-flex;
-  align-items: center;
-  gap: 12px; 
 }
 
-.contact-group {
-  position: relative;
-  display: flex;
-  align-items: center;
+a{
+    text-decoration:none;
+}
+a:hover{
+    text-decoration:none;
 }
 
-.contact-button {
-  padding: 0 16px;
-  display: flex;
-  align-items: center;
-  border-radius: 9999px; 
-  font-weight: 600;
-  cursor: pointer;
-  white-space: nowrap;
-  overflow: hidden;
-}
-
-.contact-button:hover {
-  color: var(--primary-color);
-}
-
-.contact-number {
-  display: none;
-}
-
-@media (min-width: 768px) {
-  .contact-number {
-      display: block;
-  }
-}
-
-.dropdown-menu {
-  width: 100%;
-  padding: 16px;
-  position: absolute;
-  right: 40px; 
-  top: 100%;
-  background-color: white;
-  border-radius: 12px; 
-  box-shadow: 0 4px 6px rgba(0,0,0,0.1); 
-  display: none;
-  z-index: 1000;
-}
-
-.contact-group:hover .dropdown-menu {
-  display: block;
-}
-
-.dropdown-toggle{
-margin-left: 0.4rem;
-}
-
-.dropdown-link {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  padding: 16px;
-  border-radius: 12px; 
-  font-size: medium;
-  font-weight: 500;
-  white-space: nowrap;
-  transition: background-color 0.3s, color 0.3s;
-  color: black;
-}
-
-.dropdown-link:hover {
-  background-color: #f0f0f0; 
-  text-decoration: none;
-  color: rgb(25 117 220);
-}
-
-.logout:hover {
-  color: #f56565; 
-}*/
-/* ---------------------------------------------------------------------- */
 
 /* Styling for dropdown button */
 .dropbtn {
-    background-color: e3e7ea;
+    /* background-color: #3498db; */
     color: black;
     padding: 10px 20px;
     font-size: 16px;
     border: none;
     cursor: pointer;
     border-radius: 5px;
-    transition: background-color 0.3s;
+    /* transition: background-color 0.3s; */
 }
 
-  /*  .dropbtn:hover,*/
-    .dropbtn:focus {
-         background-color: #2980b9; 
-        color: #2980b9;
-    }
+.dropbtn:hover,
+.dropbtn:focus {
+    /* background-color: #2980b9; */
+    color: #2980b9;
+}
 
 /* Dropdown container */
 .dropdown {
@@ -222,14 +147,14 @@ margin-left: 0.4rem;
 .dropdown-content {
     display: none;
     position: absolute;
-     background-color: #f9f9f9; 
+    background-color: #f9f9f9; 
     min-width: 160px;
     box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
     z-index: 1;
     border-radius: 5px;
 }
 
- /*    Links inside the dropdown */
+    /* Links inside the dropdown */
     .dropdown-content a {
         color: black;
         padding: 12px 16px;
@@ -242,56 +167,14 @@ margin-left: 0.4rem;
         .dropdown-content a:hover {
             background-color: #f1f1f1;
             color: #007bff;
-            text-decoration: none;
         }
 
 /* Show the dropdown menu on hover */
 .dropdown:hover .dropdown-content {
     display: block;
 }
-
-
-/* footer  */
-/*.footer1 {
-  background-color: #f8f8f8;
-  padding: 20px 0;
-  margin-top: 2rem;
 }
 
-.footer-section {
-  display: flex;
-  flex-direction: column;
-}
-
-.footer-section h5 {
-  font-weight: bold;
-  margin-bottom: 1rem;
-}
-
-.footer-section p {
-  margin: 0 0 10px;
-}
-
-.footer1 {
-  background-color: rgb(25 117 220);
-  color: white;
-  padding-left: 100px;
-  padding-right: 100px;
-  padding-left: 100px;
-  padding-top: 20px;
-  padding-bottom: 20px;
-}
-
-.container-md .flex2 {
-  display: flex;
-}
-
-.footer-direction {
-  display: flex;
-}*/
-html {
-    font-family: Arial, Helvetica, sans-serif;
-}
 /*  navbar */
 body {
     margin: 0;
@@ -418,9 +301,7 @@ a.btn {
         color: var(--primary-color);
     }
 
-.contact-number {
-    display: none;
-}
+
 
 @media (min-width: 768px) {
     .contact-number {

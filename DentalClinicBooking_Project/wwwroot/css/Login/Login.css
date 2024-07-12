@@ -20,7 +20,7 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-  min-height: 100vh;
+  min-height: 81vh;
   padding: 20px;
   position: relative;
   z-index: 1; /* Đảm bảo nội dung chính nằm trên hình nền */

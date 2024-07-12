@@ -20,7 +20,10 @@
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>@ViewData["Title"]</title>
-
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
+	<link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/css/select2.min.css" rel="stylesheet" />
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js"></script>
 	<link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet" />
 	<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
 	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
@@ -30,7 +33,7 @@
 </head>
 
 <!-- NavBar -->
-<header class="row navbar" id="navbar_id" style="margin-right: 0px;">
+<header class="row navbar" id="navbar_id" style="margin-right:0px">
 	<div class="navbar-brand" style="margin-left:16px">
 		<a asp-area="" asp-controller="Home" asp-action="HomePage"><img src="https://scontent.xx.fbcdn.net/v/t1.15752-9/447893264_1021972442656184_4043330415758757619_n.png?_nc_cat=109&ccb=1-7&_nc_sid=0024fc&_nc_eui2=AeFcd2BENlfYNkd4LCIysQ1DfbxKM85a27d9vEozzlrbty9rn_ynFsp8hjOmFZz73Ps4BeEExi1k01N7zuB3jOLR&_nc_ohc=9nWBJeHV-WUQ7kNvgHeZY0K&_nc_ad=z-m&_nc_cid=0&_nc_ht=scontent.xx&oh=03_Q7cD1QFVswz1ZYq6MQ-kizmEdENZIJob6pt1YgHF-72Es1_h9A&oe=66A1CBF1" alt="SunShine Logo"></a>
 	</div>
@@ -55,8 +58,8 @@
 				}
 				else
 				{
-					@* <li class="nav-item"><a asp-area="" asp-controller="HashPassword" asp-action="HashPassword" class="nav-link">Mã hóa</a></li> *@
-					<li class="nav-item"><a asp-area="" asp-controller="BookClinic" asp-action="AllClinics" class="nav-link">Đặt khám</a></li>
+@* 					<li class="nav-item"><a asp-area="" asp-controller="HashPassword" asp-action="HashPassword" class="nav-link">Mã hóa</a></li>
+ *@					<li class="nav-item"><a asp-area="" asp-controller="BookClinic" asp-action="AllClinics" class="nav-link">Đặt khám</a></li>
 					<li class="nav-item"><a asp-area="" asp-controller="BookClinic" asp-action="ViewSchedule" class="nav-link">Xem lịch khám</a></li>
 					<li class="nav-item"><a asp-area="" asp-controller="Dentist" asp-action="ShowAllDentist" asp-route-page="1" class="nav-link">Nha sĩ</a></li>
 					<li class="nav-item"><a asp-area="" asp-controller="Service" asp-action="Service" class="nav-link">Dịch vụ</a></li>
@@ -81,7 +84,7 @@
 						<path fill="currentColor" d="M258.9 48C141.92 46.42 46.42 141.92 48 258.9c1.56 112.19 92.91 203.54 205.1 205.1 117 1.6 212.48-93.9 210.88-210.88C462.44 140.91 371.09 49.56 258.9 48zm126.42 327.25a4 4 0 01-6.14-.32 124.27 124.27 0 00-32.35-29.59C321.37 329 289.11 320 256 320s-65.37 9-90.83 25.34a124.24 124.24 0 00-32.35 29.58 4 4 0 01-6.14.32A175.32 175.32 0 0180 259c-1.63-97.31 78.22-178.76 175.57-179S432 158.81 432 256a175.32 175.32 0 01-46.68 119.25z"></path>
 						<path fill="currentColor" d="M256 144c-19.72 0-37.55 7.39-50.22 20.82s-19 32-17.57 51.93C191.11 256 221.52 288 256 288s64.83-32 67.79-71.24c1.48-19.74-4.8-38.14-17.68-51.82C293.39 151.44 275.59 144 256 144z"></path>
 					</svg>
-					<span class="contact-number hidden md:block">+84904576501</span>
+					<span class="contact-number md:block">+84904576501</span>
 					<div class="dropdown-toggle"></div>
 				</div>
 				<ul class="dropdown-menu">
