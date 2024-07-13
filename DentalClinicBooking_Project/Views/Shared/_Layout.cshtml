@@ -89,7 +89,11 @@
 					<div class="dropdown-toggle"></div>
 				</div>
 				<ul class="dropdown-menu">
-					<li><a class="dropdown-link" href="">Hồ sơ</a></li>
+					@if(account!=null && account.RoleId == 2)
+					{
+						<li><a class="dropdown-link" asp-area="" asp-controller="Patient" asp-action="ChangeInformation">Hồ sơ</a></li>
+
+					}
 					<li><a class="dropdown-link logout" asp-area="" asp-controller="Login" asp-action="Logout">Thoát</a></li>
 				</ul>
 			</div>
