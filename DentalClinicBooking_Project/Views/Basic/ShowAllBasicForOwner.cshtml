@@ -3,47 +3,59 @@
 <html lang="en">
 
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Quản lý phòng khám</title>
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<title>Quản lý phòng khám</title>
 
-  <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet" />
-  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+	<link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet" />
+	<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
 	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 	<link href="~/css/basic/showallbasicforowner.css" rel="stylesheet" />
+	<script src="~/js/basic/showallbasicforowner.js"></script>
 </head>
 
 <body>
-  <div class="row container-md">
-    <div class="background"></div>
-    <h1 class="col-md-5 page-title">Quản lí phòng khám</h1>
-    <a asp-area="" asp-controller="Basic" asp-action="AddBasic" asp-route-id="@Model.clinic.ClinicId" class="col-md-3">Add Basic</a>
-  </div>
-    @if(Model!=null)
-    {
-        foreach (var basic in Model.basics)
-        {
-            <div class="container-md">
-                <div class="clinic" style="display: flex;flex-direction: row;">
-                    <div class="clinic-info col-md-6">
-                        <span class="clinic-id">ID: @basic.BasicId</span>
-                        <h2 class="clinic-name">Phòng khám @basic.BasicName</h2>
-                        <p class="clinic-address"><strong>Địa chỉ:</strong> @basic.Address</p>
-                        <p class="clinic-phone"><strong>Điện thoại:</strong> @basic.Phone</p>
-                        <div class="clinic-actions">
-                            <button class="btn-edit" onclick="toggleBlur()">Chỉnh sửa</button>
-                            <button class="btn-delete">Xóa</button>
-                        </div>
-                    </div>
-                    <div class="col-md-6">
-                        <img class="imgClinic "
-                             src="@Model.clinic.MainImage"
-                             style="width: 90%; height: 90%; border-radius: 10%; margin-top: 3rem; padding-right: 1rem;">
-                    </div>
-                </div>
-            </div>
-        }
-    }
-  </body>>
+	<main>
+		<div class="container-md">
+			<div class="background"></div>
+			<h1 class="page-title">Quản lí phòng khám</h1>
+			<button class="add-basic" onclick="openAddBasicForm('@Model.clinic.ClinicId')">Thêm cơ sở</button>
+		</div>
+		@if (Model != null)
+		{
+			foreach (var basic in Model.basics)
+			{
+				<div class="container-md">
+					<div class="clinic" style="display: flex;flex-direction: row;">
+						<div class="clinic-info col-md-6">
+							<span class="clinic-id">ID: @basic.BasicId</span>
+							<h2 class="clinic-name">Phòng khám @basic.BasicName</h2>
+							<p class="clinic-address"><strong>Địa chỉ:</strong> @basic.Address</p>
+							<p class="clinic-phone"><strong>Điện thoại:</strong> @basic.Phone</p>
+							<div class="clinic-actions">
+								<button class="btn-edit" onclick="openUpdateBasicForm('@basic.BasicId')">Chỉnh sửa</button>
+								<button class="btn-delete" onclick="openDeleteModal('@basic.BasicId')">Xóa</button>
+							</div>
+						</div>
+						<div class="col-md-6">
+							<img class="imgClinic "
+								 src="@Model.clinic.MainImage"
+								 style="width: 90%; height: 90%; border-radius: 10%; margin-top: 3rem; padding-right: 1rem;">
+						</div>
+					</div>
+				</div>
+			}
+		}
+	</main>
+	<!-- Delete Basic Modal -->
+	<div id="deleteBasicModal" class="modal">
+		<div class="modal-content">
+			<span class="close">&times;</span>
+			<h2>Are you sure to delete this basic?</h2>
+			<button id="confirmDelete">Yes, delete</button>
+			<button class="close">No, cancel</button>
+		</div>
+	</div>
+</body>
 </html>
 
