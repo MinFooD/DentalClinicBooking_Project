@@ -21,9 +21,12 @@
             type: 'POST',
             data: JSON.stringify(data),
             contentType: 'application/json; charset=utf-8',
-            success: function (data) {
+            success: function (data) {                
                 $('.time-slot-item').each(function () {
                     var slotId = $(this).data('slot-id');
+                    var currentDate = new Date();
+                    console.log(slotId);
+                    console.log(currentDate);
                     if (data[slotId] >= 2) {
                         $(this).addClass('disabled')
                     } else {

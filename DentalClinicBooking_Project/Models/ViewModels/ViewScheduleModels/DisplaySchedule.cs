@@ -1,16 +1,17 @@
 ﻿using DentalClinicBooking_Project.Models.Domain;
 
-namespace DentalClinicBooking_Project.Models.ViewModels.BookingClinicModels
+namespace DentalClinicBooking_Project.Models.ViewModels.ViewScheduleModels
 {
-    public class AppointmentBookingSuccess
+    public class DisplaySchedule
     {
-        public string? ClinicName { get; set; }   
+        public Guid Id { get; set; }
+        public string? ClinicName { get; set; }
         public string? MainImage { get; set; }
-        public string? basicAddress { get; set; }
+        public string? BasicAddress { get; set; }
         public string? Code { get; set; }
-        public DateOnly Date { get; set; }        
+        public DateOnly Date { get; set; }
         public SlotOfClinic? SlotOfClinics { get; set; }
-        public string? BasicName { get; set; }               
+        public string? BasicName { get; set; }
         public string? Service { get; set; }
         public string? PatientName { get; set; }
         public DateOnly? BirthDate { get; set; }
@@ -31,6 +32,5 @@ namespace DentalClinicBooking_Project.Models.ViewModels.BookingClinicModels
                 return "Không xác định";
             }
         }
-
     }
 }

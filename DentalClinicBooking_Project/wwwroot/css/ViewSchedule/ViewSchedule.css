@@ -1,13 +1,26 @@
-﻿
-.info-value, 
-.info-label, 
-.clinic-address, 
-.appointment-time, 
-.appointment-patient,
-.status{
-    font-weight: 500;
-    color: #6B7680;
+﻿/*html {
+    font-family: Arial, Helvetica, sans-serif;
+}*/
+
+
+
+
+/* new */
+.search-container {
+    margin: 20px;
+    text-align: center;
 }
+
+#searchInput {
+    width: 100%;
+    padding: 10px;
+    margin-right: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+/* new */
+
 * {
     margin: 0;
     padding: 0;
@@ -44,11 +57,12 @@
     transition: all 0.3s ease;
 }
 
-.menu-link:hover, .menu-link.active {
-    background-color: #f9f9f9;
-    border-left-color: #007bff;
-    color: #007bff;
-}
+    .menu-link:hover,
+    .menu-link.active {
+        background-color: #f9f9f9;
+        border-left-color: #007bff;
+        color: #007bff;
+    }
 
 .main-content {
     flex: 1;
@@ -59,6 +73,12 @@
     align-items: flex-start;
 }
 
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
 
 .header-title {
     font-size: 24px;
@@ -77,20 +97,28 @@
     border: 1px solid black;
 }
 
-.filter-button .filter-icon {
-    margin-right: 10px;
-}
+    .filter-button .filter-icon {
+        margin-right: 10px;
+    }
 
 .appointments {
     display: flex;
     gap: 20px;
 }
 
+.appointment-all {
+    flex: 1;
+    background-color: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    max-height: 500px;
+}
+
 .appointment-list {
     flex: 1;
     background-color: #ffffff;
     border-radius: 10px;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
     max-height: 500px;
     overflow-y: auto;
 }
@@ -105,13 +133,13 @@
     transition: background-color 0.3s ease;
 }
 
-.appointment-item:hover {
-    background-color: #f9f9f9;
-}
+    .appointment-item:hover {
+        background-color: #f9f9f9;
+    }
 
-.appointment-item:last-child {
-    border-bottom: none;
-}
+    .appointment-item:last-child {
+        border-bottom: none;
+    }
 
 .appointment-details {
     flex: 1;
@@ -123,7 +151,8 @@
     color: #333333;
 }
 
-.appointment-time, .appointment-patient {
+.appointment-time,
+.appointment-patient {
     color: #555555;
     margin-bottom: 5px;
 }
@@ -132,7 +161,7 @@
     display: inline-block;
     padding: 5px 10px;
     border-radius: 5px;
-    color: rgb(34 197 94 );
+    color: rgb(34 197 94);
 }
 
 .appointment-status1 .status {
@@ -169,7 +198,7 @@
     flex: 2;
     background-color: #ffffff;
     border-radius: 10px;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
     padding: 20px;
 }
 
@@ -190,23 +219,22 @@
 }
 
 .status-text {
-    font-size: 18px;
+    font-size: 16px;
     color: #22C55E;
-    font-weight: 500;
 }
 
-.status-text.confirmed {
-    color: #22C55E;
-}
+    .status-text.confirmed {
+        color: #22C55E;
+    }
 
 .status-text1 {
-  font-size: 16px;
-  color: #6B7680;
+    font-size: 16px;
+    color: #6B7680;
 }
 
-.status-text1.failed {
-  color: #6B7680;
-}
+    .status-text1.failed {
+        color: #6B7680;
+    }
 
 .summary-info {
     display: flex;
@@ -242,7 +270,9 @@
 }
 
 
-.appointment-info, .patient-info, .result-info {
+.appointment-info,
+.patient-info,
+.result-info {
     margin-bottom: 20px;
 }
 
@@ -271,7 +301,7 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    gap: 1.5rem; 
+    gap: 1.5rem;
 }
 
 .cancel-button {
@@ -279,26 +309,29 @@
     text-decoration: none;
     transition: color 0.3s;
     background-color: white;
-    font-weight: 500;
 }
 
-.cancel-button:hover {
-    text-decoration: underline; 
-}
+    .cancel-button:hover {
+        text-decoration: underline;
+    }
 
 /* chuyển qua chuyển lại giữa 2 trường thông tin */
 .appointment-details-container {
-  display: none;
+    display: none;
 }
-.appointment-details-container.active {
-  display: block;
-}
+
+    .appointment-details-container.active {
+        display: block;
+    }
+
 .appointment-item {
-  cursor: pointer;
+    cursor: pointer;
 }
+
 .details-display {
-  flex: 2;
-  /* border: 1px solid #ccc;  */
-  min-height: 200px; 
+    flex: 2;
+    /* border: 1px solid #ccc;  */
+    min-height: 200px;
 }
+
 

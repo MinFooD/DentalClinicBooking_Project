@@ -21,9 +21,27 @@ namespace DentalClinicBooking_Project.Repositories
 			return clinicAppointmentSchedule;
 		}
 
-		public async Task<IEnumerable<ClinicAppointmentSchedule>> GetAllAsync(Guid id)
+        public async Task<ClinicAppointmentSchedule?> DeleteAsyn(Guid id)
+        {
+			var appointmentSchedule = await dentalClinicBookingProjectContext.ClinicAppointmentSchedules.FindAsync(id);
+
+            if (appointmentSchedule != null)
+            {
+                dentalClinicBookingProjectContext.ClinicAppointmentSchedules.Remove(appointmentSchedule);
+                await dentalClinicBookingProjectContext.SaveChangesAsync();
+                return appointmentSchedule;
+            }
+
+			return null;
+        }
+
+        public async Task<IEnumerable<ClinicAppointmentSchedule>> GetAllAsync(Guid id)
 		{
 			return await dentalClinicBookingProjectContext.ClinicAppointmentSchedules
+				.Include(x => x.Basic)
+				.Include(x => x.Clinic)
+				.Include(x => x.Service)
+				.Include(x => x.Patient)
 				.Where(x => x.PatientId == id)
 				.ToListAsync();
 		}

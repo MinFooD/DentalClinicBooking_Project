@@ -1,5 +1,6 @@
 ﻿using DentalClinicBooking_Project.Models.Domain;
 using DentalClinicBooking_Project.Models.ViewModels.BookingClinicModels;
+using DentalClinicBooking_Project.Models.ViewModels.ViewScheduleModels;
 using DentalClinicBooking_Project.Repositories;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
@@ -11,17 +12,20 @@ namespace DentalClinicBooking_Project.Controllers
         private readonly IHttpContextAccessor httpContextAccessor;
         private readonly IClinicAppointmentScheduleRepository clinicAppointmentScheduleRepository;
         private readonly IClinicRepository clinicRepository;
+        private readonly ISlotRepository slotRepository;
 
         public ViewAppointmentScheduleController(
             IHttpContextAccessor httpContextAccessor,
             IClinicAppointmentScheduleRepository clinicAppointmentScheduleRepository,
-            IClinicRepository clinicRepository)
+            IClinicRepository clinicRepository,
+            ISlotRepository slotRepository)
         {
             this.httpContextAccessor = httpContextAccessor;
             this.clinicAppointmentScheduleRepository = clinicAppointmentScheduleRepository;
             this.clinicRepository = clinicRepository;
+            this.slotRepository = slotRepository;
         }
-        
+
         [HttpGet]
         public async Task<IActionResult> DisplayAppointmentSchedule()
         {
@@ -30,15 +34,35 @@ namespace DentalClinicBooking_Project.Controllers
             {
                 var patient = JsonConvert.DeserializeObject<Patient>(patientString);
                 var list = await clinicAppointmentScheduleRepository.GetAllAsync(patient?.PatientId ?? Guid.Empty);
-                var model = list.Select(async a => new AppointmentBookingSuccess
-                {
-                   Code = a.Code,
 
+                var model = list.Select(a => new DisplaySchedule
+                {
+                    Id = a.ClinicAppointmentScheduleId,
+                    ClinicName = a.Clinic.ClinicName,
+                    BasicAddress = a.Basic.Address,
+                    Code = a.Code,
+                    Date = a.Date,
+                    BasicName = a.Basic.BasicName,
+                    MainImage = a.Clinic.MainImage,
+                    Service = a.Service.ServiceName,
+                    PatientName = a.Patient.PatientName,
+                    PatientAddress = a.Patient.Address,
+                    Gender = DisplaySchedule.GetGender(a.Patient.Gender),
+                    BirthDate = a.Patient.BirthDay,
+                    SlotOfClinics = slotRepository.Get(a.ClinicId ?? Guid.Empty, a.SlotId ?? Guid.Empty),
                 }).ToList();
-                return View(list);
+
+                return View(model);
             }
 
             return RedirectToAction("Login", "Login");
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> CancelAppointment(Guid id)
+        {
+            var model = await clinicAppointmentScheduleRepository.DeleteAsyn(id);
+            return RedirectToAction("DisplayAppointmentSchedule");
         }
     }
 }

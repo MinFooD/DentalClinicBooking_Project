@@ -113,10 +113,21 @@ namespace DentalClinicBooking_Project.Controllers
             var arrSlots = await slotRepository.GetAllSlotsAsync();
             var slots = new Dictionary<Guid, int>();
 
+
             for (int i = 0; i < arrSlots.Length; i++)
             {
                 slots.Add(arrSlots[i].SlotId, 0);
             }
+
+            //var slots = new Dictionary<Guid, object>();
+            //foreach (var slot in arrSlots)
+            //{
+            //    slots[slot.SlotId] = new
+            //    {
+            //        count = 0,
+
+            //    };
+            //}
 
             foreach (var booking in bookings)
             {
