@@ -1,0 +1,236 @@
+
+  
+  /* Main body */
+  body {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  }
+  
+  .grid-container {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1rem;
+  padding: 1rem;
+  }
+  
+  @media (min-width: 768px) {
+  .grid-container {
+      grid-template-columns: 2fr 1fr;
+  }
+  }
+  
+  
+  .main-content, .sidebar {
+  background-color: white;
+  border-radius: 8px;
+  padding: 1rem;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
+  
+  .main-content {
+    max-width: 80%;  
+    min-height: 60vh;  
+    margin: auto; 
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .confirmbutton{
+    margin-left: 0.5rem;
+    border: 1px solid grey;
+    border-radius: 10%;
+    font-weight: 500;
+    background-color: #007bff;
+    color: white;
+  }
+  
+  .confirmbutton:hover{
+    background-color: #035bb9;
+    color: white;
+  }
+  
+  .button-group{
+    margin-top: 1rem;
+  }
+  
+  .sidebar {
+  position: sticky;
+  top: 1rem;
+  height: fit-content;
+  }
+  
+  .sidebar-sticky {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  }
+  
+  .sidebar-info {
+  background-color: white;
+  padding: 1rem;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
+  
+  .sidebar-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+  }
+  
+  .sidebar-title {
+  font-size: 1.25rem;
+  font-weight: bold;
+  }
+  
+  .sidebar-details {
+  padding: 1rem 0;
+  border-top: 1px solid #e0e0e0;
+  }
+  
+  .clinic-info {
+  display: flex;
+  align-items: center;
+  margin-bottom: 1rem;
+  font-size: larger;
+  }
+  
+  .clinic-avatar {
+  width: 100px;
+  height: 100px;
+  margin-right: 1rem;
+  border-radius: 50%;
+  object-fit: cover;
+  }
+  
+  .clinic-text {
+  display: flex;
+  flex-direction: column;
+  }
+  
+  .clinic-name {
+  font-weight: bold;
+  margin-bottom: 0px;
+  margin-bottom: 4rem;
+  }
+  
+  .clinic-address {
+  color: #888;
+  font-size: smaller;
+  }
+  
+  .booking-info {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  }
+  
+  .info-item {
+  display: flex;
+  justify-content: space-between;
+  padding: 0.5rem 0;
+  }
+  
+  .info-label{
+    font-size: 0.875rem;
+    color: #888;
+    white-space: nowrap;
+    font-size: larger;
+  }
+  
+  
+  .info-value {
+    font-size: 0.875rem;
+    font-weight: 500;
+    font-size: larger;
+  }
+  
+  .confirmation {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  }
+  
+  .confirm-button {
+  background-color: #007bff;
+  color: white;
+  padding: 0.75rem 3.2rem;
+  border-radius: 5px;
+  border: none;
+  cursor: pointer;
+  font-size: 1rem;
+  }
+  .cancel-button{
+  background-color: white;
+  color: black;
+  padding: 0.75rem 3.7rem;
+  border-radius: 5px;
+  border: 1px solid black;
+  cursor: pointer;
+  font-size: 1rem;
+  }
+  
+  .terms-text {
+  font-size: 0.875rem;
+  text-align: center;
+  }
+  
+  .terms-text a {
+  color: #007bff;
+  text-decoration: none;
+  }
+  
+  .rotate-180 {
+  transform: rotate(180deg);
+  }
+  
+  .hidden {
+  display: none;
+  }
+  
+  /* navbar cơ sở */
+  .steps-containernv {
+  padding: 1.5rem 2.5rem;
+  display: flex;
+  text-align: center;
+  gap: 1rem;
+  overflow-x: auto;
+  white-space: nowrap;
+  }
+  
+  .step-itemnv {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  flex-shrink: 0;
+  cursor: pointer;
+  }
+  
+  .step-iconnv,
+  .step-separatornv {
+  width: 1.5rem;
+  height: 1.5rem;
+  }
+  .step-label {
+  font-size: 0.875rem;
+  font-weight: 400;
+  color: #4a4a4a;
+  line-height: 1.0625rem;
+  }
+  
+  .step-number {
+  width: 1.5rem;
+  height: 1.5rem;
+  background-color: #38a169;
+  color: white;
+  text-align: center;
+  line-height: 1.5rem;
+  border-radius: 0.375rem;
+  }
+  
+  .hidden {
+    display: none;
+  }
