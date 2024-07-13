@@ -1,9 +1,5 @@
-
-  
-  
-  .page-title {
+.page-title {
     font-size: 32px;
-    color: #333;
     text-align: center;
     margin-top: 1rem;
     padding: 10px 20px;
@@ -13,9 +9,106 @@
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     display: inline-block;
     text-transform: uppercase;
-  }
-  
-  .clinic {
+}
+/*------------------------------------------------------------ confirm delete*/
+.modal {
+    /*    display: none;*/
+    position: fixed;
+    /*    z-index: 1;*/
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.5); /* Black with transparency */
+    padding-top: 60px;
+}
+
+.modal-content {
+    background-color: #fefefe;
+    margin: 5% auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%;
+    max-width: 600px;
+    border-radius: 12px;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+}
+
+    .modal-content h2 {
+        margin: 0 0 1rem;
+        color: #007acc; /* Azure Blue */
+    }
+
+    .modal-content label {
+        display: block;
+        margin: 0.5rem 0 0.2rem;
+        color: #007acc; /* Azure Blue */
+    }
+
+    .modal-content input,
+    .modal-content textarea {
+        width: 100%;
+        padding: 0.75rem;
+        margin-bottom: 1rem;
+        border: 1px solid #ccc;
+        border-radius: 6px;
+    }
+
+        .modal-content input:focus,
+        .modal-content textarea:focus {
+            border-color: #007acc; /* Azure Blue */
+            outline: none;
+        }
+
+    .modal-content button {
+        background-color: #007acc; /* Azure Blue */
+        color: white;
+        border: none;
+        padding: 0.75rem 1.5rem;
+        cursor: pointer;
+        border-radius: 6px;
+        transition: background-color 0.3s;
+        margin: 10px 0;
+        display: inline;
+    }
+
+        .modal-content button:hover {
+            background-color: #005f99; /* Darker Azure Blue */
+        }
+
+    .modal-content .close {
+        /* color: #aaa; */
+        float: right;
+        /* font-size: 28px; */
+        font-weight: bold;
+    }
+
+        .modal-content .close:hover,
+        .modal-content .close:focus {
+            color: black;
+            text-decoration: none;
+            cursor: pointer;
+        }
+/*---------------------------------------*/
+.add-basic {
+    font-size: 32px;
+    text-align: center;
+    padding: 5px 15px;
+    background-color: #007bff;
+    color: #fff;
+    border-radius: 12px;
+    border: none;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    display: inline-block;
+    text-transform: uppercase;
+}
+
+    .add-basic:hover {
+        background-color: #0056b3;
+    }
+
+.clinic {
     background-color: #fff;
     padding: 20px;
     margin-bottom: 20px;
@@ -26,66 +119,65 @@
     justify-content: space-between;
     align-items: flex-start;
     transition: box-shadow 0.3s ease;
-  
-  }
-  
-  .clinic:hover {
-    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
-  }
-  
-  .clinic-info {
+}
+
+    .clinic:hover {
+        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+    }
+
+.clinic-info {
     flex: 1;
     padding-right: 20px;
     overflow: auto;
     padding-left: 2rem;
     /* Thêm thanh cuộn khi nội dung vượt quá kích thước */
-  }
-  
-  .clinic-id {
+}
+
+.clinic-id {
     font-size: 18px;
     font-weight: bold;
     color: #007bff;
     padding-bottom: 2rem;
-  }
-  
-  .clinic-name {
+}
+
+.clinic-name {
     font-size: 24px;
     color: #333;
     margin-top: 3rem;
-  }
-  
-  .clinic-address,
-  .clinic-phone,
-  .clinic-url-address {
+}
+
+.clinic-address,
+.clinic-phone,
+.clinic-url-address {
     margin-bottom: 6px;
     color: #313030;
     font-size: larger;
-  }
-  
-  .clinic-address strong,
-  .clinic-phone strong,
-  .clinic-url-address strong {
-    margin-right: 6px;
-  }
-  
-  
-  .clinic-url a {
+}
+
+    .clinic-address strong,
+    .clinic-phone strong,
+    .clinic-url-address strong {
+        margin-right: 6px;
+    }
+
+
+.clinic-url a {
     color: #007bff;
     text-decoration: none;
     transition: color 0.3s ease;
-  }
-  
-  .clinic-url a:hover {
-    color: #0056b3;
-  }
-  
-  .clinic-actions {
+}
+
+    .clinic-url a:hover {
+        color: #0056b3;
+    }
+
+.clinic-actions {
     margin-top: 6rem;
     margin-bottom: 3rem;
-  }
-  
-  .btn-edit,
-  .btn-delete {
+}
+
+.btn-edit,
+.btn-delete {
     padding: 20px 30px;
     font-size: large;
     border: none;
@@ -94,14 +186,14 @@
     background-color: #007bff;
     color: #fff;
     transition: background-color 0.3s ease;
-  }
-  
-  .btn-edit:hover,
-  .btn-delete:hover {
-    background-color: #0056b3;
-  }
-  
-  .edit-form {
+}
+
+    .btn-edit:hover,
+    .btn-delete:hover {
+        background-color: #0056b3;
+    }
+
+.edit-form {
     display: none;
     position: absolute;
     top: 50%;
@@ -112,35 +204,35 @@
     padding: 30px;
     border-radius: 12px;
     box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
-  }
-  
-  .edit-form input {
-    width: calc(100% - 20px);
-    margin: 10px;
-    padding: 12px;
-    font-size: 16px;
-    border: 1px solid #ccc;
-    border-radius: 6px;
-  }
-  
-  .edit-form button {
-    padding: 12px 24px;
-    font-size: 16px;
-    border: none;
-    border-radius: 6px;
-    cursor: pointer;
-    background-color: #007bff;
-    color: #fff;
-    transition: background-color 0.3s ease;
-  }
-  
-  .edit-form button.btn-cancel {
-    background-color: #303031;
-    margin-left: 10px;
-  }
-  
-  
-  .background {
+}
+
+    .edit-form input {
+        width: calc(100% - 20px);
+        margin: 10px;
+        padding: 12px;
+        font-size: 16px;
+        border: 1px solid #ccc;
+        border-radius: 6px;
+    }
+
+    .edit-form button {
+        padding: 12px 24px;
+        font-size: 16px;
+        border: none;
+        border-radius: 6px;
+        cursor: pointer;
+        background-color: #007bff;
+        color: #fff;
+        transition: background-color 0.3s ease;
+    }
+
+        .edit-form button.btn-cancel {
+            background-color: #303031;
+            margin-left: 10px;
+        }
+
+
+.background {
     position: fixed;
     top: 0;
     left: 0;
@@ -154,59 +246,59 @@
     /* Độ mờ của hình nền */
     z-index: -1;
     /* Đảm bảo hình nền nằm phía sau nội dung chính */
-  }
-  
-  /* chỉnh form thứ 2 */
-  .form-group {
+}
+
+/* chỉnh form thứ 2 */
+.form-group {
     display: flex;
     align-items: center;
     margin-bottom: 10px;
-  }
-  
-  .form-group strong {
-    flex: 2;
-    font-weight: bold;
-    font-size: large;
-  }
-  
-  .form-group input {
-    padding: 5px;
-    font-size: 1rem;
-    width: 500px;
-  }
-  
-  
-  /* làm mờ phía sau */
-  .clinic-blur {
+}
+
+    .form-group strong {
+        flex: 2;
+        font-weight: bold;
+        font-size: large;
+    }
+
+    .form-group input {
+        padding: 5px;
+        font-size: 1rem;
+        width: 500px;
+    }
+
+
+/* làm mờ phía sau */
+.clinic-blur {
     filter: blur(5px);
     /* Áp dụng hiệu ứng làm mờ */
-  }
-  
-  h1 {
+}
+
+h1 {
     margin-top: 0px;
-    margin-bottom: 2rem;
-  }
-  
-  .container-md {
+    margin-bottom: 3rem;
+}
+
+.container-md {
     max-width: 1200px;
     /* Đặt chiều rộng tối đa cho container */
     margin: 0 auto;
     /* Canh giữa container */
     padding: 0 15px;
     /* Thêm padding để tạo khoảng cách với nội dung bên trong */
-  }
-  
-  
-  
-  .clinic {
+}
+
+
+
+.clinic {
     display: flex;
-  }
-  
-  .clinic-info {
+}
+
+.clinic-info {
     flex: 1;
-  }
-  
-  .imgClinic {
+}
+
+.imgClinic {
     flex: 1;
     border-radius: 10%;
-  }
+}

@@ -127,11 +127,11 @@ namespace DentalClinicBooking_Project.Controllers
 
 		public IActionResult DeleteClinic(Guid id)
 		{
-			var clinic = _context.Clinics?.Include(x => x.Basics).ThenInclude(x=> x.Dentists).Include(x=>x.SlotOfClinics).Include(x => x.Services).Include(x=>x.ClinicAppointmentSchedules).Include(x=>x.ClinicImages).FirstOrDefault(x => x.ClinicId.Equals(id));
+			var clinic = _context.Clinics?.Include(x => x.Basics).ThenInclude(x=> x.Dentists).ThenInclude(x => x.Account).Include(x=>x.SlotOfClinics).Include(x => x.Services).Include(x=>x.ClinicAppointmentSchedules).Include(x=>x.ClinicImages).FirstOrDefault(x => x.ClinicId.Equals(id));
 
 			if (clinic == null)
 			{
-				return RedirectToAction("CLinic", "ShowAllClinicForOwner");
+				return RedirectToAction("ShowAllClinicForOwner", "Clinic");
 			}
 
 			foreach (var image in clinic.ClinicImages)
@@ -141,11 +141,12 @@ namespace DentalClinicBooking_Project.Controllers
 
 			foreach (var basic in clinic.Basics)
 			{
-				foreach (var dentist in basic.Dentists)
-				{
-					_context.Dentists.Remove(dentist);
-				}				
-				_context.Basics.Remove(basic);
+                foreach (var dentist in basic.Dentists)
+                {
+                    _context.Accounts.Remove(dentist.Account);
+                    _context.Dentists.Remove(dentist);
+                }
+                _context.Basics.Remove(basic);
 			}
 
 			foreach (var slot in clinic.SlotOfClinics)
@@ -160,7 +161,7 @@ namespace DentalClinicBooking_Project.Controllers
 				_context.ClinicAppointmentSchedules.Remove(schedule);
 			}
 			_context.Clinics.Remove(clinic);
-			_context.SaveChanges();
+			//_context.SaveChanges();
 			return RedirectToAction("ShowAllClinicForOwner", "Clinic");
 		}
 	}
