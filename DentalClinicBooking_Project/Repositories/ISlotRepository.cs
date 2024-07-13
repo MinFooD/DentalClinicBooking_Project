@@ -7,7 +7,7 @@ namespace DentalClinicBooking_Project.Repositories
     public interface ISlotRepository
     {
         Task<Slot[]> GetAllSlotsAsync();
-
-        Task<IEnumerable<SlotOfClinic>> GetAsync(Guid clinicId, Guid slotId);       
+        Task<SlotOfClinic?> GetAsync(Guid clinicId, Guid slotId);
+        SlotOfClinic? Get(Guid clinicId, Guid slotId);
     }
 }

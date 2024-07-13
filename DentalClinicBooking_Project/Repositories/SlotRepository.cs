@@ -13,6 +13,13 @@ namespace DentalClinicBooking_Project.Repositories
         {
             this.dentalClinicBookingProjectContext = dentalClinicBookingProjectContext;
         }
+
+        public SlotOfClinic? Get(Guid clinicId, Guid slotId)
+        {
+            return  dentalClinicBookingProjectContext.SlotOfClinics
+        .FirstOrDefault(x => x.ClinicId == clinicId && x.SlotId == slotId);
+        }
+
         public async Task<Slot[]> GetAllSlotsAsync()
         {
             return await dentalClinicBookingProjectContext.Slots
@@ -21,13 +28,11 @@ namespace DentalClinicBooking_Project.Repositories
                 .ToArrayAsync();
         }
 
-        public async Task<IEnumerable<SlotOfClinic>> GetAsync(Guid clinicId, Guid slotId)
+        public async Task<SlotOfClinic?> GetAsync(Guid clinicId, Guid slotId)
         {
             return await dentalClinicBookingProjectContext.SlotOfClinics
-                .Include(x => x.Clinic)
-                .Include(x => x.Slot)
-                .Where(x => x.ClinicId == clinicId && x.SlotId == slotId)
-                .ToListAsync();               
+        .FirstOrDefaultAsync(x => x.ClinicId == clinicId && x.SlotId == slotId);
+
         }
     }
 }

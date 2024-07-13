@@ -56,15 +56,10 @@
                 <div class="info-row">
                     <dt class="info-title">Giờ khám</dt>
                     <dd class="info-value green">
-
-                        @foreach (var item in Model.SlotOfClinics)
-                        {
-                            @item.StartTime.ToString("HH:mm") 
-                            @(" - ") 
-                            @item.EndTime.ToString("HH:mm")
-                            <span class="session-time"></span>
-                        }
-
+                        @Model?.SlotOfClinics?.StartTime.ToString("HH:mm")
+                       @*  @(" - ") *@ -
+                        @Model?.SlotOfClinics?.EndTime.ToString("HH:mm")
+                        <span class="session-time"></span>
                     </dd>
                 </div>
                 <div class="info-row">
