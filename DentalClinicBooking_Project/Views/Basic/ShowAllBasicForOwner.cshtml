@@ -11,42 +11,39 @@
 	<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
 	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 	<link href="~/css/basic/showallbasicforowner.css" rel="stylesheet" />
-	<script src="~/js/basic/showallbasicforowner.js"></script>
 </head>
 
 <body>
-	<main>
-		<div class="container-md">
-			<div class="background"></div>
-			<h1 class="page-title">Quản lí phòng khám</h1>
-			<button class="add-basic" onclick="openAddBasicForm('@Model.clinic.ClinicId')">Thêm cơ sở</button>
-		</div>
-		@if (Model != null)
+	<div class="container-md">
+		<div class="background"></div>
+		<h1 class="page-title">Quản lí phòng khám</h1>
+		<button class="add-basic" onclick="openAddBasicForm('@Model.clinic.ClinicId')">Thêm cơ sở</button>
+	</div>
+	@if (Model != null)
+	{
+		foreach (var basic in Model.basics)
 		{
-			foreach (var basic in Model.basics)
-			{
-				<div class="container-md">
-					<div class="clinic" style="display: flex;flex-direction: row;">
-						<div class="clinic-info col-md-6">
-							<span class="clinic-id">ID: @basic.BasicId</span>
-							<h2 class="clinic-name">Phòng khám @basic.BasicName</h2>
-							<p class="clinic-address"><strong>Địa chỉ:</strong> @basic.Address</p>
-							<p class="clinic-phone"><strong>Điện thoại:</strong> @basic.Phone</p>
-							<div class="clinic-actions">
-								<button class="btn-edit" onclick="openUpdateBasicForm('@basic.BasicId')">Chỉnh sửa</button>
-								<button class="btn-delete" onclick="openDeleteModal('@basic.BasicId')">Xóa</button>
-							</div>
-						</div>
-						<div class="col-md-6">
-							<img class="imgClinic "
-								 src="@Model.clinic.MainImage"
-								 style="width: 90%; height: 90%; border-radius: 10%; margin-top: 3rem; padding-right: 1rem;">
+			<div class="container-md">
+				<div class="clinic" style="display: flex;flex-direction: row;">
+					<div class="clinic-info col-md-6">
+						<span class="clinic-id">ID: @basic.BasicId</span>
+						<h2 class="clinic-name">Phòng khám @basic.BasicName</h2>
+						<p class="clinic-address"><strong>Địa chỉ:</strong> @basic.Address</p>
+						<p class="clinic-phone"><strong>Điện thoại:</strong> @basic.Phone</p>
+						<div class="clinic-actions">
+							<button class="btn-edit" onclick="openUpdateBasicForm('@basic.BasicId')">Chỉnh sửa</button>
+							<button class="btn-delete" onclick="openDeleteModal('@basic.BasicId')">Xóa</button>
 						</div>
 					</div>
+					<div class="col-md-6">
+						<img class="imgClinic"
+							 src="@Model.clinic.MainImage"
+							 style="width: 90%; height: 90%; border-radius: 10%; margin-top: 3rem; padding-right: 1rem;">
+					</div>
 				</div>
-			}
+			</div>
 		}
-	</main>
+	}
 	<!-- Delete Basic Modal -->
 	<div id="deleteBasicModal" class="modal">
 		<div class="modal-content">
@@ -56,6 +53,8 @@
 			<button class="close">No, cancel</button>
 		</div>
 	</div>
+
+	<!-- Include the JavaScript file -->
+	<script src="~/js/basic/showallbasicforowner.js"></script>
 </body>
 </html>
-

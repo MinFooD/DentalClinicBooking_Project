@@ -29,5 +29,4 @@
     window.openUpdateBasicForm = (id) => {
         window.location.href = `/Basic/UpdateBasic?id=${id}`; // Chuyển hướng đến hành động UpdateBasic với ID của cơ sở
     };
-
-}
+});
