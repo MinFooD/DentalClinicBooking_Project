@@ -91,7 +91,7 @@
 				<ul class="dropdown-menu">
 					@if(account!=null && account.RoleId == 2)
 					{
-						<li><a class="dropdown-link" asp-area="" asp-controller="Patient" asp-action="ChangeInformation">Hồ sơ</a></li>
+						<li><a class="dropdown-link" asp-area="" asp-controller="Patient" asp-action="ShowProfile" asp-route-id="@patient.PatientId">Hồ sơ</a></li>
 
 					}
 					<li><a class="dropdown-link logout" asp-area="" asp-controller="Login" asp-action="Logout">Thoát</a></li>

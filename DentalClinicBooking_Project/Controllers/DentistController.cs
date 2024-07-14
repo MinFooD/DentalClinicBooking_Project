@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json;
+using System.Text;
 
 namespace DentalClinicBooking_Project.Controllers
 {
@@ -101,7 +102,9 @@ namespace DentalClinicBooking_Project.Controllers
         [HttpGet]
         public IActionResult UpdateDentist(Guid id)
         {
-            string ownerString = _contx.HttpContext.Session.GetString("owner");
+			byte[] key = Encoding.UTF8.GetBytes("01234567890123456789012345678901"); // 32 bytes key
+			byte[] iv = Encoding.UTF8.GetBytes("0123456789012345"); // 16 bytes IV
+			string ownerString = _contx.HttpContext.Session.GetString("owner");
             if (!string.IsNullOrEmpty(ownerString))
             {
                 var dentist = _context.Dentists.Include(x => x.Account).FirstOrDefault(x => x.DentistId.Equals(id));
@@ -115,8 +118,7 @@ namespace DentalClinicBooking_Project.Controllers
                         Image = dentist.Image,
                         Experience = dentist.Experience,
                         Gmail = dentist.Account.Gmail,
-                        NewPassword = string.Empty,
-                        ConfirmPassword = string.Empty,
+                        Password = HashPasswordController.DecryptString(dentist.Account.Password, key, iv),
                     };
                     return View(updateDentistVM);
                 }
@@ -127,7 +129,9 @@ namespace DentalClinicBooking_Project.Controllers
         [HttpPost]
         public IActionResult UpdateDentist(UpdateDentistVM updateDentistVM)
         {
-            var dentist = _context.Dentists.Include(x => x.Account).FirstOrDefault(x => x.DentistId.Equals(updateDentistVM.DentistId));
+			byte[] key = Encoding.UTF8.GetBytes("01234567890123456789012345678901"); // 32 bytes key
+			byte[] iv = Encoding.UTF8.GetBytes("0123456789012345"); // 16 bytes IV
+			var dentist = _context.Dentists.Include(x => x.Account).FirstOrDefault(x => x.DentistId.Equals(updateDentistVM.DentistId));
             if (dentist != null)
             {
 				// Kiểm tra nếu email đã tồn tại trong cơ sở dữ liệu
@@ -143,14 +147,9 @@ namespace DentalClinicBooking_Project.Controllers
                 dentist.Experience = updateDentistVM.Experience;
                 dentist.Image = updateDentistVM.Image;
                 dentist.Account.Gmail = updateDentistVM.Gmail;
+				dentist.Account.Password = HashPasswordController.EncryptString(updateDentistVM.Password, key, iv);
 
-                if(!string.IsNullOrEmpty(updateDentistVM.NewPassword) && updateDentistVM.NewPassword.Equals(updateDentistVM.ConfirmPassword))
-                {
-                    dentist.Account.Password = BCrypt.Net.BCrypt.HashPassword(updateDentistVM.NewPassword);
-                }
-                
-
-                _context.SaveChanges();
+				_context.SaveChanges();
                 TempData["result"] = "Update Successfully.";
                 
             }
