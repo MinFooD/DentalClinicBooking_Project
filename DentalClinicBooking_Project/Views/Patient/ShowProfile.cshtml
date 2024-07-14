@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Account</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet" />
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</head>
+
+<body style=" background: #F3F4F6;">
+    <div class="container">
+        <div class="sidebar">
+            <ul class="menu">
+                <li><a class="menu-item item-active" href="#">Tài khoản</a></li>
+                <li><a class="menu-item" href="#">Hồ sơ</a></li>
+                <li><a class="menu-item" href="#">Đăng xuất</a></li>
+            </ul>
+        </div>
+        <div class="main-content">
+            <h1 class="title">Tài khoản</h1>
+            <div class="account-section">
+                <div class="account-info card">
+                    <h3 class="card-title">Thông tin tài khoản</h3>
+                    <div class="info-list">
+                        <div class="info-item">
+                            <label>Họ và tên:</label>
+                            <p class="info-value"></p>
+                        </div>
+                        <div class="info-item">
+                            <label>Số điện thoại:</label>
+                            <p class="info-value"></p>
+                        </div>
+                        <div class="info-item">
+                            <label>Ngày sinh:</label>
+                            <p class="info-value"></p>
+                        </div>
+                        <div class="info-item">
+                            <label>Địa chỉ:</label>
+                            <p class="info-value">----</p>
+                        </div>
+                        <div class="info-item">
+                            <label>CCCD/CMND:</label>
+                            <p class="info-value">----</p>
+                        </div>
+                        <div class="info-item">
+                            <label>MÃ BHYT:</label>
+                            <p class="info-value">----</p>
+                        </div>
+                        <div class="info-item">
+                            <a class="edit-link" href="#" style="text-decoration: none;">Thay đổi thông tin</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="password-change card">
+                    <h3 class="card-title">Thay đổi mật khẩu</h3>
+                    <form class="password-form">
+                        <div class="form-item">
+                            <label for="currentPassword">Mật khẩu hiện tại <span class="required">*</span></label>
+                            <div class="input-container">
+                                <input type="password" id="currentPassword" name="currentPassword"
+                                       placeholder="Mật khẩu hiện tại của bạn" minlength="6" class="input-field">
+                                <img class="toggle-password"
+                                     src="https://youmed.vn/dat-kham/assets/img/booking/svg/Hide.svg"
+                                     alt="Toggle Password Visibility">
+                            </div>
+                        </div>
+                        <div class="form-item">
+                            <label for="newPassword">Mật khẩu mới <span class="required">*</span></label>
+                            <div class="input-container">
+                                <input type="password" id="newPassword" name="newPassword"
+                                       placeholder="Nhập mật khẩu mới" minlength="6" class="input-field">
+                                <img class="toggle-password"
+                                     src="https://youmed.vn/dat-kham/assets/img/booking/svg/Hide.svg"
+                                     alt="Toggle Password Visibility">
+                            </div>
+                        </div>
+                        <div class="form-actions">
+                            <button type="button" class="btn btn-disabled change-password-btn" style="border: 1px solid #666;color: white;background: #1975DC;"
+                                    disabled>
+                                Thay đổi
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal -->
+    <div class="modal-overlay" id="modalOverlay">
+        <div class="modal-content">
+            <div class="modal-header">
+                <span class="modal-icon">&#x2753;</span>
+                <span class="modal-title">Bạn muốn thay đổi mật khẩu?</span>
+            </div>
+            <div class="modal-footer">
+                <button class="modal-btn cancel-btn">Huỷ</button>
+                <button class="modal-btn ok-btn">OK</button>
+            </div>
+        </div>
+    </div>
+</body>
+
+<script>
+    document.querySelectorAll('.toggle-password').forEach(item => {
+        item.addEventListener('click', event => {
+            const inputField = event.target.previousElementSibling;
+            if (inputField.type === "password") {
+                inputField.type = "text";
+                event.target.src = "https://youmed.vn/dat-kham/assets/img/booking/svg/Show.svg"; // URL to the 'show' icon
+            } else {
+                inputField.type = "password";
+                event.target.src = "https://youmed.vn/dat-kham/assets/img/booking/svg/Hide.svg"; // URL to the 'hide' icon
+            }
+        });
+    });
+
+    document.addEventListener('DOMContentLoaded', function () {
+        const currentPasswordInput = document.getElementById('currentPassword');
+        const newPasswordInput = document.getElementById('newPassword');
+        const changeButton = document.querySelector('.change-password-btn');
+        const modalOverlay = document.getElementById('modalOverlay');
+        const cancelBtn = document.querySelector('.cancel-btn');
+        const okBtn = document.querySelector('.ok-btn');
+
+        function updateButtonState() {
+            const isCurrentPasswordValid = currentPasswordInput.value.length >= 6;
+            const isNewPasswordValid = newPasswordInput.value.length >= 6;
+            changeButton.disabled = !(isCurrentPasswordValid && isNewPasswordValid);
+            if (!changeButton.disabled) {
+                changeButton.classList.remove('btn-disabled');
+                changeButton.classList.add('btn-primary');
+            } else {
+                changeButton.classList.add('btn-disabled');
+                changeButton.classList.remove('btn-primary');
+            }
+        }
+
+        currentPasswordInput.addEventListener('input', updateButtonState);
+        newPasswordInput.addEventListener('input', updateButtonState);
+
+        changeButton.addEventListener('click', function () {
+            modalOverlay.style.display = 'flex';
+        });
+
+        cancelBtn.addEventListener('click', function () {
+            modalOverlay.style.display = 'none';
+        });
+
+        okBtn.addEventListener('click', function () {
+            // Thực hiện hành động thay đổi mật khẩu ở đây
+            modalOverlay.style.display = 'none';
+        });
+    });
+</script>
+
+<!-- khi load modal không bị đóng lại -->
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const modalOverlay = document.getElementById('modalOverlay');
+        const changeButton = document.querySelector('.change-password-btn');
+        const cancelBtn = document.querySelector('.cancel-btn');
+        const okBtn = document.querySelector('.ok-btn');
+
+        // Kiểm tra và khôi phục trạng thái của modal khi tải lại trang
+        if (localStorage.getItem('modalShown') === 'true') {
+            modalOverlay.style.display = 'flex';
+        }
+
+        // Hiển thị modal và lưu trạng thái khi nhấn nút "Thay đổi"
+        changeButton.addEventListener('click', function () {
+            modalOverlay.style.display = 'flex';
+            localStorage.setItem('modalShown', 'true');
+        });
+
+        // Xử lý khi nhấn nút "Huỷ" trong modal
+        cancelBtn.addEventListener('click', function () {
+            modalOverlay.style.display = 'none';
+            localStorage.removeItem('modalShown');
+        });
+
+        // Xử lý khi nhấn nút "OK" trong modal
+        okBtn.addEventListener('click', function () {
+            // Thực hiện hành động thay đổi mật khẩu ở đây
+            modalOverlay.style.display = 'none';
+            localStorage.removeItem('modalShown');
+        });
+    });
+</script>
+</html>
