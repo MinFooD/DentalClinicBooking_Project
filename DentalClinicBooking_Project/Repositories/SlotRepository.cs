@@ -16,16 +16,23 @@ namespace DentalClinicBooking_Project.Repositories
 
         public SlotOfClinic? Get(Guid clinicId, Guid slotId)
         {
-            return  dentalClinicBookingProjectContext.SlotOfClinics
+            return dentalClinicBookingProjectContext.SlotOfClinics
         .FirstOrDefault(x => x.ClinicId == clinicId && x.SlotId == slotId);
         }
 
-        public async Task<Slot[]> GetAllSlotsAsync()
+        //public async Task<Slot[]> GetAllSlotsAsync()
+        //{
+        //    return await dentalClinicBookingProjectContext.Slots
+        //        .GroupBy(s => s.SlotId)
+        //        .Select(g => g.FirstOrDefault()!)
+        //        .ToArrayAsync();
+        //}
+
+        public async Task<IEnumerable<SlotOfClinic?>> GetAllSlotsAsync(Guid clinicId)
         {
-            return await dentalClinicBookingProjectContext.Slots
-                .GroupBy(s => s.SlotId)
-                .Select(g => g.FirstOrDefault()!)
-                .ToArrayAsync();
+            return await dentalClinicBookingProjectContext.SlotOfClinics
+                .Where(x => x.ClinicId == clinicId)
+                .ToListAsync();
         }
 
         public async Task<SlotOfClinic?> GetAsync(Guid clinicId, Guid slotId)

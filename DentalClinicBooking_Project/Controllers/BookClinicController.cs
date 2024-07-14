@@ -110,30 +110,26 @@ namespace DentalClinicBooking_Project.Controllers
                 bookingModel.basicId)
                 ?? new List<BookingSlot>();
 
-            var arrSlots = await slotRepository.GetAllSlotsAsync();
-            var slots = new Dictionary<Guid, int>();
+            var list = await slotRepository.GetAllSlotsAsync(bookingModel.clinicId);
 
+            var slots = new Dictionary<Guid, SlotInfo>();
+            DateOnly currentDate = DateOnly.FromDateTime(DateTime.Now);
 
-            for (int i = 0; i < arrSlots.Length; i++)
+            foreach (var item in list)
             {
-                slots.Add(arrSlots[i].SlotId, 0);
+                slots[item.SlotId] = new SlotInfo
+                {
+                    Count = 0,
+                    DateTime = item.StartTime.ToString("HH:mm") + "-" + bookingModel.date.ToString("yyyy-MM-dd")
+                };
             }
-
-            //var slots = new Dictionary<Guid, object>();
-            //foreach (var slot in arrSlots)
-            //{
-            //    slots[slot.SlotId] = new
-            //    {
-            //        count = 0,
-
-            //    };
-            //}
 
             foreach (var booking in bookings)
             {
                 if (slots.ContainsKey(booking?.SlotId ?? Guid.Empty))
                 {
-                    slots[booking?.SlotId ?? Guid.Empty] = booking?.Count ?? 0;
+                    var currentSlot = slots[booking?.SlotId ?? Guid.Empty];
+                    currentSlot.Count = booking.Count;
                 }
             }
 
@@ -172,7 +168,7 @@ namespace DentalClinicBooking_Project.Controllers
                 }
                 else
                 {
-                    return Ok(new { success = false});
+                    return Ok(new { success = false });
                 }
             }
             return RedirectToAction("Login", "Login");
