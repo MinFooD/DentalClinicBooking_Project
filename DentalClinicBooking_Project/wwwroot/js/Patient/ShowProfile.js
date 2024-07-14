@@ -1,6 +1,8 @@
-
+ocument.addEventListener('DOMContentLoaded', function () {
+    // Toggle password visibility
     document.querySelectorAll('.toggle-password').forEach(item => {
         item.addEventListener('click', event => {
+            event.preventDefault(); // Ngăn chặn hành vi mặc định
             const inputField = event.target.previousElementSibling;
             if (inputField.type === "password") {
                 inputField.type = "text";
@@ -12,73 +14,64 @@
         });
     });
 
-    document.addEventListener('DOMContentLoaded', function () {
-        const currentPasswordInput = document.getElementById('currentPassword');
-        const newPasswordInput = document.getElementById('newPassword');
-        const changeButton = document.querySelector('.change-password-btn');
-        const modalOverlay = document.getElementById('modalOverlay');
-        const cancelBtn = document.querySelector('.cancel-btn');
-        const okBtn = document.querySelector('.ok-btn');
+    // Update button state based on password input
+    const currentPasswordInput = document.getElementById('currentPassword');
+    const newPasswordInput = document.getElementById('newPassword');
+    const changeButton = document.querySelector('.change-password-btn');
+    const modalOverlay = document.getElementById('modalOverlay');
+    const cancelBtn = document.querySelector('.cancel-btn');
+    const okBtn = document.querySelector('.ok-btn');
 
-        function updateButtonState() {
-            const isCurrentPasswordValid = currentPasswordInput.value.length >= 6;
-            const isNewPasswordValid = newPasswordInput.value.length >= 6;
-            changeButton.disabled = !(isCurrentPasswordValid && isNewPasswordValid);
-            if (!changeButton.disabled) {
-                changeButton.classList.remove('btn-disabled');
-                changeButton.classList.add('btn-primary');
-            } else {
-                changeButton.classList.add('btn-disabled');
-                changeButton.classList.remove('btn-primary');
-            }
+    function updateButtonState() {
+        const isCurrentPasswordValid = currentPasswordInput.value.length >= 6;
+        const isNewPasswordValid = newPasswordInput.value.length >= 6;
+        changeButton.disabled = !(isCurrentPasswordValid && isNewPasswordValid);
+        if (!changeButton.disabled) {
+            changeButton.classList.remove('btn-disabled');
+            changeButton.classList.add('btn-primary');
+        } else {
+            changeButton.classList.add('btn-disabled');
+            changeButton.classList.remove('btn-primary');
         }
+    }
 
-        currentPasswordInput.addEventListener('input', updateButtonState);
-        newPasswordInput.addEventListener('input', updateButtonState);
+    currentPasswordInput.addEventListener('input', updateButtonState);
+    newPasswordInput.addEventListener('input', updateButtonState);
 
-        changeButton.addEventListener('click', function () {
-            modalOverlay.style.display = 'flex';
-        });
-
-        cancelBtn.addEventListener('click', function () {
-            modalOverlay.style.display = 'none';
-        });
-
-        okBtn.addEventListener('click', function () {
-            // Thực hiện hành động thay đổi mật khẩu ở đây
-            modalOverlay.style.display = 'none';
-        });
+    changeButton.addEventListener('click', function () {
+        modalOverlay.style.display = 'flex';
     });
 
-
-//  khi load modal không bị đóng lại 
-    document.addEventListener('DOMContentLoaded', function () {
-        const modalOverlay = document.getElementById('modalOverlay');
-        const changeButton = document.querySelector('.change-password-btn');
-        const cancelBtn = document.querySelector('.cancel-btn');
-        const okBtn = document.querySelector('.ok-btn');
-
-        // Kiểm tra và khôi phục trạng thái của modal khi tải lại trang
-        if (localStorage.getItem('modalShown') === 'true') {
-            modalOverlay.style.display = 'flex';
-        }
-
-        // Hiển thị modal và lưu trạng thái khi nhấn nút "Thay đổi"
-        changeButton.addEventListener('click', function () {
-            modalOverlay.style.display = 'flex';
-            localStorage.setItem('modalShown', 'true');
-        });
-
-        // Xử lý khi nhấn nút "Huỷ" trong modal
-        cancelBtn.addEventListener('click', function () {
-            modalOverlay.style.display = 'none';
-            localStorage.removeItem('modalShown');
-        });
-
-        // Xử lý khi nhấn nút "OK" trong modal
-        okBtn.addEventListener('click', function () {
-            // Thực hiện hành động thay đổi mật khẩu ở đây
-            modalOverlay.style.display = 'none';
-            localStorage.removeItem('modalShown');
-        });
+    cancelBtn.addEventListener('click', function () {
+        modalOverlay.style.display = 'none';
     });
+
+    okBtn.addEventListener('click', function () {
+        // Thực hiện hành động thay đổi mật khẩu ở đây
+        modalOverlay.style.display = 'none';
+    });
+
+    // Kiểm tra và khôi phục trạng thái của modal khi tải lại trang
+    if (localStorage.getItem('modalShown') === 'true') {
+        modalOverlay.style.display = 'flex';
+    }
+
+    // Hiển thị modal và lưu trạng thái khi nhấn nút "Thay đổi"
+    changeButton.addEventListener('click', function () {
+        modalOverlay.style.display = 'flex';
+        localStorage.setItem('modalShown', 'true');
+    });
+
+    // Xử lý khi nhấn nút "Huỷ" trong modal
+    cancelBtn.addEventListener('click', function () {
+        modalOverlay.style.display = 'none';
+        localStorage.removeItem('modalShown');
+});
+
+    // Xử lý khi nhấn nút "OK" trong modal
+    okBtn.addEventListener('click', function () {
+        // Thực hiện hành động thay đổi mật khẩu ở đây
+        modalOverlay.style.display = 'none';
+        localStorage.removeItem('modalShown');
+    });
+});
