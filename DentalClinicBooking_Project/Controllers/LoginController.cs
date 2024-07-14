@@ -4,6 +4,7 @@ using DentalClinicBooking_Project.Models.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Session;
 using Newtonsoft.Json;
+using System.Text;
 
 namespace DentalClinicBooking_Project.Controllers
 {
@@ -33,11 +34,13 @@ namespace DentalClinicBooking_Project.Controllers
         [HttpPost]
         public IActionResult Login(LoginVM _login)
         {
-            //var session = HttpContext.Session;
-            if(ModelState.IsValid)
+			byte[] key = Encoding.UTF8.GetBytes("01234567890123456789012345678901"); // 32 bytes key
+			byte[] iv = Encoding.UTF8.GetBytes("0123456789012345"); // 16 bytes IV
+		    //var session = HttpContext.Session;
+			if (ModelState.IsValid)
             {
 				var account = _context.Accounts.FirstOrDefault(x => x.Gmail.Equals(_login.Gmail));
-                if(account != null && BCrypt.Net.BCrypt.Verify(_login.Password, account.Password))
+                if(account != null && account.Password.Equals(HashPasswordController.EncryptString(_login.Password, key, iv)))
                 {
                     //HttpContext.Session.SetObject("account", Newtonsoft.Json.JsonConvert.SerializeObject(account));
                     //session.SetString("Gmail", account.Gmail);
@@ -106,7 +109,9 @@ namespace DentalClinicBooking_Project.Controllers
         [HttpPost]
         public IActionResult Register(RegisterVM registerVM)
         {
-            if(ModelState.IsValid)
+            byte[] key = Encoding.UTF8.GetBytes("01234567890123456789012345678901"); // 32 bytes key
+            byte[] iv = Encoding.UTF8.GetBytes("0123456789012345"); // 16 bytes IV
+            if (ModelState.IsValid)
             {
                 var checkGmail = _context.Accounts.FirstOrDefault(x => x.Gmail.Equals(registerVM.UserName));
                 if (checkGmail!=null)
@@ -117,7 +122,7 @@ namespace DentalClinicBooking_Project.Controllers
                 var account = new Account
                 {
                     Gmail = registerVM.UserName,
-                    Password = BCrypt.Net.BCrypt.HashPassword(registerVM.Password),
+                    Password = HashPasswordController.EncryptString(registerVM.Password, key, iv),
                     RoleId = 2,
                 };
                 _context.Accounts.Add(account);

@@ -16,8 +16,6 @@ public partial class Basic
     [Required()]
     public string Phone { get; set; }
 
-    public string? LinkAddress { get; set; }
-
     public Guid? ClinicId { get; set; }
 
     public virtual Clinic Clinic { get; set; }

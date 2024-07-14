@@ -1,4 +1,4 @@
-ocument.addEventListener('DOMContentLoaded', function () {
+document.addEventListener('DOMContentLoaded', function () {
     // Toggle password visibility
     document.querySelectorAll('.toggle-password').forEach(item => {
         item.addEventListener('click', event => {
@@ -66,7 +66,7 @@ ocument.addEventListener('DOMContentLoaded', function () {
     cancelBtn.addEventListener('click', function () {
         modalOverlay.style.display = 'none';
         localStorage.removeItem('modalShown');
-});
+    });
 
     // Xử lý khi nhấn nút "OK" trong modal
     okBtn.addEventListener('click', function () {
@@ -74,4 +74,25 @@ ocument.addEventListener('DOMContentLoaded', function () {
         modalOverlay.style.display = 'none';
         localStorage.removeItem('modalShown');
     });
+    // giới hạn kí tự
+    document.getElementById('currentPassword').addEventListener('input', function () {
+        const currentPassword = document.getElementById('currentPassword');
+        const currentPasswordError = document.getElementById('currentPasswordError');
+        currentPasswordError.style.display = currentPassword.value.length < 6 && currentPassword.value.length >= 1 ? 'block' : 'none';
+        validateForm();
+    });
+
+    document.getElementById('newPassword').addEventListener('input', function () {
+        const newPassword = document.getElementById('newPassword');
+        const newPasswordError = document.getElementById('newPasswordError');
+        newPasswordError.style.display = newPassword.value.length < 6 && newPassword.value.length >= 1 ? 'block' : 'none';
+        validateForm();
+    });
+
+    function validateForm() {
+        const currentPassword = document.getElementById('currentPassword');
+        const newPassword = document.getElementById('newPassword');
+        const isFormValid = currentPassword.value.length >= 6 && newPassword.value.length >= 6;
+        document.querySelector('.change-password-btn').disabled = !isFormValid;
+    }
 });

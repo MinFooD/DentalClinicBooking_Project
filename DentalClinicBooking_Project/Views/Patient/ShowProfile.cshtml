@@ -6,7 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Account</title>
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet" />
-
+	<link href="~/css/patient/showprofile.css" rel="stylesheet" />
+	<script src="~/js/patient/showprofile.js"></script>
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </head>
@@ -57,7 +58,7 @@
                 </div>
                 <div class="password-change card">
                     <h3 class="card-title">Thay đổi mật khẩu</h3>
-                    <form class="password-form">
+                    <form class="password-form" asp-area="" asp-controller="Patient" asp-action="ChangePassword" asp-route-id="">
                         <div class="form-item">
                             <label for="currentPassword">Mật khẩu hiện tại <span class="required">*</span></label>
                             <div class="input-container">
@@ -67,6 +68,7 @@
                                      src="https://youmed.vn/dat-kham/assets/img/booking/svg/Hide.svg"
                                      alt="Toggle Password Visibility">
                             </div>
+                            <p id="currentPasswordError" style="color: red; display: none;">Mật khẩu phải có ít nhất 6 ký tự.</p>
                         </div>
                         <div class="form-item">
                             <label for="newPassword">Mật khẩu mới <span class="required">*</span></label>
@@ -77,6 +79,7 @@
                                      src="https://youmed.vn/dat-kham/assets/img/booking/svg/Hide.svg"
                                      alt="Toggle Password Visibility">
                             </div>
+                            <p id="newPasswordError" style="color: red; display: none;">Mật khẩu phải có ít nhất 6 ký tự.</p>
                         </div>
                         <div class="form-actions">
                             <button type="button" class="btn btn-disabled change-password-btn" style="border: 1px solid #666;color: white;background: #1975DC;"
