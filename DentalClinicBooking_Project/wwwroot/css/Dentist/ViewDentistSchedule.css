@@ -1,0 +1,88 @@
+
+/* Xem lịch khám */
+.container {
+    display: flex;
+    justify-content: space-between;
+}
+
+.selectedDate{
+    margin-top: 1rem;
+    font-size: x-large;
+    font-weight: 600;
+}
+
+label{
+    font-size: x-large;
+    font-weight: 600;
+} 
+
+input[type="date"] {
+    width: 50%;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: larger;
+}
+input[type="date"]:focus {
+    border-color: #0056b3;
+    box-shadow: 0 0 8px rgba(0,86,179,0.2);
+    outline: none;
+}
+
+.doctor-info {
+    width: 40%;
+    padding-top: 20px;
+    text-align: center;
+}
+.schedule {
+    width: 55%;
+    padding: 20px;
+}
+.appointment-slot {
+    background-color: white;
+    border: 1px solid black;
+    padding: 10px;
+    text-align: center;
+    margin-bottom: 0.5rem;
+    border-radius: 0.25rem;
+    font-size: large;
+    font-weight: 600;
+    color: #007BFF;
+}
+.imgdoctor {
+    width: 50%;
+    border-radius: 20%;
+    display: flex;
+}
+.info{
+    margin-top: 1rem;
+    font-size: larger;
+    text-align: justify;
+}
+
+.img1{
+    width: 4%;
+    height: 4%;
+    margin-top: 0.3rem;
+    margin-right: 2rem;
+}
+
+ .p1{
+    display: flex;
+}
+
+.info strong {
+    margin-right: 5px; 
+}
+
+.day{
+    font-weight: 600;
+    font-size: x-large;
+    margin-bottom: 0.5rem;
+}
+
+.scheduleslot{
+    margin-top: 5rem;
+} 
+
+
