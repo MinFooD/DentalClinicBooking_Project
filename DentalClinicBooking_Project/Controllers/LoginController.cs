@@ -40,7 +40,8 @@ namespace DentalClinicBooking_Project.Controllers
 			if (ModelState.IsValid)
             {
 				var account = _context.Accounts.FirstOrDefault(x => x.Gmail.Equals(_login.Gmail));
-                if(account != null && account.Password.Equals(HashPasswordController.EncryptString(_login.Password, key, iv)))
+                //if(account != null && account.Password.Equals(HashPasswordController.EncryptString(_login.Password, key, iv)))
+                if (account != null && _login.Password.Equals(HashPasswordController.DecryptString(account.Password,key,iv)))
                 {
                     //HttpContext.Session.SetObject("account", Newtonsoft.Json.JsonConvert.SerializeObject(account));
                     //session.SetString("Gmail", account.Gmail);

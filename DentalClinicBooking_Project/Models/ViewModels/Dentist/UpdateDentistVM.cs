@@ -1,4 +1,6 @@
-﻿namespace DentalClinicBooking_Project.Models.ViewModels.Dentist
+﻿using DentalClinicBooking_Project.Models.Domain;
+
+namespace DentalClinicBooking_Project.Models.ViewModels.Dentist
 {
     public class UpdateDentistVM
     {
@@ -15,5 +17,7 @@
         public string Gmail { get; set; }
 
         public string Password { get; set; }
-    }
+		public Guid? BasicId { get; set; }
+		public List<Basic> basics { get; set; }
+	}
 }

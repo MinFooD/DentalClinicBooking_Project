@@ -1,122 +1,161 @@
 ﻿using DentalClinicBooking_Project.Data;
 using DentalClinicBooking_Project.Models.Domain;
-using DentalClinicBooking_Project.Models.ViewModels.Basics;
+using DentalClinicBooking_Project.Models.ViewModels.BasicViewModel;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Newtonsoft.Json;
 
 namespace DentalClinicBooking_Project.Controllers
 {
-    public class BasicController : Controller
-    {
-        DentalClinicBookingProjectContext _context;
+	public class BasicController : Controller
+	{
+		DentalClinicBookingProjectContext _context;
+		private readonly IHttpContextAccessor _contx;
 
-        public BasicController(DentalClinicBookingProjectContext context)
-        {
-            _context = context;
-        }
+		public BasicController(DentalClinicBookingProjectContext context, IHttpContextAccessor contx)
+		{
+			_context = context;
+			_contx = contx;
+		}
 
-        public IActionResult ShowAllBasicForOwner(Guid id)
-        {
-            var basics = _context.Basics.Where(x => x.ClinicId.Equals(id)).ToList();
-            if (basics == null)
-            {
-                return RedirectToAction("ShowAllClinicForOwner", "Clinic");
-            }
-            var clinic = _context.Clinics.FirstOrDefault(x => x.ClinicId.Equals(id));
-            var basicVm = new BasicWithClinicImage
-            {
-                clinic = clinic,
-                basics = basics
-            };
-            return View(basicVm);
-        }
-
-        [HttpGet]
-        public IActionResult AddBasic(Guid id)
-        {
-            Basic basic = new Basic
-            {
-                ClinicId = id
-            };
-            return View(basic);
-        }
-
-        [HttpPost]
-        public IActionResult AddBasic(Basic basic)
-        {
-            if (ModelState.IsValid)
-            {
-                bool checkAddressExits = _context.Basics.Any(a => a.Address.Equals(basic.Address));
-                if (checkAddressExits)
-                {
-					return View(basic);
-				}
-                _context.Basics.Add(basic);
-                _context.SaveChanges();
-                return RedirectToAction("ShowAllBasicForOwner", "Basic", new { id = basic.ClinicId});
-            }
-            return View(basic);
-
-        }
-
-        [HttpGet]
-        public IActionResult UpdateBasic(Guid id)
-        {
-            var basic = _context.Basics.FirstOrDefault(x => x.BasicId.Equals(id));
-            return View(basic);
-        }
-
-        [HttpPost]
-        public IActionResult UpdateBasic(Basic basic)
-        {
-            if (ModelState.IsValid)
-            {
-                bool checkAddressExits = _context.Basics.Any(a => a.Address.Equals(basic.Address) && a.BasicId != basic.BasicId);
-                if (checkAddressExits)
-                {
-                    TempData["result"] = "Update Failed. Address already exists.";
-                    return View(basic);
-                }
-                var basicc = _context.Basics.FirstOrDefault(x => x.BasicId.Equals(basic.BasicId));
-                if (basicc != null)
-                {
-                    basicc.Address = basic.Address;
-                    basicc.BasicName = basic.BasicName;
-                    basicc.Phone = basic.Phone;
-
-                    _context.SaveChanges();
-                    TempData["result"] = "Update Successfully.";
-					return RedirectToAction("ShowAllBasicForOwner", "Basic", new { id = basic.ClinicId });
-				}
-            }
-            else
-            {
-                TempData["result"] = "Update Failed.";
-            }
-				return View(basic);
-        }
-        
-        public IActionResult DeleteBasic(Guid id)
-        {
-            var basic = _context.Basics.Include(x => x.Dentists).ThenInclude(x => x.Account).Include(x => x.ClinicAppointmentSchedules).FirstOrDefault(x => x.BasicId.Equals(id));
-
-            foreach (var dentist in basic.Dentists)
-            {
-                _context.Accounts.Remove(dentist.Account);
-                _context.Dentists.Remove(dentist);
-            }
-
-            foreach (var schedule in basic.ClinicAppointmentSchedules)
-            {
-                _context.ClinicAppointmentSchedules.Remove(schedule);
-            }
-
-            if (basic == null)
+		public IActionResult ShowAllBasicForOwner()
+		{
+			string ownerString = _contx.HttpContext.Session.GetString("owner");
+			if (!string.IsNullOrEmpty(ownerString))
 			{
-				return RedirectToAction("ShowAllClinicForOwner", "Clinic");
+				var owner = JsonConvert.DeserializeObject<Owner>(ownerString);
+				var basics = _context.Owners.Include(x => x.Clinics).ThenInclude(x => x.Basics).Where(x => x.OwnerId.Equals(owner.OwnerId)).SelectMany(x => x.Clinics).SelectMany(z => z.Basics.Select(y => new BasicWithClinicImage
+				{
+					Basic = y,
+					MainImage = z.MainImage,
+				})).ToList();
+				if (basics == null)
+				{
+					return RedirectToAction("ShowAllClinicForOwner", "Clinic");
+				}
+				return View(basics);
 			}
-            _context.Basics.Remove(basic);
 			return View();
-        }
-    }
+		}
+
+		[HttpGet]
+		public IActionResult AddBasic()
+		{
+			string ownerString = _contx.HttpContext.Session.GetString("owner");
+			if (!string.IsNullOrEmpty(ownerString))
+			{
+				var owner = JsonConvert.DeserializeObject<Owner>(ownerString);
+				var basicVM = new BasicVM
+				{
+					clicics = _context.Owners.Include(x => x.Clinics).Where(x => x.OwnerId.Equals(owner.OwnerId)).SelectMany(x => x.Clinics).ToList(),
+				};
+				return View(basicVM);
+			}
+			return View();
+		}
+
+		[HttpPost]
+		public IActionResult AddBasic(BasicVM basicVM)
+		{
+			if (ModelState.IsValid)
+			{
+				bool checkAddressExits = _context.Basics.Any(a => a.Address.Equals(basicVM.Address));
+				if (checkAddressExits)
+				{
+					return View(basicVM);
+				}
+				var basic = new Basic
+				{
+					BasicName = basicVM.BasicName,
+					Phone = basicVM.Phone,
+					Address = basicVM.Address,
+					ClinicId = basicVM.ClinicId,
+				};
+				_context.Basics.Add(basic);
+				_context.SaveChanges();
+				return RedirectToAction("ShowAllBasicForOwner", "Basic");
+			}
+			return View(basicVM);
+
+		}
+
+		[HttpGet]
+		public IActionResult UpdateBasic(Guid id)
+		{
+			string ownerString = _contx.HttpContext.Session.GetString("owner");
+			if (!string.IsNullOrEmpty(ownerString))
+			{
+				var owner = JsonConvert.DeserializeObject<Owner>(ownerString);
+				var basic = _context.Basics.FirstOrDefault(x => x.BasicId.Equals(id));
+				if (basic != null)
+				{
+					var basicVM = new BasicVM
+					{
+						BasicName = basic.BasicName,
+						Phone = basic.Phone,
+						Address = basic.Address,
+						BasicId = basic.BasicId,
+						ClinicId = basic.ClinicId,
+						clicics = _context.Owners.Include(x => x.Clinics).Where(x => x.OwnerId.Equals(owner.OwnerId)).SelectMany(x => x.Clinics).ToList(),
+					};
+					return View(basicVM);
+				}
+			}
+			return View();
+		}
+
+		[HttpPost]
+		public IActionResult UpdateBasic(BasicVM basicVM)
+		{
+			if (ModelState.IsValid)
+			{
+				bool checkAddressExits = _context.Basics.Any(a => a.Address.Equals(basicVM.Address) && a.BasicId != basicVM.BasicId);
+				if (checkAddressExits)
+				{
+					TempData["result"] = "Update Failed. Address already exists.";
+					return View(basicVM);
+				}
+				var basicc = _context.Basics.FirstOrDefault(x => x.BasicId.Equals(basicVM.BasicId));
+				if (basicc != null)
+				{
+					basicc.Address = basicVM.Address;
+					basicc.BasicName = basicVM.BasicName;
+					basicc.Phone = basicVM.Phone;
+					basicc.ClinicId = basicVM.ClinicId;
+
+					_context.SaveChanges();
+					TempData["result"] = "Update Successfully.";
+					return RedirectToAction("ShowAllBasicForOwner", "Basic");
+				}
+			}
+			else
+			{
+				TempData["result"] = "Update Failed.";
+			}
+			return View(basicVM);
+		}
+
+		public IActionResult DeleteBasic(Guid id)
+		{
+			var basic = _context.Basics.Include(x => x.Dentists).ThenInclude(x => x.Account).Include(x => x.ClinicAppointmentSchedules).FirstOrDefault(x => x.BasicId.Equals(id));
+
+			foreach (var dentist in basic.Dentists)
+			{
+				_context.Accounts.Remove(dentist.Account);
+				_context.Dentists.Remove(dentist);
+			}
+
+			foreach (var schedule in basic.ClinicAppointmentSchedules)
+			{
+				_context.ClinicAppointmentSchedules.Remove(schedule);
+			}
+
+			if (basic == null)
+			{
+				return RedirectToAction("ShowAllBasicForOwner", "Basic");
+			}
+			_context.Basics.Remove(basic);
+			return View();
+		}
+	}
 }

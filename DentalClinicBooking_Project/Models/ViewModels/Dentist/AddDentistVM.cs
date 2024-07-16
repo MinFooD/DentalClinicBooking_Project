@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using DentalClinicBooking_Project.Models.Domain;
+using System.ComponentModel.DataAnnotations;
 
 namespace DentalClinicBooking_Project.Models.ViewModels.Dentist
 {
@@ -18,6 +19,8 @@ namespace DentalClinicBooking_Project.Models.ViewModels.Dentist
 		public string Password { get; set; }
 		[Required(ErrorMessage = "BasicID can not be blank.")]
 		public Guid BasicId { get; set; }
+
+		public List<Basic> basics { get; set; }
 
 	}
 }

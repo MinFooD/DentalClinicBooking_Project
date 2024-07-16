@@ -23,9 +23,9 @@ function checkInput() {
   var rePassword = document.getElementById("re-password").value;
   var terms = document.getElementById("terms").checked;
 
-  var nextButton = document.getElementById("nextButton");
-
-  if (username && password && rePassword && terms) {
+    var nextButton = document.getElementById("nextButton");
+    const isNewPasswordValid = password.length >= 6;
+    if (username && password && rePassword && terms && isNewPasswordValid) {
     if (password === rePassword) {
       nextButton.disabled = false;
     } else {
