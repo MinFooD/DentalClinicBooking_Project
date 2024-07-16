@@ -1,24 +1,22 @@
+@model DentalClinicBooking_Project.Models.ViewModels.PatientViewModel.ChangePatientPassword
 <!DOCTYPE html>
-<html lang="en">
+<html lang="vi">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Account</title>
+    <title>Tài khoản</title>
+    <link href="~/css/patient/showprofile.css" rel="stylesheet" />
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet" />
-	<link href="~/css/patient/showprofile.css" rel="stylesheet" />
-	<script src="~/js/patient/showprofile.js"></script>
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </head>
 
-<body style=" background: #F3F4F6;">
+<body style="background: #F3F4F6;">
     <div class="container">
         <div class="sidebar">
             <ul class="menu">
                 <li><a class="menu-item item-active" href="#">Tài khoản</a></li>
-                <li><a class="menu-item" href="#">Hồ sơ</a></li>
-                <li><a class="menu-item" href="#">Đăng xuất</a></li>
+                <li><a class="menu-item" asp-area="" asp-controller="Patient" asp-action="ChangeInformation" asp-route-id="@Model.PatientId">Hồ sơ</a></li>
+                <li><a class="menu-item" asp-area="" asp-controller="Login" asp-action="Logout">Đăng xuất</a></li>
             </ul>
         </div>
         <div class="main-content">
@@ -29,15 +27,15 @@
                     <div class="info-list">
                         <div class="info-item">
                             <label>Họ và tên:</label>
-                            <p class="info-value"></p>
+                            <p class="info-value">@Model.PatientName</p>
                         </div>
                         <div class="info-item">
                             <label>Số điện thoại:</label>
-                            <p class="info-value"></p>
+                            <p class="info-value">@Model.Phone</p>
                         </div>
                         <div class="info-item">
                             <label>Ngày sinh:</label>
-                            <p class="info-value"></p>
+                            <p class="info-value">@Model.BirthDay</p>
                         </div>
                         <div class="info-item">
                             <label>Địa chỉ:</label>
@@ -52,38 +50,48 @@
                             <p class="info-value">----</p>
                         </div>
                         <div class="info-item">
-                            <a class="edit-link" href="#" style="text-decoration: none;">Thay đổi thông tin</a>
+                            <a class="edit-link" asp-area="" asp-controller="Patient" asp-action="ChangeInformation" asp-route-id="@Model.PatientId" style="text-decoration: none;">Thay đổi thông tin</a>
                         </div>
                     </div>
                 </div>
                 <div class="password-change card">
                     <h3 class="card-title">Thay đổi mật khẩu</h3>
-                    <form class="password-form" asp-area="" asp-controller="Patient" asp-action="ChangePassword" asp-route-id="">
+                    <form class="password-form" asp-area="" asp-controller="Patient" asp-action="ShowProfile" method="post"
+                          id="changePasswordForm">
+                        <input type="hidden" id="accountId" name="accountId" value="@Model.AccountId" />
+                        <input type="hidden" id="patientId" name="patientId" value="@Model.PatientId" />
+                        <input type="hidden" id="patientName" name="patientName" value="@Model.PatientName" />
+                        <input type="hidden" id="phone" name="phone" value="@Model.Phone" />
+                        <input type="hidden" id="birthDay" name="birthDay" value="@Model.BirthDay" />
                         <div class="form-item">
                             <label for="currentPassword">Mật khẩu hiện tại <span class="required">*</span></label>
                             <div class="input-container">
-                                <input type="password" id="currentPassword" name="currentPassword"
+                                <input type="password" id="currentPassword" name="OldPassword"
                                        placeholder="Mật khẩu hiện tại của bạn" minlength="6" class="input-field">
                                 <img class="toggle-password"
                                      src="https://youmed.vn/dat-kham/assets/img/booking/svg/Hide.svg"
                                      alt="Toggle Password Visibility">
                             </div>
-                            <p id="currentPasswordError" style="color: red; display: none;">Mật khẩu phải có ít nhất 6 ký tự.</p>
+                            <p id="currentPasswordError" style="color: red; display: none;">
+                                Mật khẩu phải có ít nhất 6 ký tự.
+                            </p>
                         </div>
                         <div class="form-item">
                             <label for="newPassword">Mật khẩu mới <span class="required">*</span></label>
                             <div class="input-container">
-                                <input type="password" id="newPassword" name="newPassword"
-                                       placeholder="Nhập mật khẩu mới" minlength="6" class="input-field">
+                                <input type="password" id="newPassword" name="newPassword" placeholder="Nhập mật khẩu mới"
+                                       minlength="6" class="input-field">
                                 <img class="toggle-password"
                                      src="https://youmed.vn/dat-kham/assets/img/booking/svg/Hide.svg"
                                      alt="Toggle Password Visibility">
                             </div>
-                            <p id="newPasswordError" style="color: red; display: none;">Mật khẩu phải có ít nhất 6 ký tự.</p>
+                            <p id="newPasswordError" style="color: red; display: none;">
+                                Mật khẩu phải có ít nhất 6 ký tự.
+                            </p>
                         </div>
                         <div class="form-actions">
-                            <button type="button" class="btn btn-disabled change-password-btn" style="border: 1px solid #666;color: white;background: #1975DC;"
-                                    disabled>
+                            <button type="button" id="submitButton"
+                                    class="btn btn-primary change-password-btn" disabled>
                                 Thay đổi
                             </button>
                         </div>
@@ -94,7 +102,7 @@
     </div>
 
     <!-- Modal -->
-    <div class="modal-overlay" id="modalOverlay">
+    <div class="modal-overlay" id="modalOverlay" style="display: none;">
         <div class="modal-content">
             <div class="modal-header">
                 <span class="modal-icon">&#x2753;</span>
@@ -106,5 +114,77 @@
             </div>
         </div>
     </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const currentPasswordInput = document.getElementById('currentPassword');
+            const newPasswordInput = document.getElementById('newPassword');
+            const modalOverlay = document.getElementById('modalOverlay');
+            const cancelBtn = document.querySelector('.cancel-btn');
+            const changePasswordBtn = document.getElementById('submitButton');
+            const okBtn = document.querySelector('.ok-btn');
+
+            function updateButtonState() {
+                const isCurrentPasswordValid = currentPasswordInput.value.length >= 6;
+                const isNewPasswordValid = newPasswordInput.value.length >= 6;
+                changePasswordBtn.disabled = !(isCurrentPasswordValid && isNewPasswordValid);
+            }
+
+            currentPasswordInput.addEventListener('input', function () {
+                const currentPasswordError = document.getElementById('currentPasswordError');
+                currentPasswordError.style.display = currentPasswordInput.value.length < 6 && currentPasswordInput.value.length >= 1 ? 'block' : 'none';
+                updateButtonState();
+            });
+
+            newPasswordInput.addEventListener('input', function () {
+                const newPasswordError = document.getElementById('newPasswordError');
+                newPasswordError.style.display = newPasswordInput.value.length < 6 && newPasswordInput.value.length >= 1 ? 'block' : 'none';
+                updateButtonState();
+            });
+
+            function showModal() {
+                modalOverlay.style.display = 'flex';
+            }
+
+            function hideModal() {
+                modalOverlay.style.display = 'none';
+            }
+
+            function submitForm() {
+                const currentPassword = currentPasswordInput.value;
+                const newPassword = newPasswordInput.value;
+
+                const isCurrentPasswordValid = currentPassword.length >= 6;
+                const isNewPasswordValid = newPassword.length >= 6;
+
+                if (isCurrentPasswordValid && isNewPasswordValid) {
+                    document.getElementById('changePasswordForm').submit();
+                    hideModal();
+                } else {
+                    console.log('Please enter valid passwords.');
+                }
+            }
+
+            cancelBtn.addEventListener('click', hideModal);
+            okBtn.addEventListener('click', submitForm);
+
+            changePasswordBtn.addEventListener('click', showModal);
+
+            const togglePasswordBtns = document.querySelectorAll('.toggle-password');
+            togglePasswordBtns.forEach(item => {
+                item.addEventListener('click', event => {
+                    event.preventDefault();
+                    const inputField = event.target.previousElementSibling;
+                    if (inputField.type === "password") {
+                        inputField.type = "text";
+                        event.target.src = "https://youmed.vn/dat-kham/assets/img/booking/svg/Show.svg";
+                    } else {
+                        inputField.type = "password";
+                        event.target.src = "https://youmed.vn/dat-kham/assets/img/booking/svg/Hide.svg";
+                    }
+                });
+            });
+        });
+    </script>
 </body>
 </html>

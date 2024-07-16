@@ -71,6 +71,19 @@
 						   asp-for="Experience" />
 				</div>
 				<div class="form-group">
+					<label class="label-fo" for="basicID">Cơ sở:</label>
+					@* <input type="text" readonly
+					class="form-control"
+					id="basicID"
+					placeholder="BasicID" asp-for="BasicId" /> *@
+					<select class="form-control" asp-for="BasicId">
+						@foreach (var basic in Model.basics)
+						{
+							<option value="@basic.BasicId">@basic.BasicName</option>
+						}
+					</select>
+				</div>
+				<div class="form-group">
 					<label @* for="edit-dentist-description" *@>Mô Tả:</label>
 					<textarea class="form-control"
 							  id="edit-dentist-description"

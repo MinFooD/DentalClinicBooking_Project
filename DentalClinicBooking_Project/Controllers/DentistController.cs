@@ -107,7 +107,8 @@ namespace DentalClinicBooking_Project.Controllers
 			string ownerString = _contx.HttpContext.Session.GetString("owner");
             if (!string.IsNullOrEmpty(ownerString))
             {
-                var dentist = _context.Dentists.Include(x => x.Account).FirstOrDefault(x => x.DentistId.Equals(id));
+				var owner = JsonConvert.DeserializeObject<Owner>(ownerString);
+				var dentist = _context.Dentists.Include(x => x.Account).FirstOrDefault(x => x.DentistId.Equals(id));
                 if (dentist != null)
                 {
                     var updateDentistVM = new UpdateDentistVM
@@ -119,7 +120,9 @@ namespace DentalClinicBooking_Project.Controllers
                         Experience = dentist.Experience,
                         Gmail = dentist.Account.Gmail,
                         Password = HashPasswordController.DecryptString(dentist.Account.Password, key, iv),
-                    };
+                        BasicId = dentist.BasicId,
+						basics = _context.Owners.Include(x => x.Clinics).ThenInclude(x => x.Basics).Where(x => x.OwnerId.Equals(owner.OwnerId)).SelectMany(x => x.Clinics).SelectMany(x => x.Basics).ToList(),
+					};
                     return View(updateDentistVM);
                 }
             }
@@ -148,6 +151,7 @@ namespace DentalClinicBooking_Project.Controllers
                 dentist.Image = updateDentistVM.Image;
                 dentist.Account.Gmail = updateDentistVM.Gmail;
 				dentist.Account.Password = HashPasswordController.EncryptString(updateDentistVM.Password, key, iv);
+                dentist.BasicId= updateDentistVM.BasicId;
 
 				_context.SaveChanges();
                 TempData["result"] = "Update Successfully.";
@@ -160,49 +164,55 @@ namespace DentalClinicBooking_Project.Controllers
             return RedirectToAction("ShowDentistForOwner");
         }
 
-        public IActionResult ChooseClinicForAddDentist(string searchString, int page = 1)
-        {
-            _context = new DentalClinicBookingProjectContext();
+        //public IActionResult ChooseClinicForAddDentist(string searchString, int page = 1)
+        //{
+        //    _context = new DentalClinicBookingProjectContext();
 
-            var clinics = _context.Clinics.Select(a => new ClinicWithAddress
-            {
-                ClinicId = a.ClinicId,
-                ClinicName = a.ClinicName,
-                MainImage = a.MainImage,
-                Address = a.Basics.FirstOrDefault().Address
-            }).Where(d => d.ClinicName.Contains(searchString) || string.IsNullOrEmpty(searchString)).ToList();
+        //    var clinics = _context.Clinics.Select(a => new ClinicWithAddress
+        //    {
+        //        ClinicId = a.ClinicId,
+        //        ClinicName = a.ClinicName,
+        //        MainImage = a.MainImage,
+        //        Address = a.Basics.FirstOrDefault().Address
+        //    }).Where(d => d.ClinicName.Contains(searchString) || string.IsNullOrEmpty(searchString)).ToList();
 
-            int NoOfClinicPerPage = 5;
-            var NoOfPaging = Math.Ceiling((decimal)clinics.Count() / NoOfClinicPerPage);
-            int NoOfDentistToSkip = (page - 1) * NoOfClinicPerPage;
-            ViewBag.Page = page;
-            ViewBag.NoOfPaging = NoOfPaging;
-            clinics = clinics.Skip(NoOfDentistToSkip).Take(NoOfClinicPerPage).ToList();
+        //    int NoOfClinicPerPage = 5;
+        //    var NoOfPaging = Math.Ceiling((decimal)clinics.Count() / NoOfClinicPerPage);
+        //    int NoOfDentistToSkip = (page - 1) * NoOfClinicPerPage;
+        //    ViewBag.Page = page;
+        //    ViewBag.NoOfPaging = NoOfPaging;
+        //    clinics = clinics.Skip(NoOfDentistToSkip).Take(NoOfClinicPerPage).ToList();
 
-            return View(clinics);
-        }
+        //    return View(clinics);
+        //}
 
-        public IActionResult ChooseBasicForAddDentist(Guid id)
-        {
-            var basic = _context.Clinics.Where(x => x.ClinicId.Equals(id)).Select(x => new BasicWithClinicName
-            {
-                clinicName = x.ClinicName,
-                basics = x.Basics.ToList(),
-            }).FirstOrDefault();
-            if (basic != null)
-            {
-                return View(basic);
-            }
-            return RedirectToAction("ChooseClinicForAddDentist");
-        }
+        //public IActionResult ChooseBasicForAddDentist(Guid id)
+        //{
+        //    var basic = _context.Clinics.Where(x => x.ClinicId.Equals(id)).Select(x => new BasicWithClinicName
+        //    {
+        //        clinicName = x.ClinicName,
+        //        basics = x.Basics.ToList(),
+        //    }).FirstOrDefault();
+        //    if (basic != null)
+        //    {
+        //        return View(basic);
+        //    }
+        //    return RedirectToAction("ChooseClinicForAddDentist");
+        //}
         [HttpGet]
-        public IActionResult AddDentist(Guid basicId)
+        public IActionResult AddDentist()
         {
-            var addDentistVM = new AddDentistVM
+			string ownerString = _contx.HttpContext.Session.GetString("owner");
+            if (!string.IsNullOrEmpty(ownerString))
             {
-                BasicId = basicId,
-            };
-            return View(addDentistVM);
+                var owner = JsonConvert.DeserializeObject<Owner>(ownerString);
+                var addDentistVM = new AddDentistVM
+                {
+                    basics = _context.Owners.Include(x => x.Clinics).ThenInclude(x => x.Basics).Where(x => x.OwnerId.Equals(owner.OwnerId)).SelectMany(x => x.Clinics).SelectMany(x => x.Basics).ToList(),
+                };
+				return View(addDentistVM);
+			}
+            return View();
         }
         [HttpPost]
         public IActionResult AddDentist(AddDentistVM addDentistVM)

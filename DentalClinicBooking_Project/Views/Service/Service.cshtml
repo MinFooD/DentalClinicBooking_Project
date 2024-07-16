@@ -72,7 +72,7 @@
 									</div>
 									<div class="line">
 										<div>
-											<a href="#" style="color: black">Phòng khám Hello Doctor</a>
+											<a asp-area="" asp-controller="BookClinic" asp-action="ClinicDetails" asp-route-id="@item.ClinicId" style="color: black">@item.ClinicName</a>
 											@foreach (var temp in item.Basics)
 											{
 												<p>@temp.Address</p>

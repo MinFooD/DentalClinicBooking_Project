@@ -6,9 +6,8 @@
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>ChangeCustomerInformation</title>
-	<link rel="stylesheet" href="ChangeInformation.css" />
 	<link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet" />
-	<link href="~/css/patient/changepatientinfo.css" rel="stylesheet" />
+	<link href="~/css/patient/changeinformation.css" rel="stylesheet" />
 	<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
 	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </head>
@@ -67,11 +66,16 @@
 				<input type="text" placeholder="Mã số trên thẻ Bảo hiểm y tế" class="input-text" asp-for="HealthInsuranceCardCode" />
 			</div>
 			<div class="form-actions">
-				<button type="button" class="btn-cancel">Hủy</button>
+				<button type="button" onclick="back('@Model.AccountId')" class="btn-cancel">Hủy</button>
 				<button type="submit" class="btn-primary">Xác nhận</button>
 			</div>
 		</form>
 	</div>
+	<script>
+		window.back = (id) => {
+			window.location.href = `/Patient/ShowProfile?id=${id}`; // Chuyển hướng đến hành động showAllbasic với ID của Phòng khám
+		};
+	</script>
 </body>
 
 </html>

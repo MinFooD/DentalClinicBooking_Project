@@ -1,4 +1,18 @@
+@using DentalClinicBooking_Project.Models.Domain
+@using Newtonsoft.Json
 @model DentalClinicBooking_Project.Models.ViewModels.Dentist.AddDentistVM
+@inject IHttpContextAccessor HttpContextAccessor
+@{
+	string accountString = HttpContextAccessor.HttpContext.Session.GetString("account");
+	// var account = JsonConvert.DeserializeObject<Account>(accountString);
+	var account = !string.IsNullOrEmpty(accountString) ? JsonConvert.DeserializeObject<Account>(accountString) : null;
+	string patientString = HttpContextAccessor.HttpContext.Session.GetString("patient");
+	// var account = JsonConvert.DeserializeObject<Account>(accountString);
+	var patient = !string.IsNullOrEmpty(patientString) ? JsonConvert.DeserializeObject<Patient>(patientString) : null;
+	string ownerString = HttpContextAccessor.HttpContext.Session.GetString("owner");
+	// var account = JsonConvert.DeserializeObject<Account>(accountString);
+	var owner = !string.IsNullOrEmpty(ownerString) ? JsonConvert.DeserializeObject<Owner>(ownerString) : null;
+}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -74,11 +88,17 @@
 						   placeholder="Nhập số năm kinh nghiệm" asp-for="Experience" />
 				</div>
 				<div class="form-group">
-					<label class="label-fo" for="basicID">BasicID:</label>
-					<input type="text" readonly
+					<label class="label-fo" for="basicID">Cơ sở:</label>
+					@* <input type="text" readonly
 						   class="form-control"
 						   id="basicID"
-						   placeholder="BasicID" asp-for="BasicId" />
+						   placeholder="BasicID" asp-for="BasicId" /> *@
+					<select class="form-control" asp-for="BasicId">
+						@foreach (var basic in Model.basics)
+						{
+							<option value="@basic.BasicId">@basic.BasicName</option>
+						}
+					</select>
 				</div>
 				<div class="form-group">
 					<label class="label-fo">Mô Tả:</label>

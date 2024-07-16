@@ -1,4 +1,4 @@
-@model DentalClinicBooking_Project.Models.ViewModels.Basics.BasicWithClinicImage
+@model List<DentalClinicBooking_Project.Models.ViewModels.BasicViewModel.BasicWithClinicImage>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -17,27 +17,27 @@
 	<div class="container-md">
 		<div class="background"></div>
 		<h1 class="page-title">Quản lí phòng khám</h1>
-		<button class="add-basic" onclick="openAddBasicForm('@Model.clinic.ClinicId')">Thêm cơ sở</button>
+		@* <button class="add-basic" onclick="openAddBasicForm('@Model.clinic.ClinicId')">Thêm cơ sở</button> *@
 	</div>
 	@if (Model != null)
 	{
-		foreach (var basic in Model.basics)
+		foreach (var basic in Model)
 		{
 			<div class="container-md">
 				<div class="clinic" style="display: flex;flex-direction: row;">
 					<div class="clinic-info col-md-6">
-						<span class="clinic-id">ID: @basic.BasicId</span>
-						<h2 class="clinic-name">Phòng khám @basic.BasicName</h2>
-						<p class="clinic-address"><strong>Địa chỉ:</strong> @basic.Address</p>
-						<p class="clinic-phone"><strong>Điện thoại:</strong> @basic.Phone</p>
+						<span class="clinic-id">ID: @basic.Basic.BasicId</span>
+						<h2 class="clinic-name">Phòng khám @basic.Basic.BasicName</h2>
+						<p class="clinic-address"><strong>Địa chỉ:</strong> @basic.Basic.Address</p>
+						<p class="clinic-phone"><strong>Điện thoại:</strong> @basic.Basic.Phone</p>
 						<div class="clinic-actions">
-							<button class="btn-edit" onclick="openUpdateBasicForm('@basic.BasicId')">Chỉnh sửa</button>
-							<button class="btn-delete" onclick="openDeleteModal('@basic.BasicId')">Xóa</button>
+							<button class="btn-edit" onclick="openUpdateBasicForm('@basic.Basic.BasicId')">Chỉnh sửa</button>
+							<button class="btn-delete" onclick="openDeleteModal('@basic.Basic.BasicId')">Xóa</button>
 						</div>
 					</div>
 					<div class="col-md-6">
 						<img class="imgClinic"
-							 src="@Model.clinic.MainImage"
+							 src="@basic.MainImage"
 							 style="width: 90%; height: 90%; border-radius: 10%; margin-top: 3rem; padding-right: 1rem;">
 					</div>
 				</div>
