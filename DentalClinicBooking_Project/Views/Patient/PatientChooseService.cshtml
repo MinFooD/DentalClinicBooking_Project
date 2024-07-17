@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>patientChooseService</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet" />
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="patientChooseService.js"></script>
+</head>
+
+<body>
+    <div class="container-md">
+        <h1 style="margin-left: 1rem;">Đặt khám định kỳ</h1>
+    </div>
+    <div class="container-md">
+        <div class="main-content">
+            <div class="appointment-all">
+                <div class="search-container">
+                    <input type="text" placeholder="Tìm kiếm cuộc hẹn..." id="searchInput">
+                </div>
+                <div class="appointment-list">
+                    <div class="appointment-item" id="appointment1">
+                        <div class="appointment-details">
+                            <h2 class="appointment-title">Phòng khám Hello Doctor</h2>
+                            <div class="appointment-div">
+                                <div class="appointment-info">
+                                    <div class="info-item">
+                                        <span class="info-label">Mã phiếu khám:</span>
+                                        <span class="info-value">YMA2406010986</span>
+                                    </div>
+                                    <div class="info-item">
+                                        <span class="info-label">Ngày khám:</span>
+                                        <span class="info-value">30/06/2024</span>
+                                    </div>
+                                    <div class="info-item">
+                                        <span class="info-label">Giờ khám dự kiến:</span>
+                                        <span class="info-value time" style="color: #22C55E;">14:00 <span
+                                                class="time-period">(Buổi chiều)</span></span>
+                                    </div>
+                                    <div class="info-item">
+                                        <span class="info-label">Chi nhánh:</span>
+                                        <span class="info-value">Chi nhánh 3 - Địa chỉ 2</span>
+                                    </div>
+                                    <div class="info-item">
+                                        <span class="info-label">Địa chỉ đặt khám:</span>
+                                        <span class="info-value">Căn số 21, Đường Riverview 6, Khu Vinhome Golden River
+                                            Ba Son, Bến Nghé, Quận 1, TPHCM</span>
+                                    </div>
+                                </div>
+                                <div class="appointment-actions">
+                                    <button class="btn-book">Đặt khám</button>
+                                    <button class="btn-cancel">Hủy</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="appointment-item" id="appointment2">
+                        <div class="appointment-details">
+                            <h2 class="appointment-title">Phòng khám Hello Doctor</h2>
+                            <div class="appointment-div">
+                                <div class="appointment-info">
+                                    <div class="info-item">
+                                        <span class="info-label">Mã phiếu khám:</span>
+                                        <span class="info-value">YMA2406010987</span>
+                                    </div>
+                                    <div class="info-item">
+                                        <span class="info-label">Ngày khám:</span>
+                                        <span class="info-value">30/06/2024</span>
+                                    </div>
+                                    <div class="info-item">
+                                        <span class="info-label">Giờ khám dự kiến:</span>
+                                        <span class="info-value time" style="color: #22C55E;">14:00 <span
+                                                class="time-period">(Buổi chiều)</span></span>
+                                    </div>
+                                    <div class="info-item">
+                                        <span class="info-label">Chi nhánh:</span>
+                                        <span class="info-value">Chi nhánh 3 - Địa chỉ 2</span>
+                                    </div>
+                                    <div class="info-item">
+                                        <span class="info-label">Địa chỉ đặt khám:</span>
+                                        <span class="info-value">152/6 Thành Thái, P. 12, Q. 10, TP.HCM</span>
+                                    </div>
+                                </div>
+                                <div class="appointment-actions">
+                                    <button class="btn-book">Đặt khám</button>
+                                    <button class="btn-cancel">Hủy</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="appointment-item" id="appointment3">
+                        <div class="appointment-details">
+                            <h2 class="appointment-title">Phòng khám Hello Doctor</h2>
+                            <div class="appointment-div">
+                                <div class="appointment-info">
+                                    <div class="info-item">
+                                        <span class="info-label">Mã phiếu khám:</span>
+                                        <span class="info-value">YMA2406010988</span>
+                                    </div>
+                                    <div class="info-item">
+                                        <span class="info-label">Ngày khám:</span>
+                                        <span class="info-value">30/06/2024</span>
+                                    </div>
+                                    <div class="info-item">
+                                        <span class="info-label">Giờ khám dự kiến:</span>
+                                        <span class="info-value time" style="color: #22C55E;">14:00 <span
+                                                class="time-period">(Buổi chiều)</span></span>
+                                    </div>
+                                    <div class="info-item">
+                                        <span class="info-label">Chi nhánh:</span>
+                                        <span class="info-value">Chi nhánh 3 - Địa chỉ 2</span>
+                                    </div>
+                                    <div class="info-item">
+                                        <span class="info-label">Địa chỉ đặt khám:</span>
+                                        <span class="info-value">152/6 Thành Thái, P. 12, Q. 10, TP.HCM</span>
+                                    </div>
+                                </div>
+                                <div class="appointment-actions">
+                                    <button class="btn-book">Đặt khám</button>
+                                    <button class="btn-cancel">Hủy</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="appointment-item" id="appointment4">
+                        <div class="appointment-details">
+                            <h2 class="appointment-title">Phòng khám Hello Doctor</h2>
+                            <div class="appointment-div">
+                                <div class="appointment-info">
+                                    <div class="info-item">
+                                        <span class="info-label">Mã phiếu khám:</span>
+                                        <span class="info-value">YMA2406010989</span>
+                                    </div>
+                                    <div class="info-item">
+                                        <span class="info-label">Ngày khám:</span>
+                                        <span class="info-value">30/06/2024</span>
+                                    </div>
+                                    <div class="info-item">
+                                        <span class="info-label">Giờ khám dự kiến:</span>
+                                        <span class="info-value time" style="color: #22C55E;">14:00 <span
+                                                class="time-period">(Buổi chiều)</span></span>
+                                    </div>
+                                    <div class="info-item">
+                                        <span class="info-label">Chi nhánh:</span>
+                                        <span class="info-value">Chi nhánh 3 - Địa chỉ 2</span>
+                                    </div>
+                                    <div class="info-item">
+                                        <span class="info-label">Địa chỉ đặt khám:</span>
+                                        <span class="info-value">152/6 Thành Thái, P. 12, Q. 10, TP.HCM</span>
+                                    </div>
+                                </div>
+                                <div class="appointment-actions">
+                                    <button class="btn-book">Đặt khám</button>
+                                    <button class="btn-cancel">Hủy</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal -->
+    <div class="modal fade" id="confirmModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog" style="margin-top: 20rem;" srole="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Xác nhận đặt lịch</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    Bạn có chắc chắn muốn đặt lịch không?
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
+                    <button type="button" class="btn btn-danger" id="confirmCancel">Hủy lịch</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</body>
+
+
+</html>
