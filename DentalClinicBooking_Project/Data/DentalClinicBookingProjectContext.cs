@@ -9,11 +9,11 @@ namespace DentalClinicBooking_Project.Data;
 
 public partial class DentalClinicBookingProjectContext : DbContext
 {
-    public DentalClinicBookingProjectContext()
-    {
+	public DentalClinicBookingProjectContext()
+	{
+	}
 
-    }
-    public DentalClinicBookingProjectContext(DbContextOptions<DentalClinicBookingProjectContext> options)
+	public DentalClinicBookingProjectContext(DbContextOptions<DentalClinicBookingProjectContext> options)
         : base(options)
     {
     }
@@ -42,14 +42,14 @@ public partial class DentalClinicBookingProjectContext : DbContext
 
     public virtual DbSet<SlotOfClinic> SlotOfClinics { get; set; }
 
-    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        => optionsBuilder.UseSqlServer("Server=PHUC\\PHUC;uid=sa;pwd=123456;database= DentalCLinicBookingProject;TrustServerCertificate=True");
 
-    protected override void OnModelCreating(ModelBuilder modelBuilder)
+	protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+=> optionsBuilder.UseSqlServer("Server=PHUC\\PHUC;uid=sa;pwd=123456;database= DentalCLinicBookingProject;TrustServerCertificate=True");
+	protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         modelBuilder.Entity<Account>(entity =>
         {
-            entity.HasKey(e => e.AccountId).HasName("PK__Account__349DA58680B9FD47");
+            entity.HasKey(e => e.AccountId).HasName("PK__Account__349DA586DDA3460A");
 
             entity.ToTable("Account");
 
@@ -65,15 +65,19 @@ public partial class DentalClinicBookingProjectContext : DbContext
                 .HasMaxLength(100)
                 .IsUnicode(false);
             entity.Property(e => e.RoleId).HasColumnName("RoleID");
+            entity.Property(e => e.UserName)
+                .IsRequired()
+                .HasMaxLength(100)
+                .IsUnicode(false);
         });
 
         modelBuilder.Entity<Admin>(entity =>
         {
-            entity.HasKey(e => e.AdminId).HasName("PK__Admin__719FE4E81B6183EE");
+            entity.HasKey(e => e.AdminId).HasName("PK__Admin__719FE4E8370287EB");
 
             entity.ToTable("Admin");
 
-            entity.HasIndex(e => e.AccountId, "UQ__Admin__349DA587CC3C07C5").IsUnique();
+            entity.HasIndex(e => e.AccountId, "UQ__Admin__349DA587FA92B9D8").IsUnique();
 
             entity.Property(e => e.AdminId)
                 .HasDefaultValueSql("(newid())")
@@ -82,12 +86,12 @@ public partial class DentalClinicBookingProjectContext : DbContext
 
             entity.HasOne(d => d.Account).WithOne(p => p.Admin)
                 .HasForeignKey<Admin>(d => d.AccountId)
-                .HasConstraintName("FK__Admin__AccountID__6EF57B66");
+                .HasConstraintName("FK__Admin__AccountID__5CD6CB2B");
         });
 
         modelBuilder.Entity<Basic>(entity =>
         {
-            entity.HasKey(e => e.BasicId).HasName("PK__Basic__BABA01D1E890BE4A");
+            entity.HasKey(e => e.BasicId).HasName("PK__Basic__BABA01D17924A19A");
 
             entity.ToTable("Basic");
 
@@ -108,12 +112,12 @@ public partial class DentalClinicBookingProjectContext : DbContext
 
             entity.HasOne(d => d.Clinic).WithMany(p => p.Basics)
                 .HasForeignKey(d => d.ClinicId)
-                .HasConstraintName("FK__Basic__CLinicID__6FE99F9F");
+                .HasConstraintName("FK__Basic__CLinicID__5DCAEF64");
         });
 
         modelBuilder.Entity<Clinic>(entity =>
         {
-            entity.HasKey(e => e.ClinicId).HasName("PK__Clinic__3347C2FD01B93C74");
+            entity.HasKey(e => e.ClinicId).HasName("PK__Clinic__3347C2FD744C392E");
 
             entity.ToTable("Clinic");
 
@@ -133,7 +137,7 @@ public partial class DentalClinicBookingProjectContext : DbContext
 
             entity.HasOne(d => d.Owner).WithMany(p => p.Clinics)
                 .HasForeignKey(d => d.OwnerId)
-                .HasConstraintName("FK__Clinic__OwnerID__70DDC3D8");
+                .HasConstraintName("FK__Clinic__OwnerID__5EBF139D");
         });
 
         modelBuilder.Entity<ClinicAppointmentSchedule>(entity =>
@@ -179,7 +183,7 @@ public partial class DentalClinicBookingProjectContext : DbContext
 
         modelBuilder.Entity<ClinicImage>(entity =>
         {
-            entity.HasKey(e => e.ImageId).HasName("PK__ClinicIm__7516F4ECF1E0C826");
+            entity.HasKey(e => e.ImageId).HasName("PK__ClinicIm__7516F4EC37B78281");
 
             entity.ToTable("ClinicImage");
 
@@ -194,16 +198,16 @@ public partial class DentalClinicBookingProjectContext : DbContext
 
             entity.HasOne(d => d.Clinic).WithMany(p => p.ClinicImages)
                 .HasForeignKey(d => d.ClinicId)
-                .HasConstraintName("FK__ClinicIma__Clini__76969D2E");
+                .HasConstraintName("FK__ClinicIma__Clini__6477ECF3");
         });
 
         modelBuilder.Entity<Dentist>(entity =>
         {
-            entity.HasKey(e => e.DentistId).HasName("PK__Dentist__9157336F6B5AD18E");
+            entity.HasKey(e => e.DentistId).HasName("PK__Dentist__9157336F57D5C980");
 
             entity.ToTable("Dentist");
 
-            entity.HasIndex(e => e.AccountId, "UQ__Dentist__349DA587936D9DE5").IsUnique();
+            entity.HasIndex(e => e.AccountId, "UQ__Dentist__349DA5873F8487DA").IsUnique();
 
             entity.Property(e => e.DentistId)
                 .HasDefaultValueSql("(newid())")
@@ -225,20 +229,20 @@ public partial class DentalClinicBookingProjectContext : DbContext
 
             entity.HasOne(d => d.Account).WithOne(p => p.Dentist)
                 .HasForeignKey<Dentist>(d => d.AccountId)
-                .HasConstraintName("FK__Dentist__Account__778AC167");
+                .HasConstraintName("FK__Dentist__Account__656C112C");
 
             entity.HasOne(d => d.Basic).WithMany(p => p.Dentists)
                 .HasForeignKey(d => d.BasicId)
-                .HasConstraintName("FK__Dentist__BasicID__787EE5A0");
+                .HasConstraintName("FK__Dentist__BasicID__66603565");
         });
 
         modelBuilder.Entity<Owner>(entity =>
         {
-            entity.HasKey(e => e.OwnerId).HasName("PK__Owner__81938598C75DECE9");
+            entity.HasKey(e => e.OwnerId).HasName("PK__Owner__8193859865E3FEDE");
 
             entity.ToTable("Owner");
 
-            entity.HasIndex(e => e.AccountId, "UQ__Owner__349DA587056A0652").IsUnique();
+            entity.HasIndex(e => e.AccountId, "UQ__Owner__349DA587391202D1").IsUnique();
 
             entity.Property(e => e.OwnerId)
                 .HasDefaultValueSql("(newid())")
@@ -255,16 +259,16 @@ public partial class DentalClinicBookingProjectContext : DbContext
 
             entity.HasOne(d => d.Account).WithOne(p => p.Owner)
                 .HasForeignKey<Owner>(d => d.AccountId)
-                .HasConstraintName("FK__Owner__AccountID__797309D9");
+                .HasConstraintName("FK__Owner__AccountID__6754599E");
         });
 
         modelBuilder.Entity<Patient>(entity =>
         {
-            entity.HasKey(e => e.PatientId).HasName("PK__Patient__970EC3461E4DA1AC");
+            entity.HasKey(e => e.PatientId).HasName("PK__Patient__970EC34621556549");
 
             entity.ToTable("Patient");
 
-            entity.HasIndex(e => e.AccountId, "UQ__Patient__349DA5879ECFDC98").IsUnique();
+            entity.HasIndex(e => e.AccountId, "UQ__Patient__349DA587B010A916").IsUnique();
 
             entity.Property(e => e.PatientId)
                 .HasDefaultValueSql("(newid())")
@@ -291,12 +295,12 @@ public partial class DentalClinicBookingProjectContext : DbContext
 
             entity.HasOne(d => d.Account).WithOne(p => p.Patient)
                 .HasForeignKey<Patient>(d => d.AccountId)
-                .HasConstraintName("FK__Patient__Account__7A672E12");
+                .HasConstraintName("FK__Patient__Account__68487DD7");
         });
 
         modelBuilder.Entity<Service>(entity =>
         {
-            entity.HasKey(e => e.ServiceId).HasName("PK__Service__C51BB0EA264DB7E9");
+            entity.HasKey(e => e.ServiceId).HasName("PK__Service__C51BB0EA4E20039B");
 
             entity.ToTable("Service");
 
@@ -313,14 +317,14 @@ public partial class DentalClinicBookingProjectContext : DbContext
                     r => r.HasOne<Clinic>().WithMany()
                         .HasForeignKey("ClinicId")
                         .OnDelete(DeleteBehavior.ClientSetNull)
-                        .HasConstraintName("FK__ServiceOf__Clini__7B5B524B"),
+                        .HasConstraintName("FK__ServiceOf__Clini__693CA210"),
                     l => l.HasOne<Service>().WithMany()
                         .HasForeignKey("ServiceId")
                         .OnDelete(DeleteBehavior.ClientSetNull)
-                        .HasConstraintName("FK__ServiceOf__Servi__7C4F7684"),
+                        .HasConstraintName("FK__ServiceOf__Servi__6A30C649"),
                     j =>
                     {
-                        j.HasKey("ServiceId", "ClinicId").HasName("PK__ServiceO__062FCCC54D77B520");
+                        j.HasKey("ServiceId", "ClinicId").HasName("PK__ServiceO__062FCCC5DABAFBCE");
                         j.ToTable("ServiceOfClinic");
                         j.IndexerProperty<Guid>("ServiceId").HasColumnName("ServiceID");
                         j.IndexerProperty<Guid>("ClinicId").HasColumnName("ClinicID");
@@ -329,7 +333,7 @@ public partial class DentalClinicBookingProjectContext : DbContext
 
         modelBuilder.Entity<Slot>(entity =>
         {
-            entity.HasKey(e => e.SlotId).HasName("PK__Slot__0A124A4F8929C1B2");
+            entity.HasKey(e => e.SlotId).HasName("PK__Slot__0A124A4F5114BB6B");
 
             entity.ToTable("Slot");
 
@@ -343,7 +347,7 @@ public partial class DentalClinicBookingProjectContext : DbContext
 
         modelBuilder.Entity<SlotOfClinic>(entity =>
         {
-            entity.HasKey(e => new { e.SlotId, e.ClinicId }).HasName("PK__SlotOfCl__C92636604AAABA9B");
+            entity.HasKey(e => new { e.SlotId, e.ClinicId }).HasName("PK__SlotOfCl__C926366038D1462D");
 
             entity.ToTable("SlotOfClinic");
 
@@ -353,12 +357,12 @@ public partial class DentalClinicBookingProjectContext : DbContext
             entity.HasOne(d => d.Clinic).WithMany(p => p.SlotOfClinics)
                 .HasForeignKey(d => d.ClinicId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK__SlotOfCli__Clini__7D439ABD");
+                .HasConstraintName("FK__SlotOfCli__Clini__6B24EA82");
 
             entity.HasOne(d => d.Slot).WithMany(p => p.SlotOfClinics)
                 .HasForeignKey(d => d.SlotId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK__SlotOfCli__SlotI__7E37BEF6");
+                .HasConstraintName("FK__SlotOfCli__SlotI__6C190EBB");
         });
 
         OnModelCreatingPartial(modelBuilder);

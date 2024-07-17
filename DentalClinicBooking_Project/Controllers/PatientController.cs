@@ -81,6 +81,8 @@ namespace DentalClinicBooking_Project.Controllers
                 cPP.OldPassword = string.Empty;
                 cPP.NewPassword = string.Empty;
 				return View(cPP);
+
+                //xóa session + add lại session mới
             }
             else
             {

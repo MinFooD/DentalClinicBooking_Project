@@ -1,4 +1,4 @@
-﻿@model DentalClinicBooking_Project.Models.ViewModels.LoginVM
+﻿    @model DentalClinicBooking_Project.Models.ViewModels.LoginVM
 @{
 }
 
@@ -15,7 +15,7 @@
     @* <link rel="stylesheet" href="./style.css" />
     <link rel="stylesheet" href="./../HF/style.css" />
     <link rel="stylesheet" href="./../cssForAllPage/style.css" /> *@
-	<script src="~/js/login/login.js"></script>
+	@* <script src="~/js/login/login.js"></script> *@
 	<link href="~/css/login/login.css" rel="stylesheet" />
 </head>
     <body>
@@ -69,13 +69,11 @@
                         <div class="title">Đăng Nhập</div>
                         <div class="des">Đăng nhập để sử dụng dịch vụ của phòng khám</div>
                         <div class="group">
-                            <span>
-                                <ion-icon name="mail-outline"></ion-icon>
-                            </span>
-                            <input type="email" id="loginEmail" placeholder="Email" asp-for="Gmail"/>
+                        <span>👤</span>
+                            <input type="text" id="loginEmail" placeholder="UserName" asp-for="UserName"/>
                         </div>
                         <div class="group">
-                            <span>
+                            <span style="margin-left:2px">
                                 <ion-icon name="lock-closed-outline"></ion-icon>
                             </span>
                             <input type="password"

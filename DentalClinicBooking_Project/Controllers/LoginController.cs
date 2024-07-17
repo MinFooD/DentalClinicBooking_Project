@@ -39,7 +39,7 @@ namespace DentalClinicBooking_Project.Controllers
 		    //var session = HttpContext.Session;
 			if (ModelState.IsValid)
             {
-				var account = _context.Accounts.FirstOrDefault(x => x.Gmail.Equals(_login.Gmail));
+				var account = _context.Accounts.FirstOrDefault(x => x.UserName.Equals(_login.UserName));
                 //if(account != null && account.Password.Equals(HashPasswordController.EncryptString(_login.Password, key, iv)))
                 if (account != null && _login.Password.Equals(HashPasswordController.DecryptString(account.Password,key,iv)))
                 {
@@ -114,15 +114,16 @@ namespace DentalClinicBooking_Project.Controllers
             byte[] iv = Encoding.UTF8.GetBytes("0123456789012345"); // 16 bytes IV
             if (ModelState.IsValid)
             {
-                var checkGmail = _context.Accounts.FirstOrDefault(x => x.Gmail.Equals(registerVM.UserName));
+                var checkGmail = _context.Accounts.FirstOrDefault(x => x.Gmail.Equals(registerVM.Gmail) || x.UserName.Equals(registerVM.UserName));
                 if (checkGmail!=null)
                 {
-                    ModelState.AddModelError("General", "Username already exists.");
+                    ModelState.AddModelError("General", "Username or gmail already exists.");
                     return View(registerVM);
                 }
                 var account = new Account
                 {
-                    Gmail = registerVM.UserName,
+                    UserName = registerVM.UserName,
+                    Gmail = registerVM.Gmail,
                     Password = HashPasswordController.EncryptString(registerVM.Password, key, iv),
                     RoleId = 2,
                 };

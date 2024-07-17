@@ -14,6 +14,6 @@ namespace DentalClinicBooking_Project.Models.ViewModels.BasicViewModel
 		public string Phone { get; set; }
 
 		public Guid? ClinicId { get; set; }
-		public List<Clinic> clicics { get; set; }
+		public List<Clinic>? clicics { get; set; }
 	}
 }

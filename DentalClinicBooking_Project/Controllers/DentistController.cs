@@ -119,6 +119,7 @@ namespace DentalClinicBooking_Project.Controllers
                         Image = dentist.Image,
                         Experience = dentist.Experience,
                         Gmail = dentist.Account.Gmail,
+                        UserName = dentist.Account.UserName,
                         Password = HashPasswordController.DecryptString(dentist.Account.Password, key, iv),
                         BasicId = dentist.BasicId,
 						basics = _context.Owners.Include(x => x.Clinics).ThenInclude(x => x.Basics).Where(x => x.OwnerId.Equals(owner.OwnerId)).SelectMany(x => x.Clinics).SelectMany(x => x.Basics).ToList(),
@@ -138,7 +139,7 @@ namespace DentalClinicBooking_Project.Controllers
             if (dentist != null)
             {
 				// Kiểm tra nếu email đã tồn tại trong cơ sở dữ liệu
-				bool emailExists = _context.Accounts.Any(a => a.Gmail.Equals(updateDentistVM.Gmail) && a.AccountId != dentist.Account.AccountId);
+				bool emailExists = _context.Accounts.Any(a => (a.Gmail.Equals(updateDentistVM.Gmail) || a.UserName.Equals(updateDentistVM.UserName)) && a.AccountId != dentist.Account.AccountId);
 
 				if (emailExists)
 				{
@@ -150,12 +151,12 @@ namespace DentalClinicBooking_Project.Controllers
                 dentist.Experience = updateDentistVM.Experience;
                 dentist.Image = updateDentistVM.Image;
                 dentist.Account.Gmail = updateDentistVM.Gmail;
+                dentist.Account.UserName = updateDentistVM.UserName;
 				dentist.Account.Password = HashPasswordController.EncryptString(updateDentistVM.Password, key, iv);
                 dentist.BasicId= updateDentistVM.BasicId;
 
 				_context.SaveChanges();
                 TempData["result"] = "Update Successfully.";
-                
             }
             else
             {
@@ -214,12 +215,13 @@ namespace DentalClinicBooking_Project.Controllers
 			}
             return View();
         }
+
         [HttpPost]
         public IActionResult AddDentist(AddDentistVM addDentistVM)
         {
             if (ModelState.IsValid)
             {
-                var checkGmail = _context.Accounts.FirstOrDefault(x => x.Gmail.Equals(addDentistVM.UserName));
+                var checkGmail = _context.Accounts.FirstOrDefault(x => x.Gmail.Equals(addDentistVM.UserName) || x.UserName.Equals(addDentistVM.UserName));
                 if(checkGmail != null)
                 {
 					ModelState.AddModelError("General", "Username already exists.");
@@ -227,7 +229,8 @@ namespace DentalClinicBooking_Project.Controllers
 				};
                 var account = new Account
                 {
-                    Gmail = addDentistVM.UserName,
+                    UserName = addDentistVM.UserName,
+                    Gmail = addDentistVM.Gmail,
                     Password = BCrypt.Net.BCrypt.HashPassword(addDentistVM.Password),
                     RoleId = 4,
                 };

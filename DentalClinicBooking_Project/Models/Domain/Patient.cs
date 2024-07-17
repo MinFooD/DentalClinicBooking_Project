@@ -2,32 +2,29 @@
 #nullable disable
 using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
 
 namespace DentalClinicBooking_Project.Models.Domain;
-
 public partial class Patient
 {
-    [Required]
     public Guid PatientId { get; set; }
-    [Required]
+
     public string PatientName { get; set; }
-    [Required]
+
     public string Phone { get; set; }
-    [Required]
+
     public DateOnly BirthDay { get; set; }
-    [Required]
+
     public bool Gender { get; set; }
-    [Required]
+
     public string Address { get; set; }
 
-    public string? CitizenIdentificationCard { get; set; }
+    public string CitizenIdentificationCard { get; set; }
 
-    public string? Nation { get; set; }
+    public string Nation { get; set; }
 
-    public string? Job { get; set; }
+    public string Job { get; set; }
 
-    public string? HealthInsuranceCardCode { get; set; }
+    public string HealthInsuranceCardCode { get; set; }
 
     public Guid? AccountId { get; set; }
 

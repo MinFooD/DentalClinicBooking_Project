@@ -62,6 +62,11 @@
                         <span asp-validation-for="UserName" class="text-danger"></span>
                     </div>
                     <div class="group">
+                        <ion-icon name="mail-outline" style="margin-left:2px"></ion-icon>
+                        <input style="margin-left:5px" type="email" id="gmail" placeholder="Gmail" required oninput="checkInput()" asp-for="Gmail" />
+                        <span asp-validation-for="Gmail" class="text-danger"></span>
+                    </div>
+                    <div class="group">
                         <span>🔒</span>
                         <input type="password" id="password" placeholder="Password" required oninput="checkInput()" asp-for="Password" />
                         <span asp-validation-for="Password" class="text-danger"></span>
@@ -89,6 +94,7 @@
 
                     <input type="hidden" id="hiddenUsername" name="username" asp-for="UserName" />
                     <input type="hidden" id="hiddenPassword" name="password" asp-for="Password" />
+                    <input type="hidden" id="hiddenGmail" name="gmail" asp-for="Gmail" />
 
                     <div class="group">
                         <span>👤</span>
