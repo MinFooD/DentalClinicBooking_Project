@@ -14,6 +14,7 @@ namespace DentalClinicBooking_Project.Repositories
             Guid basicId);
         Task<ClinicAppointmentSchedule> AddAsync(ClinicAppointmentSchedule clinicAppointmentSchedule);
 		Task<IEnumerable<ClinicAppointmentSchedule>> GetAllAsync(Guid id);
+        Task<IEnumerable<ClinicAppointmentSchedule>> SearchAsync(string? searchQuery, Guid id);
         Task<ClinicAppointmentSchedule?> DeleteAsyn(Guid id);
 	}
 }

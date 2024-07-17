@@ -32,9 +32,13 @@
             <!-- đổi appointment-list thành appointment-all -->
             <div class="appointment-all">
                 <!-- new -->
-                <div class="search-container">
-                    <input type="text" placeholder="Tìm kiếm cuộc hẹn..." id="searchInput">
-                </div>
+                <form method="GET" class="search-form"
+                      asp-controller="ViewAppointmentSchedule"
+                      asp-action="DisplayAppointmentSchedule">
+                    <div class="search-container">
+                        <input type="text" placeholder="Tìm kiếm mã phiếu khám..." id="searchInput" name="searchQuery">
+                    </div>
+                </form>
                 <!-- new -->
                 <!-- thêm div appointment-list -->
                 <div class="appointment-list">
@@ -45,7 +49,8 @@
                                 <h2 class="appointment-title">@appointment.ClinicName</h2>
                                 <p class="appointment-time">
                                     @appointment?.SlotOfClinics?.StartTime.ToString("HH:mm")
-                                    - @appointment?.Date</p>
+                                    - @appointment?.Date
+                                </p>
                                 <p class="appointment-patient">@appointment?.PatientName</p>
                                 <div class="appointment-status">
                                     @*                                     <p class="status confirmed">@appointment.Status</p>
@@ -89,7 +94,7 @@
                                         <span class="info-label">Giờ khám dự kiến</span>
                                         <span class="info-value time" style="color: #22C55E;">
                                             @appointment?.SlotOfClinics?.StartTime.ToString("HH:mm")
-                                            - @appointment?.SlotOfClinics?.EndTime.ToString("HH:mm") 
+                                            - @appointment?.SlotOfClinics?.EndTime.ToString("HH:mm")
                                             <span class="time-period">(Buổi chiều)</span>
                                         </span>
                                     </div>

@@ -27,31 +27,40 @@ namespace DentalClinicBooking_Project.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> DisplayAppointmentSchedule()
+        public async Task<IActionResult> DisplayAppointmentSchedule(string? searchQuery)
         {
             string? patientString = httpContextAccessor.HttpContext?.Session.GetString("patient");
             if (!string.IsNullOrEmpty(patientString))
             {
                 var patient = JsonConvert.DeserializeObject<Patient>(patientString);
-                var list = await clinicAppointmentScheduleRepository.GetAllAsync(patient?.PatientId ?? Guid.Empty);
+                IEnumerable<ClinicAppointmentSchedule> list = new List<ClinicAppointmentSchedule>();
 
-                var model = list.Select(a => new DisplaySchedule
+                if (string.IsNullOrWhiteSpace(searchQuery) == true)
                 {
-                    Id = a.ClinicAppointmentScheduleId,
-                    ClinicName = a.Clinic.ClinicName,
-                    BasicAddress = a.Basic.Address,
-                    Code = a.Code,
-                    Date = a.Date,
-                    BasicName = a.Basic.BasicName,
-                    MainImage = a.Clinic.MainImage,
-                    Service = a.Service.ServiceName,
-                    PatientName = a.Patient.PatientName,
-                    PatientAddress = a.Patient.Address,
-                    Gender = DisplaySchedule.GetGender(a.Patient.Gender),
-                    BirthDate = a.Patient.BirthDay,
-                    SlotOfClinics = slotRepository.Get(a.ClinicId ?? Guid.Empty, a.SlotId ?? Guid.Empty),
-                }).ToList();
-
+                    list = await clinicAppointmentScheduleRepository.GetAllAsync(patient?.PatientId ?? Guid.Empty);
+                }
+                else
+                {
+                    list = await clinicAppointmentScheduleRepository.SearchAsync(searchQuery, patient?.PatientId ?? Guid.Empty);
+                }
+                
+                    var model = list.Select(a => new DisplaySchedule
+                    {
+                        Id = a.ClinicAppointmentScheduleId,
+                        ClinicName = a.Clinic.ClinicName,
+                        BasicAddress = a.Basic.Address,
+                        Code = a.Code,
+                        Date = a.Date,
+                        BasicName = a.Basic.BasicName,
+                        MainImage = a.Clinic.MainImage,
+                        Service = a.Service.ServiceName,
+                        PatientName = a.Patient.PatientName,
+                        PatientAddress = a.Patient.Address,
+                        Gender = DisplaySchedule.GetGender(a.Patient.Gender),
+                        BirthDate = a.Patient.BirthDay,
+                        SlotOfClinics = slotRepository.Get(a.ClinicId ?? Guid.Empty, a.SlotId ?? Guid.Empty),
+                    }).ToList();
+                              
                 return View(model);
             }
 
