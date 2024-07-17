@@ -1,6 +1,4 @@
-﻿
-
-using DentalClinicBooking_Project.Models.Domain;
+﻿using DentalClinicBooking_Project.Models.Domain;
 
 namespace DentalClinicBooking_Project.Models.ViewModels.BasicViewModel
 {

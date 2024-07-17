@@ -13,14 +13,15 @@ namespace DentalClinicBooking_Project.Controllers
 
 		public DentalClinicBookingProjectContext _context;
 
-        public HomeController(ILogger<HomeController> logger)
-        {
-            _logger = logger;
+		public HomeController(ILogger<HomeController> logger, DentalClinicBookingProjectContext context)
+		{
+			_logger = logger;
+			_context = context;
 		}
 
 		public IActionResult HomePage()
 		{
-			_context = new DentalClinicBookingProjectContext();
+			
 
 
 			var clinics = _context.Clinics.Select(a => new ClinicWithAddress
@@ -48,6 +49,35 @@ namespace DentalClinicBooking_Project.Controllers
 				dentistWithClinicName = dentists,
 			};
 			return View(viewModels);
+		}
+
+		public IActionResult Dashboard()
+		{
+			int[] data1 = new int[12];
+
+			for (int i = 1; i <= 12; i++)
+			{
+				int count = _context.ClinicAppointmentSchedules.Where(x => x.Date != null && x.Date.Month == i).Count();
+				data1[i - 1] = count;
+			}
+
+			ViewBag.dataArrayForLineChart = data1;
+
+			int[] data2 = new int[3];
+			data2[0] = data1[0] + data1[1] + data1[2] + data1[3];
+			data2[1] = data1[4] + data1[5] + data1[6] + data1[7];
+			data2[2] = data1[8] + data1[9] + data1[10] + data1[11];
+
+			ViewBag.dataArrayForPieChart = data2;
+
+			int[] data3 = new int[4];
+			data3[0] = data1[0] + data1[1] + data1[2];
+			data3[1] = data1[3] + data1[4] + data1[5];
+			data3[2] = data1[6] + data1[7] + data1[8];
+			data3[3] = data1[9] + data1[10] + data1[11];
+
+			ViewBag.dataArrayForBarChart = data3;
+			return View();
 		}
 
 
