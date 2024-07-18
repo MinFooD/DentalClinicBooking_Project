@@ -1,0 +1,109 @@
+﻿
+
+/* new */
+.search-container {
+    margin: 20px;
+    text-align: center;
+}
+
+#searchInput {
+    width: 100%;
+    padding: 10px;
+    margin-right: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+/* new */
+/*
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Arial', sans-serif;
+}*/
+
+
+.container {
+    display: flex;
+    width: 100%;
+    height: 100%;
+}
+
+
+
+.main-content {
+    flex: 1;
+    padding: 20px;
+    display: flex;
+    justify-content: start;
+    align-items: flex-start;
+}
+
+
+
+.appointments {
+    display: flex;
+    gap: 20px;
+}
+
+
+/* chỉnh sửa và thêm */
+.appointment-all {
+    flex: 1;
+    background-color: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    max-height: 500px;
+}
+
+.appointment-list {
+    flex: 1;
+    background-color: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    max-height: 500px;
+    overflow-y: auto;
+}
+/* đến đây */
+
+
+
+/* chuyển qua chuyển lại giữa 2 trường thông tin */
+.appointment-details-container {
+    display: none;
+}
+
+    .appointment-details-container.active {
+        display: block;
+    }
+
+.appointment-item {
+    cursor: pointer;
+}
+
+.details-display {
+    flex: 2;
+    min-height: 340px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.imgempty {
+    margin-bottom: 1rem;
+}
+
+.ant-empty-description {
+    color: #ccc;
+}
+
+/* /chỉnh logo và dòng */
+.custom-empty-state1 {
+    text-align: center;
+    margin: 4.5rem;
+}
+
+.custom-empty-state2 {
+    text-align: center;
+    margin-top: 2rem;
+}
+
+
