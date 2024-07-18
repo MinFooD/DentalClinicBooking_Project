@@ -67,7 +67,15 @@ namespace DentalClinicBooking_Project.Repositories
             return await dentalClinicBookingProjectContext.ClinicAppointmentSchedules
                 .FirstOrDefaultAsync(x => x.ClinicAppointmentScheduleId == id);
         }
-
+        public async Task<ClinicAppointmentSchedule?> GetAsync(string code)
+        {
+            return await dentalClinicBookingProjectContext.ClinicAppointmentSchedules
+                .Include(x => x.Basic)
+                .Include(x => x.Clinic)
+                .Include(x => x.Service)
+                .Include(x => x.Patient)
+                .FirstOrDefaultAsync(x => x.Code.Equals(code));
+        }
         public async Task<ClinicAppointmentSchedule?> GetDuplicateAsync(
             ClinicAppointmentSchedule clinicAppointmentSchedule)
         {

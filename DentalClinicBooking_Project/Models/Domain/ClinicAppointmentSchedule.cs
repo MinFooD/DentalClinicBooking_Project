@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 
 namespace DentalClinicBooking_Project.Models.Domain;
+
 public partial class ClinicAppointmentSchedule
 {
     public Guid ClinicAppointmentScheduleId { get; set; }
@@ -23,6 +24,8 @@ public partial class ClinicAppointmentSchedule
     public Guid? ClinicId { get; set; }
 
     public string Type { get; set; }
+
+    public bool? Status { get; set; }
 
     public virtual Basic Basic { get; set; }
 
