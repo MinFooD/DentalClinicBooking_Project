@@ -12,6 +12,9 @@
 	string ownerString = HttpContextAccessor.HttpContext.Session.GetString("owner");
 	// var account = JsonConvert.DeserializeObject<Account>(accountString);
 	var owner = !string.IsNullOrEmpty(ownerString) ? JsonConvert.DeserializeObject<Owner>(ownerString) : null;
+	string dentistString = HttpContextAccessor.HttpContext.Session.GetString("dentist");
+	// var account = JsonConvert.DeserializeObject<Account>(accountString);
+	var dentist = !string.IsNullOrEmpty(dentistString) ? JsonConvert.DeserializeObject<Dentist>(dentistString) : null;
 }
 
 <!DOCTYPE html>
@@ -61,6 +64,12 @@
 							</div>
 						</div>
 					</li>
+				} else if (account!= null && account.RoleId==4)
+				{
+					<li class="nav-item"> <a asp-area="" asp-controller="" asp-action="" class="nav-link">Khám thường</a></li>
+					<li class="nav-item"> <a asp-area="" asp-controller="" asp-action="" class="nav-link">Khám định kì</a></li>
+					<li class="nav-item"> <a asp-area="" asp-controller="" asp-action="" class="nav-link">Xem lịch khám</a></li>
+					<li class="nav-item"> <a asp-area="" asp-controller="" asp-action="" class="nav-link">Xem yêu cầu</a></li>
 				}
 				else
 				{
@@ -102,6 +111,9 @@
 					} else if(account!=null && account.RoleId == 3)
 					{
 						<span class="contact-number md:block">@owner.OwnerName</span>
+					} else if(account!=null && account.RoleId == 4)
+					{
+						<span class="contact-number md:block">@dentist.DentistName</span>
 					}
 
 					<div class="dropdown-toggle"></div>

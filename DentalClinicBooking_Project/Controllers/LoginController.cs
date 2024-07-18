@@ -52,12 +52,6 @@ namespace DentalClinicBooking_Project.Controllers
                         var patient = _context.Patients.FirstOrDefault(x => x.AccountId.Equals(account.AccountId));
                         if (patient != null)
                         {
-                            //HttpContext.Session.SetString("patient", Newtonsoft.Json.JsonConvert.SerializeObject(patient));
-                            //session.SetString("PatientName",patient.PatientName);
-                            //var settings = new JsonSerializerSettings
-                            //{
-                            //    ReferenceLoopHandling = ReferenceLoopHandling.Ignore
-                            //};//cấu hình JsonSerializerSettings để bỏ qua các vòng lặp tham chiếu:
                             string patientString = JsonConvert.SerializeObject(patient, settings);
                             _contx.HttpContext.Session.SetString("patient", patientString);
                         }
@@ -67,19 +61,24 @@ namespace DentalClinicBooking_Project.Controllers
                         var owner = _context.Owners.FirstOrDefault(x => x.AccountId.Equals(account.AccountId));
                         if (owner != null)
                         {
-                            //HttpContext.Session.SetString("patient", Newtonsoft.Json.JsonConvert.SerializeObject(patient));
-                            //session.SetString("PatientName",patient.PatientName);
-                            //var settings = new JsonSerializerSettings
-                            //{
-                            //    ReferenceLoopHandling = ReferenceLoopHandling.Ignore
-                            //};//cấu hình JsonSerializerSettings để bỏ qua các vòng lặp tham chiếu:
+                            //cấu hình JsonSerializerSettings để bỏ qua các vòng lặp tham chiếu:
                             string patientString = JsonConvert.SerializeObject(owner, settings);
                             _contx.HttpContext.Session.SetString("owner", patientString);
                         }
                     }
+					if (account.RoleId == 4)
+					{
+						var dentist = _context.Dentists.FirstOrDefault(x => x.AccountId.Equals(account.AccountId));
+						if (dentist != null)
+						{
+							//cấu hình JsonSerializerSettings để bỏ qua các vòng lặp tham chiếu:
+							string dentistString = JsonConvert.SerializeObject(dentist, settings);
+							_contx.HttpContext.Session.SetString("dentist", dentistString);
+						}
+					}
 
 
-                    return RedirectToAction("HomePage", "Home");
+					return RedirectToAction("HomePage", "Home");
                 }
                 
 			}
@@ -98,8 +97,9 @@ namespace DentalClinicBooking_Project.Controllers
             _contx.HttpContext.Session.Remove("account");
             _contx.HttpContext.Session.Remove("patient");
             _contx.HttpContext.Session.Remove("owner");
+			_contx.HttpContext.Session.Remove("dentist");
 
-            return RedirectToAction("Login", "Login");
+			return RedirectToAction("Login", "Login");
         }
         [HttpGet]
         public IActionResult Register()
