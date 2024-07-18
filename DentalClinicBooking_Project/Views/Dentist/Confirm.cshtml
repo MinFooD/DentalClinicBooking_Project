@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Confirm</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet" />
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</head>
+
+<body>
+
+        <!-- Search Service Banner -->
+    <div class=" " style="max-width: 10000px; padding: 0 0; background-color: #1975DC;">
+        <div class="banner-bg container-md" style="max-width: 1600px;  position: sticky; top: 0;">
+            <div class="banner-container">
+                <form novalidate action="." class="search-form">
+                    <input type="search" formcontrolname="query"
+                        placeholder="Tìm theo triệu chứng, bác sĩ, bệnh viện..." class="search-input">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="search-icon" viewBox="0 0 16 16">
+                        <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001q.044.06.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1 1 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0"></path>
+                    </svg>
+                </form>
+                
+            </div>
+        </div>
+
+        <!-- Speciality List -->
+        <div class="speciality-container">
+            <div class="speciality-list">
+                <app-speciality-list>
+                    <div class="speciality-grid">
+                        <nz-collapse nzghost class="collapse-container">
+                            <nz-collapse-panel nzshowarrow="false" nzactive class="collapse-panel">
+                            </nz-collapse-panel>
+                        </nz-collapse>
+                    </div>
+                </app-speciality-list>
+            </div>
+        </div>
+    </div>
+    
+
+    <div class="container">
+        <div class="search-results-container">
+            <h1 class="search-results-heading">
+                Tìm thấy <span class="search-results-count">5</span> kết quả.
+            </h1>
+        </div>
+        
+        <div class="doctor-card">
+            <a class="doctor-link" href="#">
+                <div class="doctor-image-container">
+                    <img class="doctor-image"
+                        src="https://cdn.youmed.vn/photos/449c2818-9f35-437e-a2b9-b77c9888c0f1.jpg?width=160"
+                        alt="Đào Bùi Quý Quyền">
+                </div>
+                <div class="doctor-info">
+                    <div class="doctor-header">
+                        <h2 class="doctor-name"><span class="doctor-title"></span> Đào Bùi Quý Quyền</h2>
+                    </div>
+                    <p class="doctor-address">242 Nguyễn Chí Thanh, Phường 2, Quận 10, Hồ Chí Minh</p>
+                </div>
+            </a>
+            <div class="appointment-button-container">
+                <a class="appointment-button" href="#">
+                    Xác nhận
+                </a>
+            </div>
+        </div>
+        <div class="doctor-card">
+            <a class="doctor-link" href="#">
+                <div class="doctor-image-container">
+                    <img class="doctor-image"
+                        src="https://cdn.youmed.vn/photos/67c3e343-bbab-46f2-950e-f11b86ecde6e.jpg?width=160"
+                        alt="Lê Anh Tuấn">
+                </div>
+                <div class="doctor-info">
+                    <div class="doctor-header">
+                        <h2 class="doctor-name"><span class="doctor-title"></span> Lê Anh Tuấn</h2>
+                    </div>
+                    <p class="doctor-address">23 Nguyễn Văn Đậu, Phường 5, Quận Phú Nhuận, Hồ Chí Minh</p>
+                </div>
+            </a>
+            <div class="appointment-button-container">
+                <a class="appointment-button" href="#">
+                    Xác nhận
+                </a>
+            </div>
+        </div>
+        <div class="doctor-card">
+            <a class="doctor-link" href="#">
+                <div class="doctor-image-container">
+                    <img class="doctor-image"
+                        src="https://cdn.youmed.vn/photos/949bfe9b-b2f7-41d9-b892-88fa8e4f44e2.jpg?width=160"
+                        alt=" Nguyễn Thị Bích Đào ">
+                </div>
+                <div class="doctor-info">
+                    <div class="doctor-header">
+                        <h2 class="doctor-name"><span class="doctor-title"></span> Nguyễn Thị Bích Đào </h2>
+                    </div>
+                    <p class="doctor-address">215F Nguyễn Trãi, Phường Nguyễn Cư Trinh, Quận 1, Hồ Chí Minh</p>
+                </div>
+            </a>
+            <div class="appointment-button-container">
+                <a class="appointment-button" href="#">
+                    Xác nhận
+                </a>
+            </div>
+        </div>
+        <div class="doctor-card">
+            <a class="doctor-link" href="#">
+                <div class="doctor-image-container">
+                    <img class="doctor-image"
+                        src="https://cdn.youmed.vn/photos/68c2307d-18f8-4e97-9ef3-99fea20a286d.png?width=160"
+                        alt="  Trần Quang Nam ">
+                </div>
+                <div class="doctor-info">
+                    <div class="doctor-header">
+                        <h2 class="doctor-name"><span class="doctor-title"></span> Trần Quang Nam </h2>
+                    </div>
+                    <p class="doctor-address">8 Phan Phú Tiên, Phường 10, Quận 5, Hồ Chí Minh</p>
+                </div>
+            </a>
+            <div class="appointment-button-container">
+                <a class="appointment-button" href="#">
+                    Xác nhận
+                </a>
+            </div>
+        </div>
+        <div class="doctor-card">
+            <a class="doctor-link" href="#">
+                <div class="doctor-image-container">
+                    <img class="doctor-image"
+                        src="https://cdn.youmed.vn/photos/04793f26-84f2-481b-b09c-2ce8a4b99b9c.png?width=160"
+                        alt="  Hồ Thị Mỹ Ngọc  ">
+                </div>
+                <div class="doctor-info">
+                    <div class="doctor-header">
+                        <h2 class="doctor-name"><span class="doctor-title"></span> Hồ Thị Mỹ Ngọc </h2>
+                    </div>
+                    <p class="doctor-address">63/9A Gò Dầu, Phường Tân Quý, Quận Tân Phú, Hồ Chí Minh</p>
+                </div>
+            </a>
+            <div class="appointment-button-container">
+                <a class="appointment-button" href="#">
+                    Xác nhận
+                </a>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
