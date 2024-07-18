@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 
 namespace DentalClinicBooking_Project.Models.Domain;
+
 public partial class Patient
 {
     public Guid PatientId { get; set; }

@@ -12,6 +12,7 @@
 
   <ItemGroup>
     <None Include="efpt.config.json.user" />
+    <None Include="Views\Confirmation\ShowAppointmentConfirmation.cshtml" />
     <None Include="wwwroot\js\BookingClinic\BookingClinic.js" />
     <None Include="wwwroot\js\BookingClinic\BookingConfirmation.js" />
     <None Include="wwwroot\js\BookingClinic\DetermineSessionTime.js" />
@@ -19,6 +20,7 @@
     <None Include="wwwroot\js\ClinicDetails\collapse.js" />
     <None Include="wwwroot\js\ClinicDetails\Img.js" />
     <None Include="wwwroot\js\Clinic\AddClinic.js" />
+    <None Include="wwwroot\js\Dentist\AppointmentConfirmation\Appointment.js" />
     <None Include="wwwroot\js\Login\script.js" />
     <None Include="wwwroot\js\Owner\UpdateDentist.js" />
     <None Include="wwwroot\js\Service\Service.js" />
