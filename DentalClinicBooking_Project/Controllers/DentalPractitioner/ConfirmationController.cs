@@ -1,4 +1,5 @@
 ﻿using DentalClinicBooking_Project.Models.Domain;
+using DentalClinicBooking_Project.Models.ViewModels.Dentist.Confirmation;
 using DentalClinicBooking_Project.Models.ViewModels.ViewScheduleModels;
 using DentalClinicBooking_Project.Repositories;
 using Microsoft.AspNetCore.Mvc;
@@ -26,15 +27,19 @@ namespace DentalClinicBooking_Project.Controllers.DentalPractitioner
         [HttpGet]
         public async Task<IActionResult> ShowAppointmentConfirmation(string code)
         {
+            var appointmentSchedule = await clinicAppointmentScheduleRepository.GetAsync(code);
+            var model = new DisplayBookingInformation();
+            if (string.IsNullOrEmpty(code))
+            {
+                return View(model);
+            }
+
             string? dentistString = httpContextAccessor.HttpContext?.Session.GetString("dentist");
             if (!string.IsNullOrEmpty(dentistString))
             {
-                var dentist = JsonConvert.DeserializeObject<Dentist>(dentistString);
-                var appointmentSchedule = await clinicAppointmentScheduleRepository.GetAsync(code);
-                var model = new DisplaySchedule();
-
-                if (appointmentSchedule?.BasicId != dentist?.BasicId)
-                {              
+                var dentist = JsonConvert.DeserializeObject<Dentist>(dentistString);                  
+                if (appointmentSchedule?.BasicId == dentist?.BasicId)
+                {
                     DateOnly dateModel = appointmentSchedule?.Date ?? DateOnly.MinValue;
                     DateOnly currentDate = DateOnly.FromDateTime(DateTime.Today);
                     if (dateModel < currentDate)
@@ -43,7 +48,7 @@ namespace DentalClinicBooking_Project.Controllers.DentalPractitioner
                     }
                     else
                     {
-                        model = new DisplaySchedule
+                        model = new DisplayBookingInformation
                         {
                             Id = appointmentSchedule.ClinicAppointmentScheduleId,
                             ClinicName = appointmentSchedule.Clinic.ClinicName,
@@ -59,11 +64,22 @@ namespace DentalClinicBooking_Project.Controllers.DentalPractitioner
                             BirthDate = appointmentSchedule.Patient.BirthDay,
                             SlotOfClinics = slotRepository.Get(appointmentSchedule.ClinicId ?? Guid.Empty, appointmentSchedule.SlotId ?? Guid.Empty),
                         };
-                    }
+                    }                   
+                }
+                else
+                {
+                    ViewBag.Message = "Mã của phiếu khám không hợp lệ!";
                 }
                 return View(model);
             }
             return RedirectToAction("Login", "Login");
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> ShowAppointmentConfirmation(Guid id)
+        {
+
+            return RedirectToAction("Confirmation", "ShowAppointmentConfirmation");
         }
     }
 }
