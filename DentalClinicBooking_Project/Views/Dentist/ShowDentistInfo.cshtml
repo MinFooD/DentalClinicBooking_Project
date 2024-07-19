@@ -74,7 +74,7 @@
 				{
 					<a class="btn-consult" asp-area="" asp-controller="BookClinic" asp-action="BookingClinic" asp-route-id="@Model.ClinicId">Đặt khám ngay</a>
 				}
-				else if (account != null && account.RoleId == 3)
+				else if (account != null && (account.RoleId == 3 || account.RoleId == 4))
 				{
 					<button class="btn-consult" disabled>Đặt khám ngay</button>
 				}
@@ -83,7 +83,7 @@
 					<a class="btn-consult" asp-area="" asp-controller="Login" asp-action="Login" asp-route-id="@Model.ClinicId">Đặt khám ngay</a>
 				}
 				
-				<a class="btn-appointment" href="#">Hủy</a>
+				<a class="btn-appointment" asp-area="" asp-controller="Home" asp-action="HomePage">Hủy</a>
 			</div>
 		</main>
 	</div>

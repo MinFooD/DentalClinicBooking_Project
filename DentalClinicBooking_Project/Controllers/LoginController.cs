@@ -36,7 +36,6 @@ namespace DentalClinicBooking_Project.Controllers
         {
 			byte[] key = Encoding.UTF8.GetBytes("01234567890123456789012345678901"); // 32 bytes key
 			byte[] iv = Encoding.UTF8.GetBytes("0123456789012345"); // 16 bytes IV
-		    //var session = HttpContext.Session;
 			if (ModelState.IsValid)
             {
 				var account = _context.Accounts.FirstOrDefault(x => x.UserName.Equals(_login.UserName));

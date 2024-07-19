@@ -42,7 +42,7 @@ public partial class DentalClinicBookingProjectContext : DbContext
 
     public virtual DbSet<SlotOfClinic> SlotOfClinics { get; set; }
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        => optionsBuilder.UseSqlServer("Server=DESKTOP-20AJ10N\\SQLEXPRESS;uid=sa;pwd=12345;database= DentalCLinicBookingProject;TrustServerCertificate=True");
+        => optionsBuilder.UseSqlServer("Server=PHUC\\PHUC;uid=sa;pwd=123456;database= DentalCLinicBookingProject;TrustServerCertificate=True");
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
