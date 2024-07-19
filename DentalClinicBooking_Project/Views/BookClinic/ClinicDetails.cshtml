@@ -24,6 +24,10 @@
     string ownerString = HttpContextAccessor.HttpContext.Session.GetString("owner");
     // var account = JsonConvert.DeserializeObject<Account>(accountString);
     var owner = !string.IsNullOrEmpty(ownerString) ? JsonConvert.DeserializeObject<Owner>(ownerString) : null;
+
+    string dentistString = HttpContextAccessor.HttpContext.Session.GetString("dentist");
+    // var account = JsonConvert.DeserializeObject<Account>(accountString);
+    var dentist = !string.IsNullOrEmpty(dentistString) ? JsonConvert.DeserializeObject<Dentist>(dentistString) : null;
 }
 
 <!DOCTYPE html>
@@ -115,7 +119,7 @@
                 </button>
             </div>
         }
-        else if (account != null && account.RoleId == 3)
+        else if (account != null && (account.RoleId == 3 || account.RoleId == 4))
         {
 
         }

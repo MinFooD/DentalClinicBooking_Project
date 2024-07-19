@@ -1,7 +1,7 @@
 ﻿using DentalClinicBooking_Project.Data;
 using DentalClinicBooking_Project.Models.Domain;
-using DentalClinicBooking_Project.Models.ViewModels;
 using DentalClinicBooking_Project.Models.ViewModels.PatientViewModel;
+using DentalClinicBooking_Project.Repositories;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System.Text;
@@ -11,10 +11,14 @@ namespace DentalClinicBooking_Project.Controllers
     public class PatientController : Controller
     {
         DentalClinicBookingProjectContext _context;
+        private IConfiguration _configuration;
+        private readonly IPatientRepository patientRepository;
 
-        public PatientController(DentalClinicBookingProjectContext context)
+        public PatientController(DentalClinicBookingProjectContext context, IConfiguration configuration, IPatientRepository patientRepository)
         {
             _context = context;
+            _configuration = configuration;
+            this.patientRepository = patientRepository;
         }
 
         [HttpGet]
@@ -90,5 +94,45 @@ namespace DentalClinicBooking_Project.Controllers
                 return View(cPP);
             }
         }
+        [HttpGet]
+        public IActionResult ForgotPassword()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public IActionResult ForgotPassword(ResetPassword reset)
+        {
+            if (ModelState.IsValid)
+            {
+                byte[] key = Encoding.UTF8.GetBytes("01234567890123456789012345678901"); // 32 bytes key
+                byte[] iv = Encoding.UTF8.GetBytes("0123456789012345"); // 16 bytes IV
+                var checkAccount = _context.Accounts.FirstOrDefault(x => x.UserName.Equals(reset.UserName) && x.Gmail.Equals(reset.Gmail));
+                if (checkAccount != null)
+                {
+                    string password = HashPasswordController.DecryptString(checkAccount.Password,key,iv);
+                    string gmailSend = _configuration["EmailSettings:GmailSend"];
+                    string gmailPassword = _configuration["EmailSettings:GmailPassword"];
+                    string fromEmail = gmailSend;  // Gửi từ email cấu hình trong appsettings.json
+                    string toEmail = checkAccount.Gmail;  // Địa chỉ email người nhận
+                    string subject = "Reset Password";
+                    string body = patientRepository.SendMailForm(checkAccount.UserName, password);
+                    bool result =  patientRepository.SendMailGoogleSmtp(fromEmail, toEmail, subject, body, gmailSend, gmailPassword);
+                    if (result)
+                    {
+						TempData["Success"] = "Mật khẩu đã được gửi về email của bạn.";
+						return RedirectToAction("Login","Login");
+                    }
+                    else
+                    {
+                        TempData["Fail"] = "Tên đăng nhập hoặc gmail không chính xác!";
+                    }
+                }
+                TempData["Fail"] = "Tên đăng nhập hoặc gmail không chính xác!";
+            }
+            return View(reset);
+
+        }
+
     }
 }
