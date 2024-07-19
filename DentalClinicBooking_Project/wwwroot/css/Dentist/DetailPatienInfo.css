@@ -1,0 +1,104 @@
+.container {
+    margin: 0 auto;
+    background-color: #ffffff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    height: 500px;
+    display: table;
+}
+
+h1 {
+    color: #f39c12;
+    text-align: center;
+}
+
+.info {
+    margin: 20px 0;
+}
+.info p {
+    margin: 5px 0;
+}
+.info p span {
+    font-weight: bold;
+}
+
+.info-title{
+    margin-bottom: 2rem;
+}
+
+.info-item {
+    display: flex; 
+    justify-content: space-between; 
+    gap: 20px;
+    margin-left: 0.5rem;
+    margin-bottom: 0.5rem;
+   
+}
+
+
+.info-value{
+    font-size: larger;
+    flex: 1 1 auto; /* Cho phép giá trị mở rộng để lấp đầy không gian còn lại */
+    text-align: right; /* Căn chỉnh văn bản sang phải */
+}
+
+.info-label{
+    font-size: larger;
+    font-weight: 600;
+    flex: 0 0 auto;
+}
+
+.buttons {
+    margin-top: 20px;
+}
+.buttons button {
+    padding: 10px 20px;
+    font-size: 16px;
+    margin: 0 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+.buttons .confirm {
+    background-color: #3498db;
+    color: #fff;
+}
+
+
+
+.profile {
+    display: flex;
+    gap: 16px; 
+    align-items: center;
+}
+
+.avatar {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 64px; 
+    height: 64px;
+    border-radius: 50%;
+    background: linear-gradient(to right, #22d3ee, #0ea5e9);
+}
+
+.initials {
+    position: absolute;
+    font-size: 1.25rem; 
+    color: white;
+    font-weight: bold;
+}
+
+.info h3 {
+    font-size: 1rem; 
+    font-weight: bold;
+    margin: 0;
+}
+
+.info p {
+    color: #6b7280; 
+    font-size: 0.875rem; 
+    margin: 0;
+}
