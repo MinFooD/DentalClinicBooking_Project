@@ -95,5 +95,18 @@ namespace DentalClinicBooking_Project.Repositories
                    .Select(g => new BookingSlot { SlotId = g.Key, Count = g.Count() })
                    .ToListAsync();
         }
+
+        public async Task<ClinicAppointmentSchedule?> UpdateStatusAsync(ClinicAppointmentSchedule schedule)
+        {
+            var exist = await dentalClinicBookingProjectContext.ClinicAppointmentSchedules
+                .FirstOrDefaultAsync(x => x.ClinicAppointmentScheduleId == schedule.ClinicAppointmentScheduleId);
+            if(exist != null)
+            {
+                exist.Status = schedule.Status;
+                dentalClinicBookingProjectContext.SaveChanges();
+                return exist;
+            }
+            return null;
+        }
     }
 }

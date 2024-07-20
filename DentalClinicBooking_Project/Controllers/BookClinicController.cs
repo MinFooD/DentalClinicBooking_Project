@@ -1,6 +1,7 @@
 ﻿using DentalClinicBooking_Project.Models.Domain;
 using DentalClinicBooking_Project.Models.ViewModels;
 using DentalClinicBooking_Project.Models.ViewModels.BookingClinicModels;
+using DentalClinicBooking_Project.Models.ViewModels.ViewScheduleModels;
 using DentalClinicBooking_Project.Repositories;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore.Metadata.Internal;
@@ -152,7 +153,8 @@ namespace DentalClinicBooking_Project.Controllers
                     Date = appointmentBookingModel?.Date ?? DateOnly.FromDateTime(DateTime.Now),
                     SlotId = appointmentBookingModel?.SlotId,
                     ServiceId = appointmentBookingModel?.ServiceId,
-                    Type = "Book Appointment"
+                    Type = "Book Appointment",
+                    Status = false
                 };
 
                 var model = await clinicAppointmentScheduleRepository.GetDuplicateAsync(clinicAppointmentSchedule);
@@ -202,7 +204,8 @@ namespace DentalClinicBooking_Project.Controllers
                     PatientName = patient?.PatientName,
                     BirthDate = patient?.BirthDay,
                     Gender = AppointmentBookingSuccess.GetGender(patient?.Gender),
-                    PatientAddress = patient?.Address
+                    PatientAddress = patient?.Address,
+                    Status = DisplaySchedule.GetStatus(appointmentSchedule?.Status)
                 };
                 return View(model);
             }

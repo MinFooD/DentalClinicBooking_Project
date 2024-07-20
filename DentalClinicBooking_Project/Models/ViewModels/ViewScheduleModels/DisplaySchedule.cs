@@ -17,6 +17,7 @@ namespace DentalClinicBooking_Project.Models.ViewModels.ViewScheduleModels
         public DateOnly? BirthDate { get; set; }
         public string? Gender { get; set; }
         public string? PatientAddress { get; set; }
+        public string? Status { get; set; }
         public static string GetGender(bool? gender)
         {
             if (gender == true)
@@ -26,6 +27,21 @@ namespace DentalClinicBooking_Project.Models.ViewModels.ViewScheduleModels
             else if (gender == false)
             {
                 return "Nữ";
+            }
+            else
+            {
+                return "Không xác định";
+            }
+        }
+        public static string GetStatus(bool? status)
+        {
+            if (status == true)
+            {
+                return "Đã khám";
+            }
+            else if (status == false)
+            {
+                return "Chưa khám";
             }
             else
             {
