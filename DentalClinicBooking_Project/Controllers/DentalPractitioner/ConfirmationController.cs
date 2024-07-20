@@ -42,27 +42,35 @@ namespace DentalClinicBooking_Project.Controllers.DentalPractitioner
                 {
                     DateOnly dateModel = appointmentSchedule?.Date ?? DateOnly.MinValue;
                     DateOnly currentDate = DateOnly.FromDateTime(DateTime.Today);
+                    
+
+
                     if (dateModel < currentDate)
                     {
                         ViewBag.Message = "Phiếu khám đã hết hạn!";
+                    }
+                    else if (appointmentSchedule?.Status == true)
+                    {
+                        ViewBag.Message = "Phiếu khám đã xác nhận";
                     }
                     else
                     {
                         model = new DisplayBookingInformation
                         {
-                            Id = appointmentSchedule.ClinicAppointmentScheduleId,
-                            ClinicName = appointmentSchedule.Clinic.ClinicName,
-                            BasicAddress = appointmentSchedule.Basic.Address,
-                            Code = appointmentSchedule.Code,
-                            Date = appointmentSchedule.Date,
-                            BasicName = appointmentSchedule.Basic.BasicName,
-                            MainImage = appointmentSchedule.Clinic.MainImage,
-                            Service = appointmentSchedule.Service.ServiceName,
-                            PatientName = appointmentSchedule.Patient.PatientName,
-                            PatientAddress = appointmentSchedule.Patient.Address,
-                            Gender = DisplaySchedule.GetGender(appointmentSchedule.Patient.Gender),
-                            BirthDate = appointmentSchedule.Patient.BirthDay,
-                            SlotOfClinics = slotRepository.Get(appointmentSchedule.ClinicId ?? Guid.Empty, appointmentSchedule.SlotId ?? Guid.Empty),
+                            Id = appointmentSchedule?.ClinicAppointmentScheduleId ?? Guid.Empty,
+                            ClinicName = appointmentSchedule?.Clinic.ClinicName,
+                            BasicAddress = appointmentSchedule?.Basic.Address,
+                            Code = appointmentSchedule?.Code,
+                            Date = appointmentSchedule?.Date ?? DateOnly.FromDateTime(DateTime.Now),
+                            BasicName = appointmentSchedule?.Basic.BasicName,
+                            MainImage = appointmentSchedule?.Clinic.MainImage,
+                            Service = appointmentSchedule?.Service.ServiceName,
+                            PatientName = appointmentSchedule?.Patient.PatientName,
+                            PatientAddress = appointmentSchedule?.Patient.Address,
+                            Gender = DisplayBookingInformation.GetGender(appointmentSchedule?.Patient.Gender),
+                            BirthDate = appointmentSchedule?.Patient.BirthDay,
+                            SlotOfClinics = slotRepository.Get(appointmentSchedule?.ClinicId ?? Guid.Empty, appointmentSchedule?.SlotId ?? Guid.Empty),
+                            Status = DisplayBookingInformation.GetStatus(appointmentSchedule?.Status)
                         };
                     }                   
                 }
@@ -78,8 +86,14 @@ namespace DentalClinicBooking_Project.Controllers.DentalPractitioner
         [HttpPost]
         public async Task<IActionResult> ShowAppointmentConfirmation(Guid id)
         {
+            var AppointmentSchedule = await clinicAppointmentScheduleRepository.GetAsync(id);
+            if (AppointmentSchedule != null)
+            {
+                AppointmentSchedule.Status = true;
+            }           
+            var model = await clinicAppointmentScheduleRepository.UpdateStatusAsync(AppointmentSchedule ?? new ClinicAppointmentSchedule());
 
-            return RedirectToAction("Confirmation", "ShowAppointmentConfirmation");
+            return RedirectToAction("ShowAppointmentConfirmation", "Confirmation", new { code = AppointmentSchedule?.Code });
         }
     }
 }
