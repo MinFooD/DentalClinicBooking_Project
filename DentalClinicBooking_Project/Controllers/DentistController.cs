@@ -6,6 +6,7 @@ using DentalClinicBooking_Project.Models.ViewModels.Dentist;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using Newtonsoft.Json;
 using System.Text;
 
@@ -219,7 +220,9 @@ namespace DentalClinicBooking_Project.Controllers
         [HttpPost]
         public IActionResult AddDentist(AddDentistVM addDentistVM)
         {
-            if (ModelState.IsValid)
+			byte[] key = Encoding.UTF8.GetBytes("01234567890123456789012345678901"); // 32 bytes key
+			byte[] iv = Encoding.UTF8.GetBytes("0123456789012345"); // 16 bytes IV
+			if (ModelState.IsValid)
             {
                 var checkGmail = _context.Accounts.FirstOrDefault(x => x.Gmail.Equals(addDentistVM.UserName) || x.UserName.Equals(addDentistVM.UserName));
                 if(checkGmail != null)
@@ -230,9 +233,9 @@ namespace DentalClinicBooking_Project.Controllers
                 var account = new Account
                 {
                     UserName = addDentistVM.UserName,
-                    Gmail = addDentistVM.Gmail,
-                    Password = BCrypt.Net.BCrypt.HashPassword(addDentistVM.Password),
-                    RoleId = 4,
+					Gmail = addDentistVM.Gmail,
+                    Password = HashPasswordController.EncryptString(addDentistVM.Password, key, iv),
+					RoleId = 4,
                 };
                 _context.Add(account);
                 _context.SaveChanges();
