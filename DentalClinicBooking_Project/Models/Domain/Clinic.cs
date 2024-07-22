@@ -17,6 +17,8 @@ public partial class Clinic
 
     public Guid? OwnerId { get; set; }
 
+    public bool? Status { get; set; }
+
     public virtual ICollection<Basic> Basics { get; set; } = new List<Basic>();
 
     public virtual ICollection<ClinicAppointmentSchedule> ClinicAppointmentSchedules { get; set; } = new List<ClinicAppointmentSchedule>();
