@@ -25,6 +25,8 @@ public partial class ClinicAppointmentSchedule
 
     public string Type { get; set; }
 
+    public decimal? Price { get; set; }
+
     public bool? Status { get; set; }
 
     public virtual Basic Basic { get; set; }

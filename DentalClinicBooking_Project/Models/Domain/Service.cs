@@ -11,6 +11,8 @@ public partial class Service
 
     public string ServiceName { get; set; }
 
+    public decimal? Price { get; set; }
+
     public virtual ICollection<ClinicAppointmentSchedule> ClinicAppointmentSchedules { get; set; } = new List<ClinicAppointmentSchedule>();
 
     public virtual ICollection<Clinic> Clinics { get; set; } = new List<Clinic>();
