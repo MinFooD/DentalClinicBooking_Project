@@ -1,5 +1,4 @@
-﻿using BCrypt.Net;
-using DentalClinicBooking_Project.Data;
+﻿using DentalClinicBooking_Project.Data;
 using Microsoft.AspNetCore.Mvc;
 using System.Security.Cryptography;
 using System.Text;

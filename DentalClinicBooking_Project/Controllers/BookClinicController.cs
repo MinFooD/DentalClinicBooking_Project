@@ -6,6 +6,7 @@ using DentalClinicBooking_Project.Repositories;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using Newtonsoft.Json;
+using PayPal.Api;
 using System.Reflection;
 using static System.Reflection.Metadata.BlobBuilder;
 
@@ -158,7 +159,7 @@ namespace DentalClinicBooking_Project.Controllers
                 };
 
                 var model = await clinicAppointmentScheduleRepository.GetDuplicateAsync(clinicAppointmentSchedule);
-
+                //-------------------------------------------
                 if (model == null)
                 {
                     model = await clinicAppointmentScheduleRepository.AddAsync(clinicAppointmentSchedule);
@@ -212,5 +213,165 @@ namespace DentalClinicBooking_Project.Controllers
             return RedirectToAction("Login", "Login");
         }
 
-    }
+
+
+        public IActionResult FailureView()
+        {
+            return View();
+        }
+
+        public IActionResult SuccessView()
+        {
+            return View();
+        }
+
+		//Payment with Paypal
+		public IActionResult PaymentWithPaypal(string Cancel = null)
+		{
+			// Lấy APIContext từ PaypalConfiguration
+			APIContext apiContext = PaypalConfiguration.GetAPIContext();
+
+			try
+			{
+				// Đại diện cho người thanh toán với phương thức thanh toán là PayPal
+				// Payer Id sẽ được trả về khi thanh toán tiến hành hoặc khi nhấn thanh toán
+				string payerId = Request.Query["PayerID"].ToString();
+
+				// Kiểm tra nếu payerId là null hoặc rỗng
+				if (string.IsNullOrEmpty(payerId))
+				{
+					// Phần này sẽ được thực thi đầu tiên vì PayerID không tồn tại
+					// PayerID được trả về bởi lệnh gọi hàm create của lớp payment
+					// Tạo một thanh toán mới
+					// baseURL là URL mà PayPal gửi lại dữ liệu
+					string baseURI = $"{Request.Scheme}://{Request.Host}/bookclinic/PaymentWithPayPal?";
+
+					// Tạo một GUID để lưu trữ paymentID nhận được trong session
+					// sẽ được sử dụng trong quá trình thực hiện thanh toán
+					var guid = Convert.ToString((new Random()).Next(100000));
+
+					// Hàm CreatePayment trả về URL phê duyệt thanh toán
+					// người thanh toán sẽ được chuyển hướng tới URL này để thanh toán bằng PayPal
+					var createdPayment = this.CreatePayment(apiContext, baseURI + "guid=" + guid);
+
+					// Lấy các liên kết trả về từ PayPal trong phản hồi của lệnh gọi hàm Create
+					var links = createdPayment.links.GetEnumerator();
+					string paypalRedirectUrl = null;
+
+					// Duyệt qua các liên kết
+					while (links.MoveNext())
+					{
+						Links lnk = links.Current;
+						if (lnk.rel.ToLower().Trim().Equals("approval_url"))
+						{
+							// Lưu URL chuyển hướng của PayPal để người dùng được chuyển hướng đến trang thanh toán của PayPal
+							paypalRedirectUrl = lnk.href;
+						}
+					}
+
+					// Lưu paymentID vào khóa guid trong session
+					_contx.HttpContext.Session.SetString(guid, createdPayment.id);
+
+					// Chuyển hướng người dùng tới URL phê duyệt thanh toán của PayPal
+					return Redirect(paypalRedirectUrl);
+				}
+				else
+				{
+					// Phần này được thực thi sau khi nhận tất cả các tham số cho thanh toán
+					var guid = Request.Query["guid"].ToString();
+					var paymentId = _contx.HttpContext.Session.GetString(guid);
+					var executedPayment = ExecutePayment(apiContext, payerId, paymentId);
+
+					// Nếu thanh toán thất bại thì sẽ hiển thị thông báo thất bại cho người dùng
+					if (executedPayment.state.ToLower() != "approved")
+					{
+						return View("FailureView");
+					}
+				}
+			}
+			catch (Exception ex)
+			{
+				// Nếu có lỗi, hiển thị thông báo thất bại
+				return View("FailureView");
+			}
+
+			// Nếu thanh toán thành công, hiển thị trang thành công
+			return View("SuccessView");
+		}
+		private PayPal.Api.Payment payment;
+		private Payment ExecutePayment(APIContext apiContext, string payerId, string paymentId)
+		{
+			var paymentExecution = new PaymentExecution()
+			{
+				payer_id = payerId
+			};
+			this.payment = new Payment()
+			{
+				id = paymentId
+			};
+			return this.payment.Execute(apiContext, paymentExecution);
+		}
+		private Payment CreatePayment(APIContext apiContext, string redirectUrl)
+		{
+			//create itemlist and add item objects to it  
+			var itemList = new ItemList()
+			{
+				items = new List<Item>()
+			};
+			//Adding Item Details like name, currency, price etc  
+			itemList.items.Add(new Item()
+			{
+				name = "Item Name comes here",
+				currency = "USD",
+				price = "1",
+				quantity = "1",
+				sku = "sku"
+			});
+			var payer = new Payer()
+			{
+				payment_method = "paypal"
+			};
+			// Configure Redirect Urls here with RedirectUrls object  
+			var redirUrls = new RedirectUrls()
+			{
+				cancel_url = redirectUrl + "&Cancel=true",
+				return_url = redirectUrl
+			};
+			// Adding Tax, shipping and Subtotal details  
+			var details = new Details()
+			{
+				tax = "1",
+				shipping = "1",
+				subtotal = "1"
+			};
+			//Final amount with details  
+			var amount = new Amount()
+			{
+				currency = "USD",
+				total = "3", // Total must be equal to sum of tax, shipping and subtotal.  
+				details = details
+			};
+			var transactionList = new List<Transaction>();
+			// Adding description about the transaction  
+			var paypalOrderId = DateTime.Now.Ticks;
+			transactionList.Add(new Transaction()
+			{
+				description = $"Invoice #{paypalOrderId}",
+				invoice_number = paypalOrderId.ToString(), //Generate an Invoice No    
+				amount = amount,
+				item_list = itemList
+			});
+			this.payment = new Payment()
+			{
+				intent = "sale",
+				payer = payer,
+				transactions = transactionList,
+				redirect_urls = redirUrls
+			};
+			// Create a payment using a APIContext  
+			return this.payment.Create(apiContext);
+		}
+
+
+	}
 }

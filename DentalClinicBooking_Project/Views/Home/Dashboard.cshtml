@@ -24,17 +24,22 @@
 		<canvas id="myPieChart"></canvas>
 	</div>
 
-	<div style="width:800px; height:500px">
+	<div style="width:700px; height:400px">
 		<h4>Bar Charts </h4>
 		<canvas id="myBarChart"></canvas>
+	</div>
+
+	<div style="width:350px; height:400px">
+		<h4>Doughnut Charts </h4>
+		<canvas id="myDoughnutChart"></canvas>
 	</div>
 </div>
 
 <script>
 	// Line chart code
-	const dataArrayForLineChart = @Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject(ViewBag.dataArrayForLineChart));
-	const dataArrayForPieChart = @Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject(ViewBag.dataArrayForPieChart));
-	const dataArrayForBarChart = @Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject(ViewBag.dataArrayForBarChart));
+	// const dataArrayForLineChart = @Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject(ViewBag.dataArrayForLineChart));
+	// const dataArrayForPieChart = @Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject(ViewBag.dataArrayForPieChart));
+	// const dataArrayForBarChart = @Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject(ViewBag.dataArrayForBarChart));
 
 	const labels = [
 		'Tháng 1', 'Tháng 2', 'Tháng 3', 'Tháng 4', 'Tháng 5', 'Tháng 6',
@@ -47,7 +52,8 @@
 			backgroundColor: 'rgba(255, 99, 132, 0.5)',
 			borderColor: 'rgb(255, 99, 132)',
 			pointBackgroundColor: 'rgba(255, 0, 127, 1)',
-			data: dataArrayForLineChart,
+			// data: dataArrayForLineChart,
+			data: [1,2,3,4,5,6],
 			fill: true,
 			tension: 0.3
 		}]
@@ -83,7 +89,8 @@
 			],
 			datasets: [{
 				label: 'Số lượt đặt lịch trong 3 quý',
-				data: dataArrayForPieChart,
+				// data: dataArrayForPieChart,
+				data: [1, 2, 3],
 				backgroundColor: [
 					'rgb(255, 99, 132)',
 					'rgb(54, 162, 235)',
@@ -102,7 +109,8 @@
 			labels: ['Xuân', 'Hạ', 'Thu', 'Đông'],
 			datasets: [{
 				label: 'Số lượt booking trong mùa',
-				data: dataArrayForBarChart,
+				// data: dataArrayForBarChart,
+				data: [1, 2, 3, 4],
 				backgroundColor: [
 					'rgba(255, 99, 132, 0.7)',
 					'rgba(54, 162, 235, 0.7)',
@@ -124,6 +132,30 @@
 					beginAtZero: true
 				}
 			}
+		}
+	});
+
+	// Pie Chart Code
+	const ctxDoughnut = document.getElementById('myDoughnutChart').getContext('2d');
+	const myDoughnutChart = new Chart(ctxDoughnut, {
+		type: 'doughnut',
+		data: {
+			labels: [
+				'Quý 1',
+				'Quý 2',
+				'Quý 3'
+			],
+			datasets: [{
+				label: 'Số lượt đặt lịch trong 3 quý',
+				// data: dataArrayForPieChart,
+				data: [1, 2, 3],
+				backgroundColor: [
+					'rgb(255, 99, 132)',
+					'rgb(54, 162, 235)',
+					'rgb(255, 205, 86)'
+				],
+				hoverOffset: 4
+			}]
 		}
 	});
 </script>
