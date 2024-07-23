@@ -21,6 +21,12 @@ public partial class Dentist
 
     public Guid? AccountId { get; set; }
 
+    public bool? Gender { get; set; }
+
+    public string Phone { get; set; }
+
+    public string Email { get; set; }
+
     public virtual Account Account { get; set; }
 
     public virtual Basic Basic { get; set; }

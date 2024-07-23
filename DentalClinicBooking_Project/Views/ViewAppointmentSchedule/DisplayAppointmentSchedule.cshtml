@@ -160,6 +160,14 @@
                                             <span class="info-label">Địa chỉ đặt khám</span>
                                             <span class="info-value">@appointment?.BasicAddress</span>
                                         </div>
+                                        <div class="info-item">
+                                            <span class="info-label">Dịch vụ</span>
+                                            <span class="info-value">@appointment?.Service</span>
+                                        </div>
+                                        <div class="info-item">
+                                            <span class="info-label">Tổng chi phí</span>
+                                            <span class="info-value">@appointment?.Price.ToString("0.00 VND")</span>
+                                        </div>
                                     </div>
                                     <div class="patient-info">
                                         <h4 class="info-title">Thông tin bệnh nhân</h4>

@@ -47,11 +47,11 @@ namespace DentalClinicBooking_Project.Controllers.DentalPractitioner
 
                     if (dateModel < currentDate)
                     {
-                        ViewBag.Message = "Phiếu khám đã hết hạn!";
+                        ViewBag.HH = 1;
                     }
                     else if (appointmentSchedule?.Status == true)
                     {
-                        ViewBag.Message = "Phiếu khám đã xác nhận";
+                        ViewBag.XN = 2;
                     }
                     else
                     {
@@ -70,13 +70,14 @@ namespace DentalClinicBooking_Project.Controllers.DentalPractitioner
                             Gender = DisplayBookingInformation.GetGender(appointmentSchedule?.Patient.Gender),
                             BirthDate = appointmentSchedule?.Patient.BirthDay,
                             SlotOfClinics = slotRepository.Get(appointmentSchedule?.ClinicId ?? Guid.Empty, appointmentSchedule?.SlotId ?? Guid.Empty),
-                            Status = DisplayBookingInformation.GetStatus(appointmentSchedule?.Status)
+                            Status = DisplayBookingInformation.GetStatus(appointmentSchedule?.Status),
+                            Price = appointmentSchedule?.Service.Price ?? 0m
                         };
                     }                   
                 }
                 else
                 {
-                    ViewBag.Message = "Mã của phiếu khám không hợp lệ!";
+                    ViewBag.KL = 3;
                 }
                 return View(model);
             }

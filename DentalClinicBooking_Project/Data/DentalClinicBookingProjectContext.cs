@@ -11,7 +11,7 @@ public partial class DentalClinicBookingProjectContext : DbContext
 {
     public DentalClinicBookingProjectContext()
     {
-        
+
     }
     public DentalClinicBookingProjectContext(DbContextOptions<DentalClinicBookingProjectContext> options)
         : base(options)
@@ -41,8 +41,10 @@ public partial class DentalClinicBookingProjectContext : DbContext
     public virtual DbSet<Slot> Slots { get; set; }
 
     public virtual DbSet<SlotOfClinic> SlotOfClinics { get; set; }
+
+
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        => optionsBuilder.UseSqlServer("Server=PHUC\\PHUC;uid=sa;pwd=123456;database= DentalCLinicBookingProject;TrustServerCertificate=True");
+        => optionsBuilder.UseSqlServer("Server=DESKTOP-20AJ10N\\SQLEXPRESS;uid=sa;pwd=12345;database= DentalCLinicBookingProject;TrustServerCertificate=True");
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
@@ -158,7 +160,6 @@ public partial class DentalClinicBookingProjectContext : DbContext
             entity.Property(e => e.Price).HasColumnType("decimal(10, 2)");
             entity.Property(e => e.ServiceId).HasColumnName("ServiceID");
             entity.Property(e => e.SlotId).HasColumnName("SlotID");
-            entity.Property(e => e.Type).HasMaxLength(50);
 
             entity.HasOne(d => d.Basic).WithMany(p => p.ClinicAppointmentSchedules)
                 .HasForeignKey(d => d.BasicId)
@@ -218,6 +219,9 @@ public partial class DentalClinicBookingProjectContext : DbContext
                 .IsRequired()
                 .HasMaxLength(100);
             entity.Property(e => e.Description).IsRequired();
+            entity.Property(e => e.Email)
+                .HasMaxLength(50)
+                .IsUnicode(false);
             entity.Property(e => e.Experience)
                 .IsRequired()
                 .HasMaxLength(10)
@@ -225,6 +229,9 @@ public partial class DentalClinicBookingProjectContext : DbContext
             entity.Property(e => e.Image)
                 .IsRequired()
                 .HasMaxLength(100)
+                .IsUnicode(false);
+            entity.Property(e => e.Phone)
+                .HasMaxLength(20)
                 .IsUnicode(false);
 
             entity.HasOne(d => d.Account).WithOne(p => p.Dentist)

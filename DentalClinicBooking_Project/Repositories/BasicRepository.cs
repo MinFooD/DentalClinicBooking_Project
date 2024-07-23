@@ -16,6 +16,8 @@ namespace DentalClinicBooking_Project.Repositories
         public async Task<Basic?> GetAsync(Guid id)
         {
             return await dentalClinicBookingProjectContext.Basics
+                .Include(x => x.Clinic)
+                .ThenInclude(x => x.SlotOfClinics)
                 .FirstOrDefaultAsync(x => x.BasicId == id);
         }
     }

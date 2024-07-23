@@ -50,135 +50,141 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>  
 </head>
 
+
 <body>
-    <div class="container">
-
-        <nav class="homeClinic">
-            <ul class="home">
-                <li>
-                    <a asp-area=""
-                       asp-controller="Home"
-                       asp-action="HomePage">
-                        Trang chủ
-                    </a>
-                </li>
-                <li>
-                    <span class="separator">/</span>
-                </li>
-                <li>
-                    <a asp-area=""
-                       asp-controller="BookClinic"
-                       asp-action="AllClinics">
-                        Phòng khám
-                    </a>
-                </li>
-            </ul>
-        </nav>
-
-        <div class="containerClinicDetails" style="margin-top: 1rem; margin-right: 15rem">
-            <div class="phongKhamClinicDetails" href="#">
-                <div>
-                    <img class="imgClinicDetails" alt="@Model.ClinicName"
-                         src="@Model.MainImage?width=128&amp;height=128" />
-                </div>
-
-                <div class="lineClinicDetails">
-                    <div>
-                        <h2>@Model.ClinicName</h2>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="informationButton">
-            <a style="margin-left: 255rem"> Thông tin </a>
-        </div>
-
-        <div class="image-container">
-            <button class="prev" onclick="prevImage()">&#10094;</button>
-            <img id="mainImage"
-                 src="@Model.ClinicImages.FirstOrDefault()?.Image"
-                 alt="Ảnh" />
-            <button class="next" onclick="nextImage()">&#10095;</button>
-        </div>
-
-       @*  <div>
-            <button class="quickBooking"
-                    style="margin-left: 22rem"
-                    onclick="window.location.href='@Url.Action("BookingClinic", "BookClinic", new { id = Model.Id })'">
-                Đặt khám ngay
-            </button>
-        </div> *@
-         @if (account != null && account.RoleId == 2)
+    @if (Model == null || Model.ClinicName == null)
+    {
+        <h2>Phòng khám bị trống</h2>
+    }
+    else
+    {
+        if (Model.Status == false)
         {
-            <div>
-                <button class="quickBooking"
-                        style="margin-left: 22rem"
-                        onclick="window.location.href='@Url.Action("BookingClinic", "BookClinic", new { id = Model.Id })'">
-                    Đặt khám ngay
-                </button>
-            </div>
-        }
-        else if (account != null && (account.RoleId == 3 || account.RoleId == 4))
-        {
-
+            <h2>Phòng khám chưa được duyệt</h2>
         }
         else
         {
-            <div>
-                <button class="quickBooking"
-                        style="margin-left: 22rem"
-                        onclick="window.location.href='@Url.Action("Login", "Login")'">
-                    Đặt khám ngay
-                </button>
-            </div>
-        }
-    </div> 
+            <div class="container">
 
-    
-
-    <div class="row information">
-
-        <div class="col-md-6 info1" style="padding-left: 8rem; margin-bottom: 2rem;">
-            <div class="content">
-                <h4 class="text-lg font-semibold">Giới thiệu</h4>
-                <div class="text" style="text-align: justify; font-weight: 400;">
-                    @Html.Raw(Model.Description)
-                </div>
-                <a class="toggle-button" style="text-decoration: none;"
-                   id="toggleButton">Xem thêm...</a>
-            </div>
-        </div>
-
-        <div class="col-md-6">
-            <div class="working-hours-container">
-                <h4 class="title">Giờ khám</h4>
-                <div class="hours-list">
-                    <ul class="days-columns">
-                        <li class="day-item">
-                            <div class="day-name">Buổi sáng</div>
-                            @foreach (var item in slotOfClinics)
-                            {
-                                if ((item.StartTime >= stAM && item.StartTime <= enAM))
-                                {
-                                    <div class="day-time">@item.StartTime.ToString("HH:mm") - @item.EndTime.ToString("HH:mm")</div>
-                                }
-                            }
+                <nav class="homeClinic">
+                    <ul class="home">
+                        <li>
+                            <a asp-area=""
+                               asp-controller="Home"
+                               asp-action="HomePage">
+                                Trang chủ
+                            </a>
                         </li>
-                        <li class="day-item">
-                            <div class="day-name">Buổi chiều</div>
-                            @foreach (var item in slotOfClinics)
-                            {
-                                if (item.EndTime >= stPM && item.EndTime <= enPM)
-                                {
-                                    <div class="day-time">@item.StartTime.ToString("HH:mm") - @item.EndTime.ToString("HH:mm")</div>
-                                }
-                            }
+                        <li>
+                            <span class="separator">/</span>
+                        </li>
+                        <li>
+                            <a asp-area=""
+                               asp-controller="BookClinic"
+                               asp-action="AllClinics">
+                                Phòng khám
+                            </a>
                         </li>
                     </ul>
+                </nav>
+
+                <div class="containerClinicDetails" style="margin-top: 1rem; margin-right: 15rem">
+                    <div class="phongKhamClinicDetails" href="#">
+                        <div>
+                            <img class="imgClinicDetails" alt="@Model.ClinicName"
+                                 src="@Model.MainImage?width=128&amp;height=128" />
+                        </div>
+
+                        <div class="lineClinicDetails">
+                            <div>
+                                <h2>@Model.ClinicName</h2>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="informationButton">
+                    <a style="margin-left: 255rem"> Thông tin </a>
+                </div>
+
+                <div class="image-container">
+                    <button class="prev" onclick="prevImage()">&#10094;</button>
+                    <img id="mainImage"
+                         src="@Model.ClinicImages.FirstOrDefault()?.Image"
+                         alt="Ảnh" />
+                    <button class="next" onclick="nextImage()">&#10095;</button>
+                </div>
+
+                @if (account != null && account.RoleId == 2)
+                {
+                    <div>
+                        <button class="quickBooking"
+                                style="margin-left: 22rem"
+                                onclick="window.location.href='@Url.Action("BookingClinic", "BookClinic", new { id = Model.Id })'">
+                            Đặt khám ngay
+                        </button>
+                    </div>
+                }
+                else if (account != null && (account.RoleId == 3 || account.RoleId == 4))
+                {
+
+                }
+                else
+                {
+                    <div>
+                        <button class="quickBooking"
+                                style="margin-left: 22rem"
+                                onclick="window.location.href='@Url.Action("Login", "Login")'">
+                            Đặt khám ngay
+                        </button>
+                    </div>
+                }
+            </div>
+
+            <div class="row information">
+
+                <div class="col-md-6 info1" style="padding-left: 8rem; margin-bottom: 2rem;">
+                    <div class="content">
+                        <h4 class="text-lg font-semibold">Giới thiệu</h4>
+                        <div class="text" style="text-align: justify; font-weight: 400;">
+                            @Html.Raw(Model.Description)
+                        </div>
+                        <a class="toggle-button" style="text-decoration: none;"
+                           id="toggleButton">Xem thêm...</a>
+                    </div>
+                </div>
+
+                <div class="col-md-6">
+                    <div class="working-hours-container">
+                        <h4 class="title">Giờ khám</h4>
+                        <div class="hours-list">
+                            <ul class="days-columns">
+                                <li class="day-item">
+                                    <div class="day-name">Buổi sáng</div>
+                                    @foreach (var item in slotOfClinics)
+                                    {
+                                        if ((item.StartTime >= stAM && item.StartTime <= enAM))
+                                        {
+                                            <div class="day-time">@item.StartTime.ToString("HH:mm") - @item.EndTime.ToString("HH:mm")</div>
+                                        }
+                                    }
+                                </li>
+                                <li class="day-item">
+                                    <div class="day-name">Buổi chiều</div>
+                                    @foreach (var item in slotOfClinics)
+                                    {
+                                        if (item.EndTime >= stPM && item.EndTime <= enPM)
+                                        {
+                                            <div class="day-time">@item.StartTime.ToString("HH:mm") - @item.EndTime.ToString("HH:mm")</div>
+                                        }
+                                    }
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
                 </div>
             </div>
-        </div>
-    </div>
+        }
+    }
 </body>
 </html>
