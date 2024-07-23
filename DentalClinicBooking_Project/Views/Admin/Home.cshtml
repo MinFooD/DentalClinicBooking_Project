@@ -1,22 +1,28 @@
-﻿
+﻿@model List<DentalClinicBooking_Project.Models.Domain.Clinic>
+
+@{
+    Layout = null;
+}
+
+
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <title>Quản lý tài khoản</title>
+    <title>Quản lý phòng khám</title>
     <meta content="width=device-width, initial-scale=1.0, shrink-to-fit=no" name="viewport" />
     <link rel="icon" href="../assets/img/kaiadmin/favicon.ico" type="image/x-icon" />
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
-
     <!-- CSS Files -->
-    <link rel="stylesheet" href="../assets/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="../assets/css/plugins.min.css" />
-    <link rel="stylesheet" href="../assets/css/kaiadmin.min.css" />
-    <link rel="stylesheet" href="account.css" />
+    <link href="~/css/admin/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="~/css/admin/css/kaiadmin.min.css" rel="stylesheet" />
+    <link href="~/css/admin/css/plugins.min.css" rel="stylesheet" />
+    <link href="~/css/admin/css/clinicconfirm.css" rel="stylesheet" />
+
 </head>
 
 <body>
@@ -58,45 +64,23 @@
                             <span class="sidebar-mini-icon">
                                 <i class="fa fa-ellipsis-h"></i>
                             </span>
-                            <h4 class="text-section">Components</h4>
                         </li>
-
-                        <ul class="nav">
-                            <li class="nav-item">
-                                <a data-bs-toggle="collapse" href="#tables">
-                                    <img src="https://cdn-icons-png.flaticon.com/128/10620/10620373.png" style="width: 10%; margin-right: 1rem;"></img>
-                                    <p>Quản lý phòng khám</p>
-                                    <span class="caret"></span>
-                                </a>
-                                <div class="collapse" id="tables">
-                                    <ul class="nav nav-collapse">
-                                        <li>
-                                            <a href="../tables/clinicConfirm.html">
-                                                <span class="sub-item">Phòng khám</span>
-                                            </a>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </li>
-
-                            <li class="nav-item active submenu">
-                                <a data-bs-toggle="collapse" href="#account">
-                                    <img src="https://cdn-icons-png.flaticon.com/128/10620/10620373.png" style="width: 10%; margin-right: 1rem;"></img>
-                                    <p>Quản lý tài khoản</p>
-                                    <span class="caret"></span>
-                                </a>
-                                <div class="collapse show" id="account">
-                                    <ul class="nav nav-collapse">
-                                        <li class="active">
-                                            <a href="../account/account.html">
-                                                <span class="sub-item">tài khoản</span>
-                                            </a>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </li>
-                        </ul>
-
+                        <li class="nav-item active submenu">
+                            <a data-bs-toggle="collapse" href="#tables">
+                                <img src="https://cdn-icons-png.flaticon.com/128/10620/10620373.png" style="width: 10%; margin-right: 1rem;"></img>
+                                <p>Quản lý phòng khám</p>
+                                <span class="caret"></span>
+                            </a>
+                            <div class="collapse show" id="tables">
+                                <ul class="nav nav-collapse">
+                                    <li class="active">
+                                        <a href="../tables/clinicConfirm.html">
+                                            <span class="sub-item">Phòng khám</span>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </li>
                     </ul>
                 </div>
             </div>
@@ -171,114 +155,123 @@
                             <i class="icon-arrow-right"></i>
                         </li>
                         <li class="nav-item">
-                            <a href="#" style="font-size: large;">Tài khoản</a>
+                            <a href="#" style="font-size: large;">Phòng khám</a>
                         </li>
                     </ul>
                 </div>
+
                 <div id="content-accounts" class="content-section">
-                    <h2>Quản Lý Tài Khoản</h2>
+                    <h2>XÁC NHẬN PHÒNG KHÁM</h2>
                     <table class="table table-striped">
                         <thead class="thead-dark">
                             <tr>
                                 <th>ID</th>
-                                <th>Gmail</th>
-                                <th>Password</th>
-                                <th>Role ID</th>
-                                <th>Hành Động</th>
+                                <th>Tên</th>
+                                <th>Trạng thái</th>
+                                <th>Hành động</th>
                             </tr>
                         </thead>
                         <tbody id="account-list">
-                            <tr>
-                                <td>1</td>
-                                <td style="max-width: 150px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">user@example.com</td>
-                                <td>********</td>
-                                <td>Admin</td>
-                                <td>
-                                    <div class="form-button-action">
-                                        <a data-bs-toggle="tooltip" class="btn" data-original-title="Remove" data-dismiss="modal">
-                                            <img src="https://icons.veryicon.com/png/o/education-technology/onemind/edit-97.png" alt="Remove Icon" style="width:40px; height:40px;">
-                                            <i class="fa fa-times"></i>
-                                        </a>
-                                        <button type="button" data-bs-toggle="tooltip" title="Edit Task" class="btn-link" data-original-title="Edit Task">
-                                            <img src="https://e7.pngegg.com/pngimages/324/861/png-clipart-x-signage-computer-icons-encapsulated-postscript-wrong-miscellaneous-angle-thumbnail.png" alt="Edit Icon" style="width:20px; height:20px;">
-                                            <i class="fa fa-edit"></i>
-                                        </button>
+                                @foreach (var item in Model)
+                                {
+                                    @if (item.Status == false)
+                                    {
+                                    <tr>
+                                        <td>@item.ClinicId</td>
+                                        <td style="max-width: 150px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">Hòa Phú</td>
+
+                                        <td>Chưa xét duyệt</td>
+                                        <td>
+                                            <div class="form-button-action">
+                                                @* <a data-bs-toggle="tooltip" class="btn" data-original-title="Remove" data-dismiss="modal"
+                                                   asp-area=""
+                                                   asp-controller="Admin"
+                                                   asp-action="Home"
+                                                   asp-route-id="@item.ClinicId">
+                                                    <img src="https://png.pngtree.com/png-vector/20230910/ourmid/pngtree-3d-tick-sign-icon-png-image_9225323.png" alt="Remove Icon" style="width:30px; height:30px;">
+                                                    <i class="fa fa-times"></i>
+                                                </a>   *@
+                                                <form method="post" asp-action="Home" asp-controller="Admin">
+                                                    <input type="hidden" name="id" value="@item.ClinicId" />
+                                                    <a href="#" class="btn" onclick="this.closest('form').submit(); return false;">
+                                                        <img src="https://png.pngtree.com/png-vector/20230910/ourmid/pngtree-3d-tick-sign-icon-png-image_9225323.png" alt="Remove Icon" style="width:30px; height:30px;">
+                                                        <i class="fa fa-times"></i>
+                                                    </a>
+                                                </form>
+                                                
+                                                <button type="button" data-bs-toggle="tooltip" title="Edit Task" class="btn-link" data-original-title="Edit Task">
+                                                    <img src="https://e7.pngegg.com/pngimages/324/861/png-clipart-x-signage-computer-icons-encapsulated-postscript-wrong-miscellaneous-angle-thumbnail.png" alt="Edit Icon" style="width:20px; height:20px;">
+                                                    <i class="fa fa-edit"></i>
+                                                </button>
+                                            </div>
+                                        </td>
+                                    </tr>
+
+                                     <script>
+                                        $(document).ready(function () {
+                                            // Sử dụng event delegation cho các nút được thêm vào động
+                                            $(document).on('click', '.btn-link', function (event) {
+                                                event.preventDefault();
+                                                $('#confirmModal').modal('show');
+                                            });
+
+                                            $('#closeModal').on('click', function () {
+                                                $('#confirmModal').modal('hide');
+                                            });
+
+                                            $('#confirmAction').on('click', function (event) {
+                                                console.log('Hành động đã được xác nhận');
+                                                $('#confirmModal').modal('hide');
+                                            });
+
+                                        });
+                                    </script> 
+
+                                    <!-- Modal -->
+                                    <div class="modal fade" id="confirmModal" tabindex="-1" role="dialog"
+                                         aria-labelledby="exampleModalLabel" aria-hidden="true" style="margin-top: 20rem;">
+                                        <div class="modal-dialog" role="document">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+@*                                                     <h5 class="modal-title" id="exampleModalLabel">Xác nhận hành động</h5>
+ *@                                                </div>
+                                                <div class="modal-body">
+                                                    Bạn có chắc chắn muốn thực hiện hành động này không?
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-secondary"
+                                                            id="closeModal">
+                                                        Đóng
+                                                    </button>
+                                                   @*  <button type="button" class="btn btn-danger" id="confirmAction">
+                                                        Xác nhận
+                                                    </button> *@
+                                                        @using (Html.BeginForm("Delete", "Admin", FormMethod.Post, new { id = item.ClinicId }))
+                                                        {
+                                                        <button type="submit" class="btn btn-danger">Xác nhận</button>
+                                                        }
+
+                                                </div>
+                                            </div>
+                                        </div>
                                     </div>
-                                </td>
-                            </tr>
-                            <script>
-                                $(document).ready(function () {
-                                    // Sử dụng event delegation cho các nút được thêm vào động
-                                    $(document).on('click', '.btn-link', function (event) {
-                                        event.preventDefault();
-                                        $('#confirmModal').modal('show');
-                                    });
+                                    }
 
-                                    $('#closeModal').on('click', function () {
-                                        $('#confirmModal').modal('hide');
-                                    });
-
-                                    $('#confirmAction').on('click', function (event) {
-                                        console.log('Hành động đã được xác nhận');
-                                        $('#confirmModal').modal('hide');
-                                    });
-
-                                });
-                            </script>
-
-                            <!-- Modal -->
-                            <div class="modal fade" id="confirmModal" tabindex="-1" role="dialog"
-                                 aria-labelledby="exampleModalLabel" aria-hidden="true" style="margin-top: 20rem;">
-                                <div class="modal-dialog" role="document">
-                                    <div class="modal-content">
-                                        <div class="modal-header">
-                                            <h5 class="modal-title" id="exampleModalLabel">Xác nhận hành động</h5>
-                                        </div>
-                                        <div class="modal-body">
-                                            Bạn có chắc chắn muốn thực hiện hành động này không?
-                                        </div>
-                                        <div class="modal-footer">
-                                            <button type="button" class="btn btn-secondary"
-                                                    id="closeModal">
-                                                Đóng
-                                            </button>
-                                            <button type="button" class="btn btn-danger" id="confirmAction">
-                                                Xác nhận hành
-                                                động
-                                            </button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+                                }
                         </tbody>
                     </table>
                 </div>
-
             </div>
         </div>
-    </div>
-    </div>
-    </div>
-    </div>
-
-    <footer class="footer">
-        <div class="container-fluid d-flex justify-content-between">
-
-            <div class="copyright">
-                2024, made with <i class="fa fa-heart heart text-danger"></i> by
-                <a href="http://www.themekita.com">ThemeKita</a>
-            </div>
-
-        </div>
-    </footer>
-    </div>
 
     </div>
+
+
+    <!-- End Custom template -->
     <!--   Core JS Files   -->
-    <script src="../assets/js/core/jquery-3.7.1.min.js"></script>
-    <script src="../assets/js/core/popper.min.js"></script>
-    <script src="../assets/js/core/bootstrap.min.js"></script>
-
+    <script src="~/js/admin/js/bootstrap.min.js"></script>
+    <script src="~/js/admin/js/jquery-3.7.1.min.js"></script>
+    <script src="~/js/admin/js/popper.min.js"></script>
 </body>
 
 </html>

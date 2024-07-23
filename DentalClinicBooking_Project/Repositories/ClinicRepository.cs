@@ -52,5 +52,33 @@ namespace DentalClinicBooking_Project.Repositories
         {
             return await dentalClinicBookingProjectContext.Clinics.Where(x => x.ClinicName.Contains(searchString ?? string.Empty)).CountAsync();
         }
+
+        public  Clinic UpdateStatus(Guid id)
+        {
+            var exist =  dentalClinicBookingProjectContext.Clinics
+                .FirstOrDefault(x => x.ClinicId == id);
+            if (exist != null)
+            {
+                exist.Status = true;
+                 dentalClinicBookingProjectContext.SaveChanges();
+                return exist;
+            }
+            return null;
+        }
+
+        public Clinic Delete(Guid id)
+        {
+            var exist =  dentalClinicBookingProjectContext.Clinics
+                .Find(id);
+
+            if (exist != null)
+            {
+                dentalClinicBookingProjectContext.Clinics.Remove(exist);
+                 dentalClinicBookingProjectContext.SaveChanges();
+                return exist;
+            }
+
+            return null;
+        }
     }
 }
