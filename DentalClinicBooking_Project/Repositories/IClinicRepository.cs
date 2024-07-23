@@ -15,5 +15,7 @@ namespace DentalClinicBooking_Project.Repositories
         Task<Clinic?> GetAsync(Guid id);
 
         Task<int?> CountAsync(string? searchQuery);
+        Clinic? UpdateStatus(Guid id);
+        Clinic Delete(Guid id);
     }
 }
