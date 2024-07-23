@@ -52,13 +52,13 @@
                 }
                 <!-- regis-form -->
                 <form id="register-form" class="register-form active" onsubmit="return saveRegisterForm(event)" style="display: block">
-                    <div class="title">Register</div>
+                    <div class="title">Đăng ký</div>
                     <div class="des">
-                        Please fill in this form to create an account.
+                        Vui lòng điền vào thông tin bên dưới để tạo tài khoản.
                     </div>
                     <div class="group">
                         <span>👤</span>
-                        <input type="text" id="username" placeholder="Username" required oninput="checkInput()" value="@userName" asp-for="UserName" />
+                        <input type="text" id="username" placeholder="Tên tài khoản" required oninput="checkInput()" value="@userName" asp-for="UserName" />
                         <span asp-validation-for="UserName" class="text-danger"></span>
                     </div>
                     <div class="group">
@@ -66,31 +66,39 @@
                         <input style="margin-left:5px" type="email" id="gmail" placeholder="Gmail" required oninput="checkInput()" asp-for="Gmail" />
                         <span asp-validation-for="Gmail" class="text-danger"></span>
                     </div>
+                    
+                    
                     <div class="group">
                         <span>🔒</span>
-                        <input type="password" id="password" placeholder="Password" required oninput="checkInput()" asp-for="Password" />
+                        <input type="password" id="password" placeholder="Mật khẩu" required oninput="checkInput()" asp-for="Password" minlength="6" />
                         <span asp-validation-for="Password" class="text-danger"></span>
                     </div>
-                    <div class="group">
+                   @*  <div class="group">
                         <span>🔒</span>
-                        <input type="password" id="re-password" placeholder="Re-enter Password" required oninput="checkInput()" />
-                    </div>
-                    <div class="recovery">
+                        <input type="password" id="re-password" placeholder="Xác nhận mật khẩu" required oninput="checkInput()" minlength="6" />
+                    </div> *@
+         
+
+
+                   @*  <div class="recovery">
                         <div class="checkbox">
                             <input type="checkbox" id="terms" required onchange="checkInput()" />
                             Accept Terms
                         </div>
-                    </div>
+                    </div> *@
                     <div class="signIn">
-                        <button type="submit" id="nextButton" disabled>Next</button>
+                        <button type="submit" id="nextButton" >Tiếp tục</button>
                     </div>
                 </form>
+
+
+              
 
                 <!-- regis-detail-form -->
                 <form id="register-details-form" class="register-details-form" onsubmit="return submitForm()" style="display: none" method="post"
                       asp-area="" asp-action="Register" asp-controller="Login">
-                    <div class="title">Register Details</div>
-                    <div class="des">Please fill in your details.</div>
+                    <div class="title">Đăng ký thông tin</div>
+                    <div class="des">Vui lòng điền đầy đủ thông tin chi tiết</div>
 
                     <input type="hidden" id="hiddenUsername" name="username" asp-for="UserName" />
                     <input type="hidden" id="hiddenPassword" name="password" asp-for="Password" />
@@ -98,68 +106,68 @@
 
                     <div class="group">
                         <span>👤</span>
-                        <input type="text" id="name" placeholder="Name" required oninput="checkDetailInput()" value="@patientName"
+                        <input type="text" id="name" placeholder="Họ và tên" required oninput="checkDetailInput()" value="@patientName"
                                asp-for="PatientName" />
                         <span asp-validation-for="PatientName" class="text-danger"></span>
                     </div>
                     <div class="group">
                         <span>📞</span>
-                        <input type="text" id="phone" placeholder="Phone" required oninput="checkDetailInput()" value="@phone"
+                        <input type="text" id="phone" placeholder="Điện thoại" required oninput="checkDetailInput()" value="@phone"
                                asp-for="Phone" />
                         <span asp-validation-for="Phone" class="text-danger"></span>
                     </div>
                     <div class="group">
                         <span>🎂</span>
-                        <input type="date" id="birthday" required onchange="checkDetailInput()" asp-for="BirthDay"/>
+                        <input type="date" id="birthday" placeholder="Ngày sinh" required onchange="checkDetailInput()" asp-for="BirthDay" />
                         <span asp-validation-for="BirthDay" class="text-danger"></span>
                     </div>
                     <div class="group">
                         <span style="margin-left:6px">⚥</span>
                         <select id="gender" required onchange="checkDetailInput()" 
                                 asp-for="Gender" >
-                            <option value="">Select Gender</option>
-                            <option value="true">Male</option>
-                            <option value="false">Female</option>
+                            <option value="">Giới tính</option>
+                            <option value="true">Nam</option>
+                            <option value="false">Nữ</option>
                         </select>
                         <span asp-validation-for="Gender" class="text-danger"></span>
                     </div>
                     <div class="group">
                         <span>🏠</span>
-                        <input type="text" id="address" placeholder="Address" requiredoninput="checkDetailInput()" value="@address"
+                        <input type="text" id="address" placeholder="Địa chỉ" requiredoninput="checkDetailInput()" value="@address"
                                asp-for="Address" />
                         <span asp-validation-for="Address" class="text-danger"></span>
                     </div>
                     <div class="group">
                         <span>🆔</span>
-                        <input type="text" id="citizenId" placeholder="Citizen ID" oninput="checkDetailInput()" value="@citizenId"
+                        <input type="text" id="citizenId" placeholder="Số CMND/CCCD" oninput="checkDetailInput()" value="@citizenId"
                                asp-for="CitizenIdentificationCard" />
                     </div>
                     <div class="group">
                         <span>🌍</span>
-                        <input type="text" id="nation" placeholder="Nation" oninput="checkDetailInput()" value="@nation"
+                        <input type="text" id="nation" placeholder="Dân tộc" oninput="checkDetailInput()" value="@nation"
                                asp-for="Nation" />
                     </div>
                     <div class="group">
                         <span>💼</span>
-                        <input type="text" id="job" placeholder="Job" oninput="checkDetailInput()" value="@job"
+                        <input type="text" id="job" placeholder="Nghề nghiệp" oninput="checkDetailInput()" value="@job"
                                asp-for="Job" />
                     </div>
                     <div class="group">
                         <span>🏥</span>
-                        <input type="text" id="healthInsurance" placeholder="Health Insurance" oninput="checkDetailInput()" value="@healthInsurance"
+                        <input type="text" id="healthInsurance" placeholder="Mã BHYT" oninput="checkDetailInput()" value="@healthInsurance"
                                asp-for="HealthInsuranceCardCode" />
                     </div>
-                    <div class="recovery">
+                   @*  <div class="recovery">
                         <div class="checkbox">
                             <input type="checkbox"
                                    id="terms-detail"
                                    onchange="checkDetailInput()" />
                             Accept Terms
                         </div>
-                    </div>
+                    </div> *@
                     <div class="signIn">
                         <button type="submit" id="registerButton" disabled>
-                            Submit
+                            Hoàn thành
                         </button>
                     </div>
                 </form>

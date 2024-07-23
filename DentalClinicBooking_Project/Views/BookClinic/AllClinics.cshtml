@@ -89,34 +89,44 @@
         </div>
     </div>
 
+    @if (Model == null && !Model.Any())
+    {
+        <h2>Phòng khám bị trống</h2>
+    }
+    else
+    {
+        <div class="container-md">
+            @foreach (var clinic in Model)
+            {
+                @if (clinic.Status == true)
+                {
+                    <a asp-area=""
+                       asp-controller="BookClinic"
+                       asp-action="ClinicDetails"
+                       asp-route-id="@clinic.ClinicId"
+                       class="no-underline">
+                        <div class="phongKham">
+                            <div>
+                                <img class="img" alt="@clinic.ClinicName" src="@clinic.MainImage;height=128" />
+                            </div>
+                            <div class="line">
+                                <div style="color: black; font-weight: 600; font-size: larger;">
+                                    @clinic.ClinicName
+                                </div>
 
-    <div class="container-md">
-        @foreach (var clinic in Model)
-        {
-            <a asp-area=""
-               asp-controller="BookClinic"
-               asp-action="ClinicDetails"
-               asp-route-id="@clinic.ClinicId"
-               class="no-underline">
-                <div class="phongKham">
-                    <div>
-                        <img class="img" alt="@clinic.ClinicName" src="@clinic.MainImage;height=128" />
-                    </div>
-                    <div class="line">
-                        <div style="color: black; font-weight: 600; font-size: larger;">
-                            @clinic.ClinicName
+                                @foreach (var basic in clinic.Basics)
+                                {
+                                    <p>@basic.Address</p>
+                                    break;
+                                }
+                            </div>
                         </div>
-
-                        @foreach (var basic in clinic.Basics)
-                        {
-                            <p>@basic.Address</p>
-                            break;
-                        }
-                    </div>
-                </div>
-            </a>
-        }
-    </div>
+                    </a>
+                }
+            }
+        </div>
+    }
+    
 
     <ol class="pagination-container">
         <li class="ng-star-inserted">

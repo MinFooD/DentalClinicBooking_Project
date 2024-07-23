@@ -43,7 +43,6 @@
         </div>
         <div class="info-section">
             <dl class="info-list">
-                @* <p class="info-heading">Thông tin đặt lịch</p> *@
                 <div class="info-heading">Thông tin đặt lịch</div>
                 <div class="info-row">
                     <dt class="info-title">Mã phiếu khám</dt>
@@ -69,6 +68,10 @@
                 <div class="info-row">
                     <dt class="info-title">Dịch vụ</dt>
                     <dd class="info-value">@Model?.Service</dd>
+                </div>
+                <div class="info-row">
+                    <dt class="info-title">Tổng chi phí</dt>
+                    <dd class="info-value">@Model?.Price.ToString("0.00 VND")</dd>
                 </div>
             </dl>
 

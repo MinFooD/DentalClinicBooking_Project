@@ -59,7 +59,8 @@ namespace DentalClinicBooking_Project.Controllers
                         Gender = DisplaySchedule.GetGender(a.Patient.Gender),
                         BirthDate = a.Patient.BirthDay,
                         SlotOfClinics = slotRepository.Get(a.ClinicId ?? Guid.Empty, a.SlotId ?? Guid.Empty),
-                        Status = DisplaySchedule.GetStatus(a.Status)
+                        Status = DisplaySchedule.GetStatus(a.Status),
+                        Price = a.Service?.Price ?? 0m
                     }).ToList();
                               
                 return View(model);

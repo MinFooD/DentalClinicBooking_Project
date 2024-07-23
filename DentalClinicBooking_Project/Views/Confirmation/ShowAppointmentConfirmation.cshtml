@@ -19,7 +19,7 @@
 <body>
     <div class="container-md" style="margin-top: 2rem;">
         <div class="main-content">
-            <h1 style="margin-bottom: 3rem;">Xác nhận đặt khám</h1>
+            <h1 style="margin-bottom: 3rem;">Thông tin phiếu khám</h1>
             @using (Html.BeginForm("ShowAppointmentConfirmation", "Confirmation", FormMethod.Get, new { id = "confirmationForm" }))
             {
                 <div class="input-group mb-3">
@@ -59,6 +59,14 @@
                         <div class="info-item">
                             <span class="info-label">Địa chỉ đặt khám</span>
                             <span class="info-value">@Model?.BasicAddress</span>
+                        </div>
+                        <div class="info-item">
+                            <span class="info-label">Dịch vụ</span>
+                            <span class="info-value">@Model?.Service</span>
+                        </div>
+                        <div class="info-item">
+                            <span class="info-label">Tổng chi phí</span>
+                            <span class="info-value">@Model?.Price.ToString("0.00 VND")</span>
                         </div>
                     </div>
                     <div class="patient-info">
@@ -133,9 +141,17 @@
                     </form>
                 </div>
             }
-            else
+            else if(ViewBag.HH == 1)
             {
-                <div style="color: red;">@ViewBag.Message</div>
+                <div id="errorMessageViewBag" style="color: red;">Phiếu khám đã hết hạn!</div>
+            }
+            else if (ViewBag.XN == 2)
+            {
+                <div id="errorMessageViewBag" style="color: red;">Phiếu khám đã xác nhận!</div>
+            }
+            else if (ViewBag.KL == 3)
+            {
+                <div id="errorMessageViewBag" style="color: red;">Phiếu khám không hợp lệ!</div>
             }
         </div>
     </div>

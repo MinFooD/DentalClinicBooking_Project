@@ -18,6 +18,7 @@ namespace DentalClinicBooking_Project.Models.ViewModels.ViewScheduleModels
         public string? Gender { get; set; }
         public string? PatientAddress { get; set; }
         public string? Status { get; set; }
+        public decimal Price { get; set; }
         public static string GetGender(bool? gender)
         {
             if (gender == true)

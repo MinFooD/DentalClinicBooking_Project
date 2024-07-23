@@ -1,0 +1,101 @@
+﻿@using DentalClinicBooking_Project.Models.Domain
+@model DentalClinicBooking_Project.Models.ViewModels.Dentist.DentistAppointment.ShowDentistInfoModel
+
+@{
+
+    TimeOnly stAM = new TimeOnly(7, 0);
+    TimeOnly enAM = new TimeOnly(12, 0);
+
+    TimeOnly stPM = new TimeOnly(12, 0);
+    TimeOnly enPM = new TimeOnly(17, 0);
+
+    IEnumerable<SlotOfClinic> model = Model.SlotOfClinics;
+    List<SlotOfClinic> slotOfClinics = model.OrderBy(slot => slot.StartTime).ThenBy(slot => slot.EndTime).ToList();
+}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ViewDoctorSchedule</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="~/css/dentist\viewdentistschedule.css" rel="stylesheet" />
+    
+    <script src="~/js\dentist\viewdentistschedule.js"></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</head>
+
+
+
+<body style="background-color: #F1F5F9;">
+    <div class="container-md main-content">
+        <div class="container-md">
+            <h1 style="margin: 3rem 0;">Thông tin</h1>
+        </div>
+        <div class="container-md">
+            <div class="row " style="margin-bottom: 5rem;">
+                <div class="col-md-6 doctor-info">
+
+                    <img src="@Model.Image"
+                         class="imgdoctor" alt="@Model.DentistName">
+                    <div class="info">
+                        <p class="p1">
+                            <img class="img1"
+                                 src="https://cdn1.iconfinder.com/data/icons/freeline/32/account_friend_human_man_member_person_profile_user_users-512.png"
+                                 alt="Icon"><strong>Họ và tên: </strong> @Model.DentistName
+                        </p>
+                        <p class="p1">
+                            <img class="img1"
+                                 src="https://img.freepik.com/premium-vector/gender-symbols-male-female-line-icons-black-elements-isolated-white-background_822686-267.jpg"
+                                 alt="Icon"><strong>Giới tính: </strong> @Model.Gender
+                        </p>
+                        <p class="p1">
+                            <img class="img1"
+                                 src="https://t3.ftcdn.net/jpg/05/31/63/40/360_F_531634013_g3RxTenXj3nptD2yVIE9oKhpmLZIwsPq.jpg"
+                                 alt="Icon"><strong>Phone: </strong> @Model.Phone
+                        </p>
+                        <p class="p1">
+                            <img class="img1" src="https://cdn-icons-png.freepik.com/512/1313/1313686.png"
+                                 alt="Icon"><strong>Email: </strong> @Model.Email
+                        </p>
+                    </div>
+                </div>
+                <div class="col-md-6 schedule">
+                    <form action="/submit-your-form-handler" method="POST" s>
+                        <input type="date" id="date" name="date" required onchange="updateSchedule()">
+                        <p class="selectedDate"><span id="displayDate"></span></p>
+
+                    </form>
+
+                    <div class="row scheduleslot">
+                        <div class="col-md-6 morning-slots">
+                            <div class="day">Buổi sáng</div>
+                            @foreach (var item in slotOfClinics)
+                            {
+                                if ((item.StartTime >= stAM && item.StartTime <= enAM))
+                                {
+                                    <div class="appointment-slot">@item.StartTime.ToString("HH:mm") - @item.EndTime.ToString("HH:mm")</div>
+                                }
+                            }
+                        </div>
+                        <div class="col-md-6 afternoon-slots">
+                            <div class="day">Buổi chiều</div>
+                            @foreach (var item in slotOfClinics)
+                            {
+                                if (item.EndTime >= stPM && item.EndTime <= enPM)
+                                {
+                                    <div class="appointment-slot">@item.StartTime.ToString("HH:mm") - @item.EndTime.ToString("HH:mm")</div>
+                                }
+                            }
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
