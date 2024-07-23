@@ -3,18 +3,25 @@ using DentalClinicBooking_Project.Models.ViewModels;
 using DentalClinicBooking_Project.Models.ViewModels.BookingClinicModels;
 using DentalClinicBooking_Project.Models.ViewModels.ViewScheduleModels;
 using DentalClinicBooking_Project.Repositories;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using Newtonsoft.Json;
 using PayPal.Api;
 using System.Reflection;
+using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
 using static System.Reflection.Metadata.BlobBuilder;
 
 namespace DentalClinicBooking_Project.Controllers
 {
     public class BookClinicController : Controller
     {
-        private readonly IClinicRepository clinicRepository;
+		public JsonSerializerSettings settings = new JsonSerializerSettings
+		{
+			ReferenceLoopHandling = ReferenceLoopHandling.Ignore
+		};//cấu hình JsonSerializerSettings để bỏ qua các vòng lặp tham chiếu:
+         
+		private readonly IClinicRepository clinicRepository;
         private readonly IClinicAppointmentScheduleRepository clinicAppointmentScheduleRepository;
         private readonly ISlotRepository slotRepository;
         private readonly IPatientRepository patientRepository;
@@ -58,7 +65,6 @@ namespace DentalClinicBooking_Project.Controllers
 
             return View(Model);
         }
-
 
         [HttpGet]
         public async Task<IActionResult> ClinicDetails(Guid id)
@@ -138,46 +144,47 @@ namespace DentalClinicBooking_Project.Controllers
             return Ok(slots);
         }
 
-        [HttpPost]
-        public async Task<IActionResult> AppointmentBookingInfo([FromBody] AppointmentBookingViewModel appointmentBookingModel)
-        {
-            string? patientString = _contx.HttpContext?.Session.GetString("patient");
-            if (!string.IsNullOrEmpty(patientString))
-            {
-                var patient = JsonConvert.DeserializeObject<Patient>(patientString);
-                ClinicAppointmentSchedule clinicAppointmentSchedule = new ClinicAppointmentSchedule
-                {
-                    Code = AppointmentBookingViewModel.BookingCode(),
-                    PatientId = patient!.PatientId,
-                    ClinicId = appointmentBookingModel.ClinicId,
-                    BasicId = appointmentBookingModel?.BasicId,
-                    Date = appointmentBookingModel?.Date ?? DateOnly.FromDateTime(DateTime.Now),
-                    SlotId = appointmentBookingModel?.SlotId,
-                    ServiceId = appointmentBookingModel?.ServiceId,
-                    Type = "Book Appointment",
-                    Status = false
-                };
+		[HttpPost]
+		public async Task<IActionResult> AppointmentBookingInfo([FromBody] AppointmentBookingViewModel appointmentBookingModel)
+		{
+			string? patientString = _contx.HttpContext?.Session.GetString("patient");
+			if (!string.IsNullOrEmpty(patientString))
+			{
+				var patient = JsonConvert.DeserializeObject<Patient>(patientString);
+				ClinicAppointmentSchedule clinicAppointmentSchedule = new ClinicAppointmentSchedule
+				{
+					Code = AppointmentBookingViewModel.BookingCode(),
+					PatientId = patient!.PatientId,
+					ClinicId = appointmentBookingModel.ClinicId,
+					BasicId = appointmentBookingModel?.BasicId,
+					Date = appointmentBookingModel?.Date ?? DateOnly.FromDateTime(DateTime.Now),
+					SlotId = appointmentBookingModel?.SlotId,
+					ServiceId = appointmentBookingModel?.ServiceId,
+					Type = "Book Appointment",
+					Status = false
+				};
 
-                var model = await clinicAppointmentScheduleRepository.GetDuplicateAsync(clinicAppointmentSchedule);
-                //-------------------------------------------
-                if (model == null)
-                {
-                    model = await clinicAppointmentScheduleRepository.AddAsync(clinicAppointmentSchedule);
-                    return Ok(new
-                    {
-                        redirectUrl = Url.Action("ConfirmBooking", new { id = model.ClinicAppointmentScheduleId }),
-                        success = true
-                    });
-                }
-                else
-                {
-                    return Ok(new { success = false });
-                }
-            }
-            return RedirectToAction("Login", "Login");
-        }
+				var model = await clinicAppointmentScheduleRepository.GetDuplicateAsync(clinicAppointmentSchedule);
+				if (model == null)
+				{
+					// Lưu thông tin lịch hẹn vào session để xử lý sau khi thanh toán thành công
+					_contx.HttpContext.Session.SetString("clinicAppointmentSchedule", JsonConvert.SerializeObject(clinicAppointmentSchedule));
+					// Chuyển hướng người dùng đến phương thức PaymentWithPaypal
+					return Ok(new
+					{
+						redirectUrl = Url.Action("PaymentWithPaypal"),
+						success = true
+					});
+				}
+				else
+				{
+					return Ok(new { success = false });
+				}
+			}
+			return RedirectToAction("Login", "Login");
+		}
 
-        [HttpGet]
+		[HttpGet]
         public async Task<IActionResult> ConfirmBooking(Guid id)
         {
             string? patientString = _contx.HttpContext?.Session.GetString("patient");
@@ -226,11 +233,11 @@ namespace DentalClinicBooking_Project.Controllers
         }
 
 		//Payment with Paypal
-		public IActionResult PaymentWithPaypal(string Cancel = null)
+		[HttpGet]
+		public async Task<IActionResult> PaymentWithPaypal(string Cancel = null)
 		{
 			// Lấy APIContext từ PaypalConfiguration
 			APIContext apiContext = PaypalConfiguration.GetAPIContext();
-
 			try
 			{
 				// Đại diện cho người thanh toán với phương thức thanh toán là PayPal
@@ -285,6 +292,7 @@ namespace DentalClinicBooking_Project.Controllers
 					// Nếu thanh toán thất bại thì sẽ hiển thị thông báo thất bại cho người dùng
 					if (executedPayment.state.ToLower() != "approved")
 					{
+						_contx.HttpContext.Session.Remove("clinicAppointmentSchedule");
 						return View("FailureView");
 					}
 				}
@@ -292,12 +300,25 @@ namespace DentalClinicBooking_Project.Controllers
 			catch (Exception ex)
 			{
 				// Nếu có lỗi, hiển thị thông báo thất bại
+				_contx.HttpContext.Session.Remove("clinicAppointmentSchedule");
 				return View("FailureView");
 			}
 
-			// Nếu thanh toán thành công, hiển thị trang thành công
-			return View("SuccessView");
+			// Nếu thanh toán thành công
+			string? clinicAppointmentScheduleString = _contx.HttpContext?.Session.GetString("clinicAppointmentSchedule");
+			if (clinicAppointmentScheduleString != null)
+			{
+				var clinicAppointmentSchedule = JsonConvert.DeserializeObject<ClinicAppointmentSchedule>(clinicAppointmentScheduleString);
+				var model = await clinicAppointmentScheduleRepository.AddAsync(clinicAppointmentSchedule);
+
+				// Xóa thông tin lịch hẹn khỏi session sau khi đã thêm vào cơ sở dữ liệu
+				_contx.HttpContext.Session.Remove("clinicAppointmentSchedule");
+
+				return RedirectToAction("ConfirmBooking", new { id = model.ClinicAppointmentScheduleId });
+			}
+			return RedirectToAction("HomePage", "Home");
 		}
+
 		private PayPal.Api.Payment payment;
 		private Payment ExecutePayment(APIContext apiContext, string payerId, string paymentId)
 		{
