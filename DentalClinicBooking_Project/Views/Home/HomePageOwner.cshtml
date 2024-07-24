@@ -1,0 +1,23 @@
+﻿@{
+	Layout = "~/Views/Shared/_Layout1.cshtml";
+}
+<div class="banner">
+	<h1 class="border-text" style="padding-top:150px">Xin chào, @ViewBag.owner.OwnerName</h1>
+	<h3 class="border-text">Chào mừng bạn đến với trang quản lý</h3>
+</div>
+
+<div class="statistics">
+	<div class="stat-item">
+		<h1>@ViewBag.countDentist</h1>
+		<h3>Nha sĩ</h3>
+	</div>
+	<div class="stat-item">
+		<h1>@ViewBag.countClinic</h1>
+		<h3>Phòng khám</h3>
+	</div>
+	<div class="stat-item">
+		<h1>@ViewBag.countBasic</h1>
+		<h3>Cơ sở</h3>
+	</div>
+</div>
+

@@ -15,7 +15,7 @@ namespace DentalClinicBooking_Project.Controllers.Admin
         [HttpGet]
         public  async Task<IActionResult> Home()
         {
-            var list = await clinicRepository.GetAllAsync();
+            var list = await clinicRepository.GetAllForAdminAsync();
 
             return View(list);
         }

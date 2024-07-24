@@ -1,58 +1,124 @@
 @model List<DentalClinicBooking_Project.Models.Domain.Dentist>
-@TempData["result"]
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
-    />
-    <link
-      href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
-      rel="stylesheet"
-    />
-    <link
-      href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css"
-      rel="stylesheet"
-    />
-	<link href="~/css/dentist/showdentistforowner.css" rel="stylesheet" />
-	
-  </head>
-  <body>
-    <div class="background"></div>
-    <div class="container">
-      <h1>Danh sách Bác sĩ</h1>
-      <div class="doctors-list">
-            @if(Model!= null && Model.Any())
-            {
-                foreach (var item in Model)
-                {
-                    
-                    <div class="doctor">
-                        <a asp-area="" asp-controller="Dentist" asp-action="UpdateDentist" asp-route-id="@item.DentistId">
-                        <div class="image-container">
-                                <img src=@item.Image
-                                     alt="Dentist @item.DentistName's photo" />
-                        </div>
-                            <h2>@item.DentistName</h2>
-                            
-                        <div class="doctor-info" style="display: none">
-                                <span class="doctor-email">@item.Account.Gmail</span>
-                                <span class="doctor-password">@item.Account.Password</span>
-                                <span class="doctor-experience">@item.Experience</span>
-                                <span class="doctor-description">@item.Description</span>
-                        </div>
-                        </a>
-                    </div>
-                    
-                }
-            }
-      </div>
-    </div>
-    <script src="./script.js"></script>
-    <script src="https://code.ionicframework.com/ionicons/2.0.1/ionicons.min.js"></script>
-  </body>
-</html>
+@{
+	Layout = "~/Views/Shared/_Layout1.cshtml";
+}
+<title>Quản lý nha sĩ</title>
+<link href="~/css/dentist/showdentistforowner.css" rel="stylesheet" />
+<div class="page-inner">
+	<div class="page-header">
+		<ul class="breadcrumbs mb-3">
+			<li class="nav-home">
+				<a asp-area="" asp-controller="Home" asp-action="HomePageOwner">
+					<img src="https://w7.pngwing.com/pngs/396/146/png-transparent-computer-icons-homepage-angle-logo-desktop-wallpaper-thumbnail.png" alt="Remove Icon" style="width:30px; height:30px; margin-bottom: 3px;">
+				</a>
+			</li>
+			<li class="separator">
+				<img src="https://d29fhpw069ctt2.cloudfront.net/icon/image/39093/preview.png" alt="Remove Icon" style="width:10px; height:10px;">
+				<i class="icon-arrow-right"></i>
+			</li>
+			<li class="nav-item" style="padding-top: 5px;">
+				<a href="">Nha sĩ</a>
+			</li>
+	</div>
+	<div class="row">
+		<div class="col-md-12">
+			<div class="card">
+				<div class="card-header">
+					<div class="d-flex align-items-center">
+						<h4 class="card-title">Thêm nha sĩ</h4>
+						<button class="btn btn-primary btn-round ms-auto" onclick="window.location.href ='/Dentist/AddDentist';">
+							<i class="fa fa-plus"></i>
+							Thêm
+						</button>
+					</div>
+				</div>
+				<div class="card-body">
+					<div class="table-responsive">
+						<table id="add-row" class="display table table-striped table-hover">
+							<thead>
+								<tr>
+									<th>Tên</th>
+									<th style="max-width: 250px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">Mô tả</th>
+									<th style="max-width: 100px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">Kinh nghiệm làm việc</th>
+									<th style="width: 10%; text-align: center;">Hành động</th>
+								</tr>
+							</thead>
+							<tbody>
+								@if (Model != null && Model.Any())
+								{
+									foreach (var dentist in Model)
+									{
+										<tr>
+											<td>@dentist.DentistName</td>
+											<td style="max-width: 250px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">@Html.Raw(@dentist.Description)</td>
+											<td>@dentist.Experience</td>
+											<td>
+												<div class="form-button-action">
+													<a data-bs-toggle="tooltip" class="btn" data-dismiss="modal" asp-area="" asp-controller="Dentist" asp-action="UpdateDentist" asp-route-id="@dentist.DentistId">
+														<img src="https://icons.veryicon.com/png/o/education-technology/onemind/edit-97.png" alt="Edit Icon" style="width:40px; height:40px;">
+														<i class="fa fa-times"></i>
+													</a>
+													<button type="button" data-bs-toggle="tooltip" class="btn-link" data-id="@dentist.DentistId">
+														<img src="https://e7.pngegg.com/pngimages/324/861/png-clipart-x-signage-computer-icons-encapsulated-postscript-wrong-miscellaneous-angle-thumbnail.png" alt="Remove Icon" style="width:20px; height:20px;">
+														<i class="fa fa-edit"></i>
+													</button>
+												</div>
+											</td>
+										</tr>
+									}
+								}
+
+							</tbody>
+						</table>
+
+						<script>
+							$(document).ready(function () {
+								var dentistIdToDelete; // Khai báo biến toàn cục
+
+								$(document).on('click', '.btn-link', function (event) {
+									event.preventDefault();
+									dentistIdToDelete = $(this).data('id'); // Lấy id từ thuộc tính data-id của nút nhấn
+									$('#confirmModal').modal('show'); // Hiển thị modal
+								});
+								$('#closeModal').on('click', function () {
+									$('#confirmModal').modal('hide'); // Ẩn modal
+								});
+								$('#confirmAction').on('click', function (event) {
+									console.log('Hành động đã được xác nhận');
+									window.location.href = '/Dentist/DeleteDentist?id=' + dentistIdToDelete;
+									$('#confirmModal').modal('hide'); // Ẩn modal sau khi xác nhận
+								});
+							});
+						</script>
+
+
+						<!-- Modal -->
+						<div class="modal fade" id="confirmModal" tabindex="-1" role="dialog"
+							 aria-labelledby="exampleModalLabel" aria-hidden="true" style="margin-top: 20rem;">
+							<div class="modal-dialog" role="document">
+								<div class="modal-content">
+									<div class="modal-header">
+										<h5 class="modal-title" id="exampleModalLabel">Xác nhận hành động</h5>
+									</div>
+									<div class="modal-body">
+										Bạn có chắc chắn muốn thực hiện hành động này không?
+									</div>
+									<div class="modal-footer">
+										<button type="button" class="btn btn-secondary"
+												id="closeModal">
+											Đóng
+										</button>
+										<button type="button" class="btn btn-danger" id="confirmAction">Xác nhận</button>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+
+

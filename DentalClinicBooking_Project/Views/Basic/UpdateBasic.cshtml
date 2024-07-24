@@ -1,4 +1,7 @@
-﻿@model DentalClinicBooking_Project.Models.ViewModels.BasicViewModel.BasicVM
+﻿@{
+	Layout = "~/Views/Shared/_Layout1.cshtml";
+}
+@model DentalClinicBooking_Project.Models.ViewModels.BasicViewModel.BasicVM
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -10,7 +13,6 @@
 
 	<link rel="stylesheet"
 		  href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
-	<link href="~/css/basic/addbasic.css" rel="stylesheet" />
 </head>
 <body>
 	<div>
@@ -68,12 +70,15 @@
 									   id="ClinicId"
 									   placeholder="Nhập số điện thoại"
 									   asp-for="ClinicId" /> *@
-								<select class="form-control" asp-for="ClinicId">
+								<select class="form-control" asp-for="ClinicId" disabled>
 									@foreach (var basic in Model.clicics)
 									{
 										<option value="@basic.ClinicId">@basic.ClinicName</option>
 									}
 								</select>
+
+								<!-- Input ẩn để lưu giá trị đã chọn -->
+								<input type="hidden" asp-for="ClinicId" value="@Model.ClinicId" />
 							</div>
 							<div>
 								<button type="submit" class="btn btn-primary">

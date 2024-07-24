@@ -196,9 +196,10 @@
                                     {
                                         <div class="service-item"
                                              data-service="@item.ServiceName"
-                                             data-serviceid="@item.ServiceId">
+                                             data-serviceid="@item.ServiceId"
+                                             data-price="@item.Price">
                                             <div class="service-header">
-                                                <div class="service-name">@item.ServiceName</div>
+                                                <div class="service-details">@item.ServiceName - @item.Price</div> <!-- Gộp tên dịch vụ và giá -->
                                             </div>
                                         </div>
                                     }
@@ -210,6 +211,34 @@
 
                 </div>
             </div>
+            <script>
+                function formatPrice(price) {
+                    return new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(price);
+                }
+
+                $(document).ready(function () {
+                    // Apply formatting on page load
+                    $('.service-item').each(function () {
+                        var price = $(this).data('price');
+                        var formattedPrice = formatPrice(price);
+                        $(this).find('.service-details').text($(this).data('service') + ' - ' + formattedPrice);
+                    });
+
+                    // Apply formatting when service is selected
+                    $('.service-item').click(function () {
+                        var price = $(this).data('price');
+                        var formattedPrice = formatPrice(price);
+                        $('.info-valueprice').text(formattedPrice);
+                    });
+
+                    // Apply formatting when a new service is selected in the sidebar (if applicable)
+                    $('.info-itemprice').each(function () {
+                        var price = $(this).find('.info-valueprice').data('price');
+                        var formattedPrice = formatPrice(price);
+                        $(this).find('.info-valueprice').text(formattedPrice);
+                    });
+                });
+            </script>
 
 
             <div class="sidebar">
@@ -248,6 +277,10 @@
                                 <div class="info-label">Dịch vụ</div>
                                 <div class="info-value"></div>
                             </div>
+                            <div class="info-itemprice" style="display: none;">
+                                <div class="info-labelprice">Giá</div>
+                                <div class="info-valueprice" data-field="price"></div>
+                            </div>
                             <div id="error-message" style="display:none; color: red;"></div>
                         </div>
                     </div>
@@ -267,4 +300,5 @@
         </div>
     </div>
 </body>
+
 </html>

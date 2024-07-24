@@ -46,6 +46,16 @@ namespace DentalClinicBooking_Project.Controllers
                     //session.SetString("Gmail", account.Gmail);
                     string accountString = JsonConvert.SerializeObject(account);
                     _contx.HttpContext.Session.SetString("account", accountString);
+                    if (account.RoleId == 1)
+                    {
+                        var admin = _context.Admins.FirstOrDefault(x => x.AccountId.Equals(account.AccountId));
+                        if (admin != null)
+                        {
+                            string adminString = JsonConvert.SerializeObject(admin, settings);
+                            _contx.HttpContext.Session.SetString("admin", adminString);
+                            return RedirectToAction("Home", "Admin");
+                        }
+                    }
                     if (account.RoleId == 2)
                     {
                         var patient = _context.Patients.FirstOrDefault(x => x.AccountId.Equals(account.AccountId));
@@ -63,7 +73,8 @@ namespace DentalClinicBooking_Project.Controllers
                             //cấu hình JsonSerializerSettings để bỏ qua các vòng lặp tham chiếu:
                             string patientString = JsonConvert.SerializeObject(owner, settings);
                             _contx.HttpContext.Session.SetString("owner", patientString);
-                        }
+							return RedirectToAction("HomePageOwner", "Home");
+						}
                     }
 					if (account.RoleId == 4)
 					{

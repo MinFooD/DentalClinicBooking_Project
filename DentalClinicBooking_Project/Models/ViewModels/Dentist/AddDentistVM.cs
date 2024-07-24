@@ -1,4 +1,5 @@
 ﻿using DentalClinicBooking_Project.Models.Domain;
+using PayPal.Api;
 using System.ComponentModel.DataAnnotations;
 
 namespace DentalClinicBooking_Project.Models.ViewModels.Dentist
@@ -21,8 +22,12 @@ namespace DentalClinicBooking_Project.Models.ViewModels.Dentist
 		public string Password { get; set; }
 		[Required(ErrorMessage = "BasicID can not be blank.")]
 		public Guid BasicId { get; set; }
+		[Required(ErrorMessage = "Gender can not be blank.")]
+		public bool Gender { get; set; }
+		[RegularExpression(@"^\d{10}$", ErrorMessage = "Phone number must be exactly 10 digits.")]
+		public string Phone { get; set; }
 
-		public List<Basic> basics { get; set; }
+		public List<Basic>? basics { get; set; }
 
 	}
 }

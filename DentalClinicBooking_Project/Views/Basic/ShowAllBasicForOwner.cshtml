@@ -1,60 +1,120 @@
+@{
+	Layout = "~/Views/Shared/_Layout1.cshtml";
+}
 @model List<DentalClinicBooking_Project.Models.ViewModels.BasicViewModel.BasicWithClinicImage>
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-	<meta charset="UTF-8" />
-	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-	<title>Quản lý phòng khám</title>
-
-	<link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet" />
-	<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-	<link href="~/css/basic/showallbasicforowner.css" rel="stylesheet" />
-</head>
-
-<body>
-	<div class="container-md">
-		<div class="background"></div>
-		<h1 class="page-title">Quản lí phòng khám</h1>
-		@* <button class="add-basic" onclick="openAddBasicForm('@Model.clinic.ClinicId')">Thêm cơ sở</button> *@
+<link href="~/css/basic/showallbasicforowner.css" rel="stylesheet" />
+<title>Quản lý cơ sở</title>
+<div class="page-inner">
+	<div class="page-header">
+		<ul class="breadcrumbs mb-3">
+			<li class="nav-home">
+				<a asp-area="" asp-controller="Home" asp-action="HomePageOwner">
+					<img src="https://w7.pngwing.com/pngs/396/146/png-transparent-computer-icons-homepage-angle-logo-desktop-wallpaper-thumbnail.png" alt="Remove Icon" style="width:30px; height:30px; margin-bottom: 3px;">
+				</a>
+			</li>
+			<li class="separator">
+				<img src="https://d29fhpw069ctt2.cloudfront.net/icon/image/39093/preview.png" alt="Remove Icon" style="width:10px; height:10px;">
+				<i class="icon-arrow-right"></i>
+			</li>
+			<li class="nav-item">
+				<a href="">Cơ sở</a>
+			</li>
+		</ul>
 	</div>
-	@if (Model != null)
-	{
-		foreach (var basic in Model)
-		{
-			<div class="container-md">
-				<div class="clinic" style="display: flex;flex-direction: row;">
-					<div class="clinic-info col-md-6">
-						<span class="clinic-id">ID: @basic.Basic.BasicId</span>
-						<h2 class="clinic-name">Phòng khám @basic.Basic.BasicName</h2>
-						<p class="clinic-address"><strong>Địa chỉ:</strong> @basic.Basic.Address</p>
-						<p class="clinic-phone"><strong>Điện thoại:</strong> @basic.Basic.Phone</p>
-						<div class="clinic-actions">
-							<button class="btn-edit" onclick="openUpdateBasicForm('@basic.Basic.BasicId')">Chỉnh sửa</button>
-							<button class="btn-delete" onclick="openDeleteModal('@basic.Basic.BasicId')">Xóa</button>
-						</div>
+	<div class="row">
+		<div class="col-md-12">
+			<div class="card">
+				<div class="card-header">
+					<div class="d-flex align-items-center">
+						<h4 class="card-title">Thêm cơ sở</h4>
+						<button class="btn btn-primary btn-round ms-auto" onclick="window.location.href ='/Basic/AddBasic';">
+							<i class="fa fa-plus"></i>
+							Thêm
+						</button>
 					</div>
-					<div class="col-md-6">
-						<img class="imgClinic"
-							 src="@basic.MainImage"
-							 style="width: 90%; height: 90%; border-radius: 10%; margin-top: 3rem; padding-right: 1rem;">
+				</div>
+				<div class="card-body">
+					<div class="table-responsive">
+						<table id="add-row" class="display table table-striped table-hover">
+							<thead>
+								<tr>
+									<th>Tên cơ sở</th>
+									<th style="max-width: 250px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">Địa chỉ</th>
+									<th>số điện thoại</th>
+									<th style="width: 10%">Hành động</th>
+								</tr>
+							</thead>
+							<tbody>
+								@if(Model!=null && Model.Any())
+								{
+									foreach (var basic in Model)
+									{
+										<tr>
+											<td>@basic.Basic.BasicName</td>
+											<td style="max-width: 250px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">@basic.Basic.Address</td>
+											<td>@basic.Basic.Phone</td>
+											<td>
+												<div class="form-button-action">
+													<a data-bs-toggle="tooltip" class="btn"  data-dismiss="modal" asp-area="" asp-controller="Basic" asp-action="UpdateBasic" asp-route-id="@basic.Basic.BasicId">
+														<img src="https://icons.veryicon.com/png/o/education-technology/onemind/edit-97.png" alt="Edit Icon" style="width:40px; height:40px;">
+														<i class="fa fa-times"></i>
+													</a>
+													<button type="button" data-bs-toggle="tooltip" class="btn-link" data-id="@basic.Basic.BasicId">
+														<img src="https://e7.pngegg.com/pngimages/324/861/png-clipart-x-signage-computer-icons-encapsulated-postscript-wrong-miscellaneous-angle-thumbnail.png" alt="Remove Icon" style="width:20px; height:20px;">
+														<i class="fa fa-edit"></i>
+													</button>
+												</div>
+											</td>
+										</tr>
+									}			
+								}
+								<script>
+									$(document).ready(function () {
+										var basicIdToDelete; // Khai báo biến toàn cục
+
+										$(document).on('click', '.btn-link', function (event) {
+											event.preventDefault();
+											basicIdToDelete = $(this).data('id'); // Lấy id từ thuộc tính data-id của nút nhấn
+											$('#confirmModal').modal('show'); // Hiển thị modal
+										});
+										$('#closeModal').on('click', function () {
+											$('#confirmModal').modal('hide'); // Ẩn modal
+										});
+										$('#confirmAction').on('click', function (event) {
+											console.log('Hành động đã được xác nhận');
+											window.location.href = '/Basic/DeleteBasic?id=' + basicIdToDelete;
+											$('#confirmModal').modal('hide'); // Ẩn modal sau khi xác nhận
+										});
+									});
+								</script>
+
+								<!-- Modal -->
+								<div class="modal fade" id="confirmModal" tabindex="-1" role="dialog"
+									 aria-labelledby="exampleModalLabel" aria-hidden="true" style="margin-top: 20rem;">
+									<div class="modal-dialog" role="document">
+										<div class="modal-content">
+											<div class="modal-header">
+												<h5 class="modal-title" id="exampleModalLabel">Xác nhận hành động</h5>
+											</div>
+											<div class="modal-body">
+												Bạn có chắc chắn muốn thực hiện hành động này không?
+											</div>
+											<div class="modal-footer">
+												<button type="button" class="btn btn-secondary"
+														id="closeModal">
+													Đóng
+												</button>
+												<button type="button" class="btn btn-danger" id="confirmAction">Xác nhận</button>
+											</div>
+										</div>
+									</div>
+								</div>
+							</tbody>
+						</table>
 					</div>
 				</div>
 			</div>
-		}
-	}
-	<!-- Delete Basic Modal -->
-	<div id="deleteBasicModal" class="modal">
-		<div class="modal-content">
-			<span class="close">&times;</span>
-			<h2>Are you sure to delete this basic?</h2>
-			<button id="confirmDelete">Yes, delete</button>
-			<button class="close">No, cancel</button>
 		</div>
 	</div>
+</div>
 
-	<!-- Include the JavaScript file -->
-	<script src="~/js/basic/showallbasicforowner.js"></script>
-</body>
-</html>

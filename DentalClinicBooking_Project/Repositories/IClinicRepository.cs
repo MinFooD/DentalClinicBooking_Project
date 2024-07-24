@@ -12,6 +12,8 @@ namespace DentalClinicBooking_Project.Repositories
             int pageNumber = 1,
             int pageSize = 100);
 
+        Task<IEnumerable<Clinic>> GetAllForAdminAsync();
+
         Task<Clinic?> GetAsync(Guid id);
 
         Task<int?> CountAsync(string? searchQuery);

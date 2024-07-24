@@ -71,9 +71,30 @@
                 </div>
                 <div class="info-row">
                     <dt class="info-title">Tổng chi phí</dt>
-                    <dd class="info-value">@Model?.Price.ToString("0.00 VND")</dd>
+                    <dd class="info-value" data-price="@Model?.Price">@Model?.Price.ToString("N0")</dd>
                 </div>
             </dl>
+            <script>
+                // Hàm định dạng giá tiền theo kiểu Việt Nam
+                function formatPrice(price) {
+                    return new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(price);
+                }
+
+                $(document).ready(function () {
+                    // Định dạng giá tiền khi trang tải xong
+                    $('.info-value').each(function () {
+                        // Lấy giá từ thuộc tính data-price
+                        var price = $(this).data('price');
+                        if (price != null) {
+                            // Định dạng giá và cập nhật nội dung của phần tử
+                            var formattedPrice = formatPrice(price);
+                            $(this).text(formattedPrice);
+                        }
+                    });
+
+                    // Nếu có sự kiện tương tác nào đó, bạn có thể thêm vào đây
+                });
+            </script>
 
 
             <dl class="info-list">

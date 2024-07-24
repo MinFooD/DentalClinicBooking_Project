@@ -23,7 +23,7 @@ public partial class ClinicAppointmentSchedule
 
     public Guid? ClinicId { get; set; }
 
-    public decimal? Price { get; set; }
+    public decimal Price { get; set; }
 
     public bool? Status { get; set; }
 

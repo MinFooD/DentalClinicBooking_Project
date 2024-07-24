@@ -1,0 +1,166 @@
+﻿@using DentalClinicBooking_Project.Models.Domain
+@using Newtonsoft.Json
+@inject IHttpContextAccessor HttpContextAccessor
+@{
+    string accountString = HttpContextAccessor.HttpContext.Session.GetString("account");
+    // var account = JsonConvert.DeserializeObject<Account>(accountString);
+    var account = !string.IsNullOrEmpty(accountString) ? JsonConvert.DeserializeObject<Account>(accountString) : null;
+    string patientString = HttpContextAccessor.HttpContext.Session.GetString("patient");
+    // var account = JsonConvert.DeserializeObject<Account>(accountString);
+    var patient = !string.IsNullOrEmpty(patientString) ? JsonConvert.DeserializeObject<Patient>(patientString) : null;
+    string ownerString = HttpContextAccessor.HttpContext.Session.GetString("owner");
+    // var account = JsonConvert.DeserializeObject<Account>(accountString);
+    var owner = !string.IsNullOrEmpty(ownerString) ? JsonConvert.DeserializeObject<Owner>(ownerString) : null;
+    string dentistString = HttpContextAccessor.HttpContext.Session.GetString("dentist");
+    // var account = JsonConvert.DeserializeObject<Account>(accountString);
+    var dentist = !string.IsNullOrEmpty(dentistString) ? JsonConvert.DeserializeObject<Dentist>(dentistString) : null;
+}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>Quản lý nha sĩ</title>
+    <meta content="width=device-width, initial-scale=1.0, shrink-to-fit=no" name="viewport" />
+    <link href="~/css/home/homepageowner.css" rel="stylesheet" />
+    <!-- CSS Files -->
+    <link href="~/css/admin/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="~/css/admin/css/kaiadmin.min.css" rel="stylesheet" />
+    <link href="~/css/admin/css/plugins.min.css" rel="stylesheet" />
+    <!--   Core JS Files   -->
+    <script src="~/js/admin/js/bootstrap.min.js"></script>
+    <script src="~/js/admin/js/jquery-3.7.1.min.js"></script>
+    <script src="~/js/admin/js/popper.min.js"></script>
+    <link href='https://cdn.jsdelivr.net/npm/froala-editor@latest/css/froala_editor.pkgd.min.css' rel='stylesheet' type='text/css' />
+    <script type='text/javascript' src='https://cdn.jsdelivr.net/npm/froala-editor@latest/js/froala_editor.pkgd.min.js'></script>
+</head>
+
+<body>
+    <div class="wrapper">
+        <!-- Sidebar -->
+        <div class="sidebar" data-background-color="dark">
+            <div class="sidebar-logo">
+                <!-- Logo Header -->
+                <div class="logo-header" data-background-color="dark">
+                    <a asp-area="" asp-controller="Home" asp-action="HomePageOwner" class="logo">
+                        <span style="color: #59c3ff;height: 50px; width: 210px; font-size: xx-large;">SunShine</span>
+                    </a>
+                    <button class="topbar-toggler more">
+                        <i class="gg-more-vertical-alt"></i>
+                    </button>
+                </div>
+                <!-- End Logo Header -->
+            </div>
+            <div class="sidebar-wrapper scrollbar scrollbar-inner">
+                <div class="sidebar-content">
+                    <ul class="nav nav-secondary">
+                        <li class="nav-item ">
+                            <a data-bs-toggle="collapse" href="#Nhasi">
+                                <img src="https://cdn-icons-png.flaticon.com/128/10620/10620373.png" style="width: 10%; margin-right: 1rem;">
+                                <p>Quản lý</p>
+                                <span class="caret"></span>
+                            </a>
+                            <div class="collapse show" id="Nhasi">
+                                <ul class="nav nav-collapse">
+                                    @if(account!=null && account.RoleId == 3)
+                                    {
+                                        <li class="active">
+                                            <a asp-area="" asp-controller="Dentist" asp-action="ShowDentistForOwner">
+                                                <span class="sub-item">Nha sĩ</span>
+                                            </a>
+                                        </li>
+                                        <li class="active">
+                                            <a asp-area="" asp-controller="Clinic" asp-action="ShowAllClinicForOwner">
+                                                <span class="sub-item">Phòng khám</span>
+                                            </a>
+                                        </li>
+                                        <li class="active">
+                                            <a asp-area="" asp-controller="Basic" asp-action="ShowAllBasicForOwner">
+                                                <span class="sub-item">Cơ sở</span>
+                                            </a>
+                                        </li>
+                                    }
+                                    else if (account != null && account.RoleId == 1)
+                                    {
+                                        <li class="active">
+                                            <a asp-area="" asp-controller="Admin" asp-action="Home">
+                                                <span class="sub-item">Xét duyệt</span>
+                                            </a>
+                                        </li>
+                                    }
+                                </ul>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <!-- End Sidebar -->
+
+        <div class="main-panel">
+            <div class="main-header row">
+                <div class="main-header-logo">
+                    <!-- Logo Header -->
+                    <div class="logo-header" data-background-color="dark">
+                        <a href="index.html" class="logo">
+                            <img src="assets/img/kaiadmin/logo_light.svg" alt="navbar brand" class="navbar-brand" height="20" />
+                        </a>
+                        <div class="nav-toggle">
+                            <button class="btn btn-toggle toggle-sidebar">
+                                <i class="gg-menu-right"></i>
+                            </button>
+                            <button class="btn btn-toggle sidenav-toggler">
+                                <i class="gg-menu-left"></i>
+                            </button>
+                        </div>
+                        <button class="topbar-toggler more">
+                            <i class="gg-more-vertical-alt"></i>
+                        </button>
+                    </div>
+                    <!-- End Logo Header -->
+                </div>
+                <!-- Navbar Header -->
+                
+                <div class="contact-container">
+                    <div class="contact-group">
+                        <div class="contact-button">
+                            <svg class="contact-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 512 512">
+                                <path fill="currentColor" d="M258.9 48C141.92 46.42 46.42 141.92 48 258.9c1.56 112.19 92.91 203.54 205.1 205.1 117 1.6 212.48-93.9 210.88-210.88C462.44 140.91 371.09 49.56 258.9 48zm126.42 327.25a4 4 0 01-6.14-.32 124.27 124.27 0 00-32.35-29.59C321.37 329 289.11 320 256 320s-65.37 9-90.83 25.34a124.24 124.24 0 00-32.35 29.58 4 4 0 01-6.14.32A175.32 175.32 0 0180 259c-1.63-97.31 78.22-178.76 175.57-179S432 158.81 432 256a175.32 175.32 0 01-46.68 119.25z"></path>
+                                <path fill="currentColor" d="M256 144c-19.72 0-37.55 7.39-50.22 20.82s-19 32-17.57 51.93C191.11 256 221.52 288 256 288s64.83-32 67.79-71.24c1.48-19.74-4.8-38.14-17.68-51.82C293.39 151.44 275.59 144 256 144z"></path>
+                            </svg>
+                            @if (account != null && account.RoleId == 3)
+                            {
+                                <span class="contact-number md:block">Xin chào @owner.OwnerName</span>
+                            }
+                            else if (account != null && account.RoleId == 1)
+                            {
+                                <span class="contact-number md:block">Xin chào Admin</span>
+                            }
+                            <div class="dropdown-toggle"></div>
+                        </div>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-link logout" asp-area="" asp-controller="Login" asp-action="Logout">Thoát</a></li>
+                        </ul>
+                    </div>
+                </div>
+        </div>
+
+        <div class="container">
+                @RenderBody()
+                @RenderSection("Scripts", required: false)
+        </div>
+
+        <footer class="footer">
+            <div class="container-fluid d-flex justify-content-between">
+                <div class="copyright">
+                    2024, made with <i class="fa fa-heart heart text-danger"></i> by
+                    <a>Sunshine</a>
+                </div>
+            </div>
+        </footer>
+    </div>
+    <!-- End Custom template -->
+    </div>
+</body>
+
+</html>

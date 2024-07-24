@@ -9,9 +9,6 @@
 	string patientString = HttpContextAccessor.HttpContext.Session.GetString("patient");
 	// var account = JsonConvert.DeserializeObject<Account>(accountString);
 	var patient = !string.IsNullOrEmpty(patientString) ? JsonConvert.DeserializeObject<Patient>(patientString) : null;
-	string ownerString = HttpContextAccessor.HttpContext.Session.GetString("owner");
-	// var account = JsonConvert.DeserializeObject<Account>(accountString);
-	var owner = !string.IsNullOrEmpty(ownerString) ? JsonConvert.DeserializeObject<Owner>(ownerString) : null;
 	string dentistString = HttpContextAccessor.HttpContext.Session.GetString("dentist");
 	// var account = JsonConvert.DeserializeObject<Account>(accountString);
 	var dentist = !string.IsNullOrEmpty(dentistString) ? JsonConvert.DeserializeObject<Dentist>(dentistString) : null;
@@ -47,24 +44,7 @@
 	<nav class="navbar navbar-expand-md">
 		<div class="navbar-menu">
 			<ul class="navbar-nav">
-				@if (account != null && account.RoleId == 3)
-				{
-					<li class="nav-item"> <a asp-area="" asp-controller="Clinic" asp-action="AddClinic" class="nav-link">Thêm phòng khám</a></li>
-					<li class="nav-item"> <a asp-area="" asp-controller="Basic" asp-action="AddBasic" class="nav-link">Thêm cơ sở</a> </li>
-					<li class="nav-item"> <a asp-area="" asp-controller="Dentist" asp-action="AddDentist" class="nav-link">Thêm nha sĩ</a> </li>
-					<li class="nav-item">
-						<div class="dropdown">
-							<button class="dropbtn">
-								Quản lí <i class="fa fa-chevron-down"></i>
-							</button>
-							<div class="dropdown-content">
-								<a asp-area="" asp-controller="Clinic" asp-action="ShowAllClinicForOwner">Phòng khám</a>
-								<a asp-area="" asp-controller="Basic" asp-action="ShowAllBasicForOwner">Cơ sở</a>
-								<a asp-area="" asp-controller="Dentist" asp-action="ShowDentistForOwner">Nha sĩ</a>
-							</div>
-						</div>
-					</li>
-				} else if (account!= null && account.RoleId==4)
+				@if (account!= null && account.RoleId==4)
 				{
 					<li class="nav-item">
 						<a asp-area=""
@@ -76,10 +56,6 @@
 				}
 				else
 				{
-					<li class="nav-item"><a asp-area="" asp-controller="Admin" asp-action="Home" class="nav-link">Admin</a></li>
-					@* <li class="nav-item"><a asp-area="" asp-controller="HashPassword" asp-action="HashPassword" class="nav-link">Mã hóa</a></li> *@
-					<li class="nav-item"><a asp-area="" asp-controller="Home" asp-action="Dashboard" class="nav-link">Thống kê</a></li>
-					<li class="nav-item"><a asp-area="" asp-controller="BookClinic" asp-action="PaymentWithPaypal" class="nav-link">Thanh toán</a></li>
 					<li class="nav-item"><a asp-area="" asp-controller="BookClinic" asp-action="AllClinics" class="nav-link">Đặt khám</a></li>
 					if (account != null && account.RoleId == 2)
 					{
@@ -112,10 +88,7 @@
 					@if(account!=null && account.RoleId == 2)
 					{
 						<span class="contact-number md:block">@patient.PatientName</span>
-					} else if(account!=null && account.RoleId == 3)
-					{
-						<span class="contact-number md:block">@owner.OwnerName</span>
-					} else if(account!=null && account.RoleId == 4)
+					}else if(account!=null && account.RoleId == 4)
 					{
 						<span class="contact-number md:block">@dentist.DentistName</span>
 					}
