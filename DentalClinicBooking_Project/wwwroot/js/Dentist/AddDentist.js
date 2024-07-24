@@ -50,8 +50,13 @@ function checkInput() {
     var nextButton = document.getElementById("nextButton");
 
     if (username && password && rePassword && gmail) {
-        if (password === rePassword) {
-            nextButton.disabled = false;
+        // Kiểm tra mật khẩu có ít nhất 6 ký tự
+        if (password.length >= 6) {
+            if (password === rePassword) {
+                nextButton.disabled = false;
+            } else {
+                nextButton.disabled = true;
+            }
         } else {
             nextButton.disabled = true;
         }

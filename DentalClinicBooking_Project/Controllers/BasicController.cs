@@ -47,7 +47,7 @@ namespace DentalClinicBooking_Project.Controllers
 				var owner = JsonConvert.DeserializeObject<Owner>(ownerString);
 				var basicVM = new BasicVM
 				{
-					clicics = _context.Owners.Include(x => x.Clinics).Where(x => x.OwnerId.Equals(owner.OwnerId)).SelectMany(x => x.Clinics).ToList(),
+					clicics = _context.Owners.Include(x => x.Clinics).Where(x => x.OwnerId.Equals(owner.OwnerId)).SelectMany(x => x.Clinics).Where(x=> x.Status==true).ToList(),
 				};
 				return View(basicVM);
 			}
@@ -137,24 +137,24 @@ namespace DentalClinicBooking_Project.Controllers
 
 		public IActionResult DeleteBasic(Guid id)
 		{
-			var basic = _context.Basics.Include(x => x.Dentists).ThenInclude(x => x.Account).Include(x => x.ClinicAppointmentSchedules).FirstOrDefault(x => x.BasicId.Equals(id));
-
-			foreach (var dentist in basic.Dentists)
+			var checkBookingSchedule = _context.ClinicAppointmentSchedules.Where(x=> x.BasicId.Equals(id)).Count();
+			if (checkBookingSchedule == 0)
 			{
-				_context.Accounts.Remove(dentist.Account);
-				_context.Dentists.Remove(dentist);
+				var basic = _context.Basics.Include(x => x.Dentists).ThenInclude(x => x.Account).Include(x => x.ClinicAppointmentSchedules).FirstOrDefault(x => x.BasicId.Equals(id));
+				//var basic1 = _context.Basics.FirstOrDefault(x => x.BasicId.Equals(id)).Include(x => x.Dentists).ThenInclude(x => x.Account).Include(x => x.ClinicAppointmentSchedules);
+				foreach (var dentist in basic.Dentists)
+				{
+					_context.Accounts.Remove(dentist.Account);
+					_context.Dentists.Remove(dentist);
+					_context.SaveChanges();
+				}
+				if (basic == null)
+				{
+					return RedirectToAction("ShowAllBasicForOwner", "Basic");
+				}
+				_context.Basics.Remove(basic);
+				_context.SaveChanges();
 			}
-
-			foreach (var schedule in basic.ClinicAppointmentSchedules)
-			{
-				_context.ClinicAppointmentSchedules.Remove(schedule);
-			}
-
-			if (basic == null)
-			{
-				return RedirectToAction("ShowAllBasicForOwner", "Basic");
-			}
-			_context.Basics.Remove(basic);
 			return View();
 		}
 	}

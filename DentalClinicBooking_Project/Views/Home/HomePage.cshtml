@@ -1,5 +1,7 @@
 ﻿@model DentalClinicBooking_Project.Models.ViewModels.ClinicAndDentist
-
+@{
+	Layout = "~/Views/Shared/_Layout.cshtml";
+}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -40,7 +42,7 @@
 				</div>
 
 
-				<form id="searchForm" method="GET" asp-area="" asp-controller="Dentist" asp-action="SearchDentist" class="search-form">
+				<form id="searchForm" method="GET" asp-area="" asp-controller="Dentist" asp-action="ShowAllDentist" class="search-form">
 					<div class="search-bar">
 						<input name="searchString" type="search" placeholder="Triệu chứng, bác sĩ, bệnh viện..." class="Search" />
 						<svg id="searchIcon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">

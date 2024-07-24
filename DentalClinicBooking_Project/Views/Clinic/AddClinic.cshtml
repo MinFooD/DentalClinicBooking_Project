@@ -1,4 +1,7 @@
-﻿@model DentalClinicBooking_Project.Models.ViewModels.ClinicModels.AddClinicVM
+﻿@{
+	Layout = "~/Views/Shared/_Layout1.cshtml";
+}
+@model DentalClinicBooking_Project.Models.ViewModels.ClinicModels.AddClinicVM
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -113,7 +116,7 @@
 	function addImageInput() {
 		// Tạo một div mới chứa trường input mới
 		var newDiv = document.createElement("div");
-		newDiv.classList.add("form-group");
+		// newDiv.classList.add("form-group");
 		var newLabel = document.createElement("label");
 		newLabel.innerText = "Ảnh:";
 		var newInput = document.createElement("input");

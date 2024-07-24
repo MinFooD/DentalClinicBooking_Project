@@ -19,7 +19,9 @@ namespace DentalClinicBooking_Project.Models.ViewModels.Dentist
         public string UserName { get; set; }
 
         public string Password { get; set; }
+        public string Phone { get; set; }
+        public bool? Gender { get; set; }    
 		public Guid? BasicId { get; set; }
-		public List<Basic> basics { get; set; }
+		public List<Basic>? basics { get; set; }
 	}
 }

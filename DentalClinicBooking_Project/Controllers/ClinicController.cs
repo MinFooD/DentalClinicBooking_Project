@@ -59,6 +59,7 @@ namespace DentalClinicBooking_Project.Controllers
 					MainImage = addClinicVM.MainImage,
 					Description = addClinicVM.Description,
 					OwnerId = addClinicVM.OwnerId,
+					Status = false,
 				};
 				string imageUrlsJson = addClinicVM.ImageUrlsJson;
 				List<string> imageUrls = JsonConvert.DeserializeObject<List<string>>(addClinicVM.ImageUrlsJson);
@@ -107,7 +108,7 @@ namespace DentalClinicBooking_Project.Controllers
 			{
 				SlotId = x.SlotId,
 			}).ToList();
-			return View(addClinicVM);
+			return RedirectToAction("ShowAllClinicForOwner");
 		}
 
 		public IActionResult ShowAllClinicForOwner()
@@ -127,40 +128,48 @@ namespace DentalClinicBooking_Project.Controllers
 
 		public IActionResult DeleteClinic(Guid id)
 		{
-			var clinic = _context.Clinics?.Include(x => x.Basics).ThenInclude(x=> x.Dentists).ThenInclude(x => x.Account).Include(x=>x.SlotOfClinics).Include(x => x.Services).Include(x=>x.ClinicAppointmentSchedules).Include(x=>x.ClinicImages).FirstOrDefault(x => x.ClinicId.Equals(id));
-
-			if (clinic == null)
+			var checkBooking = _context.ClinicAppointmentSchedules.Where(x => x.ClinicId.Equals(id)).Count();
+			if (checkBooking == 0)
 			{
-				return RedirectToAction("ShowAllClinicForOwner", "Clinic");
-			}
+				var clinic = _context.Clinics?.Include(x => x.Basics).ThenInclude(x => x.Dentists).ThenInclude(x => x.Account).Include(x => x.SlotOfClinics).Include(x => x.Services).Include(x => x.ClinicAppointmentSchedules).Include(x => x.ClinicImages).FirstOrDefault(x => x.ClinicId.Equals(id));
 
-			foreach (var image in clinic.ClinicImages)
-			{
-				_context.ClinicImages.Remove(image);
-			}
+				if (clinic == null)
+				{
+					return RedirectToAction("ShowAllClinicForOwner", "Clinic");
+				}
 
-			foreach (var basic in clinic.Basics)
-			{
-                foreach (var dentist in basic.Dentists)
-                {
-                    _context.Accounts.Remove(dentist.Account);
-                    _context.Dentists.Remove(dentist);
-                }
-                _context.Basics.Remove(basic);
-			}
+				foreach (var image in clinic.ClinicImages)
+				{
+					_context.ClinicImages.Remove(image);
+				}
 
-			foreach (var slot in clinic.SlotOfClinics)
-			{
-				_context.SlotOfClinics.Remove(slot);
-			}
+				foreach (var basic in clinic.Basics)
+				{
+					foreach (var dentist in basic.Dentists)
+					{
+						_context.Accounts.Remove(dentist.Account);
+						_context.Dentists.Remove(dentist);
+					}
+					_context.Basics.Remove(basic);
+				}
 
-			clinic.Services.Clear();
+				_context.Database.ExecuteSqlRaw("DELETE FROM ServiceOfClinic WHERE ClinicId = {0}", id);
 
-			foreach (var schedule in clinic.ClinicAppointmentSchedules)
-			{
-				_context.ClinicAppointmentSchedules.Remove(schedule);
+
+				foreach (var slot in clinic.SlotOfClinics)
+				{
+					_context.SlotOfClinics.Remove(slot);
+				}
+
+				clinic.Services.Clear();
+
+				foreach (var schedule in clinic.ClinicAppointmentSchedules)
+				{
+					_context.ClinicAppointmentSchedules.Remove(schedule);
+				}
+				_context.Clinics.Remove(clinic);
+				_context.SaveChanges();
 			}
-			_context.Clinics.Remove(clinic);
 			//_context.SaveChanges();
 			return RedirectToAction("ShowAllClinicForOwner", "Clinic");
 		}

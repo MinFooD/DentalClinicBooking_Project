@@ -98,7 +98,7 @@ namespace DentalClinicBooking_Project.Controllers
                     return View(dentist);
                 }
             }
-            return RedirectToAction("HomePage","Home");
+            return RedirectToAction("HomePageOwner","Home");
         }
         [HttpGet]
         public IActionResult UpdateDentist(Guid id)
@@ -122,13 +122,15 @@ namespace DentalClinicBooking_Project.Controllers
                         Gmail = dentist.Account.Gmail,
                         UserName = dentist.Account.UserName,
                         Password = HashPasswordController.DecryptString(dentist.Account.Password, key, iv),
+                        Phone = dentist.Phone,
+                        Gender = dentist.Gender,
                         BasicId = dentist.BasicId,
 						basics = _context.Owners.Include(x => x.Clinics).ThenInclude(x => x.Basics).Where(x => x.OwnerId.Equals(owner.OwnerId)).SelectMany(x => x.Clinics).SelectMany(x => x.Basics).ToList(),
 					};
                     return View(updateDentistVM);
                 }
             }
-            return RedirectToAction("HomePage","Home");
+            return RedirectToAction("ShowDentistForOwner", "Dentist");
         }
 
         [HttpPost]
@@ -155,6 +157,8 @@ namespace DentalClinicBooking_Project.Controllers
                 dentist.Account.UserName = updateDentistVM.UserName;
 				dentist.Account.Password = HashPasswordController.EncryptString(updateDentistVM.Password, key, iv);
                 dentist.BasicId= updateDentistVM.BasicId;
+                dentist.Phone = updateDentistVM.Phone;
+                dentist.Gender = updateDentistVM.Gender;
 
 				_context.SaveChanges();
                 TempData["result"] = "Update Successfully.";
@@ -212,16 +216,30 @@ namespace DentalClinicBooking_Project.Controllers
                     Experience = addDentistVM.Experience,
                     AccountId = account.AccountId,
                     BasicId = addDentistVM.BasicId,
+                    Phone = addDentistVM.Phone,
+                    Gender = addDentistVM.Gender,
                 };
                 _context.Add(dentist);
                 _context.SaveChanges();
 				ModelState.AddModelError("Success", "Register successful.");
-				return RedirectToAction("ShowAllDentist", "Dentist");
+				return RedirectToAction("ShowDentistForOwner", "Dentist");
 
 			}
 			ModelState.AddModelError("Success", "Register successful.");
-			return RedirectToAction("HomePage", "Home");
+			return View(addDentistVM);
 		}
+
+        [HttpGet]
+        public IActionResult DeleteDentist(Guid id)
+        {
+            var dentist = _context.Dentists.FirstOrDefault(x => x.DentistId.Equals(id));
+            if (dentist != null)
+            {
+                _context.Remove(dentist);
+                _context.SaveChanges();
+            }
+            return RedirectToAction("ShowDentistForOwner");
+        }
 
     }
 }

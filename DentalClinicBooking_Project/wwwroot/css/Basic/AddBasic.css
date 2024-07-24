@@ -12,9 +12,6 @@
     z-index: -1; /* Đảm bảo hình nền nằm phía sau nội dung chính */
 }
 
-html {
-    font-family: Arial, Helvetica, sans-serif;
-}
 
 * {
     margin: 0;
@@ -30,7 +27,7 @@ h2 {
 }
 
 .container {
-    display: flex;
+    /*display: flex;*/
     align-items: center;
     justify-content: center;
     min-height: 70vh;

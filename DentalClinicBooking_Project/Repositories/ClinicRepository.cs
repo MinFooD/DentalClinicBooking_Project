@@ -5,6 +5,7 @@ using DentalClinicBooking_Project.Models.ViewModels.BookingClinicModels;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System.Linq;
+using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
 using static System.Runtime.InteropServices.JavaScript.JSType;
 
 
@@ -24,8 +25,8 @@ namespace DentalClinicBooking_Project.Repositories
             int pageNumber = 1,
             int pageSize = 100)
         {
-            var query = dentalClinicBookingProjectContext.Clinics.AsQueryable();
-
+            var query = dentalClinicBookingProjectContext.Clinics.Where(x=> x.Status==true).AsQueryable();
+            
             if (string.IsNullOrWhiteSpace(searchQuery) == false)
             {
                 query = query.Where(x => x.ClinicName.Contains(searchQuery));
@@ -50,7 +51,7 @@ namespace DentalClinicBooking_Project.Repositories
 
         public async Task<int?> CountAsync(string? searchString)
         {
-            return await dentalClinicBookingProjectContext.Clinics.Where(x => x.ClinicName.Contains(searchString ?? string.Empty)).CountAsync();
+            return await dentalClinicBookingProjectContext.Clinics.Where(x => x.ClinicName.Contains(searchString ?? string.Empty) && (x.Status == true)).CountAsync();
         }
 
         public  Clinic UpdateStatus(Guid id)
@@ -79,6 +80,11 @@ namespace DentalClinicBooking_Project.Repositories
             }
 
             return null;
+        }
+
+        public async Task<IEnumerable<Clinic>> GetAllForAdminAsync()
+        {
+            return await dentalClinicBookingProjectContext.Clinics.ToListAsync();
         }
     }
 }

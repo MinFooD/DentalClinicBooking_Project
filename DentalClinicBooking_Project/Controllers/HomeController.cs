@@ -1,8 +1,10 @@
 using DentalClinicBooking_Project.Data;
 using DentalClinicBooking_Project.Models;
+using DentalClinicBooking_Project.Models.Domain;
 using DentalClinicBooking_Project.Models.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Newtonsoft.Json;
 using System.Diagnostics;
 
 namespace DentalClinicBooking_Project.Controllers
@@ -12,19 +14,18 @@ namespace DentalClinicBooking_Project.Controllers
         private readonly ILogger<HomeController> _logger;
 
 		public DentalClinicBookingProjectContext _context;
+        private readonly IHttpContextAccessor _contx;
 
-		public HomeController(ILogger<HomeController> logger, DentalClinicBookingProjectContext context)
+        public HomeController(ILogger<HomeController> logger, DentalClinicBookingProjectContext context, IHttpContextAccessor contx)
+        {
+            _logger = logger;
+            _context = context;
+            _contx = contx;
+        }
+
+        public IActionResult HomePage()
 		{
-			_logger = logger;
-			_context = context;
-		}
-
-		public IActionResult HomePage()
-		{
-			
-
-
-			var clinics = _context.Clinics.Select(a => new ClinicWithAddress
+			var clinics = _context.Clinics.Where(x=> x.Status == true).Select(a => new ClinicWithAddress
 			{
 				ClinicId = a.ClinicId,
 				ClinicName = a.ClinicName,
@@ -77,6 +78,25 @@ namespace DentalClinicBooking_Project.Controllers
 			data3[3] = data1[9] + data1[10] + data1[11];
 
 			ViewBag.dataArrayForBarChart = data3;
+			return View();
+		}
+
+		public IActionResult HomePageOwner()
+		{
+            string ownerString = _contx.HttpContext.Session.GetString("owner");
+			if (!string.IsNullOrEmpty(ownerString))
+			{
+				var owner = JsonConvert.DeserializeObject<Owner>(ownerString);
+				int countDentist = _context.Owners.Where(x=> x.OwnerId.Equals(owner.OwnerId)).SelectMany(x => x.Clinics).SelectMany(x => x.Basics).SelectMany(x=> x.Dentists).Count();
+				int countClinic = _context.Owners.Where(x => x.OwnerId.Equals(owner.OwnerId)).SelectMany(x => x.Clinics).Count();
+				int countBasic = _context.Owners.Where(x => x.OwnerId.Equals(owner.OwnerId)).SelectMany(x => x.Clinics).SelectMany(x => x.Basics).Count();
+
+				ViewBag.countDentist = countDentist;
+				ViewBag.countClinic = countClinic;
+				ViewBag.countBasic = countBasic;
+				ViewBag.owner = owner;
+                return View();
+			}
 			return View();
 		}
 
