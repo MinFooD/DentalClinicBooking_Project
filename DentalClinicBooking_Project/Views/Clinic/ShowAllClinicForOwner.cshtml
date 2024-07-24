@@ -1,124 +1,306 @@
-﻿@model List<DentalClinicBooking_Project.Models.Domain.Clinic>
-@{
-	Layout = "~/Views/Shared/_Layout1.cshtml";
+﻿<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Quản lý phòng khám</title>
+  <meta content="width=device-width, initial-scale=1.0, shrink-to-fit=no" name="viewport" />
+  <link rel="icon" href="../assets/img/kaiadmin/favicon.ico" type="image/x-icon" />
+  <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+
+
+
+  <!-- CSS Files -->
+  <link rel="stylesheet" href="../assets/css/bootstrap.min.css" />
+  <link rel="stylesheet" href="../assets/css/plugins.min.css" />
+  <link rel="stylesheet" href="../assets/css/kaiadmin.min.css" />
+  
+</head>
+
+<body>
+  <div class="wrapper">
+    <!-- Sidebar -->
+    <div class="sidebar" data-background-color="dark">
+      <div class="sidebar-logo">
+        <!-- Logo Header -->
+        <div class="logo-header" data-background-color="dark">
+          <a href="../index.html" class="logo">
+            <img src="../assets/img/kaiadmin/logo_light.svg" alt="navbar brand" class="navbar-brand" height="20" />
+          </a>
+          <button class="topbar-toggler more">
+            <i class="gg-more-vertical-alt"></i>
+          </button>
+        </div>
+        <!-- End Logo Header -->
+      </div>
+      <div class="sidebar-wrapper scrollbar scrollbar-inner">
+        <div class="sidebar-content">
+          <ul class="nav nav-secondary">
+            <li class="nav-section">
+              <span class="sidebar-mini-icon">
+                <i class="fa fa-ellipsis-h"></i>
+              </span>
+              <h4 class="text-section">Tìm kiếm tại đây</h4>
+            </li>
+            <li class="nav-item active submenu">
+              <a data-bs-toggle="collapse" href="#Nhasi">
+                <img src="https://cdn-icons-png.flaticon.com/128/10620/10620373.png" style="width: 10%; margin-right: 1rem;">
+                <p>Quản lý</p>
+                <span class="caret"></span>
+              </a>
+              <div class="collapse show" id="Nhasi">
+                <ul class="nav nav-collapse">
+                  <li class="active">
+                    <a href="../tables/datatables.html">
+                      <span class="sub-item">Nha sĩ</span>
+                    </a>
+                  </li>
+                  <li class="active">
+                    <a href="../tables/datatables2.html">
+                      <span class="sub-item">Phòng khám</span>
+                    </a>
+                  </li>
+                  <li class="active">
+                    <a href="../tables/datatables3.html">
+                      <span class="sub-item">Cơ sở</span>
+                    </a>
+                  </li>
+                </ul>
+
+              </div>
+
+            </li>
+
+          </ul>
+        </div>
+      </div>
+    </div>
+    <!-- End Sidebar -->
+
+    <div class="main-panel">
+      <div class="main-header">
+        <div class="main-header-logo">
+          <!-- Logo Header -->
+          <div class="logo-header" data-background-color="dark">
+            <a href="../index.html" class="logo">
+              <img src="../assets/img/kaiadmin/logo_light.svg" alt="navbar brand" class="navbar-brand" height="20" />
+            </a>
+            <button class="topbar-toggler more">
+              <i class="gg-more-vertical-alt"></i>
+            </button>
+          </div>
+          <!-- End Logo Header -->
+        </div>
+        <!-- Navbar Header -->
+        <nav class="navbar navbar-header navbar-header-transparent navbar-expand-lg border-bottom">
+          <div class="container-fluid">
+            <nav class="navbar navbar-header-left navbar-expand-lg navbar-form nav-search p-0 d-none d-lg-flex">
+              <div class="input-group">
+                <div class="input-group-prepend">
+                </div>
+              </div>
+            </nav>
+
+            <ul class="navbar-nav topbar-nav ms-md-auto align-items-center">
+              <li class="nav-item topbar-user dropdown hidden-caret">
+                <a class="dropdown-toggle profile-pic" data-bs-toggle="dropdown" href="#" aria-expanded="false">
+                  <span class="profile-username">
+                    <span class="op-7">Hi,</span>
+                    <span class="fw-bold">Hizrian</span>
+                  </span>
+                </a>
+                <ul class="dropdown-menu dropdown-user animated fadeIn">
+                  <div class="dropdown-user-scroll scrollbar-outer">
+                    <li>
+                      <div class="dropdown-divider"></div>
+                      <a class="dropdown-item" href="#">Logout</a>
+                    </li>
+                  </div>
+                </ul>
+              </li>
+            </ul>
+          </div>
+        </nav>
+        <!-- End Navbar -->
+      </div>
+
+      <div class="container">
+        <div class="page-inner">
+          <div class="page-header">
+            <ul class="breadcrumbs mb-3">
+              <li class="nav-home">
+                <a href="#"> 
+                  <img src="https://w7.pngwing.com/pngs/396/146/png-transparent-computer-icons-homepage-angle-logo-desktop-wallpaper-thumbnail.png" alt="Remove Icon" style="width:30px; height:30px; margin-bottom: 3px;">
+                </a>
+              </li>
+              <li class="separator">
+                <img src="https://d29fhpw069ctt2.cloudfront.net/icon/image/39093/preview.png" alt="Remove Icon" style="width:10px; height:10px;">
+                <i class="icon-arrow-right"></i>
+              </li>
+              <li class="nav-item">
+                <a href="#">Phòng khám</a>
+              </li>
+            </ul>
+          </div>
+          <div class="row">
+            <div class="col-md-12">
+              <div class="card">
+                <div class="card-header">
+                  <div class="d-flex align-items-center">
+                    <h4 class="card-title">Thêm phòng khám</h4>
+                    <button class="btn btn-primary btn-round ms-auto">
+                      <i class="fa fa-plus"></i>
+                      Thêm
+                    </button>
+                  </div>
+                </div>
+                <div class="card-body">
+                  <div class="table-responsive">
+                    <table id="add-row" class="display table table-striped table-hover">
+                      <thead>
+                        <tr>
+                          <th>Tên phòng khám</th>
+                          <th></th>
+                          <th>Mô tả</th>
+                          <th style="width: 10%">Hành động</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr>
+                          <td>Sunshil</td>
+                          <td></td>
+                          <td>đẹp, sạch</td>
+                          <td>
+                            <div class="form-button-action">
+                              <a data-bs-toggle="tooltip" class="btn" data-original-title="Remove" data-dismiss="modal">
+                                <img src="https://icons.veryicon.com/png/o/education-technology/onemind/edit-97.png" alt="Remove Icon" style="width:40px; height:40px;">
+                                <i class="fa fa-times"></i>
+                              </a>
+                              <button type="button" data-bs-toggle="tooltip" title="Edit Task" class="btn-link" data-original-title="Edit Task">
+                                <img src="https://e7.pngegg.com/pngimages/324/861/png-clipart-x-signage-computer-icons-encapsulated-postscript-wrong-miscellaneous-angle-thumbnail.png" alt="Edit Icon" style="width:20px; height:20px;">
+                                <i class="fa fa-edit"></i>
+                              </button>
+                            </div>
+                          </td>
+                        </tr>
+                        <tr>
+                          <td>Sunshine</td>
+                          <td></td>
+                          <td>vjp</td>
+                          <td>
+                            <div class="form-button-action">
+                              <a data-bs-toggle="tooltip" class="btn" data-original-title="Remove" data-dismiss="modal">
+                                <img src="https://icons.veryicon.com/png/o/education-technology/onemind/edit-97.png" alt="Remove Icon" style="width:40px; height:40px;">
+                                <i class="fa fa-times"></i>
+                              </a>
+                              <button type="button" data-bs-toggle="tooltip" title="Edit Task" class="btn-link" data-original-title="Edit Task">
+                                <img src="https://e7.pngegg.com/pngimages/324/861/png-clipart-x-signage-computer-icons-encapsulated-postscript-wrong-miscellaneous-angle-thumbnail.png" alt="Edit Icon" style="width:20px; height:20px;">
+                                <i class="fa fa-edit"></i>
+                              </button>
+                            </div>
+                          </td>
+                        </tr>
+
+                        <script>
+                          $(document).ready(function () {
+                            // Sử dụng event delegation cho các nút được thêm vào động
+                            $(document).on('click', '.btn-link', function (event) {
+                              event.preventDefault();
+                              $('#confirmModal').modal('show');
+                            });
+
+                            $('#closeModal').on('click', function () {
+                              $('#confirmModal').modal('hide');
+                            });
+
+                            $('#confirmAction').on('click', function (event) {
+                              console.log('Hành động đã được xác nhận');
+                              $('#confirmModal').modal('hide');
+                            });
+
+                          });
+                        </script>
+
+                        <!-- Modal -->
+                        <div class="modal fade" id="confirmModal" tabindex="-1" role="dialog"
+                          aria-labelledby="exampleModalLabel" aria-hidden="true" style="margin-top: 20rem;">
+                          <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                              <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLabel">Xác nhận hành động</h5>
+                              </div>
+                              <div class="modal-body">
+                                Bạn có chắc chắn muốn thực hiện hành động này không?
+                              </div>
+                              <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" 
+                                  id="closeModal">Đóng</button>
+                                <button type="button" class="btn btn-danger" id="confirmAction">Xác nhận hành
+                                  động</button>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <footer class="footer">
+        <div class="container-fluid d-flex justify-content-between">
+          <div class="copyright">
+            2024, made with <i class="fa fa-heart heart text-danger"></i> by
+            <a href="http://www.themekita.com">Sunshine</a>
+          </div>
+        </div>
+      </footer>
+    </div>
+
+  </div>
+  <!--   Core JS Files   -->
+  <script src="../assets/js/core/jquery-3.7.1.min.js"></script>
+  <script src="../assets/js/core/popper.min.js"></script>
+  <script src="../assets/js/core/bootstrap.min.js"></script>
+
+</body>
+
+</html>
+
+<style>
+  /* thanh nav */
+.breadcrumbs {
+    display: flex;
+    align-items: center;
+    list-style: none;
+    padding: 0;
+    margin: 0;
 }
-<title>Quản lý phòng khám</title>
-<link href="~/css/clinic/showallclinicforowner.css" rel="stylesheet" />
-<div class="page-inner">
-	<div class="page-header">
-		<ul class="breadcrumbs mb-3">
-			<li class="nav-home">
-				<a asp-area="" asp-controller="Home" asp-action="HomePageOwner">
-					<img src="https://w7.pngwing.com/pngs/396/146/png-transparent-computer-icons-homepage-angle-logo-desktop-wallpaper-thumbnail.png" alt="Remove Icon" style="width:30px; height:30px; margin-bottom: 3px;">
-				</a>
-			</li>
-			<li class="separator">
-				<img src="https://d29fhpw069ctt2.cloudfront.net/icon/image/39093/preview.png" alt="Remove Icon" style="width:10px; height:10px;">
-				<i class="icon-arrow-right"></i>
-			</li>
-			<li class="nav-item">
-				<a href="">Phòng khám</a>
-			</li>
-		</ul>
-	</div>
-	<div class="row">
-		<div class="col-md-12">
-			<div class="card">
-				<div class="card-header">
-					<div class="d-flex align-items-center">
-						<h4 class="card-title">Thêm phòng khám</h4>
-						<button class="btn btn-primary btn-round ms-auto" onclick="window.location.href ='/Clinic/AddClinic';">
-							<i class="fa fa-plus"></i>
-							Thêm
-						</button>
-					</div>
-				</div>
-				<div class="card-body">
-					<div class="table-responsive">
-						<table id="add-row" class="display table table-striped table-hover">
-							<thead>
-								<tr>
-									<th>Tên phòng khám</th>
-									<th>Mô tả</th>
-									<th style="width: 10%">Hành động</th>
-								</tr>
-							</thead>
-							<tbody>
-								@if(Model!=null && Model.Any())
-								{
-									foreach (var clinic in Model)
-									{
 
-										<tr>
-											<td>@clinic.ClinicName</td>
-											<td style="max-width: 550px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">@Html.Raw(@clinic.Description)</td>
-											<td>
-												<div class="form-button-action">
-													<a data-bs-toggle="tooltip" class="btn" data-original-title="Remove" data-dismiss="modal">
-														<img src="https://icons.veryicon.com/png/o/education-technology/onemind/edit-97.png" alt="Remove Icon" style="width:40px; height:40px;">
-														<i class="fa fa-times"></i>
-													</a>
-													<button type="button" data-bs-toggle="tooltip" title="Edit Task" class="btn-link" data-id="@clinic.ClinicId">
-														<img src="https://e7.pngegg.com/pngimages/324/861/png-clipart-x-signage-computer-icons-encapsulated-postscript-wrong-miscellaneous-angle-thumbnail.png" alt="Edit Icon" style="width:20px; height:20px;">
-														<i class="fa fa-edit"></i>
-													</button>
-												</div>
-											</td>
-										</tr>
-									}
-								}
-								
+.breadcrumbs .nav-home,
+.breadcrumbs .separator,
+.breadcrumbs .nav-item {
+    display: flex;
+    align-items: center;
+}
 
-								<script>
-									$(document).ready(function () {
-										var clinicIdToDelete; // Khai báo biến toàn cục
+.breadcrumbs .nav-home img,
+.breadcrumbs .separator img,
+.breadcrumbs .nav-item a {
+    vertical-align: middle;
+}
 
-										$(document).on('click', '.btn-link', function (event) {
-											event.preventDefault();
-											clinicIdToDelete = $(this).data('id'); // Lấy id từ thuộc tính data-id của nút nhấn
-											$('#confirmModal').modal('show'); // Hiển thị modal
-										});
-										$('#closeModal').on('click', function () {
-											$('#confirmModal').modal('hide'); // Ẩn modal
-										});
-										$('#confirmAction').on('click', function (event) {
-											console.log('Hành động đã được xác nhận');
-											window.location.href = '/Clinic/DeleteClinic?id=' + clinicIdToDelete;
-											$('#confirmModal').modal('hide'); // Ẩn modal sau khi xác nhận
-										});
-									});
-								</script>
-
-								<!-- Modal -->
-								<div class="modal fade" id="confirmModal" tabindex="-1" role="dialog"
-									 aria-labelledby="exampleModalLabel" aria-hidden="true" style="margin-top: 20rem;">
-									<div class="modal-dialog" role="document">
-										<div class="modal-content">
-											<div class="modal-header">
-												<h5 class="modal-title" id="exampleModalLabel">Xác nhận hành động</h5>
-											</div>
-											<div class="modal-body">
-												Bạn có chắc chắn muốn thực hiện hành động này không?
-											</div>
-											<div class="modal-footer">
-												<button type="button" class="btn btn-secondary"
-														id="closeModal">
-													Đóng
-												</button>
-												<button type="button" class="btn btn-danger" id="confirmAction">
-													Xác nhận
-												</button>
-											</div>
-										</div>
-									</div>
-								</div>
-
-							</tbody>
-						</table>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
-</div>
-
+.breadcrumbs .nav-item a {
+    font-size: large;
+    margin-left: 5px;
+}
+</style>
