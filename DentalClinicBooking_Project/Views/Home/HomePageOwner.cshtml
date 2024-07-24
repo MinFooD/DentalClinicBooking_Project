@@ -1,23 +1,183 @@
-﻿@{
-	Layout = "~/Views/Shared/_Layout1.cshtml";
-}
-<div class="banner">
-	<h1 class="border-text" style="padding-top:150px">Xin chào, @ViewBag.owner.OwnerName</h1>
-	<h3 class="border-text">Chào mừng bạn đến với trang quản lý</h3>
-</div>
+﻿<!DOCTYPE html>
+<html lang="en">
 
-<div class="statistics">
-	<div class="stat-item">
-		<h1>@ViewBag.countDentist</h1>
-		<h3>Nha sĩ</h3>
-	</div>
-	<div class="stat-item">
-		<h1>@ViewBag.countClinic</h1>
-		<h3>Phòng khám</h3>
-	</div>
-	<div class="stat-item">
-		<h1>@ViewBag.countBasic</h1>
-		<h3>Cơ sở</h3>
-	</div>
-</div>
+<head>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Quản lý nha sĩ</title>
+  <meta content="width=device-width, initial-scale=1.0, shrink-to-fit=no" name="viewport" />
+
+  <!-- CSS Files -->
+  <link rel="stylesheet" href="assets/css/bootstrap.min.css" />
+  <link rel="stylesheet" href="assets/css/plugins.min.css" />
+  <link rel="stylesheet" href="assets/css/kaiadmin.min.css" />
+
+</head>
+
+<body>
+  <div class="wrapper">
+    <!-- Sidebar -->
+    <div class="sidebar" data-background-color="dark">
+      <div class="sidebar-logo">
+        <!-- Logo Header -->
+        <div class="logo-header" data-background-color="dark">
+          <a href="index.html" class="logo">
+            <img src="assets/img/kaiadmin/logo_light.svg" alt="navbar brand" class="navbar-brand" height="20" />
+          </a>
+          <button class="topbar-toggler more">
+            <i class="gg-more-vertical-alt"></i>
+          </button>
+        </div>
+        <!-- End Logo Header -->
+      </div>
+      <div class="sidebar-wrapper scrollbar scrollbar-inner">
+        <div class="sidebar-content">
+          <ul class="nav nav-secondary">
+            <li class="nav-section">
+              <span class="sidebar-mini-icon">
+                <i class="fa fa-ellipsis-h"></i>
+              </span>
+              <h4 class="text-section">Tìm kiếm tại đây</h4>
+            </li>
+            <li class="nav-item ">
+              <a data-bs-toggle="collapse" href="#Nhasi">
+                <img src="https://cdn-icons-png.flaticon.com/128/10620/10620373.png"
+                  style="width: 10%; margin-right: 1rem;">
+                <p>Quản lý</p>
+                <span class="caret"></span>
+              </a>
+              <div class="collapse show" id="Nhasi">
+                <ul class="nav nav-collapse">
+                  <li class="active">
+                    <a href="../tables/datatables.html">
+                      <span class="sub-item">Nha sĩ</span>
+                    </a>
+                  </li>
+                  <li class="active">
+                    <a href="../tables/datatables2.html">
+                      <span class="sub-item">Phòng khám</span>
+                    </a>
+                  </li>
+                  <li class="active">
+                    <a href="../tables/datatables3.html">
+                      <span class="sub-item">Cơ sở</span>
+                    </a>
+                  </li>
+                </ul>
+
+              </div>
+
+            </li>
+
+          </ul>
+        </div>
+      </div>
+    </div>
+    <!-- End Sidebar -->
+
+    <div class="main-panel">
+      <div class="main-header">
+        <div class="main-header-logo">
+          <!-- Logo Header -->
+          <div class="logo-header" data-background-color="dark">
+            <a href="index.html" class="logo">
+              <img src="assets/img/kaiadmin/logo_light.svg" alt="navbar brand" class="navbar-brand" height="20" />
+            </a>
+            <div class="nav-toggle">
+              <button class="btn btn-toggle toggle-sidebar">
+                <i class="gg-menu-right"></i>
+              </button>
+              <button class="btn btn-toggle sidenav-toggler">
+                <i class="gg-menu-left"></i>
+              </button>
+            </div>
+            <button class="topbar-toggler more">
+              <i class="gg-more-vertical-alt"></i>
+            </button>
+          </div>
+          <!-- End Logo Header -->
+        </div>
+        <!-- Navbar Header -->
+        <nav class="navbar navbar-header navbar-header-transparent navbar-expand-lg border-bottom">
+          <div class="container-fluid">
+            <nav class="navbar navbar-header-left navbar-expand-lg navbar-form nav-search p-0 d-none d-lg-flex">
+              <div class="input-group">
+                <div class="input-group-prepend">
+                  <button type="submit" class="btn btn-search pe-1">
+                    <i class="fa fa-search search-icon"></i>
+                  </button>
+                </div>
+                <input type="text" placeholder="Search ..." class="form-control" />
+              </div>
+            </nav>
+
+            <ul class="navbar-nav topbar-nav ms-md-auto align-items-center">
+              <li class="nav-item topbar-user dropdown hidden-caret">
+                <a class="dropdown-toggle profile-pic" data-bs-toggle="dropdown" href="#" aria-expanded="false">
+                  <span class="profile-username">
+                    <span class="op-7">Hi,</span>
+                    <span class="fw-bold">Hizrian</span>
+                  </span>
+                </a>
+                <ul class="dropdown-menu dropdown-user animated fadeIn">
+                  <div class="dropdown-user-scroll scrollbar-outer">
+                    <li>
+                      <div class="dropdown-divider"></div>
+                      <a class="dropdown-item" href="#">Logout</a>
+                    </li>
+                  </div>
+                </ul>
+              </li>
+            </ul>
+          </div>
+        </nav>
+        <!-- End Navbar -->
+      </div>
+
+      <div class="container">
+        <div class="banner">
+          <h1 class="border-text">Xin chào, Owner</h1>
+          <p class="border-text">Chào mừng bạn đến với trang quản lý nha sĩ</p>
+        </div>
+
+        <div class="statistics">
+          <div class="stat-item">
+            <h2>10</h2>
+            <p>Nha sĩ</p>
+          </div>
+          <div class="stat-item">
+            <h2>5</h2>
+            <p>Phòng khám</p>
+          </div>
+          <div class="stat-item">
+            <h2>3</h2>
+            <p>Cơ sở</p>
+          </div>
+        </div>
+
+        <div class="quick-links">
+          <h3>Liên kết nhanh</h3>
+          <a href="#">Quản lý Nha sĩ</a>
+          <a href="#">Quản lý Phòng khám</a>
+          <a href="#">Quản lý Cơ sở</a>
+        </div>
+      </div>
+
+      <footer class="footer">
+        <div class="container-fluid d-flex justify-content-between">
+          <div class="copyright">
+            2024, made with <i class="fa fa-heart heart text-danger"></i> by
+            <a href="http://www.themekita.com">Sunshine</a>
+          </div>
+        </div>
+      </footer>
+    </div>
+    <!-- End Custom template -->
+  </div>
+  <!--   Core JS Files   -->
+  <script src="assets/js/core/jquery-3.7.1.min.js"></script>
+  <script src="assets/js/core/popper.min.js"></script>
+  <script src="assets/js/core/bootstrap.min.js"></script>
+</body>
+
+</html>
 
