@@ -46,7 +46,7 @@ namespace DentalClinicBooking_Project.Controllers
                     Password = HashPasswordController.EncryptString(addOwnerVM.Password, key, iv)
                 };
                 _context.Accounts.Add(account);
-
+                _context.SaveChanges();
                 var owner = new Owner
                 {
                     OwnerName = addOwnerVM.OwnerName,
@@ -55,7 +55,6 @@ namespace DentalClinicBooking_Project.Controllers
                     AccountId = account.AccountId,
                 };
                 _context.Owners.Add(owner);
-
                 _context.SaveChanges();
             }
             return View(addOwnerVM);
