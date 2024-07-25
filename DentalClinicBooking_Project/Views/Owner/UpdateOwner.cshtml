@@ -1,0 +1,110 @@
+﻿@{
+	Layout = "~/Views/Shared/_Layout1.cshtml";
+}
+@model DentalClinicBooking_Project.Models.ViewModels.OwnerViewModels.UpdateOwnerVM
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<title>Document</title>
+	<link rel="stylesheet"
+		  href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" />
+
+	<link rel="stylesheet"
+		  href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
+</head>
+<body>
+	<div>
+		<div class="background"></div>
+		<div class="container" style="margin-top: 50px; margin-bottom:50px">
+			<div id="basic-form-container" class="form-container">
+				<div style="display: flex; justify-content: space-between">
+					<h2 style="margin-bottom: 20px">Update Basic</h2>
+				</div>
+				<div id="additional-basic-forms">
+					<!-- <div class="toggle-icon" onclick="toggleForm(this)">
+					  &#9660;
+
+					</div> -->
+					<div class="basic-form" style="height: 100%">
+						<form class="form-basic" asp-area="" asp-controller="Owner" asp-action="UpdateOwner" method="post">
+							<div class="form-group">
+								<label for="AccountID">AccountID:</label>
+								<input type="text"
+									   readonly
+									   class="form-control"
+									   id="BasicId"
+									   placeholder=""
+									   asp-for="AccountId" />
+							</div>
+							<div class="form-group">
+								<label for="edit-workplace-name">Tên đăng nhập:</label>
+								<input type="text"
+									   class="form-control"
+									   id="edit-workplace-name"
+									   placeholder="Nhập tên đăng nhập"
+									   asp-for="UserName" />
+							</div>
+							<div class="form-group">
+								<label for="edit-workplace-address">Gmail:</label>
+								<input type="email"
+									   class="form-control"
+									   id="edit-workplace-address"
+									   placeholder="Nhập gmail"
+									   asp-for="Gmail" />
+							</div>
+							<div class="form-group">
+								<label for="edit-phone-address">Mật khẩu:</label>
+								<input type="text"
+									   class="form-control"
+									   id="edit-workplace-address"
+									   placeholder="Nhập mật khẩu"
+									   asp-for="Password" />
+							</div>
+							<div class="form-group">
+								<label for="AccountID">OwnerID:</label>
+								<input type="text"
+									   readonly
+									   class="form-control"
+									   id="BasicId"
+									   placeholder=""
+									   asp-for="OwnerId" />
+							</div>
+							<div class="form-group">
+								<label for="edit-phone-address">Tên owner:</label>
+								<input type="text"
+									   class="form-control"
+									   id="edit-workplace-address"
+									   placeholder="Nhập tên owner"
+									   asp-for="OwnerName" />
+							</div>
+							<div class="form-group">
+								<label for="edit-phone-address">Kinh nghiệm:</label>
+								<input type="text"
+									   class="form-control"
+									   id="edit-workplace-address"
+									   placeholder="Nhập kinh nghiệm"
+									   asp-for="Experience" />
+							</div>
+							<div class="form-group">
+								<label for="edit-phone-address">Ảnh:</label>
+								<input type="text"
+									   class="form-control"
+									   id="edit-workplace-address"
+									   placeholder="Nhập ảnh"
+									   asp-for="Image" />
+							</div>
+							<div>
+								<button type="submit" class="btn btn-primary">
+									Save
+								</button>
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+</html>
