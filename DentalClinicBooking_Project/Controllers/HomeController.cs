@@ -61,17 +61,35 @@ namespace DentalClinicBooking_Project.Controllers
 				int count = _context.ClinicAppointmentSchedules.Where(x => x.Date != null && x.Date.Month == i).Count();
 				data1[i - 1] = count;
 			}
-
-			ViewBag.dataArrayForLineChart = data1;
+			decimal[] data1_1 = new decimal[12];
+            for (int i = 1; i <= 12; i++)
+            {
+                var price = _context.ClinicAppointmentSchedules.Where(x => x.Date != null && x.Date.Month == i).Select(x=> x.Price);
+                decimal totalPrice = 0;
+                foreach (var item in price)
+				{
+					totalPrice += item;
+				}
+                data1_1[i - 1] = totalPrice;
+            }
+            ViewBag.dataArrayForLineChartDecimal = data1_1;
+            ViewBag.dataArrayForLineChart = data1;
 
 			int[] data2 = new int[3];
 			data2[0] = data1[0] + data1[1] + data1[2] + data1[3];
 			data2[1] = data1[4] + data1[5] + data1[6] + data1[7];
 			data2[2] = data1[8] + data1[9] + data1[10] + data1[11];
 
-			ViewBag.dataArrayForPieChart = data2;
+            decimal[] data2_2 = new decimal[3];
+            data2_2[0] = data1_1[0] + data1_1[1] + data1_1[2] + data1_1[3];
+            data2_2[1] = data1_1[4] + data1_1[5] + data1_1[6] + data1_1[7];
+            data2_2[2] = data1_1[8] + data1_1[9] + data1_1[10] + data1_1[11];
 
-			int[] data3 = new int[4];
+            ViewBag.dataArrayForPieChart = data2;
+
+            ViewBag.dataArrayForPieChartDecimal = data2_2;
+
+            int[] data3 = new int[4];
 			data3[0] = data1[0] + data1[1] + data1[2];
 			data3[1] = data1[3] + data1[4] + data1[5];
 			data3[2] = data1[6] + data1[7] + data1[8];
