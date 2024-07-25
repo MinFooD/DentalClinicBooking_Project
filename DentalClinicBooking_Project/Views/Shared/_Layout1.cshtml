@@ -42,9 +42,18 @@
             <div class="sidebar-logo">
                 <!-- Logo Header -->
                 <div class="logo-header" data-background-color="dark">
-                    <a asp-area="" asp-controller="Home" asp-action="HomePageOwner" class="logo">
-                        <span style="color: #59c3ff;height: 50px; width: 210px; font-size: xx-large;">SunShine</span>
-                    </a>
+                    @if (account.RoleId == 3)
+                    {
+                        <a asp-area="" asp-controller="Home" asp-action="HomePageOwner" class="logo">
+                            <span style="color: #59c3ff;height: 50px; width: 210px; font-size: xx-large;">SunShine</span>
+                        </a>
+                    }else if (account.RoleId == 1)
+                    {
+                        <a asp-area="" asp-controller="Admin" asp-action="Home" class="logo">
+                            <span style="color: #59c3ff;height: 50px; width: 210px; font-size: xx-large;">SunShine</span>
+                        </a>
+                    }
+
                     <button class="topbar-toggler more">
                         <i class="gg-more-vertical-alt"></i>
                     </button>
