@@ -44,7 +44,7 @@ namespace DentalClinicBooking_Project.Controllers
 						SlotId = x.SlotId,
 					}).ToList()
 				};
-				return View(model);
+				return RedirectToAction("ShowAllClinicForOwner");
 			}
 			return View();
         }

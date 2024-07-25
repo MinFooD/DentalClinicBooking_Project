@@ -47,6 +47,7 @@ namespace DentalClinicBooking_Project.Controllers
                 };
                 _context.Accounts.Add(account);
                 _context.SaveChanges();
+
                 var owner = new Owner
                 {
                     OwnerName = addOwnerVM.OwnerName,
@@ -57,7 +58,7 @@ namespace DentalClinicBooking_Project.Controllers
                 _context.Owners.Add(owner);
                 _context.SaveChanges();
             }
-            return View(addOwnerVM);
+            return RedirectToAction("ShowAllOwnerForAdmin");
         }
 
         [HttpGet]
