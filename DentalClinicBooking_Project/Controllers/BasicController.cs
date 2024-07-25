@@ -155,7 +155,7 @@ namespace DentalClinicBooking_Project.Controllers
 				_context.Basics.Remove(basic);
 				_context.SaveChanges();
 			}
-			return View();
-		}
+            return RedirectToAction("ShowAllBasicForOwner", "Basic");
+        }
 	}
 }
